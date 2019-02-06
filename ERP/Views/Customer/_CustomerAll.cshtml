@@ -1,4 +1,4 @@
-﻿@model List<BusinessModels.Customer> 
+﻿@model List<ERP.Models.Customer> 
 
 <div class="container">          
   <table class="table customerAll">
@@ -18,9 +18,9 @@
         <td>@customer.CustomerName</td>
         <td>@customer.EmailID</td>
         <td>@customer.Purpose</td>
-        <td><i class="fa fa-eye" aria-hidden="true" data-identity="@(customer.Identity)"></i></td>
-        <td><i class="fa fa-pencil" aria-hidden="true" data-identity="@(customer.Identity)"></i></td>
-        <td><i class="fa fa-times" aria-hidden="true" data-identity="@(customer.Identity)"></i></td>
+        <td><i class="fa fa-eye customerView" aria-hidden="true" data-url="@Url.Action("_CustomerView", "Customer")" data-identity="@(customer.Identity)"></i></td>
+        <td><i class="fa fa-pencil customerEdit" aria-hidden="true" data-url="@Url.Action("_CustomerEdit", "Customer")" data-identity="@(customer.Identity)"></i></td>
+        <td><i class="fa fa-times customerDelete" aria-hidden="true" data-url="@Url.Action("Delete", "Customer")" data-identity="@(customer.Identity)"></i></td>
       </tr>
     }
 

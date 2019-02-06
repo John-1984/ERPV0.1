@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BusinessLayer
 {
@@ -14,18 +15,27 @@ namespace BusinessLayer
         }
 
         public BusinessModels.Customer GetCustomer(Int32 identity){
-            return customers[0];
+            return customers.FirstOrDefault(p=>p.Identity.Equals(identity));
         }
 
         public IEnumerable<BusinessModels.Customer> GetAll(){
            return customers;
         }
 
-        public Boolean Delete(){
+        public Boolean Delete(Int32 identity){
+            customers.Remove(customers.Find(p => p.Identity.Equals(identity)));
             return true;
         }
 
         public Boolean Update(BusinessModels.Customer customer){
+            customers.Remove(customers.Find(p => p.Identity.Equals(customer.Identity)));
+            customers.Add(customer);
+            return true;
+        }
+
+        public Boolean Insert(BusinessModels.Customer customer)
+        {
+            customers.Add(customer);
             return true;
         }
 
@@ -49,7 +59,7 @@ namespace BusinessLayer
                     Address = new BusinessModels.Address() { Line1 = "Line1", Line2 = "Line2", Pincode = "12345" },
                     CustomerName = "John",
                     EmailID = "m@mail.com",
-                    Identity = 1,
+                    Identity = 2,
                     Location = "Mumbai",
                     Profession = "Engg",
                     Purpose = "Just So",
@@ -61,7 +71,7 @@ namespace BusinessLayer
                     Address = new BusinessModels.Address() { Line1 = "Line1", Line2 = "Line2", Pincode = "12345" },
                     CustomerName = "John",
                     EmailID = "m@mail.com",
-                    Identity = 1,
+                    Identity = 3,
                     Location = "Mumbai",
                     Profession = "Engg",
                     Purpose = "Just So",

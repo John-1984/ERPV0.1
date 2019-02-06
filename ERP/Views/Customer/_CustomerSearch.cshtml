@@ -1,11 +1,10 @@
 ﻿
 <div class="container-fluid col-md-8 col-lg-8">
     <div class="float-left">    
-        <input type="text" placeholder="Enter Customer Name"/>
-
-        <input type="button" value="Search"/>
+        <input type="text" class="searchText" placeholder="Enter Customer Name"/>
+        <input type="button" class="btn btn-primary customerSearch" data-url="@Url.Action("CustomerSearch", "Customer")" value="Search"/>
     </div>
     <div class="float-right">
-        <input type="button" value="Add Customer"/>
+        <input type="button" class="btn btn-secondary customerAdd" data-url="@Url.Action("_CustomerEdit", "Customer")" data-identity="-1" value="Add Customer"/>
     </div>
 </div>

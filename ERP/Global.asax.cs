@@ -12,6 +12,7 @@ namespace ERP
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            AutoMapperConfig.RegisterAutoMapperConfig();
         }
     }
 }

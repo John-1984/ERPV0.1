@@ -72,6 +72,10 @@
     <Reference Include="System.Web.Http.WebHost">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\" />
@@ -91,6 +95,9 @@
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="App_Start\AutoMapperConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
@@ -112,6 +119,8 @@
     <Content Include="Views\Customer\_CustomerSearch.cshtml" />
     <Content Include="Views\Customer\_CustomerAll.cshtml" />
     <Content Include="Scripts\CustomerJS.js" />
+    <Content Include="Content\jquery.growl.css" />
+    <Content Include="Scripts\jquery.growl.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MenuModule\MenuModule.csproj">

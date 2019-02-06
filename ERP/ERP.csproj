@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,6 +9,18 @@
     <RootNamespace>ERP</RootNamespace>
     <AssemblyName>ERP</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -26,6 +38,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data, Version=8.0.15.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>F:\A-May2018-desktop\Project Files\G3\MySql.Data.DLL</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
@@ -60,9 +80,6 @@
     <Reference Include="System.Web.Mvc">
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http.Formatting">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
@@ -74,12 +91,47 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\" />
     <Folder Include="Models\" />
-    <Folder Include="Scripts\" />
-    <Folder Include="Views\Menu\" />
-    <Folder Include="Views\Login\" />
-    <Folder Include="Views\Customer\" />
+    <Folder Include="Views\HR\EmployeeMaster\" />
+    <Folder Include="Views\HR\IdentifcationType\" />
+    <Folder Include="Views\Master\Brand\" />
+    <Folder Include="Views\Master\Country\" />
+    <Folder Include="Views\Master\Discount\" />
+    <Folder Include="Views\Master\District\" />
+    <Folder Include="Views\Master\EscalationHeirarchy\" />
+    <Folder Include="Views\Master\Header\" />
+    <Folder Include="Views\Master\ItemMaster\" />
+    <Folder Include="Views\Master\LocationType\" />
+    <Folder Include="Views\Master\ProductMaster\" />
+    <Folder Include="Views\Master\PurchaseLocationType\" />
+    <Folder Include="Views\Master\PurchaseRequestType\" />
+    <Folder Include="Views\Master\Region\" />
+    <Folder Include="Views\Master\RoleManagerMapping\" />
+    <Folder Include="Views\Master\Role\" />
+    <Folder Include="Views\Master\SalesRequestType\" />
+    <Folder Include="Views\Master\State\" />
+    <Folder Include="Views\Master\StoreLocation\" />
+    <Folder Include="Views\Master\Supplier\" />
+    <Folder Include="Views\Master\Tax\" />
+    <Folder Include="Views\Master\UomMaster\" />
+    <Folder Include="Views\Master\Vendor\" />
+    <Folder Include="Views\Master\WareHouseMaster\" />
+    <Folder Include="Views\Master\Warranty\" />
+    <Folder Include="Views\Purchase\PurchaseOrder\" />
+    <Folder Include="Views\Purchase\PurchaseRequest\" />
+    <Folder Include="Views\Purchase\Reports\" />
+    <Folder Include="Views\Purchase\SupplierQuotation\" />
+    <Folder Include="Views\Sales\CallCentre\" />
+    <Folder Include="Views\Sales\Product Enquiry\" />
+    <Folder Include="Views\Sales\Quotation\" />
+    <Folder Include="Views\Sales\Reports\" />
+    <Folder Include="Views\warehouse\DeadStock\" />
+    <Folder Include="Views\warehouse\Reports\" />
+    <Folder Include="Views\warehouse\StockIn\" />
+    <Folder Include="Views\warehouse\StockOut\" />
+    <Folder Include="Views\warehouse\StockReturn\" />
+    <Folder Include="Views\warehouse\StockShortage\" />
+    <Folder Include="Views\warehouse\StockTransfer\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
@@ -93,6 +145,15 @@
     <Compile Include="Controllers\CustomerController.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\date.png" />
+    <Content Include="Content\delete.png" />
+    <Content Include="Content\edit.png" />
+    <Content Include="Content\exit-img.png" />
+    <Content Include="Content\green.gif" />
+    <Content Include="Content\GridClose.png" />
+    <Content Include="Content\Home-icon.png" />
+    <Content Include="Content\red.gif" />
+    <Content Include="Content\view.gif" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -133,6 +194,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\favicon.ico" />
+    <Content Include="libman.json" />
+    <Content Include="Views\Shared\_LayoutHome.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
@@ -141,5 +204,22 @@
         <XspParameters Port="8080" Address="127.0.0.1" SslMode="None" SslProtocol="Default" KeyType="None" CertFile="" KeyFile="" PasswordOptions="None" Password="" Verbose="True" />
       </Properties>
     </MonoDevelop>
+    <VisualStudio>
+      <FlavorProperties GUID="{349C5851-65DF-11DA-9384-00065B846F21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:49744/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
   </ProjectExtensions>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v15.0\WebApplications\Microsoft.WebApplication.targets" />
 </Project>

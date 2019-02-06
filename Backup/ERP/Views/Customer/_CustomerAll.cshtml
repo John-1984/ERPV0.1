@@ -1,0 +1,30 @@
+﻿@model List<BusinessModels.Customer> 
+
+<div class="container">          
+  <table class="table customerAll">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Purpose</th>
+        <th>View</th>
+        <th>Edit</th> 
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+     @foreach(var customer in Model) {
+     <tr>
+        <td>@customer.CustomerName</td>
+        <td>@customer.EmailID</td>
+        <td>@customer.Purpose</td>
+        <td><i class="fa fa-eye" aria-hidden="true" data-identity="@(customer.Identity)"></i></td>
+        <td><i class="fa fa-pencil" aria-hidden="true" data-identity="@(customer.Identity)"></i></td>
+        <td><i class="fa fa-times" aria-hidden="true" data-identity="@(customer.Identity)"></i></td>
+      </tr>
+    }
+
+    </tbody>
+  </table>
+</div>
+

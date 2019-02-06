@@ -3,11 +3,15 @@
 <head>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/Content/General.css">
+
     <title>@ViewBag.Title</title>
 
+    <link rel="icon" type="image/x-icon" href="/Content/favicon.ico">
+
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width , initial-scale=1, shrink-to-fit=no">
 </head>
 <body class="container-fluid height-100vh highlightSection  bodymaxheight bodymaxwidth nopadding" style="overflow:auto">
     <div class="col-md-12 col-lg-12 lightblue  bodymaxwidth nopadding height-33" style="border-bottom:1px solid white">
@@ -29,10 +33,16 @@
                 <div class="float-right col-md-2 col-lg-2 height-33">
                     <div class="col-md-12 col-lg-12 height-3 ">
 
-                        <div class="width-100 welcomestyle " style="vertical-align:bottom">Welcome Guest</div>
+                        <div class="width-100" style="text-align:right;padding-top:7px;">
+                            <img src="~/Content/Home-icon.png" alt="Home">&nbsp;&nbsp;<img src="~/Content/exit-img.png" alt="Exit">
+                        </div>
 
                     </div>
-                    
+                    <div class="col-md-12 col-lg-12 height-7" style="text-align:right">
+                        <div class="width-100 ">&nbsp;</div>
+                        <div class="width-100 welcomestyle " style="vertical-align:bottom">Welcome @ViewData["UserName"]</div>
+
+                    </div>
 
                 </div>
             </div>
@@ -42,23 +52,16 @@
     <div class="container  bodymaxwidth height-100vh contentmaxheight " style=" padding-left:0px;  padding-top:0px; ">
         <div class="row " style="padding-top:0px;min-height:535px;">
             <div class="col-md-12 col-lg-12">
-                <div class="col-md-12 col-lg-12 height-30 ">
-
+                <div class="float-left col-md-2 col-lg-2 " style=" min-height:535px; padding-left:0px; background-color:#36A4C0; padding-top:0px; border-width:2px; border-right-color:red ">
+                    @{Html.RenderAction("Index", "Menu");}
                 </div>
-
-                <div class="col-md-12 col-lg-12 centered ">
-                    
-
-                        <div class="col-md-12 col-lg-12 centered">
-                            <div id="roundcornerbox" style="width:350px;height:300px;  " >
-                                <div style="padding-top:20%;padding-left:7%">
-                                    @RenderBody()
-                                </div>
-                            </div>
-                        </div>
+                <div class=" float-left col-md-10 col-lg-10 centered ">
+                    <div style="padding-right:30px">
+                        @RenderBody()
                     </div>
                 </div>
             </div>
+        </div>
         <div class="container bodymaxwidth nopadding ">
             <footer class="nopadding lightblue footerstyle" style="height:30px; text-align:right;">
                 Copy right 2019. All rights reserved.
@@ -76,3 +79,4 @@
 
 </body>
 </html>
+

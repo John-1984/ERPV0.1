@@ -1,49 +1,81 @@
 ﻿<!DOCTYPE html>
 <html class="h-100 highlightSection">
 <head>
-        <link rel="stylesheet" href="/Content/General.css" >
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-        <title>@ViewBag.Title</title>
-        
-        <link rel="icon" type="image/x-icon" href="/Content/favicon.ico">
-        
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-</head>
-<body class="container-fluid height-100 highlightSection commonPadding">
-                
-        <div class="height-100 highlightSection">
 
-            <header class="height-20 highlightSection">
-                <div>
-                    <div class="float-left col-md-10 col-lg-10">
-                         <img src="/Content/ERPLogo.jpg" alt="The ERP App" width="200px">
-                    </div>          
-                    <div class="float-right col-md-2 col-lg-2">Welcome @ViewData["UserName"]</div>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/Content/General.css">
+    
+    <title>@ViewBag.Title</title>
+
+    <link rel="icon" type="image/x-icon" href="/Content/favicon.ico">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width , initial-scale=1, shrink-to-fit=no">
+</head>
+<body class="container-fluid height-100vh highlightSection  bodymaxheight bodymaxwidth nopadding" style="overflow:auto">    
+        <div class="col-md-12 col-lg-12 lightblue  bodymaxwidth nopadding height-33" style="border-bottom:1px solid white">
+            <header class="highlightSection   verticalcenter " style="height:100%">
+
+                <div class="float-left col-md-3 col-lg-3 verticalcenter height-33">
+                    @*<figure>*@
+                    <img src="/Content/ERPLogo.jpg" alt="The ERP App">
+                    @*</figure>*@
+
                 </div>
-            </header>
-            
-            <div class="row neutralizeRow height-70 highlightSection">
-                <div class="float-left col-md-2 col-lg-2 highlightSection">
-                    @{Html.RenderAction("Index", "Menu");}
+                <div class="float-left col-md-9 col-lg-9 height-33 textcentre ">
+                    <div class="float-left col-md-1 col-lg-1"></div>
+                    <div class="float-left col-md-7 col-lg-7 height-33 textcentre ">
+                        <div class="HeaderText" style="padding-bottom:20px; vertical-align:middle">
+                            Centralized Processing Information System
+                        </div>
+                    </div>
+                    <div class="float-right col-md-2 col-lg-2 height-33">
+                        <div class="col-md-12 col-lg-12 height-3 ">
+
+                            <div class="width-100" style="text-align:right;padding-top:7px;">
+                                <img src="~/Content/Home-icon.png" alt="Home">&nbsp;&nbsp;<img src="~/Content/exit-img.png" alt="Exit">
+                            </div>
+
+                        </div>
+                        <div class="col-md-12 col-lg-12 height-7" style="text-align:right">
+                            <div class="width-100 ">&nbsp;</div>
+                            <div class="width-100 welcomestyle " style="vertical-align:bottom">Welcome @ViewData["UserName"]</div>
+
+                        </div>
+
+                    </div>
                 </div>
-                <div class="float-right col-md-10 col-lg-10 highlightSection">
-                @RenderBody()
+             </header>
+        </div>
+       
+        <div class="container  bodymaxwidth height-100vh contentmaxheight " style=" padding-left:0px;  padding-top:0px; ">
+            <div class="row " style="padding-top:0px;min-height:535px;">
+                <div class="col-md-12 col-lg-12">
+                    <div class="float-left col-md-2 col-lg-2 " style=" min-height:535px; padding-left:0px; background-color:#36A4C0; padding-top:0px; border-width:2px; border-right-color:red ">
+                        @{Html.RenderAction("Index", "Menu");}
+                    </div>
+                    <div class=" float-left col-md-10 col-lg-10 " >
+                        <div style="padding-right:30px">
+                            @RenderBody()
+                        </div>
+                    </div>
                 </div>
             </div>
-        
-            <footer class="height-10 highlightSection">    
-                
-            Copyright
+            <div class="container bodymaxwidth nopadding " >
+                <footer class="nopadding lightblue footerstyle" style="height:30px; text-align:right;">
+                    Copy right 2019. All rights reserved.
 
-            </footer>    
-
+                </footer>
+            </div>
         </div>
+        
+        
+        @*<script src="~/Scripts/CustomerJS.js" type="text/javascript"></script>*@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-  
+
 </body>
 </html>

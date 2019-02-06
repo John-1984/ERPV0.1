@@ -1,9 +1,9 @@
-﻿@model List<ERP.Models.Customer> 
+@model List<ERP.Models.Customer> 
 
 <div class="container">          
   <table class="table customerAll">
     <thead>
-      <tr>
+      <tr class="gridheader">
         <th>Name</th>
         <th>Email</th>
         <th>Purpose</th>
@@ -14,14 +14,19 @@
     </thead>
     <tbody>
      @foreach(var customer in Model) {
-     <tr>
-        <td>@customer.CustomerName</td>
-        <td>@customer.EmailID</td>
-        <td>@customer.Purpose</td>
-        <td><i class="fa fa-eye customerView" aria-hidden="true" data-url="@Url.Action("_CustomerView", "Customer")" data-identity="@(customer.Identity)"></i></td>
-        <td><i class="fa fa-pencil customerEdit" aria-hidden="true" data-url="@Url.Action("_CustomerEdit", "Customer")" data-identity="@(customer.Identity)"></i></td>
-        <td><i class="fa fa-times customerDelete" aria-hidden="true" data-url="@Url.Action("Delete", "Customer")" data-identity="@(customer.Identity)"></i></td>
-      </tr>
+
+        <tr class="gridrow">
+            <td class="gridrow">@customer.CustomerName</td>
+            <td class="gridrow">@customer.EmailID</td>
+            <td class="gridrow">@customer.Purpose</td>
+            @*<td class="gridrow"><i class="fa fa-eye" aria-hidden="true" data-identity="@(customer.Identity)"></i></td>
+        <td class="gridrow"><i class="fa fa-pencil" aria-hidden="true" data-identity="@(customer.Identity)"></i></td>
+        <td class="gridrow"><i class="fa fa-times" aria-hidden="true" data-identity="@(customer.Identity)"></i></td>*@
+            <td class="gridrow "> <img src="~/Content/view.gif" alt="View" class="customerView" data-url="@Url.Action("_CustomerView", "Customer")" data-identity="@(customer.Identity)" /> </td>
+            <td class="gridrow "><img src="~/Content/edit.png" alt="View" class="customerEdit" data-url="@Url.Action("_CustomerEdit", "Customer")" data-identity="@(customer.Identity)" /></td>
+            <td class="gridrow "><img src="~/Content/delete.png" alt="View" class="customerDelete" data-url="@Url.Action("Delete", "Customer")" data-identity="@(customer.Identity)"/></td>
+        </tr>
+
     }
 
     </tbody>

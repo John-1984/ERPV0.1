@@ -1,4 +1,4 @@
-﻿$(document).ready(function(){
+$(document).ready(function(){
 
 //Common Message Handling functions. Need to be separated.
 var showMessage = function(status, message){

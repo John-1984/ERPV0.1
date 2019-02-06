@@ -1,23 +1,27 @@
-﻿@model BusinessModels.Customer 
+@model ERP.Models.Customer 
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 col-lg-6"><div class="float-left col-md-4 col-lg-4 ">Name</div><div class="float-right col-md-8 col-lg-8">@Model.CustomerName</div></div>
+
+<div class="container customerView">
+    <input type="hidden" value="@Model.Identity">
+    <div class="row commonPadding">
+        <div class="col-md-6 col-lg-6"><div class="float-left col-md-4 col-lg-4">Name</div><div class="float-right col-md-8 col-lg-8">@Model.CustomerName</div></div>
+
         <div class="col-md-6 col-lg-6"><div class="float-left col-md-4 col-lg-4">Profession</div><div class="float-right col-md-8 col-lg-8">@Model.Profession</div></div>
     </div>
-    <div class="row">
+    <div class="row commonPadding">
         <div class="col-md-6 col-lg-6"><div class="float-left col-md-4 col-lg-4">Location</div><div class="float-right col-md-8 col-lg-8">@Model.Location</div></div>
-        <div class="col-md-6 col-lg-6"><div class="float-left col-md-4 col-lg-4">Address</div><div class="float-right col-md-8 col-lg-8"> @Model.Address.Line1</div></div>
+        <div class="col-md-6 col-lg-6"><div class="float-left col-md-4 col-lg-4">Address Line1</div><div class="float-right col-md-8 col-lg-8"> @Model.Address.Line1</div></div>
     </div>
-    <div class="row">
+    <div class="row commonPadding">
         <div class="col-md-6 col-lg-6"><div class="float-left col-md-4 col-lg-4">Email ID</div><div class="float-right col-md-8 col-lg-8">@Model.EmailID</div></div>
-        <div class="col-md-6 col-lg-6"><div class="float-left col-md-4 col-lg-4">Purpose</div><div class="float-right col-md-8 col-lg-8">@Model.Purpose</div></div>
+        <div class="col-md-6 col-lg-6"><div class="float-left col-md-4 col-lg-4">Address Line2</div><div class="float-right col-md-8 col-lg-8"> @Model.Address.Line2</div></div>
     </div>
-    <div class="row">
+    <div class="row commonPadding">
+        <div class="col-md-6 col-lg-6"><div class="float-left col-md-4 col-lg-4">Purpose</div><div class="float-right col-md-8 col-lg-8">@Model.Purpose</div></div>
         <div class="col-md-6 col-lg-6"><div class="float-left col-md-4 col-lg-4">Quantity (sqft)</div><div class="float-right col-md-8 col-lg-8">@Model.Quantity</div></div>
     </div>
-    <div class="row">
-        <div class="col-md-6 col-lg-6 float-left"><input type="button" value="Update"/></div>
-        <div class="col-md-6 col-lg-6 float-right"><input type="button" value="Delete"/></div>
+    <div class="row commonPadding">
+        <div class="col-md-6 col-lg-6"><input type="button" class="btn btn-primary float-right" data-identity="@(Model.Identity)" value="Update"/></div>
+        <div class="col-md-6 col-lg-6"><input type="button" class="btn btn-primary float-left" data-identity="@(Model.Identity)" value="Delete"/></div>
     </div>
 </div>

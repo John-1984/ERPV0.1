@@ -13,7 +13,7 @@ namespace ERP.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            ViewData["UserName"] = TempData["UserName"];
+            ViewData["UserName"] = HttpContext.User.Identity.Name;
 
             return View();
         }

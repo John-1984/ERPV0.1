@@ -1,4 +1,4 @@
-﻿
+
 <div class="container-fluid col-md-12 col-lg-12 width-100" style="display:block">
     <div class="container float-left nopadding ">
         <div class="col-md-12 col-lg-12 commonPadding">
@@ -14,16 +14,17 @@
 
                     <input type="text" placeholder="Enter Date" class="textboxstyles" />
                     <img src="~/Content/date.png" alt="The ERP App">
-                    <input type="button" value="Search" class="formbutton" />
+                    <input type="button" value="Search" data-url="@Url.Action("CustomerSearch", "Customer")" class="formbutton customerSearch" />
                 </div>
             </div>
 
 
 
             <div class="col-md-12 col-lg-12 commonPadding " style="text-align:right">
-                <input type="button" value="Add Customer" class="formbutton" />
+                <input type="button" value="Add Customer" data-url="@Url.Action("_CustomerEdit", "Customer")" data-identity="-1"  class="formbutton customerAdd" />
             </div>
 
         </div>
    
+
 </div>

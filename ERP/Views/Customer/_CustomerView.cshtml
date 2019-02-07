@@ -21,7 +21,7 @@
         <div class="col-md-6 col-lg-6"><div class="float-left col-md-4 col-lg-4">Quantity (sqft)</div><div class="float-right col-md-8 col-lg-8">@Model.Quantity</div></div>
     </div>
     <div class="row commonPadding">
-        <div class="col-md-6 col-lg-6"><input type="button" class="btn btn-primary float-right" data-identity="@(Model.Identity)" value="Update"/></div>
-        <div class="col-md-6 col-lg-6"><input type="button" class="btn btn-primary float-left" data-identity="@(Model.Identity)" value="Delete"/></div>
+        <div class="col-md-6 col-lg-6"><input type="button" class="btn btn-primary float-right customerEdit" data-url="@Url.Action("_CustomerEdit", "Customer")" data-identity="@(Model.Identity)" value="Update"/></div>
+        <div class="col-md-6 col-lg-6"><input type="button" class="btn btn-primary float-left customerDelete" data-url="@Url.Action("Delete", "Customer")" data-identity="@(Model.Identity)" value="Delete"/></div>
     </div>
 </div>

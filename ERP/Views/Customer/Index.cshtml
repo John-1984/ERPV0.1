@@ -13,7 +13,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
     <div>
         @ViewData["ActionUpdate"]
     </div>
-    <div class="resultView height-90">
+    <div class="resultView height-90" id="resultView">
         @{Html.RenderAction("_CustomerAll", "Customer");}
     </div>
 

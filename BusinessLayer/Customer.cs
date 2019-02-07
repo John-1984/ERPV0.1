@@ -41,42 +41,22 @@ namespace BusinessLayer
 
         public void TestData()
         {
-            customers.Add(
+
+            for (int i = 0; i < 10; i++){
+                customers.Add(
                 new BusinessModels.Customer()
                 {
                     Address = new BusinessModels.Address() { Line1 = "Line1", Line2 = "Line2", Pincode = "12345" },
                     CustomerName = "John",
                     EmailID = "m@mail.com",
-                    Identity = 1,
+                    Identity = i,
                     Location = "Mumbai",
                     Profession = "Engg",
                     Purpose = "Just So",
-                    Quantity = "12"
+                    Quantity = "12",
+                    CreatedDate = DateTime.Now
                 });
-            customers.Add(
-                new BusinessModels.Customer()
-                {
-                    Address = new BusinessModels.Address() { Line1 = "Line1", Line2 = "Line2", Pincode = "12345" },
-                    CustomerName = "John",
-                    EmailID = "m@mail.com",
-                    Identity = 2,
-                    Location = "Mumbai",
-                    Profession = "Engg",
-                    Purpose = "Just So",
-                    Quantity = "12"
-                });
-            customers.Add(
-                new BusinessModels.Customer()
-                {
-                    Address = new BusinessModels.Address() { Line1 = "Line1", Line2 = "Line2", Pincode = "12345" },
-                    CustomerName = "John",
-                    EmailID = "m@mail.com",
-                    Identity = 3,
-                    Location = "Mumbai",
-                    Profession = "Engg",
-                    Purpose = "Just So",
-                    Quantity = "12"
-                });
+            }
         }
 
     }

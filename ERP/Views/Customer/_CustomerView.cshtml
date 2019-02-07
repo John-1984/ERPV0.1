@@ -1,9 +1,11 @@
-﻿@model ERP.Models.Customer 
+@model ERP.Models.Customer 
+
 
 <div class="container customerView">
     <input type="hidden" value="@Model.Identity">
     <div class="row commonPadding">
         <div class="col-md-6 col-lg-6"><div class="float-left col-md-4 col-lg-4">Name</div><div class="float-right col-md-8 col-lg-8">@Model.CustomerName</div></div>
+
         <div class="col-md-6 col-lg-6"><div class="float-left col-md-4 col-lg-4">Profession</div><div class="float-right col-md-8 col-lg-8">@Model.Profession</div></div>
     </div>
     <div class="row commonPadding">

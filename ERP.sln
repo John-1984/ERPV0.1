@@ -1,6 +1,7 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.329
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERP", "ERP\ERP.csproj", "{83718E7D-2693-4169-8233-720966A2F5E8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERP.Tests", "ERP.Tests\ERP.Tests.csproj", "{19226644-E90A-42F3-85DD-448359DFB5FB}"
@@ -44,11 +45,10 @@ Global
 		{CAC5FD58-E0F1-423C-B1FF-F65E151CF844}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CAC5FD58-E0F1-423C-B1FF-F65E151CF844}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
-		Policies = $0
-		$0.StandardHeader = $1
-		$0.VersionControlPolicy = $2
-		$2.CommitMessageStyle = $3
-		$3.IncludeDirectoryPaths = True
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EFCD797C-09BD-48D0-951F-4AABD5B1C8E5}
 	EndGlobalSection
 EndGlobal

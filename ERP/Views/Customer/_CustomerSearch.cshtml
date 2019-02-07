@@ -5,26 +5,20 @@
             <div class="col-md-6 col-lg-6 commonPadding">
                 <span class="BodyWelcomeText">Search Options</span>
             </div>
-                <div class="col-md-6 col-lg-6 commonPadding">
-                    <input type="text" placeholder="Enter Customer Name" class="textboxstyles" />
+                    <div class="col-md-6 col-lg-6 commonPadding">
+                        <input type="text" placeholder="Enter Customer Name" class="textboxstyles searchText" />
+                    </div>
+                    <div class="col-md-6 col-lg-6 commonPadding">
 
+                    <input id="datepicker"/>
 
-                </div>
-                <div class="col-md-6 col-lg-6 commonPadding">
-
-                    <input type="text" placeholder="Enter Date" class="textboxstyles" />
-                    <img src="~/Content/date.png" alt="The ERP App">
                     <input type="button" value="Search" data-url="@Url.Action("CustomerSearch", "Customer")" class="formbutton customerSearch" />
                 </div>
             </div>
-
-
 
             <div class="col-md-12 col-lg-12 commonPadding " style="text-align:right">
                 <input type="button" value="Add Customer" data-url="@Url.Action("_CustomerEdit", "Customer")" data-identity="-1"  class="formbutton customerAdd" />
             </div>
 
         </div>
-   
-
 </div>

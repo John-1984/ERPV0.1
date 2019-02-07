@@ -1,4 +1,6 @@
-@model List<ERP.Models.Customer> 
+@using X.PagedList;
+@using X.PagedList.Mvc;  
+@model IPagedList<ERP.Models.Customer>  
 
 <div class="container">          
   <table class="table customerAll">
@@ -19,17 +21,25 @@
             <td class="gridrow">@customer.CustomerName</td>
             <td class="gridrow">@customer.EmailID</td>
             <td class="gridrow">@customer.Purpose</td>
-            @*<td class="gridrow"><i class="fa fa-eye" aria-hidden="true" data-identity="@(customer.Identity)"></i></td>
-        <td class="gridrow"><i class="fa fa-pencil" aria-hidden="true" data-identity="@(customer.Identity)"></i></td>
-        <td class="gridrow"><i class="fa fa-times" aria-hidden="true" data-identity="@(customer.Identity)"></i></td>*@
-            <td class="gridrow "> <img src="~/Content/view.gif" alt="View" class="customerView" data-url="@Url.Action("_CustomerView", "Customer")" data-identity="@(customer.Identity)" /> </td>
+            <td class="gridrow "><img src="~/Content/view.gif" alt="View" class="customerView" data-url="@Url.Action("_CustomerView", "Customer")" data-identity="@(customer.Identity)" /> </td>
             <td class="gridrow "><img src="~/Content/edit.png" alt="View" class="customerEdit" data-url="@Url.Action("_CustomerEdit", "Customer")" data-identity="@(customer.Identity)" /></td>
             <td class="gridrow "><img src="~/Content/delete.png" alt="View" class="customerDelete" data-url="@Url.Action("Delete", "Customer")" data-identity="@(customer.Identity)"/></td>
         </tr>
-
     }
 
     </tbody>
   </table>
+  <br />  
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Sorting",  new { page, sortOrder = ViewBag.CurrentSort, createdDate = ViewBag.CreatedDate, searchString = ViewBag.SearchString}), 
+    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(
+        new AjaxOptions() { 
+            InsertionMode = InsertionMode.Replace,
+            HttpMethod = "GET", 
+            UpdateTargetId = "resultView" 
+        })
+    )
+
 </div>
 

@@ -69,6 +69,13 @@ namespace ERP.Models
             set;
         }
 
+        [DefaultValue("")]
+        public string Comments
+        {
+            get;
+            set;
+        }
+
         [DefaultValue("0")]
         public string Quantity
         {

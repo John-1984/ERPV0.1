@@ -1,0 +1,37 @@
+﻿@model List<ERP.Models.District>
+
+<div class="container">
+    <table class="table DistrictAll">
+        <thead>
+            <tr class="gridheader">
+                <th>Name</th>
+                <th>Region</th>
+                <th>Country</th>
+                <th>State</th>                
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var District in Model)
+            {
+
+            <tr class="gridrow">
+                <td class="gridrow">@District.DistrictName</td>
+                <td class="gridrow">@District.DistrictName</td>
+                <td class="gridrow">@District.DistrictName</td>
+                <td class="gridrow">@District.DistrictName</td>
+                @*<td class="gridrow"><i class="fa fa-eye" aria-hidden="true" data-identity="@(District.Identity)"></i></td>
+        <td class="gridrow"><i class="fa fa-pencil" aria-hidden="true" data-identity="@(District.Identity)"></i></td>
+        <td class="gridrow"><i class="fa fa-times" aria-hidden="true" data-identity="@(District.Identity)"></i></td>*@
+               
+                <td class="gridrow "><img src="~/Content/edit.png" alt="View" class="DistrictEdit pointer" data-url="@Url.Action("_DistrictEdit", "District")" data-identity="@(District.Identity)" /></td>
+                <td class="gridrow "><img src="~/Content/delete.png" alt="View" class="DistrictDelete pointer" data-url="@Url.Action("Delete", "District")" data-identity="@(District.Identity)" /></td>
+            </tr>
+
+            }
+
+        </tbody>
+    </table>
+</div>
+

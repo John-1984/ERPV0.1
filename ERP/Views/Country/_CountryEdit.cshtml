@@ -1,0 +1,28 @@
+﻿@model ERP.Models.Country
+
+
+<div class="container CountryDetails col-md-12 col-lg-12 commonPadding">
+
+    <div class="row  col-md-12 col-lg-12">
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">CountryName :</div>
+                <div class="float-right col-md-8 col-lg-8"><input class="textareastyles" style="width:300px;height:35px;" type="text" name="CountryName" value="@(Model.CountryName)" placeholder="Enter Name" /></div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">Region :</div>
+                <div class="float-right col-md-8 col-lg-8"><input type="text" class="textareastyles" style="width:300px;height:35px;" name="RegionID" value="@(Model.RegionID)" placeholder="Enter Profession" /></div>
+            </div>
+        </div>
+    </div>   
+
+    <div class="row col-md-12 col-lg-12 commonPadding">
+        <div class="col-md-6 col-lg-6"><input type="button" data-url="@Url.Action("Update", "Country")" class="formbutton float-right CountryAddEdit" data-identity="@(Model.Identity)" value="Update/Add" /></div>
+        <input type="hidden" name="Identity" value="@(Model.Identity)">
+    </div>
+
+
+
+</div>

@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="height-100 width-100">
+    <div class=" BodyWelcomeText centered">
+        Region Info
+    </div>
+
+    <div class="commonPadding height-10">
+        @{Html.RenderPartial("_RegionSearch");}
+    </div>
+    <div>
+        @ViewData["ActionUpdate"]
+    </div>
+    <div class="resultView height-90">
+        @{Html.RenderAction("_RegionAll", "Region");}
+    </div>
+
+</div>
+

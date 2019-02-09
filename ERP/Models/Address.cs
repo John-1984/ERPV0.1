@@ -11,6 +11,11 @@ namespace ERP.Models
             Line2 = string.Empty;
             Pincode = string.Empty;
         }
+        public int Identity
+        {
+            get;
+            set;
+        }
 
         [DefaultValue("")]
         public string Line1

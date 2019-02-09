@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 namespace BusinessModels
 {
     public class Customer
@@ -51,6 +51,13 @@ namespace BusinessModels
 
         public string Quantity
         {
+            get;
+            set;
+        }
+
+
+        public string Comments
+          {
             get;
             set;
         }

@@ -7,6 +7,11 @@ namespace BusinessModels
         {
         }
 
+        public int Identity
+        {
+            get;
+            set;
+        }
         public string Line1
         {
             get;

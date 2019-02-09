@@ -1,0 +1,21 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="height-100 width-100">
+    <div class=" BodyWelcomeText centered">
+        District Info
+    </div>
+
+    <div class="commonPadding height-10">
+        @{Html.RenderPartial("_DistrictSearch");}
+    </div>
+    <div>
+        @ViewData["ActionUpdate"]
+    </div>
+    <div class="resultView height-90">
+        @{Html.RenderAction("_DistrictAll", "District");}
+    </div>
+
+</div>
+

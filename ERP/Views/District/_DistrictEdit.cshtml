@@ -1,0 +1,43 @@
+﻿@model ERP.Models.District
+
+
+<div class="container DistrictDetails col-md-12 col-lg-12 commonPadding">
+
+    <div class="row  col-md-12 col-lg-12">
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">Region :</div>
+                <div class="float-right col-md-8 col-lg-8"><input class="textareastyles" style="width:300px;height:35px;" type="text" name="DistrictName" value="@(Model.DistrictName)" placeholder="Enter Name" /></div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">Country :</div>
+                <div class="float-right col-md-8 col-lg-8"><input type="text" class="textareastyles" style="width:300px;height:35px;" name="DistrictName" value="@(Model.DistrictName)" placeholder="Enter Country" /></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row  col-md-12 col-lg-12">
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">State :</div>
+                <div class="float-right col-md-8 col-lg-8"><input class="textareastyles" style="width:300px;height:35px;" type="text" name="DistrictName" value="@(Model.DistrictName)" placeholder="Enter State" /></div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">District :</div>
+                <div class="float-right col-md-8 col-lg-8"><input type="text" class="textareastyles" style="width:300px;height:35px;" name="DistrictName" value="@(Model.DistrictName)" placeholder="Enter District" /></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row col-md-12 col-lg-12 commonPadding">
+        <div class="col-md-6 col-lg-6"><input type="button" data-url="@Url.Action("Update", "District")" class="formbutton float-right DistrictAddEdit" data-identity="@(Model.Identity)" value="Update/Add" /></div>
+        <input type="hidden" name="Identity" value="@(Model.Identity)">
+    </div>
+
+
+
+</div>

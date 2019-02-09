@@ -1,26 +1,86 @@
 @model ERP.Models.Customer 
 
 
-<div class="container customerDetails">
-    <input type="hidden" name="Identity" value="@(Model.Identity)">
-    <div class="row commonPadding">
-        <div class="col-md-6 col-lg-6"><div class="float-left col-md-4 col-lg-4">Name</div><div class="float-right col-md-8 col-lg-8"><input type="text" name="CustomerName" value="@(Model.CustomerName)" placeholder="Enter Name"/></div></div>
-        <div class="col-md-6 col-lg-6"><div class="float-left col-md-4 col-lg-4">Profession</div><div class="float-right col-md-8 col-lg-8"><input type="text" name="Profession" value="@(Model.Profession)" placeholder="Enter Profession"/></div></div>
+<div class="container customerDetails col-md-12 col-lg-12 commonPadding">
+
+    <div class="row  col-md-12 col-lg-12">
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">Name :</div>
+                <div class="float-right col-md-8 col-lg-8"><input class="textareastyles" style="width:300px;height:35px;" type="text" name="CustomerName" value="@(Model.CustomerName)" placeholder="Enter Name" /></div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">Profession :</div>
+                <div class="float-right col-md-8 col-lg-8"><input type="text" class="textareastyles" style="width:300px;height:35px;" name="Profession" value="@(Model.Profession)" placeholder="Enter Profession" /></div>
+            </div>
+        </div>
     </div>
-    <div class="row commonPadding">
-        <div class="col-md-6 col-lg-6"><div class="float-left col-md-4 col-lg-4">Location</div><div class="float-right col-md-8 col-lg-8"><input type="text" name="Location" value="@(Model.Location)" placeholder="Enter Location"/></div></div>
-        <div class="col-md-6 col-lg-6"><div class="float-left col-md-4 col-lg-4">Address Line1</div><div class="float-right col-md-8 col-lg-8"> <input type="text" name="Address.Line1" value="@(Model.Address.Line1)" placeholder="Enter Address"/></div></div>
+    <div class="row  col-md-12 col-lg-12 commonPadding">
+
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">Address Line1 :</div>
+                <div class="float-right col-md-8 col-lg-8">
+                    <textarea name="Line1" rows="6" cols="40" class="textareastyles" placeholder="Enter Address Line1">@(Model.Address.Line1)</textarea>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">Address Line2 :</div>
+                <div class="float-right col-md-8 col-lg-8">
+                    <textarea name="Line1" rows="6" cols="40" class="textareastyles" placeholder="Enter Address Line2">@(Model.Address.Line2)</textarea>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="row commonPadding">
-        <div class="col-md-6 col-lg-6"><div class="float-left col-md-4 col-lg-4">Email ID</div><div class="float-right col-md-8 col-lg-8"><input type="text" name="EmailID" value="@(Model.EmailID)" placeholder="Enter Email"/></div></div>
-        <div class="col-md-6 col-lg-6"><div class="float-left col-md-4 col-lg-4">Address Line2</div><div class="float-right col-md-8 col-lg-8"> <input type="text" name="Address.Line2" value="@(Model.Address.Line2)" placeholder="Enter Address"/></div></div>
-    </div>
-    <div class="row commonPadding">
-        <div class="col-md-6 col-lg-6"><div class="float-left col-md-4 col-lg-4">Purpose</div><div class="float-right col-md-8 col-lg-8"><input type="text" name="Purpose" value="@(Model.Purpose)" placeholder="Enter Purpose"/></div></div>
-        <div class="col-md-6 col-lg-6"><div class="float-left col-md-4 col-lg-4">Quantity (sqft)</div><div class="float-right col-md-8 col-lg-8"><input type="text" name="Quantity" value="@(Model.Quantity)" placeholder="Enter Quantity"/></div></div>
-    </div>
-    <div class="row commonPadding">
-        <div class="col-md-6 col-lg-6"><input type="button" data-url="@Url.Action("Update", "Customer")" class="btn btn-primary float-right customerAddEdit" data-identity="@(Model.Identity)" value="Update/Add"/></div>
+
+    <div class="row col-md-12 col-lg-12 commonPadding">
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">Email ID :</div>
+                <div class="float-right col-md-8 col-lg-8"><input class="textareastyles" style="width:300px;height:35px;" type="text" name="EmailID" value="@(Model.EmailID)" placeholder="Enter Email" /></div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">Quantity (sqft) :</div>
+                <div class="float-right col-md-8 col-lg-8">
+                    <input type="text" name="Quantity" class="textareastyles" style="width:300px;height:35px;" value="@(Model.Quantity)" placeholder="Enter Quantity" />
+                </div>
+            </div>
+        </div>
 
     </div>
+
+    <div class="row col-md-12 col-lg-12 commonPadding">
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">Purpose :</div>
+                <div class="float-right col-md-8 col-lg-8">
+                    <textarea name="Line1" rows="8" cols="60" class="textareastyles" placeholder="Enter Visit Purpose">@(Model.Purpose)</textarea>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">Comments :</div>
+                <div class="float-right col-md-8 col-lg-8">
+                    <textarea name="Line1" rows="8" cols="60" class="textareastyles" placeholder="Enter Comments">@(Model.Comments)</textarea>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+    <div class="row col-md-12 col-lg-12 commonPadding">
+        <div class="col-md-6 col-lg-6"><input type="button" data-url="@Url.Action("Update", "Customer")" class="formbutton float-right customerAddEdit" data-identity="@(Model.Identity)" value="Update/Add" /></div>
+        <input type="hidden" name="Identity" value="@(Model.Identity)">
+    </div>
+
+
+
 </div>

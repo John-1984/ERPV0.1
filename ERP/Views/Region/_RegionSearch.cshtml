@@ -1,0 +1,27 @@
+﻿
+<div class="container-fluid col-md-12 col-lg-12 width-100 " style="display:block">
+    <div class="container float-left nopadding ">
+        <div class="col-md-12 col-lg-12 commonPadding RegionSearchDetials">
+            <div class="col-md-6 col-lg-6 commonPadding">
+                <span class="BodyWelcomeText">Search Options</span>
+            </div>
+            <div class="col-md-6 col-lg-6 commonPadding">
+                <input type="text" placeholder="Search By Region Name" class="textboxstyles" style="width:300px;height:27px;" />
+
+
+            </div>
+            <div class="col-md-4 col-lg-4 commonPadding textleft">              
+                <input type="button" value="Search" data-url="@Url.Action("RegionSearch", "Region")" class="formbutton RegionSearch" />
+            </div>
+        </div>
+
+
+
+        <div class="col-md-12 col-lg-12 commonPadding" style="text-align:right">
+            <input type="button" value="Add Region" data-url="@Url.Action("_RegionEdit", "Region")" data-identity="-1" class="formbutton RegionAdd" />
+        </div>
+
+    </div>
+
+
+</div>

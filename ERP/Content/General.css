@@ -183,21 +183,50 @@ a.ForgetPwd {
     align-items: center !important;  
     
 }
-
 .textboxstyles {
     font-family: 'BenchNine-Bold', sans-serif;
     font-size: 13px;
     border: 1px solid #36A4C0;
-    height:20px;
+    height: 20px;
+   
+}
+.textboxlargewidth {
+    
+    width: 400px;
+}
+.textareastyles {
+    font-family: 'BenchNine-Bold', sans-serif;
+    font-size: 13px;
+    border: 1px solid #36A4C0;
+    
 }
 
+.lablestyles {
+    font-family: Oswald;
+    font-size: 14px;
+    font-weight: 400;
+    color: #7F7F7F;
+}
+.lablecontentstyles {
+   
+    font-size: 13px;
+    
+}
+.pointer{
+    cursor:pointer;
+}
 .logintextboxstyles {
     font-family: 'BenchNine-Bold', sans-serif;
     font-size: 13px;
     border: 1px solid #36A4C0;
    
 }
-
+.textright {
+    text-align: right;
+}
+.textleft {
+    text-align: left;
+}
 .textcentre {
    
     text-align: center;
@@ -270,12 +299,14 @@ a.menulink {
     background-color: #36A4C0;
     border: 1px thick #36A4C0;
     text-align:center;
+    line-height:10px;
 }
 .gridrow {
+   
     font-family: 'BenchNine-Bold', sans-serif;
     font-size: 13px;
     text-decoration: none;
-    text-align:center;
+    text-align: center;
     color: black;
     border: 1px solid #36A4C0;
     border-bottom: 1px solid #36A4C0;

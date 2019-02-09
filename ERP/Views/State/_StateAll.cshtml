@@ -1,0 +1,35 @@
+﻿@model List<ERP.Models.State>
+
+<div class="container">
+    <table class="table StateAll">
+        <thead>
+            <tr class="gridheader">
+                <th>StateName</th>
+                <th>Region</th>
+                <th>Country</th>                
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var State in Model)
+            {
+
+                <tr class="gridrow">
+                    <td class="gridrow">@State.StateName</td>
+                    <td class="gridrow">@State.StateName</td>
+                    <td class="gridrow">@State.StateName</td>
+                    @*<td class="gridrow"><i class="fa fa-eye" aria-hidden="true" data-identity="@(State.Identity)"></i></td>
+                        <td class="gridrow"><i class="fa fa-pencil" aria-hidden="true" data-identity="@(State.Identity)"></i></td>
+                        <td class="gridrow"><i class="fa fa-times" aria-hidden="true" data-identity="@(State.Identity)"></i></td>*@
+                    
+                    <td class="gridrow "><img src="~/Content/edit.png" alt="View" class="StateEdit pointer" data-url="@Url.Action("_StateEdit", "State")" data-identity="@(State.Identity)" /></td>
+                    <td class="gridrow "><img src="~/Content/delete.png" alt="View" class="StateDelete pointer" data-url="@Url.Action("Delete", "State")" data-identity="@(State.Identity)" /></td>
+                </tr>
+
+            }
+
+        </tbody>
+    </table>
+</div>
+

@@ -1,0 +1,37 @@
+﻿@model ERP.Models.State
+
+
+<div class="container StateDetails col-md-12 col-lg-12 commonPadding">
+    <div class="row  col-md-12 col-lg-12">
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">Select Region :</div>
+                <div class="float-right col-md-8 col-lg-8"><input class="textareastyles" style="width:300px;height:35px;" type="text" name="StateName" value="@(Model.StateName)" placeholder="Enter Name" /></div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">Select Country</div>
+                <div class="float-right col-md-8 col-lg-8"><input type="text" class="textareastyles" style="width:300px;height:35px;" name="Profession" value="@(Model.StateName)" placeholder="Enter Profession" /></div>
+            </div>
+        </div>
+    </div>
+    <div class="row  col-md-12 col-lg-12">
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">State Name :</div>
+                <div class="float-right col-md-8 col-lg-8"><input class="textareastyles" style="width:300px;height:35px;" type="text" name="StateName" value="@(Model.StateName)" placeholder="Enter Name" /></div>
+            </div>
+        </div>
+       
+    </div>
+
+
+    <div class="row col-md-12 col-lg-12 commonPadding">
+        <div class="col-md-6 col-lg-6"><input type="button" data-url="@Url.Action("Update", "State")" class="formbutton float-right StateAddEdit" data-identity="@(Model.Identity)" value="Update/Add" /></div>
+        <input type="hidden" name="Identity" value="@(Model.Identity)">
+    </div>
+
+
+
+</div>

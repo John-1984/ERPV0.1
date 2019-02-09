@@ -54,5 +54,11 @@ namespace BusinessModels
             get;
             set;
         }
+
+        public string Comments
+        {
+            get;
+            set;
+        }
     }
 }

@@ -1,0 +1,23 @@
+﻿@model ERP.Models.Region
+
+
+<div class="container RegionDetails col-md-12 col-lg-12 commonPadding">
+
+    <div class="row  col-md-12 col-lg-12">
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">Region Name :</div>
+                <div class="float-right col-md-8 col-lg-8"><input class="textareastyles" style="width:300px;height:35px;" type="text" name="RegionName" value="@(Model.RegionName)" placeholder="Enter Region Name" /></div>
+            </div>
+        </div>
+        
+    </div>
+   
+    <div class="row col-md-12 col-lg-12 commonPadding">
+        <div class="col-md-6 col-lg-6"><input type="button" data-url="@Url.Action("Update", "Region")" class="formbutton float-right RegionAddEdit" data-identity="@(Model.Identity)" value="Update/Add" /></div>
+        <input type="hidden" name="Identity" value="@(Model.Identity)">
+    </div>
+
+
+
+</div>

@@ -57,7 +57,7 @@ namespace BusinessLayer
                 new BusinessModels.Customer()
                 {
                     Address = new BusinessModels.Address() { Line1 = "Line1", Line2 = "Line2", Pincode = "12345" },
-                    CustomerName = "John",
+                    CustomerName = "Rajeesh",
                     EmailID = "m@mail.com",
                     Identity = 2,
                     Location = "Mumbai",
@@ -69,7 +69,7 @@ namespace BusinessLayer
                 new BusinessModels.Customer()
                 {
                     Address = new BusinessModels.Address() { Line1 = "Line1", Line2 = "Line2", Pincode = "12345" },
-                    CustomerName = "John",
+                    CustomerName = "Ashraf",
                     EmailID = "m@mail.com",
                     Identity = 3,
                     Location = "Mumbai",

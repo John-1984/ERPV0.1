@@ -22,9 +22,9 @@
             @*<td class="gridrow"><i class="fa fa-eye" aria-hidden="true" data-identity="@(customer.Identity)"></i></td>
         <td class="gridrow"><i class="fa fa-pencil" aria-hidden="true" data-identity="@(customer.Identity)"></i></td>
         <td class="gridrow"><i class="fa fa-times" aria-hidden="true" data-identity="@(customer.Identity)"></i></td>*@
-            <td class="gridrow "> <img src="~/Content/view.gif" alt="View" class="customerView" data-url="@Url.Action("_CustomerView", "Customer")" data-identity="@(customer.Identity)" /> </td>
-            <td class="gridrow "><img src="~/Content/edit.png" alt="View" class="customerEdit" data-url="@Url.Action("_CustomerEdit", "Customer")" data-identity="@(customer.Identity)" /></td>
-            <td class="gridrow "><img src="~/Content/delete.png" alt="View" class="customerDelete" data-url="@Url.Action("Delete", "Customer")" data-identity="@(customer.Identity)"/></td>
+            <td class="gridrow "> <img src="~/Content/view.gif" alt="View" class="customerView pointer" data-url="@Url.Action("_CustomerView", "Customer")" data-identity="@(customer.Identity)" /> </td>
+            <td class="gridrow "><img src="~/Content/edit.png" alt="View" class="customerEdit pointer" data-url="@Url.Action("_CustomerEdit", "Customer")" data-identity="@(customer.Identity)" /></td>
+            <td class="gridrow "><img src="~/Content/delete.png" alt="View" class="customerDelete pointer" data-url="@Url.Action("Delete", "Customer")" data-identity="@(customer.Identity)"/></td>
         </tr>
 
     }

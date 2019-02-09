@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using X.PagedList;
+using System.Runtime;
+using System.Globalization;
 
 namespace ERP.Controllers
 {
@@ -16,7 +19,7 @@ namespace ERP.Controllers
 
         public PartialViewResult _CustomerAll()
         {
-            return PartialView(AutoMapperConfig.Mapper().Map<List<Models.Customer>>(_customer.GetAll()));
+            return PartialView(GetCustomers("", 1, "", ""));
         }
 
         public PartialViewResult _CustomerEdit(int identity)
@@ -54,8 +57,48 @@ namespace ERP.Controllers
         }
 
         [HttpPost]
-        public PartialViewResult CustomerSearch(string searchString){
-            return PartialView("_CustomerAll", AutoMapperConfig.Mapper().Map<List<Models.Customer>>(_customer.GetAll().ToList().FindAll(p => p.CustomerName.ToLower().Contains(searchString.ToLower()))));
+        public PartialViewResult CustomerSearch(string searchString, string createdDate = ""){
+            return PartialView("_CustomerAll", GetCustomers("", 1, createdDate, searchString));
+        }
+
+        public PartialViewResult Sorting(int? page, string sortOrder = "", string createdDate = "", string searchString = "")  
+        {
+            return PartialView("_CustomerAll", GetCustomers(sortOrder, page, createdDate, searchString)); 
+        } 
+
+        private IPagedList<Models.Customer> GetCustomers(string sortOrder, int? page, string createdDate = "", string searchString = ""){
+
+            ViewBag.CreatedDate = string.IsNullOrEmpty(createdDate) ? "" : createdDate;
+            ViewBag.SearchString = string.IsNullOrEmpty(searchString) ? "" : searchString;
+            ViewBag.CurrentSort = string.IsNullOrEmpty(sortOrder) ? "CustomerName" : "";
+
+            var customers = AutoMapperConfig.Mapper().Map<List<Models.Customer>>(_customer.GetAll());
+            if (!string.IsNullOrEmpty(searchString) && !string.IsNullOrEmpty(createdDate))
+                customers = AutoMapperConfig.Mapper().Map<List<Models.Customer>>(_customer.GetAll().ToList().FindAll(p => p.CustomerName.ToLower().Contains(searchString.ToLower()) && p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+            else if (!string.IsNullOrEmpty(searchString))
+                customers = AutoMapperConfig.Mapper().Map<List<Models.Customer>>(_customer.GetAll().ToList().FindAll(p => p.CustomerName.ToLower().Contains(searchString.ToLower())));
+            else if (!string.IsNullOrEmpty(createdDate))
+                customers = AutoMapperConfig.Mapper().Map<List<Models.Customer>>(_customer.GetAll().ToList().FindAll(p => p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+            
+            switch (sortOrder)  
+            {  
+                case "CustomerName":  
+                    customers = customers.OrderByDescending(stu=> stu.CustomerName).ToList();  
+                break;  
+                case "DateAsc":  
+                    customers = customers.OrderBy(stu => stu.CreatedDate).ToList();  
+                break;  
+                case "DateDesc":  
+                    customers = customers.OrderByDescending(stu => stu.CreatedDate).ToList();  
+                break;  
+                default:  
+                    customers = customers.OrderBy(stu => stu.CustomerName).ToList();  
+                break;  
+            }
+
+            int Size_Of_Page = 8;
+            int No_Of_Page = (page ?? 1);
+            return customers.ToPagedList(No_Of_Page, Size_Of_Page);
         }
 
         //Function to get random number

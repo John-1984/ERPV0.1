@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -41,6 +41,8 @@ namespace BusinessLayer
 
         public void TestData()
         {
+
+   for (int i = 0; i < 10; i++){
             customers.Add(
                 new BusinessModels.Customer()
                 {
@@ -66,17 +68,20 @@ namespace BusinessLayer
                     Quantity = "12"
                 });
             customers.Add(
+
                 new BusinessModels.Customer()
                 {
                     Address = new BusinessModels.Address() { Line1 = "Line1", Line2 = "Line2", Pincode = "12345" },
                     CustomerName = "Ashraf",
                     EmailID = "m@mail.com",
-                    Identity = 3,
+                    Identity = i,
                     Location = "Mumbai",
                     Profession = "Engg",
                     Purpose = "Just So",
-                    Quantity = "12"
+                    Quantity = "12",
+                    CreatedDate = DateTime.Now
                 });
+            }
         }
 
     }

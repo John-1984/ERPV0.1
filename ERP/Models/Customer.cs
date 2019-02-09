@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using BusinessModels;
+using X.PagedList;
 
 namespace ERP.Models
 {
@@ -17,6 +18,7 @@ namespace ERP.Models
             EmailID = string.Empty;
             Purpose = string.Empty;
             Quantity = string.Empty;
+            CreatedDate = DateTime.Now;
         }
 
         [DefaultValue(-1)]
@@ -77,6 +79,11 @@ namespace ERP.Models
         [DefaultValue("0")]
         public string Quantity
         {
+            get;
+            set;
+        }
+
+        public DateTime CreatedDate{
             get;
             set;
         }

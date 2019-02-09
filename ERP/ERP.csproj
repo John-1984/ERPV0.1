@@ -93,6 +93,12 @@
       <HintPath>..\packages\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="X.PagedList">
+      <HintPath>..\packages\X.PagedList.5.3.0.5300\lib\portable-net45+wp8+win8\X.PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="X.PagedList.Mvc">
+      <HintPath>..\packages\X.PagedList.Mvc.5.3.0.5300\lib\net46\X.PagedList.Mvc.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -218,6 +224,13 @@
     <Content Include="Scripts\CustomerJS.js" />
     <Content Include="Content\jquery.growl.css" />
     <Content Include="Scripts\jquery.growl.js" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessModels\BusinessModels.csproj">

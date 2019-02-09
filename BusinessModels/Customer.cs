@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 namespace BusinessModels
 {
     public class Customer
@@ -55,7 +55,14 @@ namespace BusinessModels
             set;
         }
 
+
         public string Comments
+          {
+            get;
+            set;
+        }
+
+        public DateTime CreatedDate
         {
             get;
             set;

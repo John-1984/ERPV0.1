@@ -13,9 +13,13 @@ var showMessage = function(status, message){
     }
 };
 
+$('#datepicker').datepicker({
+    uiLibrary: 'bootstrap4'
+});
 
 $(document).off("click", ".customerView");
 $(document).on("click", ".customerView", function(event){
+event.stopImmediatePropagation();
 var theUrl = $(this).attr("data-url");
 $.ajax({
     url:theUrl,
@@ -35,6 +39,7 @@ $.ajax({
 
 $(document).off("click", ".customerEdit, .customerAdd");
 $(document).on("click", ".customerEdit, .customerAdd", function(event){
+event.stopImmediatePropagation();
     var theUrl = $(this).attr("data-url");
     $.ajax({
         url:theUrl,
@@ -55,6 +60,7 @@ $(document).on("click", ".customerEdit, .customerAdd", function(event){
 
 $(document).off("click", ".customerDelete");
 $(document).on("click", ".customerDelete", function(event){
+event.stopImmediatePropagation();
     if (!confirm("Do you want to delete")){
           return false;
         }else  {
@@ -76,6 +82,7 @@ $(document).on("click", ".customerDelete", function(event){
 
 $(document).off("click", ".customerAddEdit");
 $(document).on("click", ".customerAddEdit", function(event){
+event.stopImmediatePropagation();
 var theUrl = $(this).attr("data-url");
 $.ajax({
     url:theUrl,
@@ -95,11 +102,12 @@ $.ajax({
 
 $(document).off("click", ".customerSearch");
 $(document).on("click", ".customerSearch", function(event){
+event.stopImmediatePropagation();
 var theUrl = $(this).attr("data-url");
 $.ajax({
     url:theUrl,
     type: 'POST',  // http method
-    data: { "searchString": $(".searchText").val() }, 
+    data: { "searchString": $(".searchText").val(), "createdDate": $("#datepicker").val() }, 
     success: function (data, status, xhr) {
         $('.resultView').html(data);
         showMessage(status, "Success");

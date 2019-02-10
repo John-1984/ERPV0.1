@@ -4,48 +4,48 @@ using System.Linq;
 
 namespace BusinessLayer
 {
-    public class StoreInfo
+    public class Company
     {
-        public StoreInfo()
+        public Company()
         {
             
         }
 
-        private static List<BusinessModels.StoreInfo> StoreInfos = new List<BusinessModels.StoreInfo>();
+        private static List<BusinessModels.Company> Companys = new List<BusinessModels.Company>();
 
-        public BusinessModels.StoreInfo GetStoreInfo(Int32 identity)
+        public BusinessModels.Company GetCompany(Int32 identity)
         {
-            return StoreInfos.FirstOrDefault(p => p.Identity.Equals(identity));
+            return Companys.FirstOrDefault(p => p.Identity.Equals(identity));
         }
 
-        public IEnumerable<BusinessModels.StoreInfo> GetAll()
+        public IEnumerable<BusinessModels.Company> GetAll()
         {
-            return StoreInfos;
+            return Companys;
         }
 
         public Boolean Delete(Int32 identity)
         {
-            StoreInfos.Remove(StoreInfos.Find(p => p.Identity.Equals(identity)));
+            Companys.Remove(Companys.Find(p => p.Identity.Equals(identity)));
             return true;
         }
 
-        public Boolean Update(BusinessModels.StoreInfo StoreInfo)
+        public Boolean Update(BusinessModels.Company Company)
         {
-            StoreInfos.Remove(StoreInfos.Find(p => p.Identity.Equals(StoreInfo.Identity)));
-            StoreInfos.Add(StoreInfo);
+            Companys.Remove(Companys.Find(p => p.Identity.Equals(Company.Identity)));
+            Companys.Add(Company);
             return true;
         }
 
-        public Boolean Insert(BusinessModels.StoreInfo StoreInfo)
+        public Boolean Insert(BusinessModels.Company Company)
         {
-            StoreInfos.Add(StoreInfo);
+            Companys.Add(Company);
             return true;
         }
 
         public void TestData()
         {
-            StoreInfos.Add(
-                new BusinessModels.StoreInfo()
+            Companys.Add(
+                new BusinessModels.Company()
                 {
                     Identity = 1,
 
@@ -57,8 +57,8 @@ namespace BusinessLayer
                     ModifiedDate = DateTime.Now,
                     ModifiedBy = 1
                 });
-            StoreInfos.Add(
-                new BusinessModels.StoreInfo()
+            Companys.Add(
+                new BusinessModels.Company()
                 {
                     Identity = 2,
 
@@ -70,8 +70,8 @@ namespace BusinessLayer
                     ModifiedDate = DateTime.Now,
                     ModifiedBy = 1
                 });
-            StoreInfos.Add(
-                new BusinessModels.StoreInfo()
+            Companys.Add(
+                new BusinessModels.Company()
                 {
                     Identity = 3,
 

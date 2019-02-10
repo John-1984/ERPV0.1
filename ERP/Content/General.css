@@ -97,6 +97,10 @@
 .lightblue {
     background-color: #36A4C0;
 }
+
+.sandcolor {
+    background-color:#EAD1B2;
+}
 .whitefont {
     color: white;
     font-family: 'BenchNine-Bold', sans-serif;
@@ -150,12 +154,12 @@ a.ForgetPwd {
     }
 
 #roundcornerbox {
-    border: 2px solid #36A4C0;
+    border: 2px solid #EAD1B2;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
-    background-color: #36A4C0;
+    background-color: #EAD1B2;
 }
 
 .formbutton {
@@ -314,4 +318,5 @@ a.menulink {
 .gridedit {
    
     background-image: url('green.gif');
+
 }

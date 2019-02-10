@@ -1,4 +1,5 @@
 using System;
+
 namespace BusinessModels
 {
     public class Customer

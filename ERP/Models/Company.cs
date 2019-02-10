@@ -7,9 +7,9 @@ using System.ComponentModel;
 
 namespace ERP.Models
 {
-    public class StoreInfo
+    public class Company
     {
-        public StoreInfo()
+        public Company()
         {
             Identity = -1;
             StoreName = string.Empty;

@@ -6,7 +6,7 @@ using X.PagedList;
 
 namespace ERP.Models
 {
-    public class Customer
+    public class Customer 
     {
         public Customer()
         {

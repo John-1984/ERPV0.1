@@ -38,15 +38,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MySql.Data, Version=8.0.15.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>F:\A-May2018-desktop\Project Files\G3\MySql.Data.DLL</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -100,7 +97,9 @@
       <HintPath>..\packages\X.PagedList.Mvc.5.3.0.5300\lib\net46\X.PagedList.Mvc.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Models\DB\" />
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\BrandController.cs" />
     <Compile Include="Controllers\CallCenterController.cs" />
@@ -132,7 +131,7 @@
     <Compile Include="Controllers\StockReturnController.cs" />
     <Compile Include="Controllers\StockShortageController.cs" />
     <Compile Include="Controllers\StockTransferController.cs" />
-    <Compile Include="Controllers\StoreInfoController.cs" />
+    <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\SupplierQuotationController.cs" />
     <Compile Include="Controllers\TaxController.cs" />
     <Compile Include="Controllers\UOMMasterController.cs" />
@@ -179,7 +178,7 @@
     <Compile Include="Models\SalesRoleType.cs" />
     <Compile Include="Models\State.cs" />
     <Compile Include="Models\Status.cs" />
-    <Compile Include="Models\StoreInfo.cs" />
+    <Compile Include="Models\Company.cs" />
     <Compile Include="Models\SupplierQuotation.cs" />
     <Compile Include="Models\Tax.cs" />
     <Compile Include="Models\UOMMaster.cs" />
@@ -188,6 +187,7 @@
     <Compile Include="Models\Warranty.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bodybglogin.jfif" />
     <Content Include="Content\date.png" />
     <Content Include="Content\delete.png" />
     <Content Include="Content\edit.png" />
@@ -260,7 +260,7 @@
     <Content Include="Views\State\Index.cshtml" />
     <Content Include="Views\District\Index.cshtml" />
     <Content Include="Views\Location\Index.cshtml" />
-    <Content Include="Views\StoreInfo\Index.cshtml" />
+    <Content Include="Views\Company\Index.cshtml" />
     <Content Include="Views\ProductMaster\Index.cshtml" />
     <Content Include="Views\Brand\Index.cshtml" />
     <Content Include="Views\ItemMaster\Index.cshtml" />
@@ -406,10 +406,10 @@
     <Content Include="Views\StockTransfer\_StockTransferSearch.cshtml" />
     <Content Include="Views\StockTransfer\_StockTransferEdit.cshtml" />
     <Content Include="Views\StockTransfer\_StockTransferAll.cshtml" />
-    <Content Include="Views\StoreInfo\_StoreInfoView.cshtml" />
-    <Content Include="Views\StoreInfo\_StoreInfoSearch.cshtml" />
-    <Content Include="Views\StoreInfo\_StoreInfoEdit.cshtml" />
-    <Content Include="Views\StoreInfo\_StoreInfoAll.cshtml" />
+    <Content Include="Views\Company\_CompanyView.cshtml" />
+    <Content Include="Views\Company\_CompanySearch.cshtml" />
+    <Content Include="Views\Company\_CompanyEdit.cshtml" />
+    <Content Include="Views\Company\_CompanyAll.cshtml" />
     <Content Include="Views\SupplierQuotation\_SupplierQuotationView.cshtml" />
     <Content Include="Views\SupplierQuotation\_SupplierQuotationSearch.cshtml" />
     <Content Include="Views\SupplierQuotation\_SupplierQuotationEdit.cshtml" />

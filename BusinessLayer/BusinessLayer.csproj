@@ -27,7 +27,12 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data, Version=6.9.12.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.9.12\lib\net45\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Address.cs" />
@@ -36,6 +41,7 @@
     <Compile Include="CallCenterDetails.cs" />
     <Compile Include="Country.cs" />
     <Compile Include="Customer.cs" />
+    <Compile Include="DBConnection.cs" />
     <Compile Include="Discount.cs" />
     <Compile Include="District.cs" />
     <Compile Include="EnquiryLevel.cs" />
@@ -62,7 +68,7 @@
     <Compile Include="SalesRoleType.cs" />
     <Compile Include="State.cs" />
     <Compile Include="Status.cs" />
-    <Compile Include="StoreInfo.cs" />
+    <Compile Include="Company.cs" />
     <Compile Include="SupplierQuotation.cs" />
     <Compile Include="Tax.cs" />
     <Compile Include="UOMMaster.cs" />
@@ -75,6 +81,10 @@
       <Project>{CAC5FD58-E0F1-423C-B1FF-F65E151CF844}</Project>
       <Name>BusinessModels</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

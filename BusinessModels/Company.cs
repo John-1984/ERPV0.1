@@ -3,9 +3,9 @@
 
 namespace BusinessModels
 {
-    public class StoreInfo
+    public class Company
     {
-        public StoreInfo()
+        public Company()
         {
             Identity = -1;
             StoreName = string.Empty;

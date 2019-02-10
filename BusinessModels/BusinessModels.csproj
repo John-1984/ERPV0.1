@@ -62,7 +62,7 @@
     <Compile Include="SalesRoleType.cs" />
     <Compile Include="State.cs" />
     <Compile Include="Status.cs" />
-    <Compile Include="StoreInfo.cs" />
+    <Compile Include="Company.cs" />
     <Compile Include="SupplierQuotation.cs" />
     <Compile Include="Tax.cs" />
     <Compile Include="UOMMaster.cs" />

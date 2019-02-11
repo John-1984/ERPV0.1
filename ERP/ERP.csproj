@@ -43,6 +43,7 @@
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
@@ -155,6 +156,7 @@
     <Compile Include="App_Start\AutoMapperConfig.cs" />
     <Compile Include="Models\Discount.cs" />
     <Compile Include="Models\District.cs" />
+    <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\EnquiryLevel.cs" />
     <Compile Include="Models\Header.cs" />
     <Compile Include="Models\IdentificationsType.cs" />
@@ -198,6 +200,7 @@
     <Content Include="Content\red.gif" />
     <Content Include="Content\view.gif" />
     <Content Include="Scripts\Country.js" />
+    <Content Include="Scripts\Employee.js" />
     <Content Include="Scripts\District.js" />
     <Content Include="Scripts\RegionJS.js" />
     <Content Include="Scripts\State.js" />

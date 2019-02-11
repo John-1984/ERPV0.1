@@ -18,6 +18,8 @@ namespace LoginModule
         public bool ValidateLogin(string userName, string password)
         {
             bool check = false;
+            string strPassword = Encrypt.HashSHA(password);
+            //asecv@123#
             DataTable dtbl = new DataTable();
             try
             {
@@ -29,7 +31,7 @@ namespace LoginModule
                 MySqlDataAdapter sdaadapter = new MySqlDataAdapter("VerifyUsernameAndPassword", sqlcon);
                 sdaadapter.SelectCommand.CommandType = CommandType.StoredProcedure;
                 sdaadapter.SelectCommand.Parameters.Add("_name", MySqlDbType.VarChar).Value = userName;
-                sdaadapter.SelectCommand.Parameters.Add("_password", MySqlDbType.VarChar).Value = password;
+                sdaadapter.SelectCommand.Parameters.Add("_password", MySqlDbType.VarChar).Value = strPassword;
                 sdaadapter.Fill(dtbl);
 
                 check = dtbl.Rows.Count > 0 ? true : false;

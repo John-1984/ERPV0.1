@@ -96,7 +96,7 @@ namespace ERP.Controllers
                 break;  
             }
 
-            int Size_Of_Page = 8;
+            int Size_Of_Page = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["GridPageSize"].ToString());
             int No_Of_Page = (page ?? 1);
             return customers.ToPagedList(No_Of_Page, Size_Of_Page);
         }

@@ -1,17 +1,30 @@
-﻿@{
-    Layout = null;
-}
+﻿
+<div class="container-fluid col-md-12 col-lg-12 width-100 " style="display:block">
+    <div class="container float-left nopadding ">
+        <div class="col-md-12 col-lg-12 commonPadding EmployeeSearchDetials">
+            <div class="col-md-6 col-lg-6">
+                <span class="BodyWelcomeText">Search Options</span>
+            </div>
+        </div>
 
-<!DOCTYPE html>
+        <div class="col-md-12 col-lg-12 EmployeeSearchDetials">
+            <div class="col-md-6 col-lg-6 commonPadding">
+                <input type="text" placeholder="Search By Employee Name" class="textboxstyles searchText" style="width:300px;height:27px;" />
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
-    
+
+
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-12 commonPadding EmployeeSearchDetials">
+
+            <div class="col-md-6 col-lg-6 commonPadding">
+
+                <input type="button" value="Search" data-url="@Url.Action("EmployeeSearch", "Employee")" class="formbutton EmployeeSearch" />
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-12 commonPadding " style="text-align:right">
+            <input type="button" value="Add Employee" data-url="@Url.Action("_EmployeeEdit", "Employee")" data-identity="-1" class="formbutton EmployeeAdd" />
+        </div>
+
     </div>
-</body>
-</html>
+</div>

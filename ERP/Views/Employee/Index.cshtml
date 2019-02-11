@@ -1,8 +1,21 @@
-﻿
-@{
-    ViewBag.Title = "Index";
+﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="height-100 width-100">
+    <div class=" BodyWelcomeText centered">
+        @ViewData["PageType"]
+    </div>
+
+    <div class="commonPadding height-10">
+        @{Html.RenderPartial("_EmployeeSearch");}
+    </div>
+    <div>
+        @ViewData["ActionUpdate"]
+    </div>
+    <div class="resultView height-90" id="resultView">
+        @{Html.RenderAction("_EmployeeAll", "Employee");}
+    </div>
+
+</div>
 

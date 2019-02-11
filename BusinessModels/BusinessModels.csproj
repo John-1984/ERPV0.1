@@ -37,6 +37,7 @@
     <Compile Include="Customer.cs" />
     <Compile Include="Discount.cs" />
     <Compile Include="District.cs" />
+    <Compile Include="Employee.cs" />
     <Compile Include="EnquiryLevel.cs" />
     <Compile Include="Header.cs" />
     <Compile Include="IdentificationsType.cs" />
@@ -69,6 +70,9 @@
     <Compile Include="Vendor.cs" />
     <Compile Include="WarehouseMaster.cs" />
     <Compile Include="Warranty.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

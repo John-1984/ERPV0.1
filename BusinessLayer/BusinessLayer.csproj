@@ -44,6 +44,7 @@
     <Compile Include="DBConnection.cs" />
     <Compile Include="Discount.cs" />
     <Compile Include="District.cs" />
+    <Compile Include="Employee.cs" />
     <Compile Include="EnquiryLevel.cs" />
     <Compile Include="Header.cs" />
     <Compile Include="IdentificationsType.cs" />

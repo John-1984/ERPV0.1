@@ -48,7 +48,6 @@ namespace ERP.Controllers
             //IF Failure return json value
             if (customer.Identity.Equals(-1))
             {
-                customer.Identity = GetRandomNumber();
                 _customer.Insert(AutoMapperConfig.Mapper().Map<BusinessModels.Customer>(customer));
             }
             else
@@ -96,7 +95,7 @@ namespace ERP.Controllers
                 break;  
             }
 
-            int Size_Of_Page = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["GridPageSize"].ToString());
+            int Size_Of_Page = 8;  //Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["GridPageSize"].ToString());
             int No_Of_Page = (page ?? 1);
             return customers.ToPagedList(No_Of_Page, Size_Of_Page);
         }

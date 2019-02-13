@@ -1,7 +1,6 @@
 @using X.PagedList;
 @using X.PagedList.Mvc;
 @model IPagedList<ERP.Models.Customer>
-@*@model ERP.Models.Customer*@
 <div class="container">
     <div class="col-md-12 col-lg-12 commonPadding">
         <table class="table customerAll">
@@ -16,8 +15,16 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var customer in Model)
+                @if (Model.Count() == 0)
                 {
+                    <tr class="col-md-12 col-lg-12 gridrow">
+                        <td>No Data Found</td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var customer in Model)
+                    {
 
                     <tr class="gridrow">
                         <td class="gridrow">@customer.CustomerName</td>
@@ -28,6 +35,7 @@
                         <td class="gridrow "><img src="~/Content/delete.png" alt="View" class="customerDelete pointer" data-url="@Url.Action("Delete", "Customer")" data-identity="@(customer.Identity)" /></td>
 
                     </tr>
+                    }
                 }
 
             </tbody>

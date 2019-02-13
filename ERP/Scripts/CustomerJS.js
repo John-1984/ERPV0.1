@@ -26,7 +26,9 @@ $.ajax({
     type: 'GET',  // http method
     data: { "identity": $(this).attr("data-identity") }, 
     success: function (data, status, xhr) {
-        
+
+        $('.customerSearchDetials').hide();
+      
         $('.resultView').html(data);
         showMessage(status, "Success");
     },
@@ -46,7 +48,7 @@ event.stopImmediatePropagation();
         data: { "identity": $(this).attr("data-identity") }, 
         success: function (data, status, xhr) {
             $('.customerSearchDetials').hide();
-            $('.customerAdd').hide();
+            //$('.customerAdd').hide();
             
             $('.resultView').html(data);
             showMessage(status, "Success");
@@ -88,7 +90,9 @@ $.ajax({
     type: 'POST',  // http method
     data: $(".customerDetails").find("input").serialize(), 
     success: function (data, status, xhr) {
-       
+
+        $('.customerSearchDetials').show();
+    
         $('.resultView').html(data);
         showMessage(status, "Success");
     },

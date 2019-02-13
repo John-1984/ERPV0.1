@@ -7,6 +7,7 @@ namespace ERP.Models
     {
         public Address()
         {
+            Identity = -1;
             Line1 = string.Empty;
             Line2 = string.Empty;
             Pincode = string.Empty;

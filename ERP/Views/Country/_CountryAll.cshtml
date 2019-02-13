@@ -1,29 +1,42 @@
-﻿@model List<ERP.Models.Country>
+﻿@using X.PagedList;
+@using X.PagedList.Mvc;
+@model IPagedList<ERP.Models.Country>
 
 <div class="container">
-    <table class="table CountryAll">
-        <thead>
-            <tr class="gridheader">
-                <th>Country Name</th>
-                <th>Region</th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var Country in Model)
-            {
-
-                <tr class="gridrow">
-                    <td class="gridrow">@Country.CountryName</td>
-                    <td class="gridrow">@Country.RegionID</td>              
-                    <td class="gridrow "><img src="~/Content/edit.png" alt="View" class="CountryEdit pointer" data-url="@Url.Action("_CountryEdit", "Country")" data-identity="@(Country.Identity)" /></td>
-                    <td class="gridrow "><img src="~/Content/delete.png" alt="View" class="CountryDelete pointer" data-url="@Url.Action("Delete", "Country")" data-identity="@(Country.Identity)" /></td>
+    <div class="col-md-12 col-lg-12 commonPadding">
+        <table class="table CountryAll">
+            <thead>
+                <tr class="gridheader">
+                    <th>Country Name</th>
+                    <th>Region</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
+            </thead>
+            <tbody>
+                @foreach (var Country in Model)
+                {
+                    <tr class="gridrow">
+                        <td class="gridrow">@Country.CountryName</td>
+                        <td class="gridrow "> @Country.RegionName</td>
+                        <td class="gridrow "><img src="~/Content/edit.png" alt="Edit" class="CountryEdit pointer" data-url="@Url.Action("_CountryEdit", "Country")" data-identity="@(Country.Identity)" /></td>
+                        <td class="gridrow "><img src="~/Content/delete.png" alt="Delete" class="CountryDelete pointer" data-url="@Url.Action("Delete", "Country")" data-identity="@(Country.Identity)" /></td>
+                    </tr>
 
-            }
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-12 col-lg-12 nopadding textright">
+        <div class="col-md-6 col-lg-6">
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-        </tbody>
-    </table>
+
+        </div>
+        <div class="col-md-6 col-lg-6">
+            @Html.PagedListPager(Model, page => Url.Action("Sorting", new { page, sortOrder = ViewBag.CurrentSort, createdDate = ViewBag.CreatedDate, searchString = ViewBag.SearchString }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { InsertionMode = InsertionMode.Replace, HttpMethod = "GET", UpdateTargetId = "resultView" }))
+
+        </div>
+    </div>
 </div>
 

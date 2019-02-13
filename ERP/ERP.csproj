@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -190,18 +190,29 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bodybglogin.jfif" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\date.png" />
     <Content Include="Content\delete.png" />
     <Content Include="Content\edit.png" />
     <Content Include="Content\exit-img.png" />
+    <Content Include="Content\gijgo.css" />
+    <Content Include="Content\gijgo.min.css" />
     <Content Include="Content\green.gif" />
     <Content Include="Content\GridClose.png" />
     <Content Include="Content\Home-icon.png" />
     <Content Include="Content\red.gif" />
     <Content Include="Content\view.gif" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Country.js" />
+    <Content Include="Scripts\CustomValidator.js" />
     <Content Include="Scripts\Employee.js" />
     <Content Include="Scripts\District.js" />
+    <Content Include="Scripts\gijgo.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\RegionJS.js" />
     <Content Include="Scripts\State.js" />
     <Content Include="Views\Web.config" />
@@ -231,7 +242,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Content\PagedList.css" />
   </ItemGroup>

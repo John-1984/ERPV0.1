@@ -14,8 +14,9 @@ namespace BusinessLayer
            
         }
         private static List<BusinessModels.Country> Countrys = new List<BusinessModels.Country>();
+        private static List<BusinessModels.Region> Regions = new List<BusinessModels.Region>();
 
-        
+
 
         public BusinessModels.Country GetCountry(Int32 identity)
         {
@@ -28,6 +29,11 @@ namespace BusinessLayer
             return Countrys;
         }
 
+        public IEnumerable<BusinessModels.Region> GetAllRegions()
+        {
+            TestRegionData();
+            return Regions;
+        }
         public Boolean Delete(Int32 identity)
         {
             Countrys.Remove(Countrys.Find(p => p.Identity.Equals(identity)));
@@ -84,6 +90,26 @@ namespace BusinessLayer
                     CreatedBy = 1,
                     ModifiedDate = DateTime.Now,
                     ModifiedBy = 1
+                });
+        }
+
+        public void TestRegionData()
+        {
+            Regions.Add(
+                new BusinessModels.Region()
+                {
+                    Identity = 1,
+
+                    RegionName = "John",
+                  
+                });
+            Regions.Add(
+                new BusinessModels.Region()
+                {
+                    Identity = 1,
+
+                    RegionName = "John",
+
                 });
         }
 

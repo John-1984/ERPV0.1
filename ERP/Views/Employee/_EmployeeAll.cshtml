@@ -21,8 +21,8 @@
 
                     <tr class="gridrow">
                         <td class="gridrow">@Employee</td>
-                        <td class="gridrow">@Employee.EmailID</td>
-                        <td class="gridrow">@Employee.Purpose</td>
+                        <td class="gridrow">@Employee.PersonalEmail</td>
+                        <td class="gridrow">@Employee.PersonalEmail</td>
                         <td class="gridrow "><img src="~/Content/view.gif" alt="View" class="EmployeeView pointer" data-url="@Url.Action("_EmployeeView", "Employee")" data-identity="@(Employee.Identity)" /> </td>
                         <td class="gridrow "><img src="~/Content/edit.png" alt="View" class="EmployeeEdit pointer" data-url="@Url.Action("_EmployeeEdit", "Employee")" data-identity="@(Employee.Identity)" /></td>
                         <td class="gridrow "><img src="~/Content/delete.png" alt="View" class="EmployeeDelete pointer" data-url="@Url.Action("Delete", "Employee")" data-identity="@(Employee.Identity)" /></td>

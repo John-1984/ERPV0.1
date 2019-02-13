@@ -1,35 +1,13 @@
-﻿@model ERP.Models.Country
+﻿@model ERP.Models.Customer
 
 
-<div class="container CountryView col-md-12 col-lg-12 commonPadding">
+<div class="container customerView col-md-12 col-lg-12 commonPadding">
     <input type="hidden" value="@Model.Identity">
-    <div class="row commonPadding col-md-12 col-lg-12" style="padding-bottom:13px;">
-        <div class="col-md-6 col-lg-6">
-            <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-5 col-lg-5 textright lablestyles">
-                   Country Name :
-                </div>
-                <div class="float-right col-md-7 col-lg-7 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
-                    @Model.CountryName
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6 col-lg-6 ">
-            <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-4 col-lg-4 textright lablestyles">
-                    Region :
-                </div>
-                <div class="float-right col-md-8 col-lg-8 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
-                    @Model.RegionID
-                </div>
-            </div>
-        </div>
-
-    </div>
    
-    <div class="row col-md-12 col-lg-12 commonPadding">
-        <div class="col-md-5 col-lg-5 textright"><input type="button" class="formbutton float-right" data-identity="@(Model.Identity)" value="Cancel" /></div>
+
+    <div class="row commonPadding">
+        <div class="col-md-6 col-lg-5"><input type="button" class="formbutton float-right customerEdit" data-url="@Url.Action("_CustomerEdit", "Customer")" data-identity="@(Model.Identity)" value="Update" /></div>
+        <div class="col-md-6 col-lg-6"><input type="button" class="formbutton float-left customerDelete" data-url="@Url.Action("Delete", "Customer")" data-identity="@(Model.Identity)" value="Delete" /></div>
 
     </div>
 </div>

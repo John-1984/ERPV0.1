@@ -7,13 +7,10 @@ Layout = "~/Views/Shared/_Layout.cshtml";
         Customer Info
     </div>
 
-    <div class="commonPadding height-10">
+    <div class="commonPadding height-20">
         @{Html.RenderPartial("_CustomerSearch");}
     </div>
-    <div>
-        @ViewData["ActionUpdate"]
-    </div>
-    <div class="resultView height-90" id="resultView">
+    <div class="resultView height-80" id="resultView">
         @{Html.RenderAction("_CustomerAll", "Customer");}
     </div>
 

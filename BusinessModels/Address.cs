@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace BusinessModels
 {
     public class Address
@@ -7,6 +9,8 @@ namespace BusinessModels
         {
         }
 
+        [System.ComponentModel.DataAnnotations.Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Identity
         {
             get;

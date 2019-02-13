@@ -27,7 +27,7 @@ $.ajax({
     data: { "identity": $(this).attr("data-identity") }, 
     success: function (data, status, xhr) {
         $('.customerSearchDetials').hide();
-        $('.customerAdd').hide();
+        //$('.customerAdd').hide();
         $('.resultView').html(data);
         showMessage(status, "Success");
     },
@@ -47,7 +47,7 @@ event.stopImmediatePropagation();
         data: { "identity": $(this).attr("data-identity") }, 
         success: function (data, status, xhr) {
             $('.customerSearchDetials').hide();
-            $('.customerAdd').hide();
+            //$('.customerAdd').hide();
             
             $('.resultView').html(data);
             showMessage(status, "Success");
@@ -90,7 +90,7 @@ $.ajax({
     data: $(".customerDetails").find("input").serialize(), 
     success: function (data, status, xhr) {
         $('.customerSearchDetials').show();
-        $('.customerAdd').show();
+        //$('.customerAdd').show();
         $('.resultView').html(data);
         showMessage(status, "Success");
     },

@@ -28,6 +28,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Brand.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Vendor.cs" />
     <Compile Include="WarehouseMaster.cs" />
     <Compile Include="Warranty.cs" />
+    <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

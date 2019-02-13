@@ -17,6 +17,7 @@ namespace ERP.Models
             Address = new Address();
             EmailID = string.Empty;
             Purpose = string.Empty;
+            Comments = string.Empty;
             Quantity = string.Empty;
             CreatedDate = DateTime.Now;
         }

@@ -231,9 +231,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\PagedList.css" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Content\PagedList.css" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessModels\BusinessModels.csproj">

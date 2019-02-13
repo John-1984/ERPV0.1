@@ -24,6 +24,7 @@ namespace ERP.Controllers
             {
                 FormsAuthentication.SetAuthCookie(formCollection["UserName"], false);
                 TempData["UserName"] = formCollection["UserName"];
+                TempData.Keep();
                 return RedirectToAction("Index", "Home");
             }
             else

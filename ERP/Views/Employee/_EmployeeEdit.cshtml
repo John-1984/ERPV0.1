@@ -1,60 +1,65 @@
 ﻿@model ERP.Models.Employee
 
+@Html.EnableClientValidation(true);
+@Html.ValidationSummary();
 
-<div class="container EmployeeDetails col-md-12 col-lg-12 commonPadding">
+@using (Html.BeginForm("Index", "Employee", FormMethod.Post))
+{
+    <div class="container EmployeeDetails col-md-12 col-lg-12 commonPadding">
 
-    <div class="row  col-md-12 col-lg-12">
-        <div class="col-md-6 col-lg-6">
-            <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-3 col-lg-3 lablestyles textright">Employee Name :</div>
-                <div class="float-right col-md-5 col-lg-5"><input class="textareastyles" style="width:220px;height:27px;" type="text" name="EmployeeName" value="@(Model.EmployeeName)" placeholder="Enter Name" /></div>
-            </div>
-        </div>       
-    </div>
-    <div class="row  col-md-12 col-lg-12 commonPadding">
-
-        <div class="col-md-6 col-lg-6">
-            <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-3 col-lg-3 lablestyles textright">Staff ID :</div>
-                <div class="float-right col-md-5 col-lg-5">
-                    <input class="textareastyles" style="width:220px;height:27px;" type="text" name="StaffID" value="@(Model.StaffID)" placeholder="Enter Name" /> 
+        <div class="row  col-md-12 col-lg-12">
+            <div class="col-md-6 col-lg-6">
+                <div class="row col-md-12 col-lg-12">
+                    <div class="float-left col-md-3 col-lg-3 lablestyles textright">Employee Name :</div>
+                    <div class="float-right col-md-5 col-lg-5"><input class="textareastyles" style="width:220px;height:27px;" type="text" name="EmployeeName" value="@(Model.EmployeeName)" placeholder="Enter Name" /></div>
                 </div>
             </div>
         </div>
-       
-    </div>
+        <div class="row  col-md-12 col-lg-12 commonPadding">
 
-    <div class="row col-md-12 col-lg-12 commonPadding">
-        <div class="col-md-6 col-lg-6">
-            <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-3 col-lg-3 lablestyles textright">Personal Email ID :</div>
-                <div class="float-right col-md-5 col-lg-5">
-                    @*@Html.EditorFor<>*@
-                    @*@Html.Editor(model => model.PersonalEmail)
-                    @Html.ValidationMessageFor(model => model.ConfirmEmail, "", new { @class = "text-danger" })*@
-                    @*<input class="" style="width:220px;height:27px;" type="text" name="PersonalEmail" value="@(Model.EmailID)" placeholder="Enter Email" />*@
+            <div class="col-md-6 col-lg-6">
+                <div class="row col-md-12 col-lg-12">
+                    <div class="float-left col-md-3 col-lg-3 lablestyles textright">Staff ID :</div>
+                    <div class="float-right col-md-5 col-lg-5">
+                        <input class="textareastyles" style="width:220px;height:27px;" type="text" name="StaffID" value="@(Model.StaffID)" placeholder="Enter Name" />
+                    </div>
                 </div>
             </div>
-        </div>     
 
-    </div>
+        </div>
 
-    <div class="row col-md-12 col-lg-12 commonPadding">
-        <div class="col-md-6 col-lg-6">
-            <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-3 col-lg-3 lablestyles textright">Address :</div>
-                <div class="float-right col-md-6 col-lg-6">
-                    @*<textarea name="Line1" rows="6" cols="30" class="textareastyles" placeholder="Enter Address Line2">@(Model.Address.Line2)</textarea>*@
+        <div class="row col-md-12 col-lg-12 commonPadding">
+            <div class="col-md-6 col-lg-6">
+                <div class="row col-md-12 col-lg-12">
+                    <div class="float-left col-md-3 col-lg-3 lablestyles textright">Personal Email ID :</div>
+                    <div class="float-right col-md-5 col-lg-5">
+                        @*@Html.EditorFor<>*@
+                        @*@Html.Editor(model => model.PersonalEmail)
+                            @Html.ValidationMessageFor(model => model.ConfirmEmail, "", new { @class = "text-danger" })*@
+                        @*<input class="" style="width:220px;height:27px;" type="text" name="PersonalEmail" value="@(Model.EmailID)" placeholder="Enter Email" />*@
+                    </div>
                 </div>
             </div>
         </div>
+
+        <div class="row col-md-12 col-lg-12 commonPadding">
+            <div class="col-md-6 col-lg-6">
+                <div class="row col-md-12 col-lg-12">
+                    <div class="float-left col-md-3 col-lg-3 lablestyles textright">Address :</div>
+                    <div class="float-right col-md-6 col-lg-6">
+                        @*<textarea name="Line1" rows="6" cols="30" class="textareastyles" placeholder="Enter Address Line2">@(Model.Address.Line2)</textarea>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row col-md-12 col-lg-12 commonPadding">
+            <div class="col-md-6 col-lg-6"><input type="button" data-url="@Url.Action("Update", "Employee")" class="formbutton float-right EmployeeAddEdit" data-identity="@(Model.Identity)" value="Update/Add" /></div>
+            <input type="hidden" name="Identity" value="@(Model.Identity)">
+        </div>
+
+
+
     </div>
 
-    <div class="row col-md-12 col-lg-12 commonPadding">
-        <div class="col-md-6 col-lg-6"><input type="button" data-url="@Url.Action("Update", "Employee")" class="formbutton float-right EmployeeAddEdit" data-identity="@(Model.Identity)" value="Update/Add" /></div>
-        <input type="hidden" name="Identity" value="@(Model.Identity)">
-    </div>
-
-
-
-</div>
+    } 

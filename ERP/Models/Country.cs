@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
-
+using System.Web.Mvc;
 namespace ERP.Models
 {
     public class Country
@@ -14,6 +14,7 @@ namespace ERP.Models
         {
             Identity = -1;
             CountryName = string.Empty;
+            RegionList = null;
         }
 
         [DefaultValue(-1)]
@@ -29,7 +30,11 @@ namespace ERP.Models
             get;
             set;
         }
-
+        public string RegionName
+        {
+            get;
+            set;
+        }
         public int RegionID
         {
             get;
@@ -58,6 +63,22 @@ namespace ERP.Models
             set;
         }
 
+        public List<string> ErrorList
+        {
+            get;
+            set;
+        }
 
+        public SelectList RegionList
+        {
+            get;
+            set;
+        }
+
+        public string PageInfo
+        {
+            get;
+            set;
+        }
     }
 }

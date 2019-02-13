@@ -12,7 +12,9 @@ namespace ERP
             {
                 cfg.CreateMap<BusinessModels.Customer, ERP.Models.Customer>().ReverseMap();
                 cfg.CreateMap<BusinessModels.Address, ERP.Models.Address>().ReverseMap();
-                 });
+                cfg.CreateMap<BusinessModels.Region, ERP.Models.Region>().ReverseMap();
+                cfg.CreateMap<BusinessModels.Country, ERP.Models.Country>().ReverseMap();
+            });
         }
 
         public static IMapper Mapper(){

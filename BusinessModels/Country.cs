@@ -1,4 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.ComponentModel;
+//using System.Web.Mvc;
 
 
 namespace BusinessModels
@@ -18,7 +23,11 @@ namespace BusinessModels
             set;
         }
 
-        
+        public string RegionName
+        {
+            get;
+            set;
+        }
         public string CountryName
         {
             get;
@@ -53,6 +62,16 @@ namespace BusinessModels
             set;
         }
 
+        public List<string> ErrorList
+        {
+            get;
+            set;
+        }
 
+        //public SelectList RegionList
+        //{
+        //    get;
+        //    set;
+        //}
     }
 }

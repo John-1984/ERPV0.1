@@ -17,6 +17,7 @@
     $(document).off("click", ".CountryView");
     $(document).on("click", ".CountryView", function (event) {
         var theUrl = $(this).attr("data-url");
+        $('.headermode').html('View Country Info');
         $.ajax({
             url: theUrl,
             type: 'GET',  // http method
@@ -36,15 +37,16 @@
     $(document).off("click", ".CountryEdit, .CountryAdd");
     $(document).on("click", ".CountryEdit, .CountryAdd", function (event) {
         var theUrl = $(this).attr("data-url");
-
+        $('.headermode').html('Edit Country Info');
+        $('.CountrySearchDetials').hide();
+        $('.CountryAdd').hide();
         $.ajax({
             url: theUrl,
             type: 'GET',  // http method
             data: { "identity": $(this).attr("data-identity") },
             success: function (data, status, xhr) {
 
-                $('.CountrySearchDetials').hide();
-                $('.CountryAdd').hide();
+               
                 $('.resultView').html(data);
                 showMessage(status, "Success");
             },
@@ -78,6 +80,7 @@
     $(document).off("click", ".CountryAddEdit");
     $(document).on("click", ".CountryAddEdit", function (event) {
         var theUrl = $(this).attr("data-url");
+        $('.headermode').html('View Country Info');
         $.ajax({
             url: theUrl,
             type: 'POST',  // http method
@@ -97,6 +100,7 @@
     $(document).off("click", ".CountrySearch");
     $(document).on("click", ".CountrySearch", function (event) {
         var theUrl = $(this).attr("data-url");
+        $('.headermode').html('View Country Info');
         $.ajax({
             url: theUrl,
             type: 'POST',  // http method

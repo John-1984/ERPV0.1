@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
-
+using X.PagedList;
 namespace ERP.Models
 {
     public class Region
@@ -24,6 +24,7 @@ namespace ERP.Models
         }
 
         [DefaultValue("")]
+        [Required(ErrorMessage = "Region Name is required")]
         public string RegionName
         {
             get;
@@ -47,6 +48,12 @@ namespace ERP.Models
             set;
         }
         public int CreatedBy
+        {
+            get;
+            set;
+        }
+
+        public List<string> ErrorList
         {
             get;
             set;

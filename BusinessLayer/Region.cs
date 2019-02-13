@@ -44,6 +44,8 @@ namespace BusinessLayer
 
         public void TestData()
         {
+            for(int i=0;i<=20; i++)
+            { 
             Regions.Add(
                 new BusinessModels.Region()
                 {
@@ -77,6 +79,7 @@ namespace BusinessLayer
                     ModifiedDate = DateTime.Now,
                     ModifiedBy = 1
                 });
+            }
         }
 
     }

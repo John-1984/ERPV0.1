@@ -1,10 +1,12 @@
-﻿@{
+﻿
+@{
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="height-100 width-100">
-    <div class=" BodyWelcomeText centered">
-        Country Info
+    <div class="BodyWelcomeText centered headermode">
+        @TempData["PageInfo"]
     </div>
 
     <div class="commonPadding height-10">

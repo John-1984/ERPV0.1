@@ -49,6 +49,10 @@
       <Project>{f28a8b70-ebd4-40dc-a47f-8cac6c646ae6}</Project>
       <Name>BusinessLayer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BusinessModels\BusinessModels.csproj">
+      <Project>{CAC5FD58-E0F1-423C-B1FF-F65E151CF844}</Project>
+      <Name>BusinessModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

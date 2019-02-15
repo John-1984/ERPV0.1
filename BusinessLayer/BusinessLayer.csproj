@@ -73,6 +73,7 @@
     <Compile Include="Vendor.cs" />
     <Compile Include="WarehouseMaster.cs" />
     <Compile Include="Warranty.cs" />
+    <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.0" />

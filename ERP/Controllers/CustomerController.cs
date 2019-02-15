@@ -111,5 +111,13 @@ namespace ERP.Controllers
             }
         }
 
+        [HttpPost]
+        public JsonResult AutoComplete(string prefix)
+        {
+            var customers = _customer.GetMatchingCustomers(prefix);
+
+            return Json(customers);
+        }
+
     }
 }

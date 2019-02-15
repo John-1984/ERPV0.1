@@ -88,7 +88,7 @@ var theUrl = $(this).attr("data-url");
 $.ajax({
     url:theUrl,
     type: 'POST',  // http method
-    data: $(".customerDetails").find("input").serialize(), 
+    data: $(".customerDetails").find("input, textarea").serialize(), 
     success: function (data, status, xhr) {
 
         $('.customerSearchDetials').show();

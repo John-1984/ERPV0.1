@@ -4,7 +4,8 @@ using System.Web.Security;
 namespace ERP.Controllers
 {
     [AllowAnonymous]
-    [HandleError]  
+    [HandleError]
+    [ERP.CustomeFilters.LoggingFilter]
     public class LoginController : Controller
     {
         public ActionResult Index()

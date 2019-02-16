@@ -9,6 +9,7 @@ using System.Globalization;
 
 namespace ERP.Controllers
 {
+    [ERP.CustomeFilters.LoggingFilter]
     public class CustomerController : Controller
     {
         private BusinessLayer.Customer _customer = new BusinessLayer.Customer();

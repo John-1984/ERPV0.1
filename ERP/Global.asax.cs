@@ -1,8 +1,8 @@
-﻿using System.Web;
+﻿using System;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using System.Web.Http;
-using System.Web.Services.Description;
+using ERP.Controllers;
 
 namespace ERP
 {
@@ -15,6 +15,62 @@ namespace ERP
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             AutoMapperConfig.RegisterAutoMapperConfig();
             FilterConfig.RegisterGlobalFilters(new GlobalFilterCollection());
+        }
+
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            HttpContext httpContext = HttpContext.Current;
+            if (httpContext != null)
+            {
+                RequestContext requestContext = ((MvcHandler)httpContext.CurrentHandler).RequestContext;
+            }
+            //var httpContext = ((MvcApplication)sender).Context;
+            var currentController = " ";
+            var currentAction = " ";
+            var currentRouteData = RouteTable.Routes.GetRouteData(new HttpContextWrapper(httpContext));
+
+            if (currentRouteData != null)
+            {
+                if (currentRouteData.Values["controller"] != null && !String.IsNullOrEmpty(currentRouteData.Values["controller"].ToString()))
+                {
+                    currentController = currentRouteData.Values["controller"].ToString();
+                }
+
+                if (currentRouteData.Values["action"] != null && !String.IsNullOrEmpty(currentRouteData.Values["action"].ToString()))
+                {
+                    currentAction = currentRouteData.Values["action"].ToString();
+                }
+            }
+
+            var ex = Server.GetLastError();
+            var controller = new ErrorController();
+            var routeData = new RouteData();
+            var action = "Index";
+
+            if (ex is HttpException)
+            {
+                var httpEx = ex as HttpException;
+
+                switch (httpEx.GetHttpCode())
+                {
+                    case 404:
+                        action = "NotFound";
+                        break;
+
+                        // others if any
+                }
+            }
+
+            httpContext.ClearError();
+            httpContext.Response.Clear();
+            httpContext.Response.StatusCode = ex is HttpException ? ((HttpException)ex).GetHttpCode() : 500;
+            httpContext.Response.TrySkipIisCustomErrors = true;
+
+            routeData.Values["controller"] = "Error";
+            routeData.Values["action"] = action;
+
+            controller.ViewData.Model = new HandleErrorInfo(ex, currentController, currentAction);
+            ((IController)controller).Execute(new RequestContext(new HttpContextWrapper(httpContext), routeData));
         }
     }
 }

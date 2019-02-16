@@ -8,6 +8,7 @@ namespace ERP
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new CustomeFilters.LoggingFilter());
+            filters.Add(new CustomeFilters.ExceptionFilter());
         }
     }
 }

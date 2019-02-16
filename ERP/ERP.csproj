@@ -101,6 +101,7 @@
   <ItemGroup>
     <Folder Include="Models\DB\" />
     <Folder Include="CustomeFilters\" />
+    <Folder Include="Views\Error\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\BrandController.cs" />
@@ -190,6 +191,8 @@
     <Compile Include="Models\Warranty.cs" />
     <Compile Include="CustomeFilters\LoggingFilter.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="CustomeFilters\ExceptionFilter.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bodybglogin.jfif" />
@@ -250,6 +253,8 @@
 
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessModels\BusinessModels.csproj">

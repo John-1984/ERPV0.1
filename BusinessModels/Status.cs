@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BusinessModels
 {
@@ -11,7 +11,8 @@ namespace BusinessModels
             StatusName = string.Empty;
         }
 
-        
+        [System.ComponentModel.DataAnnotations.Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Int32 Identity
         {
             get;

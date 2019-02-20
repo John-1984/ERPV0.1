@@ -16,6 +16,7 @@ namespace ERP.Models
             CompanyName = string.Empty;
         }
 
+        [Key]
         [DefaultValue(-1)]
         public Int32 Identity
         {

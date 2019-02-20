@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 //using System.Web.Mvc;
 
 
@@ -17,7 +19,8 @@ namespace BusinessModels
         }
 
 
-       
+        [System.ComponentModel.DataAnnotations.Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Int32 Identity
         {
             get;
@@ -31,6 +34,7 @@ namespace BusinessModels
             set;
         }
 
+        [ForeignKey("Region")]
         public int RegionID
         {
             get;
@@ -58,12 +62,7 @@ namespace BusinessModels
             get;
             set;
         }
-        public string RegionName
-        {
-            get;
-            set;
-        }
-        public List<string> ErrorList
+        public Region Region
         {
             get;
             set;

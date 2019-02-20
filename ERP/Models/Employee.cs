@@ -33,6 +33,7 @@ namespace ERP.Models
         public string PersonalEmail
         { get; set; }
 
+        [Key]
         [DefaultValue(-1)]
         public Int32 Identity
         {

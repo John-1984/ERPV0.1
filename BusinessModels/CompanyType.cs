@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,8 @@ namespace BusinessModels
            // TypeName = string.Empty;
         }
 
+        [System.ComponentModel.DataAnnotations.Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Int32 Identity
         {
             get;

@@ -14,6 +14,7 @@ namespace ERP.Models
         {
         }
 
+        [Key]
         [DefaultValue(-1)]
         public Int32 Identity
         {

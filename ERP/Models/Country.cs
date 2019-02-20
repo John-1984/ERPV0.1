@@ -17,6 +17,7 @@ namespace ERP.Models
             RegionList = null;
         }
 
+        [Key]
         [DefaultValue(-1)]
         public Int32 Identity
         {
@@ -81,5 +82,13 @@ namespace ERP.Models
             get;
             set;
         }
+
+        public Region Region
+        {
+            get;
+            set;
+        }
+
+        public string SelectedRegion { get; set; }
     }
 }

@@ -17,6 +17,7 @@ namespace ERP.Models
             Comments = string.Empty;
         }
 
+        [Key]
         [DefaultValue(-1)]
         public Int32 Identity
         {

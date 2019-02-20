@@ -14,6 +14,7 @@ namespace ERP.Models
           //  CountryName = string.Empty;
         }
 
+        [Key]
         [DefaultValue(-1)]
         public Int32 Identity
         {

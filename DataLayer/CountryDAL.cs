@@ -39,7 +39,21 @@ namespace DataLayer
 
             return _Countrys;
         }
-      
+
+        public IEnumerable<BusinessModels.Country> GetAll(int regidentity)
+        {
+            var _Countrys = new List<BusinessModels.Country>();
+            using (var dbContext = new CountryDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _Countrys = dbContext.Country
+                             .Include("Region").Where(p=>p.Region.Identity== regidentity)
+                            .ToList();
+            }
+
+            return _Countrys;
+        }
+
 
         public IEnumerable<BusinessModels.Region> GetRegions()
         {

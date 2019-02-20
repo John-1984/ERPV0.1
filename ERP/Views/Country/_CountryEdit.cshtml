@@ -22,21 +22,21 @@
         <div class="row  col-md-12 col-lg-12">
             <div class="col-md-6 col-lg-6">
                 <div class="row col-md-12 col-lg-12">
-                    <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div>Region :</div></div>
+                    <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div><label>Region :</label></div></div>
                     <div class="float-right col-md-7 col-lg-8">
                         @* @Html.DropDownList("Mobiledropdown1", Model.RegionList)*@
-                        @*@Html.DropDownList("drpRegion", (IEnumerable<SelectListItem>)Model.RegionList, "Select Region", new { @class = "dropdownstyles" })*@
+                        @Html.DropDownList("drpRegion", (IEnumerable<SelectListItem>)Model.RegionList, "Select Region", new { @class = "dropdownstyles", name= "drpRegion" })
                         @*<span class="input-validation-error" data-valmsg-for="CountryName" data-valmsg-replace="true"></span>*@
 
-                        @Html.DropDownListFor(model => model.RegionID, Model.RegionList as SelectList, new { @class = "dropdownstyles" })
-
+                        @*@Html.DropDownListFor(model => model.RegionID, Model.RegionList as SelectList, new { @class = "dropdownstyles" })*@
+                        <input type="hidden" name="hdnRegion" id="hdnRegion" />
                     </div>
 
                 </div>
                 </div>
                 <div class="col-md-6 col-lg-6">
                     <div class="row col-md-12 col-lg-12">
-                        <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;">Country Name :</div></div>
+                        <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;"><label>Country Name :</label></div></div>
                         <div class="float-right col-md-8 col-lg-8">
                             <input class="textareastyles" style="width:300px;height:35px;" type="text" name="CountryName" value="@(Model.CountryName)" placeholder="Enter Country Name" />
                             @*<span class="input-validation-error" data-valmsg-for="CountryName" data-valmsg-replace="true"></span>*@
@@ -48,10 +48,16 @@
 
             </div>
 
-            <div class="row col-md-12 col-lg-12 commonPadding">
-                <div class="col-md-6 col-lg-6"><input type="button" data-url="@Url.Action("Update", "Country")" class="formbutton float-right CountryAddEdit" data-identity="@(Model.Identity)" value="Update/Add" /></div>
-                <input type="hidden" name="Identity" value="@(Model.Identity)">
+        <div class="row col-md-12 col-lg-12 commonPadding">
+            <div class="col-md-6 col-lg-6">
+                <input type="button" data-url="@Url.Action("Update", "Country")" class="formbutton float-right CountryAddEdit" data-identity="@(Model.Identity)" value="Update/Add" />
             </div>
+
+            <div class="col-md-6 col-lg-6">
+                <input type="button" value="Cancel" data-url="@Url.Action("_CountryCancel", "Country")" data-identity="-1" class="formbutton CountryCancel" />
+            </div>
+            <input type="hidden" name="Identity" value="@(Model.Identity)">
+        </div>
 
 
 

@@ -23,6 +23,7 @@ namespace ERP.Models
         }
 
         [DefaultValue("")]
+        [Required(ErrorMessage ="Please enter role type")]
         public string RoletypeName
         {
             get;

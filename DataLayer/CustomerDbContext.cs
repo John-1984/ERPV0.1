@@ -17,6 +17,7 @@ namespace DataLayer
         public DbSet<BusinessModels.User> User { get; set; }
         public DbSet<BusinessModels.Customer> Customer { get; set; }
         public DbSet<BusinessModels.Address> Address { get; set; }
+        //public DbSet<Veri> Address { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

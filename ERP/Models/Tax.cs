@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using System.Web.Mvc;
 
 namespace ERP.Models
 {
@@ -29,13 +30,15 @@ namespace ERP.Models
             set;
         }
 
-        public int BrandID
+        
+
+        public int ItemID
         {
             get;
             set;
         }
 
-        public int ItemID
+        public String ItemName
         {
             get;
             set;
@@ -61,6 +64,17 @@ namespace ERP.Models
             set;
         }
 
+        public SelectList ItemList
+        {
+            get;
+            set;
+        }
+
+        public List<string> ErrorList
+        {
+            get;
+            set;
+        }
 
     }
 }

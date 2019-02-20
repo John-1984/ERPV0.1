@@ -1,84 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 namespace BusinessLayer
 {
     public class PurchaseRequestType
     {
+        private List<BusinessModels.PurchaseRequestType> PurchaseRequestTypes = new List<BusinessModels.PurchaseRequestType>();
+        private DataLayer.PurchaseRequestTypeDAL _dataLayer = null;
+
         public PurchaseRequestType()
         {
-           
+            _dataLayer = new DataLayer.PurchaseRequestTypeDAL();
         }
-
-        private static List<BusinessModels.PurchaseRequestType> PurchaseRequestTypes = new List<BusinessModels.PurchaseRequestType>();
-
-       
 
         public BusinessModels.PurchaseRequestType GetPurchaseRequestType(Int32 identity)
         {
-            return PurchaseRequestTypes.FirstOrDefault(p => p.Identity.Equals(identity));
+            return _dataLayer.GetPurchaseRequestType(identity);
         }
 
         public IEnumerable<BusinessModels.PurchaseRequestType> GetAll()
         {
-            return PurchaseRequestTypes;
+            return _dataLayer.GetAll();
         }
 
         public Boolean Delete(Int32 identity)
         {
-            PurchaseRequestTypes.Remove(PurchaseRequestTypes.Find(p => p.Identity.Equals(identity)));
-            return true;
+            return _dataLayer.Delete(identity);
         }
 
         public Boolean Update(BusinessModels.PurchaseRequestType PurchaseRequestType)
         {
-            PurchaseRequestTypes.Remove(PurchaseRequestTypes.Find(p => p.Identity.Equals(PurchaseRequestType.Identity)));
-            PurchaseRequestTypes.Add(PurchaseRequestType);
-            return true;
+            return _dataLayer.Update(PurchaseRequestType);
         }
 
         public Boolean Insert(BusinessModels.PurchaseRequestType PurchaseRequestType)
         {
-            PurchaseRequestTypes.Add(PurchaseRequestType);
-            return true;
+            return _dataLayer.Insert(PurchaseRequestType);
         }
 
-        public void TestData()
-        {
-            PurchaseRequestTypes.Add(
-                new BusinessModels.PurchaseRequestType()
-                {
-                    Identity = 1,
 
-                    Name = "John",
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-            PurchaseRequestTypes.Add(
-                new BusinessModels.PurchaseRequestType()
-                {
-                    Identity = 2,
-
-                    Name = "John",
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-            PurchaseRequestTypes.Add(
-                new BusinessModels.PurchaseRequestType()
-                {
-                    Identity = 3,
-
-                    Name = "John",
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-        }
 
     }
 

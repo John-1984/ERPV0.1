@@ -6,79 +6,40 @@ namespace BusinessLayer
 {
     public class UOMMaster
     {
+        private List<BusinessModels.UOMMaster> UOMMasters = new List<BusinessModels.UOMMaster>();
+        private DataLayer.UOMMasterDAL _dataLayer = null;
+
         public UOMMaster()
         {
-           
+            _dataLayer = new DataLayer.UOMMasterDAL();
         }
-        private static List<BusinessModels.UOMMaster> UOMMasters = new List<BusinessModels.UOMMaster>();
-
-       
 
         public BusinessModels.UOMMaster GetUOMMaster(Int32 identity)
         {
-            return UOMMasters.FirstOrDefault(p => p.Identity.Equals(identity));
+            return _dataLayer.GetUOMMaster(identity);
         }
 
         public IEnumerable<BusinessModels.UOMMaster> GetAll()
         {
-            return UOMMasters;
+            return _dataLayer.GetAll();
         }
 
         public Boolean Delete(Int32 identity)
         {
-            UOMMasters.Remove(UOMMasters.Find(p => p.Identity.Equals(identity)));
-            return true;
+            return _dataLayer.Delete(identity);
         }
 
         public Boolean Update(BusinessModels.UOMMaster UOMMaster)
         {
-            UOMMasters.Remove(UOMMasters.Find(p => p.Identity.Equals(UOMMaster.Identity)));
-            UOMMasters.Add(UOMMaster);
-            return true;
+            return _dataLayer.Update(UOMMaster);
         }
 
         public Boolean Insert(BusinessModels.UOMMaster UOMMaster)
         {
-            UOMMasters.Add(UOMMaster);
-            return true;
+            return _dataLayer.Insert(UOMMaster);
         }
 
-        public void TestData()
-        {
-            UOMMasters.Add(
-                new BusinessModels.UOMMaster()
-                {
-                    Identity = 1,
 
-                    UOMName = "John",
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-            UOMMasters.Add(
-                new BusinessModels.UOMMaster()
-                {
-                    Identity = 2,
-
-                    UOMName = "John",
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-            UOMMasters.Add(
-                new BusinessModels.UOMMaster()
-                {
-                    Identity = 3,
-
-                    UOMName = "John",
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-        }
 
     }
 

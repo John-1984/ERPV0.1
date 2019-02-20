@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using X.PagedList;
+using System.Runtime;
+using System.Globalization;
 
 namespace ERP.Controllers
 {
@@ -16,17 +19,36 @@ namespace ERP.Controllers
 
         public PartialViewResult _DiscountAll()
         {
-            return PartialView(AutoMapperConfig.Mapper().Map<List<Models.Discount>>(_Discount.GetAll()));
+            return PartialView(GetDiscounts("", 1, "", ""));
         }
 
+        [HttpGet]
         public PartialViewResult _DiscountEdit(int identity)
         {
             if (identity.Equals(-1))
-                return PartialView(new Models.Discount());
+            {
+                Models.Discount mdDiscount = new Models.Discount();
+                mdDiscount.itemList = null;
+                mdDiscount.itemList = new SelectList(_Discount.GetAllItemMaster(), "Identity", "ItemName");
+
+               
+
+                TempData["PageInfo"] = "Add Discount Info";
+                return PartialView(mdDiscount);
+            }
             else
-                return PartialView(AutoMapperConfig.Mapper().Map<Models.Discount>(_Discount.GetDiscount(identity)));
+            {
+                Models.Discount mdDiscount = AutoMapperConfig.Mapper().Map<Models.Discount>(_Discount.GetDiscount(identity));
+                mdDiscount.itemList = null;
+                mdDiscount.itemList = new SelectList(_Discount.GetAllItemMaster(), "Identity", "ItemName");
+
+                TempData["PageInfo"] = "Edit Discount Info";
+                TempData.Keep();
+                return PartialView(mdDiscount);
+            }
         }
 
+        [HttpGet]
         public PartialViewResult _DiscountView(int identity)
         {
             return PartialView(AutoMapperConfig.Mapper().Map<Models.Discount>(_Discount.GetDiscount(identity)));
@@ -46,7 +68,6 @@ namespace ERP.Controllers
             //IF Failure return json value
             if (Discount.Identity.Equals(-1))
             {
-                Discount.Identity = GetRandomNumber();
                 _Discount.Insert(AutoMapperConfig.Mapper().Map<BusinessModels.Discount>(Discount));
             }
             else
@@ -55,9 +76,50 @@ namespace ERP.Controllers
         }
 
         [HttpPost]
-        public PartialViewResult DiscountSearch(string searchString)
+        public PartialViewResult DiscountSearch(string searchString, string createdDate = "")
         {
-            return PartialView("_DiscountAll", AutoMapperConfig.Mapper().Map<List<Models.Discount>>(_Discount.GetAll().ToList().FindAll(p => p.DiscountValue.ToString().ToLower().Contains(searchString.ToLower()))));
+            return PartialView("_DiscountAll", GetDiscounts("", 1, createdDate, searchString));
+        }
+
+        public PartialViewResult Sorting(int? page, string sortOrder = "", string createdDate = "", string searchString = "")
+        {
+            return PartialView("_DiscountAll", GetDiscounts(sortOrder, page, createdDate, searchString));
+        }
+
+        private IPagedList<Models.Discount> GetDiscounts(string sortOrder, int? page, string createdDate = "", string searchString = "")
+        {
+
+            ViewBag.CreatedDate = string.IsNullOrEmpty(createdDate) ? "" : createdDate;
+            ViewBag.SearchString = string.IsNullOrEmpty(searchString) ? "" : searchString;
+            ViewBag.CurrentSort = string.IsNullOrEmpty(sortOrder) ? "ItemName" : "";
+
+            var Discounts = AutoMapperConfig.Mapper().Map<List<Models.Discount>>(_Discount.GetAll());
+            if (!string.IsNullOrEmpty(searchString) && !string.IsNullOrEmpty(createdDate))
+                Discounts = AutoMapperConfig.Mapper().Map<List<Models.Discount>>(_Discount.GetAll().ToList().FindAll(p => p.ItemName.ToLower().Contains(searchString.ToLower()) && p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+            else if (!string.IsNullOrEmpty(searchString))
+                Discounts = AutoMapperConfig.Mapper().Map<List<Models.Discount>>(_Discount.GetAll().ToList().FindAll(p => p.ItemName.ToLower().Contains(searchString.ToLower())));
+            else if (!string.IsNullOrEmpty(createdDate))
+                Discounts = AutoMapperConfig.Mapper().Map<List<Models.Discount>>(_Discount.GetAll().ToList().FindAll(p => p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+
+            switch (sortOrder)
+            {
+                case "ItemName":
+                    Discounts = Discounts.OrderByDescending(stu => stu.ItemName).ToList();
+                    break;
+                case "DateAsc":
+                    Discounts = Discounts.OrderBy(stu => stu.CreatedDate).ToList();
+                    break;
+                case "DateDesc":
+                    Discounts = Discounts.OrderByDescending(stu => stu.CreatedDate).ToList();
+                    break;
+                default:
+                    Discounts = Discounts.OrderBy(stu => stu.ItemName).ToList();
+                    break;
+            }
+
+            int Size_Of_Page = 8;  //Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["GridPageSize"].ToString());
+            int No_Of_Page = (page ?? 1);
+            return Discounts.ToPagedList(No_Of_Page, Size_Of_Page);
         }
 
         //Function to get random number

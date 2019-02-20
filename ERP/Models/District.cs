@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
-
+using System.Web.Mvc;
 namespace ERP.Models
 {
     public class District
@@ -23,6 +23,7 @@ namespace ERP.Models
         }
 
         [DefaultValue("")]
+        [Required(ErrorMessage ="Please enter district Name")]
         public string DistrictName
         {
             get;
@@ -56,7 +57,53 @@ namespace ERP.Models
             get;
             set;
         }
+        public string RegionName
+        {
+            get;
+            set;
+        }
+        public string CountryName
+        {
+            get;
+            set;
+        }
+        public string StateName
+        {
+            get;
+            set;
+        }
+        public int RegionID
+        {
+            get;
+            set;
+        }
+        public int CountryID
+        {
+            get;
+            set;
+        }
 
+        public SelectList RegionList
+        {
+            get;
+            set;
+        }
+        public SelectList CountryList
+        {
+            get;
+            set;
+        }
+        public SelectList StateList
+        {
+            get;
+            set;
+        }
+
+        public List<string> ErrorList
+        {
+            get;
+            set;
+        }
 
     }
 }

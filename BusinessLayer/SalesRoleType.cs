@@ -1,84 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 namespace BusinessLayer
 {
     public class SalesRoleType
     {
+        private List<BusinessModels.SalesRoleType> SalesRoleTypes = new List<BusinessModels.SalesRoleType>();
+        private DataLayer.SalesRoleTypeDAL _dataLayer = null;
+
         public SalesRoleType()
         {
-           
+            _dataLayer = new DataLayer.SalesRoleTypeDAL();
         }
-
-        private static List<BusinessModels.SalesRoleType> SalesRoleTypes = new List<BusinessModels.SalesRoleType>();
-
-      
 
         public BusinessModels.SalesRoleType GetSalesRoleType(Int32 identity)
         {
-            return SalesRoleTypes.FirstOrDefault(p => p.Identity.Equals(identity));
+            return _dataLayer.GetSalesRoleType(identity);
         }
 
         public IEnumerable<BusinessModels.SalesRoleType> GetAll()
         {
-            return SalesRoleTypes;
+            return _dataLayer.GetAll();
         }
 
         public Boolean Delete(Int32 identity)
         {
-            SalesRoleTypes.Remove(SalesRoleTypes.Find(p => p.Identity.Equals(identity)));
-            return true;
+            return _dataLayer.Delete(identity);
         }
 
         public Boolean Update(BusinessModels.SalesRoleType SalesRoleType)
         {
-            SalesRoleTypes.Remove(SalesRoleTypes.Find(p => p.Identity.Equals(SalesRoleType.Identity)));
-            SalesRoleTypes.Add(SalesRoleType);
-            return true;
+            return _dataLayer.Update(SalesRoleType);
         }
 
         public Boolean Insert(BusinessModels.SalesRoleType SalesRoleType)
         {
-            SalesRoleTypes.Add(SalesRoleType);
-            return true;
+            return _dataLayer.Insert(SalesRoleType);
         }
 
-        public void TestData()
-        {
-            SalesRoleTypes.Add(
-                new BusinessModels.SalesRoleType()
-                {
-                    Identity = 1,
 
-                    TypeName = "John",
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-            SalesRoleTypes.Add(
-                new BusinessModels.SalesRoleType()
-                {
-                    Identity = 2,
-
-                    TypeName = "John",
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-            SalesRoleTypes.Add(
-                new BusinessModels.SalesRoleType()
-                {
-                    Identity = 3,
-
-                    TypeName = "John",
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-        }
 
     }
 

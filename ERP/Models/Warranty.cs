@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using System.Web.Mvc;
 
 namespace ERP.Models
 {
@@ -23,6 +24,7 @@ namespace ERP.Models
         }
 
         [DefaultValue(0)]
+        [Required(ErrorMessage ="Please enter warranty value")]
         public int WarrantyValue
         {
             get;
@@ -30,6 +32,12 @@ namespace ERP.Models
         }
 
         public int ItemID
+        {
+            get;
+            set;
+        }
+
+        public string ItemName
         {
             get;
             set;
@@ -57,6 +65,17 @@ namespace ERP.Models
             set;
         }
 
+        public SelectList ItemList
+        {
+            get;
+            set;
+        }
+
+        public List<string> ErrorList
+        {
+            get;
+            set;
+        }
 
     }
 }

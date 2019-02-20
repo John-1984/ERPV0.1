@@ -31,6 +31,12 @@ namespace BusinessModels
             set;
         }
 
+        public string ItemName
+        {
+            get;
+            set;
+        }
+
 
         public DateTime CreatedDate
         {

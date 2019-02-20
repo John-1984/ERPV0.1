@@ -6,103 +6,63 @@ namespace BusinessLayer
 {
     public class ItemMaster
     {
+
+        private List<BusinessModels.ItemMaster> ItemMasters = new List<BusinessModels.ItemMaster>();
+        private List<BusinessModels.Country> Countrys = new List<BusinessModels.Country>();
+        private DataLayer.ItemMasterDAL _dataLayer = null;
+        private DataLayer.VendorDAL _venddataLayer = null;
+        private DataLayer.BrandDAL _branddataLayer = null;
+        private DataLayer.UOMMasterDAL _uomdataLayer = null;
+
         public ItemMaster()
         {
-           
+            _dataLayer = new DataLayer.ItemMasterDAL();
+            _venddataLayer = new DataLayer.VendorDAL();
+            _branddataLayer = new DataLayer.BrandDAL();
+            _uomdataLayer = new DataLayer.UOMMasterDAL();
         }
-
-        private static List<BusinessModels.ItemMaster> ItemMasters = new List<BusinessModels.ItemMaster>();
-
 
         public BusinessModels.ItemMaster GetItemMaster(Int32 identity)
         {
-            return ItemMasters.FirstOrDefault(p => p.Identity.Equals(identity));
+            return _dataLayer.GetItemMaster(identity);
         }
-
+        public IEnumerable<BusinessModels.Vendor> GetAllVendors()
+        {
+            //TestRegionData();
+            return _venddataLayer.GetAll();
+        }
+        public IEnumerable<BusinessModels.Brand> GetAllBrands()
+        {
+            //TestRegionData();
+            return _branddataLayer.GetAll();
+        }
+        public IEnumerable<BusinessModels.UOMMaster> GetAllUOMs()
+        {
+            //TestRegionData();
+            return _uomdataLayer.GetAll();
+        }
+       
         public IEnumerable<BusinessModels.ItemMaster> GetAll()
         {
-            return ItemMasters;
+            return _dataLayer.GetAll();
         }
 
         public Boolean Delete(Int32 identity)
         {
-            ItemMasters.Remove(ItemMasters.Find(p => p.Identity.Equals(identity)));
-            return true;
+            return _dataLayer.Delete(identity);
         }
 
         public Boolean Update(BusinessModels.ItemMaster ItemMaster)
         {
-            ItemMasters.Remove(ItemMasters.Find(p => p.Identity.Equals(ItemMaster.Identity)));
-            ItemMasters.Add(ItemMaster);
-            return true;
+            return _dataLayer.Update(ItemMaster);
         }
 
         public Boolean Insert(BusinessModels.ItemMaster ItemMaster)
         {
-            ItemMasters.Add(ItemMaster);
-            return true;
+            return _dataLayer.Insert(ItemMaster);
         }
 
-        public void TestData()
-        {
-            ItemMasters.Add(
-                new BusinessModels.ItemMaster()
-                {
-                    BrandID = 1,
-                    Description = "sfdfsaf",
-                    ItemName = "Mumbai",
-                    ItemSize = "Engg",
-                    ItemWeight = Convert.ToDecimal("0.00"),
-                    PurchacePrice = Convert.ToDecimal("0.00"),
-                    UOMID =1,
-                    RetailPrice= Convert.ToDecimal("0.00"),
-                    WarrantyID=1,                    
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    Identity = 1,
 
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-            ItemMasters.Add(
-                new BusinessModels.ItemMaster()
-                {
-                    BrandID = 1,
-                    Description = "sfdfsaf",
-                    ItemName = "Mumbai",
-                    ItemSize = "Engg",
-                    Identity = 2,
-
-                    ItemWeight = Convert.ToDecimal("0.00"),
-                    PurchacePrice = Convert.ToDecimal("0.00"),
-                    UOMID = 1,
-                    RetailPrice = Convert.ToDecimal("0.00"),
-                    WarrantyID = 1,
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-            ItemMasters.Add(
-                new BusinessModels.ItemMaster()
-                {
-                    BrandID = 1,
-                    Identity = 3,
-
-                    Description = "sfdfsaf",
-                    ItemName = "Mumbai",
-                    ItemSize = "Engg",
-                    ItemWeight = Convert.ToDecimal("0.00"),
-                    PurchacePrice = Convert.ToDecimal("0.00"),
-                    UOMID = 1,
-                    RetailPrice = Convert.ToDecimal("0.00"),
-                    WarrantyID = 1,
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-        }
 
     }
 

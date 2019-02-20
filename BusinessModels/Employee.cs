@@ -12,27 +12,23 @@ namespace BusinessModels
         {
         }
 
-        public string EmployeeName
-        { get; set; }              
-
-        public string officialemail
-        { get; set; }
-
-        public string PersonalEmail
-        { get; set; }
-
         public Int32 Identity
         {
             get;
             set;
         }
-
-        public int RoleMasterID
+        public string EmployeeName
         { get; set; }
 
 
-        public int LocationID
+
+        public string OfficialEmail
         { get; set; }
+
+        public string PersonalEmail
+        { get; set; }
+
+       
 
         public string Address
         { get; set; }
@@ -51,7 +47,7 @@ namespace BusinessModels
         { get; set; }
 
 
-        public string IdentificationID
+        public int IdentificationID
         { get; set; }
 
         public string IdentificationValue
@@ -63,11 +59,57 @@ namespace BusinessModels
         public string CompanyID
         { get; set; }
 
-        public int managerID
+        public int ManagerID
         { get; set; }
 
-        public string StaffID
+        public string StaffCode
         { get; set; }
 
+        public int RoleMasterID
+        { get; set; }
+
+
+        public int LocationID
+        { get; set; }
+
+        public int CompanyTypeID
+        { get; set; }
+
+        public string RoleName
+        { get; set; }
+
+        public string LocationName
+        { get; set; }
+
+        public string TypeName
+        { get; set; }
+
+        public string IdentificationName
+        { get; set; }
+
+        public string CompanyName
+        { get; set; }
+
+
+        public DateTime CreatedDate
+        {
+            get;
+            set;
+        }
+        public DateTime ModifiedDate
+        {
+            get;
+            set;
+        }
+        public int ModifiedBy
+        {
+            get;
+            set;
+        }
+        public int CreatedBy
+        {
+            get;
+            set;
+        }
     }
 }

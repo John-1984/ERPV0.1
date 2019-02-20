@@ -17,6 +17,7 @@
     $(document).off("click", ".DistrictView");
     $(document).on("click", ".DistrictView", function (event) {
         var theUrl = $(this).attr("data-url");
+        $('.headermode').html('View District Info');
         $.ajax({
             url: theUrl,
             type: 'GET',  // http method
@@ -36,14 +37,16 @@
     $(document).off("click", ".DistrictEdit, .DistrictAdd");
     $(document).on("click", ".DistrictEdit, .DistrictAdd", function (event) {
         var theUrl = $(this).attr("data-url");
+        $('.headermode').html('Manage District Info');
         $.ajax({
             url: theUrl,
             type: 'GET',  // http method
             data: { "identity": $(this).attr("data-identity") },
+            //async: true,
             success: function (data, status, xhr) {
+
                 $('.DistrictSearchDetials').hide();
                 $('.DistrictAdd').hide();
-
                 $('.resultView').html(data);
                 showMessage(status, "Success");
             },
@@ -77,6 +80,7 @@
     $(document).off("click", ".DistrictAddEdit");
     $(document).on("click", ".DistrictAddEdit", function (event) {
         var theUrl = $(this).attr("data-url");
+        $('.headermode').html('View District Info');
         $.ajax({
             url: theUrl,
             type: 'POST',  // http method
@@ -96,6 +100,7 @@
     $(document).off("click", ".DistrictSearch");
     $(document).on("click", ".DistrictSearch", function (event) {
         var theUrl = $(this).attr("data-url");
+        $('.headermode').html('View District Info');
         $.ajax({
             url: theUrl,
             type: 'POST',  // http method

@@ -1,98 +1,62 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 namespace BusinessLayer
 {
     public class LocalSupplier
     {
+
+        private List<BusinessModels.LocalSupplier> LocalSuppliers = new List<BusinessModels.LocalSupplier>();
+        private List<BusinessModels.Country> Countrys = new List<BusinessModels.Country>();
+        private DataLayer.LocalSupplierDAL _dataLayer = null;
+        private DataLayer.ItemMasterDAL _itemdataLayer = null;
+        private DataLayer.LocationDAL _locdataLayer = null;       
+
         public LocalSupplier()
         {
-            
+            _dataLayer = new DataLayer.LocalSupplierDAL();
+            _itemdataLayer = new DataLayer.ItemMasterDAL();
+            _locdataLayer = new DataLayer.LocationDAL();
+           
         }
 
-        private static List<BusinessModels.LocalSupplier> LocalSuppliers = new List<BusinessModels.LocalSupplier>();
-
-        
         public BusinessModels.LocalSupplier GetLocalSupplier(Int32 identity)
         {
-            return LocalSuppliers.FirstOrDefault(p => p.Identity.Equals(identity));
+            return _dataLayer.GetLocalSupplier(identity);
         }
-
+        public IEnumerable<BusinessModels.ItemMaster> GetAllItemMaster()
+        {
+            //TestRegionData();
+            return _itemdataLayer.GetAll();
+        }
+        public IEnumerable<BusinessModels.Location> GetAlllocations()
+        {
+            //TestRegionData();
+            return _locdataLayer.GetAll();
+        }
+       
         public IEnumerable<BusinessModels.LocalSupplier> GetAll()
         {
-            return LocalSuppliers;
+            return _dataLayer.GetAll();
         }
 
         public Boolean Delete(Int32 identity)
         {
-            LocalSuppliers.Remove(LocalSuppliers.Find(p => p.Identity.Equals(identity)));
-            return true;
+            return _dataLayer.Delete(identity);
         }
 
         public Boolean Update(BusinessModels.LocalSupplier LocalSupplier)
         {
-            LocalSuppliers.Remove(LocalSuppliers.Find(p => p.Identity.Equals(LocalSupplier.Identity)));
-            LocalSuppliers.Add(LocalSupplier);
-            return true;
+            return _dataLayer.Update(LocalSupplier);
         }
 
         public Boolean Insert(BusinessModels.LocalSupplier LocalSupplier)
         {
-            LocalSuppliers.Add(LocalSupplier);
-            return true;
+            return _dataLayer.Insert(LocalSupplier);
         }
 
-        public void TestData()
-        {
-            LocalSuppliers.Add(
-                new BusinessModels.LocalSupplier()
-                {
-                    Identity = 1,
 
-                    Address = "John",
-                    Email = "m@mail.com",
-                    ContactNumber = 1,
-                    LocationID = 1,
-                    ItemID = 1,
-                    SupplierName = "Just So",
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-            LocalSuppliers.Add(
-                new BusinessModels.LocalSupplier()
-                {
-                    Identity = 2,
-
-                    Address = "John",
-                    Email = "m@mail.com",
-                    ContactNumber = 1,
-                    LocationID = 1,
-                    ItemID = 1,
-                    SupplierName = "Just So",
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-            LocalSuppliers.Add(
-                new BusinessModels.LocalSupplier()
-                {
-                    Identity = 3,
-
-                    Address = "John",
-                    Email = "m@mail.com",
-                    ContactNumber = 1,
-                    LocationID = 1,
-                    ItemID = 1,
-                    SupplierName = "Just So",
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-        }
 
     }
 

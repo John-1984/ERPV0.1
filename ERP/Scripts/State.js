@@ -17,6 +17,7 @@
     $(document).off("click", ".StateView");
     $(document).on("click", ".StateView", function (event) {
         var theUrl = $(this).attr("data-url");
+        $('.headermode').html('View State Info');
         $.ajax({
             url: theUrl,
             type: 'GET',  // http method
@@ -36,11 +37,12 @@
     $(document).off("click", ".StateEdit, .StateAdd");
     $(document).on("click", ".StateEdit, .StateAdd", function (event) {
         var theUrl = $(this).attr("data-url");
-
+        $('.headermode').html('Manage State Info');
         $.ajax({
             url: theUrl,
             type: 'GET',  // http method
             data: { "identity": $(this).attr("data-identity") },
+            //async: true,
             success: function (data, status, xhr) {
 
                 $('.StateSearchDetials').hide();
@@ -78,6 +80,7 @@
     $(document).off("click", ".StateAddEdit");
     $(document).on("click", ".StateAddEdit", function (event) {
         var theUrl = $(this).attr("data-url");
+        $('.headermode').html('View State Info');
         $.ajax({
             url: theUrl,
             type: 'POST',  // http method
@@ -97,6 +100,7 @@
     $(document).off("click", ".StateSearch");
     $(document).on("click", ".StateSearch", function (event) {
         var theUrl = $(this).attr("data-url");
+        $('.headermode').html('View State Info');
         $.ajax({
             url: theUrl,
             type: 'POST',  // http method

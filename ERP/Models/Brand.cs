@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using System.Web.Mvc;
 
 namespace ERP.Models
 {
@@ -23,19 +24,20 @@ namespace ERP.Models
         }
 
         [DefaultValue("")]
+        [Required(ErrorMessage ="Please enter brand name")]
         public string BrandName
         {
             get;
             set;
         }
 
-        public int ProductMasterID
+        
+        public int VendorID
         {
             get;
             set;
         }
-
-        public int VendorID
+        public int VendorName
         {
             get;
             set;
@@ -60,6 +62,17 @@ namespace ERP.Models
             get;
             set;
         }
+        public SelectList VendorList
+        {
+            get;
+            set;
+        }
+        public List<string> ErrorList
+        {
+            get;
+            set;
+        }
+
 
 
     }

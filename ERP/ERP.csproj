@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -104,11 +104,14 @@
   <ItemGroup>
     <Compile Include="Controllers\BrandController.cs" />
     <Compile Include="Controllers\CallCenterController.cs" />
+    <Compile Include="Controllers\CompanyTypeController.cs" />
     <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\DeadStockController.cs" />
     <Compile Include="Controllers\DiscountController.cs" />
     <Compile Include="Controllers\DistrictController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\ErrorLoggerAttribute.cs" />
+    <Compile Include="Controllers\FloorMasterController.cs" />
     <Compile Include="Controllers\HeaderController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IdentificationsTypeController.cs" />
@@ -123,6 +126,7 @@
     <Compile Include="Controllers\PurchaseRequestTypeController.cs" />
     <Compile Include="Controllers\RegionController.cs" />
     <Compile Include="Controllers\RoleMasterController.cs" />
+    <Compile Include="Controllers\RoleTypeController.cs" />
     <Compile Include="Controllers\SalesPendingApprovalsController.cs" />
     <Compile Include="Controllers\SalesQuotationController.cs" />
     <Compile Include="Controllers\SalesRoleTypeController.cs" />
@@ -151,6 +155,7 @@
     <Compile Include="Models\Brand.cs" />
     <Compile Include="Models\CallCenter.cs" />
     <Compile Include="Models\CallCenterDetails.cs" />
+    <Compile Include="Models\CompanyType.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="App_Start\AutoMapperConfig.cs" />
@@ -158,6 +163,7 @@
     <Compile Include="Models\District.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\EnquiryLevel.cs" />
+    <Compile Include="Models\FloorMaster.cs" />
     <Compile Include="Models\Header.cs" />
     <Compile Include="Models\IdentificationsType.cs" />
     <Compile Include="Models\ItemMaster.cs" />
@@ -203,18 +209,36 @@
     <Content Include="Content\red.gif" />
     <Content Include="Content\view.gif" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Brand.js" />
+    <Content Include="Scripts\Company.js" />
+    <Content Include="Scripts\CompanyType.js" />
     <Content Include="Scripts\Country.js" />
     <Content Include="Scripts\CustomValidator.js" />
+    <Content Include="Scripts\Discount.js" />
     <Content Include="Scripts\Employee.js" />
     <Content Include="Scripts\District.js" />
+    <Content Include="Scripts\FloorMaster.js" />
     <Content Include="Scripts\gijgo.min.js" />
+    <Content Include="Scripts\IdentificationsType.js" />
+    <Content Include="Scripts\ItemMaster.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\LocalSupplier.js" />
+    <Content Include="Scripts\Location.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\ProductMaster.js" />
+    <Content Include="Scripts\PurchaseRequestType.js" />
     <Content Include="Scripts\RegionJS.js" />
+    <Content Include="Scripts\RoleMaster.js" />
+    <Content Include="Scripts\RoleType.js" />
+    <Content Include="Scripts\SalesRoleType.js" />
     <Content Include="Scripts\State.js" />
+    <Content Include="Scripts\Tax.js" />
+    <Content Include="Scripts\UOMMaster.js" />
+    <Content Include="Scripts\Vendor.js" />
+    <Content Include="Scripts\Warranty.js" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -242,9 +266,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
-
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Content\PagedList.css" />
   </ItemGroup>
@@ -450,6 +472,20 @@
     <Content Include="Views\Warranty\_WarrantySearch.cshtml" />
     <Content Include="Views\Warranty\_WarrantyEdit.cshtml" />
     <Content Include="Views\Warranty\_WarrantyAll.cshtml" />
+    <Content Include="Views\CompanyType\Index.cshtml" />
+    <Content Include="Views\CompanyType\_CompanyTypeSearch.cshtml" />
+    <Content Include="Views\CompanyType\_CompanyTypEdit.cshtml" />
+    <Content Include="Views\CompanyType\_CompanyTypAll.cshtml" />
+    <Content Include="Views\RoleType\_RoleTypeAll.cshtml" />
+    <Content Include="Views\RoleType\_RoleTypEdit.cshtml" />
+    <Content Include="Views\RoleType\_RoleTypSearch.cshtml" />
+    <Content Include="Views\RoleType\_RoleTypView.cshtml" />
+    <Content Include="Views\RoleType\Index.cshtml" />
+    <Content Include="Views\FloorMaster\_FloorMasterAll.cshtml" />
+    <Content Include="Views\FloorMaster\_FloorMasterEdit.cshtml" />
+    <Content Include="Views\FloorMaster\_FloorMasterSearch.cshtml" />
+    <Content Include="Views\FloorMaster\_FloorMasterView.cshtml" />
+    <Content Include="Views\FloorMaster\Index.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

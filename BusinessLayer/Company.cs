@@ -6,84 +6,83 @@ namespace BusinessLayer
 {
     public class Company
     {
+
+        private List<BusinessModels.Company> Companys = new List<BusinessModels.Company>();
+        private List<BusinessModels.Region> regionss = new List<BusinessModels.Region>();
+        private DataLayer.CompanyDAL _dataLayer = null;
+        private DataLayer.RegionDAL _regdataLayer = null;
+        private DataLayer.CountryDAL _condataLayer = null;
+        private DataLayer.StateDAL _statedataLayer = null;
+        private DataLayer.DistrictDAL _distdataLayer = null;
+        private DataLayer.LocationDAL _locdataLayer = null;
+        private DataLayer.CompanyTypeDAL _comptypedataLayer = null;
+
         public Company()
         {
-            
+            _dataLayer = new DataLayer.CompanyDAL();
+            _regdataLayer = new DataLayer.RegionDAL();
+            _condataLayer = new DataLayer.CountryDAL();
+            _statedataLayer = new DataLayer.StateDAL();
+            _distdataLayer = new DataLayer.DistrictDAL();
+            _locdataLayer = new DataLayer.LocationDAL();
+            _comptypedataLayer = new DataLayer.CompanyTypeDAL();
         }
-
-        private static List<BusinessModels.Company> Companys = new List<BusinessModels.Company>();
 
         public BusinessModels.Company GetCompany(Int32 identity)
         {
-            return Companys.FirstOrDefault(p => p.Identity.Equals(identity));
+            return _dataLayer.GetCompany(identity);
         }
-
+        public IEnumerable<BusinessModels.Region> GetAllRegions()
+        {
+            //TestRegionData();
+            return _regdataLayer.GetAll();
+        }
+        public IEnumerable<BusinessModels.Country> GetAllCountry()
+        {
+            //TestRegionData();
+            return _condataLayer.GetAll();
+        }
+        public IEnumerable<BusinessModels.State> GetAllStates()
+        {
+            //TestRegionData();
+            return _statedataLayer.GetAll();
+        }
+        public IEnumerable<BusinessModels.District> GetAllDistrict()
+        {
+            //TestRegionData();
+            return _distdataLayer.GetAll();
+        }
+        public IEnumerable<BusinessModels.Location> GetAllLocaton()
+        {
+            //TestRegionData();
+            return _locdataLayer.GetAll();
+        }
+        public IEnumerable<BusinessModels.CompanyType> GetAllCompanyType()
+        {
+            //TestRegionData();
+            return _comptypedataLayer.GetAll();
+        }
         public IEnumerable<BusinessModels.Company> GetAll()
         {
-            return Companys;
+            return _dataLayer.GetAll();
         }
 
         public Boolean Delete(Int32 identity)
         {
-            Companys.Remove(Companys.Find(p => p.Identity.Equals(identity)));
-            return true;
+            return _dataLayer.Delete(identity);
         }
 
         public Boolean Update(BusinessModels.Company Company)
         {
-            Companys.Remove(Companys.Find(p => p.Identity.Equals(Company.Identity)));
-            Companys.Add(Company);
-            return true;
+            return _dataLayer.Update(Company);
         }
 
         public Boolean Insert(BusinessModels.Company Company)
         {
-            Companys.Add(Company);
-            return true;
+            return _dataLayer.Insert(Company);
         }
 
-        public void TestData()
-        {
-            Companys.Add(
-                new BusinessModels.Company()
-                {
-                    Identity = 1,
 
-                    Storetype = 1,
-                    StoreName = "John",
-                    LocationID=1,
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-            Companys.Add(
-                new BusinessModels.Company()
-                {
-                    Identity = 2,
-
-                    Storetype = 1,
-                    StoreName = "John",
-                    LocationID = 1,
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-            Companys.Add(
-                new BusinessModels.Company()
-                {
-                    Identity = 3,
-
-                    Storetype = 1,
-                    StoreName = "John",
-                    LocationID = 1,
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-        }
 
     }
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using System.Web.Mvc;
 
 namespace ERP.Models
 {
@@ -25,6 +26,7 @@ namespace ERP.Models
         }
 
         [DefaultValue("")]
+        [Required(ErrorMessage ="Please enter supplier name")]
         public string SupplierName
         {
             get;
@@ -44,6 +46,8 @@ namespace ERP.Models
             set;
         }
 
+        [DefaultValue("")]
+        [Required(ErrorMessage = "Please enter contact number")]
         public int ContactNumber
         {
             get;
@@ -56,13 +60,23 @@ namespace ERP.Models
             set;
         }
 
+        public string LocationName
+        {
+            get;
+            set;
+        }
+
         public int ItemID
         {
             get;
             set;
         }
 
-
+        public string ItemName
+        {
+            get;
+            set;
+        }
         public DateTime CreatedDate
         {
             get;
@@ -84,6 +98,23 @@ namespace ERP.Models
             set;
         }
 
+
+        public SelectList LocationList
+        {
+            get;
+            set;
+        }
+        public SelectList ItemList
+        {
+            get;
+            set;
+        }
+
+        public List<string> ErrorList
+        {
+            get;
+            set;
+        }
 
     }
 }

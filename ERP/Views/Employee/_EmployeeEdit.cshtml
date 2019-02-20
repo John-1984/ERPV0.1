@@ -1,56 +1,179 @@
 ﻿@model ERP.Models.Employee
 
-@Html.EnableClientValidation(true);
-@Html.ValidationSummary();
-
-@using (Html.BeginForm("Index", "Employee", FormMethod.Post))
+@using (Html.BeginForm("Update", "Employee", FormMethod.Post, new { @id = "registerFormId" }))
 {
+
     <div class="container EmployeeDetails col-md-12 col-lg-12 commonPadding">
+        <div class="row  col-md-12 col-lg-12ccommonPadding">
+            @*@{
+                    var categories = Model.ErrorList; // Cast the list
+                }
 
+                @if(Model.ErrorList != null && Model.ErrorList.Count > 0)
+                {
+                @foreach (var c in @categories) // Print the list
+                {
+                    @Html.Label(categories.ToString());
+                }
+                }*@
+
+            &nbsp;
+        </div>
         <div class="row  col-md-12 col-lg-12">
-            <div class="col-md-6 col-lg-6">
-                <div class="row col-md-12 col-lg-12">
-                    <div class="float-left col-md-3 col-lg-3 lablestyles textright">Employee Name :</div>
-                    <div class="float-right col-md-5 col-lg-5"><input class="textareastyles" style="width:220px;height:27px;" type="text" name="EmployeeName" value="@(Model.EmployeeName)" placeholder="Enter Name" /></div>
-                </div>
-            </div>
-        </div>
-        <div class="row  col-md-12 col-lg-12 commonPadding">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;">Employee Name :</div></div>
+                <div class="float-right col-md-8 col-lg-8">
+                    <input class="textareastyles" style="width:300px;height:35px;" type="text" name="EmployeeName" value="@(Model.EmployeeName)" placeholder="Enter Employee Name" />
 
-            <div class="col-md-6 col-lg-6">
-                <div class="row col-md-12 col-lg-12">
-                    <div class="float-left col-md-3 col-lg-3 lablestyles textright">Staff ID :</div>
-                    <div class="float-right col-md-5 col-lg-5">
-                        <input class="textareastyles" style="width:220px;height:27px;" type="text" name="StaffID" value="@(Model.StaffID)" placeholder="Enter Name" />
-                    </div>
                 </div>
+
+            </div>
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;">Employee CompanyID:</div></div>
+                <div class="float-right col-md-8 col-lg-8">
+                    <input class="textareastyles" style="width:300px;height:35px;" type="text" name="StaffCode" value="@(Model.StaffCode)" placeholder="Enter Employee Name" />
+
+                </div>
+
             </div>
 
-        </div>
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;">Personal Contact Number:</div></div>
+                <div class="float-right col-md-8 col-lg-8">
+                    <input class="textareastyles" style="width:300px;height:35px;" type="text" name="PersonalContactNo" value="@(Model.PersonalContactNo)" placeholder="Enter Employee Name" />
 
-        <div class="row col-md-12 col-lg-12 commonPadding">
-            <div class="col-md-6 col-lg-6">
-                <div class="row col-md-12 col-lg-12">
-                    <div class="float-left col-md-3 col-lg-3 lablestyles textright">Personal Email ID :</div>
-                    <div class="float-right col-md-5 col-lg-5">
-                        @*@Html.EditorFor<>*@
-                        @*@Html.Editor(model => model.PersonalEmail)
-                            @Html.ValidationMessageFor(model => model.ConfirmEmail, "", new { @class = "text-danger" })*@
-                        @*<input class="" style="width:220px;height:27px;" type="text" name="PersonalEmail" value="@(Model.EmailID)" placeholder="Enter Email" />*@
-                    </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="row col-md-12 col-lg-12 commonPadding">
-            <div class="col-md-6 col-lg-6">
-                <div class="row col-md-12 col-lg-12">
-                    <div class="float-left col-md-3 col-lg-3 lablestyles textright">Address :</div>
-                    <div class="float-right col-md-6 col-lg-6">
-                        @*<textarea name="Line1" rows="6" cols="30" class="textareastyles" placeholder="Enter Address Line2">@(Model.Address.Line2)</textarea>*@
-                    </div>
-                </div>
             </div>
+
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;">Official Contact Number:</div></div>
+                <div class="float-right col-md-8 col-lg-8">
+                    <input class="textareastyles" style="width:300px;height:35px;" type="text" name="OfficialContactNo" value="@(Model.OfficialContactNo)" placeholder="Enter Employee Name" />
+
+                </div>
+
+            </div>
+
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;">Alternate Contact Number:</div></div>
+                <div class="float-right col-md-8 col-lg-8">
+                    <input class="textareastyles" style="width:300px;height:35px;" type="text" name="AlternateContactNo" value="@(Model.AlternateContactNo)" placeholder="Enter Employee Name" />
+
+                </div>
+
+            </div>
+
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;">Official EmailID:</div></div>
+                <div class="float-right col-md-8 col-lg-8">
+                    <input class="textareastyles" style="width:300px;height:35px;" type="text" name="OfficialEmail" value="@(Model.OfficialEmail)" placeholder="Enter Employee Name" />
+
+                </div>
+
+            </div>
+
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;">Personal Email:</div></div>
+                <div class="float-right col-md-8 col-lg-8">
+                    <input class="textareastyles" style="width:300px;height:35px;" type="text" name="PersonalEmail" value="@(Model.PersonalEmail)" placeholder="Enter Employee Name" />
+
+                </div>
+
+            </div>
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;">Address:</div></div>
+                <div class="float-right col-md-8 col-lg-8">
+                    <textarea name="Address" rows="6" cols="30" class="textareastyles" placeholder="Enter Address ">@(Model.Address)</textarea>
+
+                </div>
+
+            </div>
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;">Qualification</div></div>
+                <div class="float-right col-md-8 col-lg-8">
+                    <input class="textareastyles" style="width:300px;height:35px;" type="text" name="Qualification" value="@(Model.Qualification)" placeholder="Enter Employee Name" />
+
+                </div>
+
+            </div>
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div>Identification Mode :</div></div>
+                <div class="float-right col-md-7 col-lg-8">
+                    @Html.DropDownList("drpidentificationtype", (IEnumerable<SelectListItem>)Model.IdentificationList, "Select Identification Type", new { @class = "dropdownstyles" })
+
+                </div>
+
+
+            </div>
+
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;">Identification ID</div></div>
+                <div class="float-right col-md-8 col-lg-8">
+                    <input class="textareastyles" style="width:300px;height:35px;" type="text" name="IdentificationValue" value="@(Model.IdentificationValue)" placeholder="Enter Employee Name" />
+
+                </div>
+
+            </div>
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div>Role :</div></div>
+                <div class="float-right col-md-7 col-lg-8">
+                    @Html.DropDownList("drprole", (IEnumerable<SelectListItem>)Model.RoleList, "Select Role", new { @class = "dropdownstyles" })
+
+                </div>
+
+
+            </div>
+
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div>Location :</div></div>
+                <div class="float-right col-md-7 col-lg-8">
+                    @Html.DropDownList("drplocation", (IEnumerable<SelectListItem>)Model.LocationList, "Select Location", new { @class = "dropdownstyles" })
+
+                </div>
+
+
+            </div>
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div>Company :</div></div>
+                <div class="float-right col-md-7 col-lg-8">
+                    @Html.DropDownList("drpcompany", (IEnumerable<SelectListItem>)Model.CompanyList, "Select Company", new { @class = "dropdownstyles" })
+
+                </div>
+
+
+            </div>
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div>Company Type :</div></div>
+                <div class="float-right col-md-7 col-lg-8">
+                    @Html.DropDownList("drpcompanytype", (IEnumerable<SelectListItem>)Model.ComapnyTypeList, "Select Company Type", new { @class = "dropdownstyles" })
+
+                </div>
+
+
+            </div>
+
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div>Manager ID :</div></div>
+                <div class="float-right col-md-7 col-lg-8">
+
+
+                </div>
+
+
+            </div>
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div>Photo :</div></div>
+                <div class="float-right col-md-7 col-lg-8">
+
+
+                </div>
+
+
+            </div>
+
+
+
         </div>
 
         <div class="row col-md-12 col-lg-12 commonPadding">
@@ -61,5 +184,19 @@
 
 
     </div>
+}
 
-    } 
+
+
+
+
+
+
+
+
+
+
+
+
+
+

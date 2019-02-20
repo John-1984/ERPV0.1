@@ -6,17 +6,16 @@ namespace BusinessModels
     {
         public RoleMaster()
         {
-           
+            Identity = -1;
+            RoleName = string.Empty;
         }
 
-        
         public Int32 Identity
         {
             get;
             set;
         }
 
-        
         public string RoleName
         {
             get;
@@ -29,13 +28,31 @@ namespace BusinessModels
             set;
         }
 
-        public int RegionID
+        public string RoleTypeName
+        {
+            get;
+            set;
+        }
+
+        public string RegionName
         {
             get;
             set;
         }
 
         public int ModuleID
+        {
+            get;
+            set;
+        }
+
+        public int RegionID
+        {
+            get;
+            set;
+        }
+
+        public string ModuleName
         {
             get;
             set;

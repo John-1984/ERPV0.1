@@ -1,17 +1,45 @@
-﻿@{
-    Layout = null;
-}
+﻿@model ERP.Models.PurchaseRequestType
 
-<!DOCTYPE html>
+@using (Html.BeginForm("Update", "PurchaseRequestType", FormMethod.Post, new { @id = "registerFormId" }))
+{
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
-    
+    <div class="container PurchaseRequestTypeDetails col-md-12 col-lg-12 commonPadding">
+        <div class="row  col-md-12 col-lg-12ccommonPadding">
+            @*@{
+                    var categories = Model.ErrorList; // Cast the list
+                }
+
+                @if(Model.ErrorList != null && Model.ErrorList.Count > 0)
+                {
+                @foreach (var c in @categories) // Print the list
+                {
+                    @Html.Label(categories.ToString());
+                }
+                }*@
+
+            &nbsp;
+        </div>
+        <div class="row  col-md-12 col-lg-12">
+            <div class="col-md-6 col-lg-6">
+                <div class="row col-md-12 col-lg-12">
+                    <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;">Type Name :</div></div>
+                    <div class="float-right col-md-8 col-lg-8">
+                        <input class="textareastyles" style="width:300px;height:35px;" type="text" name="PurchaseRequestTypeName" value="@(Model.Name)" placeholder="Enter PurchaseRequestType Name" />
+                        @*<span class="input-validation-error" data-valmsg-for="PurchaseRequestTypeName" data-valmsg-replace="true"></span>*@
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row col-md-12 col-lg-12 commonPadding">
+            <div class="col-md-6 col-lg-6"><input type="button" data-url="@Url.Action("Update", "PurchaseRequestType")" class="formbutton float-right PurchaseRequestTypeAddEdit" data-identity="@(Model.Identity)" value="Update/Add" /></div>
+            <input type="hidden" name="Identity" value="@(Model.Identity)">
+        </div>
+
+
+
     </div>
-</body>
-</html>
+}

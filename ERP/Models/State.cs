@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using System.Web.Mvc;
 
 namespace ERP.Models
 {
@@ -23,6 +24,7 @@ namespace ERP.Models
         }
 
         [DefaultValue("")]
+        [Required(ErrorMessage ="Please enter state name")]
         public string StateName
         {
             get;
@@ -34,7 +36,23 @@ namespace ERP.Models
             get;
             set;
         }
+        public string CountryName
+        {
+            get;
+            set;
+        }
 
+        public string RegionName
+        {
+            get;
+            set;
+        }
+
+        public int RegionID
+        {
+            get;
+            set;
+        }
         public DateTime CreatedDate
         {
             get;
@@ -56,6 +74,24 @@ namespace ERP.Models
             set;
         }
 
+        public SelectList RegionList
+        {
+            get;
+            set;
+        }
+        public SelectList CountryList
+        {
+            get;
+            set;
+        }
+
+        public List<string> ErrorList
+        {
+            get;
+            set;
+        }
+
+        
     }
 }
 

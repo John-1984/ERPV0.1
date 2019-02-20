@@ -1,17 +1,112 @@
-﻿@{
-    Layout = null;
+﻿@model ERP.Models.LocalSupplier
+
+@using (Html.BeginForm("Update", "LocalSupplier", FormMethod.Post, new { @id = "registerFormId" }))
+{
+
+    <div class="container LocalSupplierDetails col-md-12 col-lg-12 commonPadding">
+        <div class="row  col-md-12 col-lg-12ccommonPadding">
+            @*@{
+                    var categories = Model.ErrorList; // Cast the list
+                }
+
+                @if(Model.ErrorList != null && Model.ErrorList.Count > 0)
+                {
+                @foreach (var c in @categories) // Print the list
+                {
+                    @Html.Label(categories.ToString());
+                }
+                }*@
+
+            &nbsp;
+        </div>
+        <div class="row  col-md-12 col-lg-12">
+
+
+
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;">Supplier Name :</div></div>
+                <div class="float-right col-md-8 col-lg-8">
+                    <input class="textareastyles" style="width:300px;height:35px;" type="text" name="SupplierName" value="@(Model.SupplierName)" placeholder="Enter Local Supplier Name" />
+                    @*<span class="input-validation-error" data-valmsg-for="LocalSupplierName" data-valmsg-replace="true"></span>*@
+
+                </div>
+
+            </div>
+
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;">Contact Number :</div></div>
+                <div class="float-right col-md-8 col-lg-8">
+                    <input class="textareastyles" style="width:300px;height:35px;" type="text" name="ContactNumber" value="@(Model.ContactNumber)" placeholder="Enter supplier contact number" />
+                    @*<span class="input-validation-error" data-valmsg-for="LocalSupplierName" data-valmsg-replace="true"></span>*@
+
+                </div>
+
+            </div>
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;">Email :</div></div>
+                <div class="float-right col-md-8 col-lg-8">
+                    <input class="textareastyles" style="width:300px;height:35px;" type="text" name="Email" value="@(Model.Email)" placeholder="Enter Email address" />
+                    @*<span class="input-validation-error" data-valmsg-for="LocalSupplierName" data-valmsg-replace="true"></span>*@
+
+                </div>
+
+            </div>
+
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;">Address :</div></div>
+                <div class="float-right col-md-8 col-lg-8">
+                    <textarea name="Address" rows="6" cols="30" class="textareastyles" placeholder="Enter Supplier Address">@(Model.Address)</textarea>
+
+                </div>
+
+            </div>
+
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div>Item :</div></div>
+                <div class="float-right col-md-7 col-lg-8">
+                    @* @Html.DropDownList("Mobiledropdown1", Model.RegionList)*@
+                    @Html.DropDownList("drpitem", (IEnumerable<SelectListItem>)Model.ItemList, "Select item", new { @class = "dropdownstyles" })
+                    @*<span class="input-validation-error" data-valmsg-for="LocationName" data-valmsg-replace="true"></span>*@
+
+                </div>
+
+
+            </div>
+
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div>Location :</div></div>
+                <div class="float-right col-md-7 col-lg-8">
+                    @* @Html.DropDownList("Mobiledropdown1", Model.RegionList)*@
+                    @Html.DropDownList("drplocation", (IEnumerable<SelectListItem>)Model.LocationList, "Select supplier location", new { @class = "dropdownstyles" })
+                    @*<span class="input-validation-error" data-valmsg-for="LocationName" data-valmsg-replace="true"></span>*@
+
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="row col-md-12 col-lg-12 commonPadding">
+            <div class="col-md-6 col-lg-6"><input type="button" data-url="@Url.Action("Update", "LocalSupplier")" class="formbutton float-right LocalSupplierAddEdit" data-identity="@(Model.Identity)" value="Update/Add" /></div>
+            <input type="hidden" name="Identity" value="@(Model.Identity)">
+        </div>
+
+
+
+    </div>
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
-    
-    </div>
-</body>
-</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

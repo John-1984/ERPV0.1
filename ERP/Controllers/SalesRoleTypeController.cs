@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using X.PagedList;
+using System.Runtime;
+using System.Globalization;
 
 namespace ERP.Controllers
 {
@@ -16,9 +19,10 @@ namespace ERP.Controllers
 
         public PartialViewResult _SalesRoleTypeAll()
         {
-            return PartialView(AutoMapperConfig.Mapper().Map<List<Models.SalesRoleType>>(_SalesRoleType.GetAll()));
+            return PartialView(GetSalesRoleTypes("", 1, "", ""));
         }
 
+        [HttpGet]
         public PartialViewResult _SalesRoleTypeEdit(int identity)
         {
             if (identity.Equals(-1))
@@ -27,6 +31,7 @@ namespace ERP.Controllers
                 return PartialView(AutoMapperConfig.Mapper().Map<Models.SalesRoleType>(_SalesRoleType.GetSalesRoleType(identity)));
         }
 
+        [HttpGet]
         public PartialViewResult _SalesRoleTypeView(int identity)
         {
             return PartialView(AutoMapperConfig.Mapper().Map<Models.SalesRoleType>(_SalesRoleType.GetSalesRoleType(identity)));
@@ -46,7 +51,6 @@ namespace ERP.Controllers
             //IF Failure return json value
             if (SalesRoleType.Identity.Equals(-1))
             {
-                SalesRoleType.Identity = GetRandomNumber();
                 _SalesRoleType.Insert(AutoMapperConfig.Mapper().Map<BusinessModels.SalesRoleType>(SalesRoleType));
             }
             else
@@ -55,9 +59,50 @@ namespace ERP.Controllers
         }
 
         [HttpPost]
-        public PartialViewResult SalesRoleTypeSearch(string searchString)
+        public PartialViewResult SalesRoleTypeSearch(string searchString, string createdDate = "")
         {
-            return PartialView("_SalesRoleTypeAll", AutoMapperConfig.Mapper().Map<List<Models.SalesRoleType>>(_SalesRoleType.GetAll().ToList().FindAll(p => p.TypeName.ToLower().Contains(searchString.ToLower()))));
+            return PartialView("_SalesRoleTypeAll", GetSalesRoleTypes("", 1, createdDate, searchString));
+        }
+
+        public PartialViewResult Sorting(int? page, string sortOrder = "", string createdDate = "", string searchString = "")
+        {
+            return PartialView("_SalesRoleTypeAll", GetSalesRoleTypes(sortOrder, page, createdDate, searchString));
+        }
+
+        private IPagedList<Models.SalesRoleType> GetSalesRoleTypes(string sortOrder, int? page, string createdDate = "", string searchString = "")
+        {
+
+            ViewBag.CreatedDate = string.IsNullOrEmpty(createdDate) ? "" : createdDate;
+            ViewBag.SearchString = string.IsNullOrEmpty(searchString) ? "" : searchString;
+            ViewBag.CurrentSort = string.IsNullOrEmpty(sortOrder) ? "TypeName" : "";
+
+            var SalesRoleTypes = AutoMapperConfig.Mapper().Map<List<Models.SalesRoleType>>(_SalesRoleType.GetAll());
+            if (!string.IsNullOrEmpty(searchString) && !string.IsNullOrEmpty(createdDate))
+                SalesRoleTypes = AutoMapperConfig.Mapper().Map<List<Models.SalesRoleType>>(_SalesRoleType.GetAll().ToList().FindAll(p => p.TypeName.ToLower().Contains(searchString.ToLower()) && p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+            else if (!string.IsNullOrEmpty(searchString))
+                SalesRoleTypes = AutoMapperConfig.Mapper().Map<List<Models.SalesRoleType>>(_SalesRoleType.GetAll().ToList().FindAll(p => p.TypeName.ToLower().Contains(searchString.ToLower())));
+            else if (!string.IsNullOrEmpty(createdDate))
+                SalesRoleTypes = AutoMapperConfig.Mapper().Map<List<Models.SalesRoleType>>(_SalesRoleType.GetAll().ToList().FindAll(p => p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+
+            switch (sortOrder)
+            {
+                case "TypeName":
+                    SalesRoleTypes = SalesRoleTypes.OrderByDescending(stu => stu.TypeName).ToList();
+                    break;
+                case "DateAsc":
+                    SalesRoleTypes = SalesRoleTypes.OrderBy(stu => stu.CreatedDate).ToList();
+                    break;
+                case "DateDesc":
+                    SalesRoleTypes = SalesRoleTypes.OrderByDescending(stu => stu.CreatedDate).ToList();
+                    break;
+                default:
+                    SalesRoleTypes = SalesRoleTypes.OrderBy(stu => stu.TypeName).ToList();
+                    break;
+            }
+
+            int Size_Of_Page = 8;  //Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["GridPageSize"].ToString());
+            int No_Of_Page = (page ?? 1);
+            return SalesRoleTypes.ToPagedList(No_Of_Page, Size_Of_Page);
         }
 
         //Function to get random number

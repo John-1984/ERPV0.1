@@ -6,82 +6,45 @@ namespace BusinessLayer
 {
     public class Vendor
     {
+        private List<BusinessModels.Vendor> Vendors = new List<BusinessModels.Vendor>();
+        private DataLayer.VendorDAL _dataLayer = null;
+        private DataLayer.ProductMasterDAL _proddataLayer = null;
+
         public Vendor()
         {
-          
+            _dataLayer = new DataLayer.VendorDAL();
+            _proddataLayer = new DataLayer.ProductMasterDAL();
         }
-
-        private static List<BusinessModels.Vendor> Vendors = new List<BusinessModels.Vendor>();
-
-       
 
         public BusinessModels.Vendor GetVendor(Int32 identity)
         {
-            return Vendors.FirstOrDefault(p => p.Identity.Equals(identity));
+            return _dataLayer.GetVendor(identity);
         }
 
         public IEnumerable<BusinessModels.Vendor> GetAll()
         {
-            return Vendors;
+            return _dataLayer.GetAll();
         }
-
+        public IEnumerable<BusinessModels.ProductMaster> GetAllProductMaster()
+        {
+            return _proddataLayer.GetAll();
+        }
         public Boolean Delete(Int32 identity)
         {
-            Vendors.Remove(Vendors.Find(p => p.Identity.Equals(identity)));
-            return true;
+            return _dataLayer.Delete(identity);
         }
 
         public Boolean Update(BusinessModels.Vendor Vendor)
         {
-            Vendors.Remove(Vendors.Find(p => p.Identity.Equals(Vendor.Identity)));
-            Vendors.Add(Vendor);
-            return true;
+            return _dataLayer.Update(Vendor);
         }
 
         public Boolean Insert(BusinessModels.Vendor Vendor)
         {
-            Vendors.Add(Vendor);
-            return true;
+            return _dataLayer.Insert(Vendor);
         }
 
-        public void TestData()
-        {
-            Vendors.Add(
-                new BusinessModels.Vendor()
-                {
-                    Identity = 1,
-                    VendorName = "dad",
 
-                    CreatedDate = DateTime.Now,
-                    ModifiedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedBy = 1
-
-
-                });
-            Vendors.Add(
-                new BusinessModels.Vendor()
-                {
-                    Identity = 2,
-                    VendorName = "dad",
-
-                    CreatedDate = DateTime.Now,
-                    ModifiedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedBy = 1
-                });
-            Vendors.Add(
-                new BusinessModels.Vendor()
-                {
-                    Identity = 3,
-                    VendorName = "dad",
-
-                    CreatedDate = DateTime.Now,
-                    ModifiedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedBy = 1
-                });
-        }
 
     }
 

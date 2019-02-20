@@ -23,6 +23,7 @@ namespace ERP.Models
         }
 
         [DefaultValue("")]
+        [Required(ErrorMessage ="Please enter UOM")]
         public string UOMName
         {
             get;

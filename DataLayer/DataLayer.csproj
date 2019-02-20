@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -47,13 +47,65 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BrandDAL.cs" />
+    <Compile Include="BrandDbContext.cs" />
+    <Compile Include="CompanyDAL.cs" />
+    <Compile Include="CompanyDbContext.cs" />
+    <Compile Include="CompanyTypeDAL.cs" />
+    <Compile Include="CompanyTypeDbContext.cs" />
+    <Compile Include="CountryDAL.cs" />
+    <Compile Include="CountryDbContext.cs" />
+    <Compile Include="DiscountDAL.cs" />
+    <Compile Include="DiscountDbContext.cs" />
+    <Compile Include="DistrictDAL.cs" />
+    <Compile Include="DistrictDbContext.cs" />
+    <Compile Include="EmployeeDAL.cs" />
+    <Compile Include="EmployeeDbContext.cs" />
+    <Compile Include="FloorMasterDAL.cs" />
+    <Compile Include="FloorMasterDbContext.cs" />
+    <Compile Include="IdentificationsTypeDAL.cs" />
+    <Compile Include="IdentificationsTypeDbContext.cs" />
+    <Compile Include="ItemMasterDAL.cs" />
+    <Compile Include="ItemMasterDbContext.cs" />
+    <Compile Include="LocalSupplierDAL.cs" />
+    <Compile Include="LocalSupplierDbContext.cs" />
+    <Compile Include="LocationDAL.cs" />
+    <Compile Include="LocationDbContext.cs" />
+    <Compile Include="ModulesDAL.cs" />
+    <Compile Include="ModulesDbContext.cs" />
+    <Compile Include="ProductMasterDAL.cs" />
+    <Compile Include="ProductMasterDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CustomerDbContext.cs" />
     <Compile Include="CustomerDAL.cs" />
     <Compile Include="DBConnection.cs" />
+    <Compile Include="PurchaseRequestTypeDAL.cs" />
+    <Compile Include="PurchaseRequestTypeDbContext.cs" />
+    <Compile Include="RegionDAL.cs" />
+    <Compile Include="RegionDbContext.cs" />
+    <Compile Include="RoleMasterDAL.cs" />
+    <Compile Include="RoleMasterDbContext.cs" />
+    <Compile Include="RoleTypeDAL.cs" />
+    <Compile Include="RoleTypeDbContext.cs" />
+    <Compile Include="SalesRoleTypeDAL.cs" />
+    <Compile Include="SalesRoleTypeDbContext.cs" />
+    <Compile Include="StateDAL.cs" />
+    <Compile Include="StateDbContext.cs" />
+    <Compile Include="StatusDAL.cs" />
+    <Compile Include="StatusDbContext.cs" />
+    <Compile Include="TaxDAL.cs" />
+    <Compile Include="TaxDbContext.cs" />
+    <Compile Include="UOMMasterDAL.cs" />
+    <Compile Include="UOMMasterDbContext.cs" />
+    <Compile Include="VendorDAL.cs" />
+    <Compile Include="VendorDbContext.cs" />
+    <Compile Include="WarrantyDAL.cs" />
+    <Compile Include="WarrantyDbContext.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>

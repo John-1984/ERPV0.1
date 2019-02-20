@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using X.PagedList;
+using System.Runtime;
+using System.Globalization;
 
 namespace ERP.Controllers
 {
@@ -16,9 +19,10 @@ namespace ERP.Controllers
 
         public PartialViewResult _UOMMasterAll()
         {
-            return PartialView(AutoMapperConfig.Mapper().Map<List<Models.UOMMaster>>(_UOMMaster.GetAll()));
+            return PartialView(GetUOMMasters("", 1, "", ""));
         }
 
+        [HttpGet]
         public PartialViewResult _UOMMasterEdit(int identity)
         {
             if (identity.Equals(-1))
@@ -27,6 +31,7 @@ namespace ERP.Controllers
                 return PartialView(AutoMapperConfig.Mapper().Map<Models.UOMMaster>(_UOMMaster.GetUOMMaster(identity)));
         }
 
+        [HttpGet]
         public PartialViewResult _UOMMasterView(int identity)
         {
             return PartialView(AutoMapperConfig.Mapper().Map<Models.UOMMaster>(_UOMMaster.GetUOMMaster(identity)));
@@ -46,7 +51,6 @@ namespace ERP.Controllers
             //IF Failure return json value
             if (UOMMaster.Identity.Equals(-1))
             {
-                UOMMaster.Identity = GetRandomNumber();
                 _UOMMaster.Insert(AutoMapperConfig.Mapper().Map<BusinessModels.UOMMaster>(UOMMaster));
             }
             else
@@ -55,9 +59,50 @@ namespace ERP.Controllers
         }
 
         [HttpPost]
-        public PartialViewResult UOMMasterSearch(string searchString)
+        public PartialViewResult UOMMasterSearch(string searchString, string createdDate = "")
         {
-            return PartialView("_UOMMasterAll", AutoMapperConfig.Mapper().Map<List<Models.UOMMaster>>(_UOMMaster.GetAll().ToList().FindAll(p => p.UOMName.ToLower().Contains(searchString.ToLower()))));
+            return PartialView("_UOMMasterAll", GetUOMMasters("", 1, createdDate, searchString));
+        }
+
+        public PartialViewResult Sorting(int? page, string sortOrder = "", string createdDate = "", string searchString = "")
+        {
+            return PartialView("_UOMMasterAll", GetUOMMasters(sortOrder, page, createdDate, searchString));
+        }
+
+        private IPagedList<Models.UOMMaster> GetUOMMasters(string sortOrder, int? page, string createdDate = "", string searchString = "")
+        {
+
+            ViewBag.CreatedDate = string.IsNullOrEmpty(createdDate) ? "" : createdDate;
+            ViewBag.SearchString = string.IsNullOrEmpty(searchString) ? "" : searchString;
+            ViewBag.CurrentSort = string.IsNullOrEmpty(sortOrder) ? "UOMName" : "";
+
+            var UOMMasters = AutoMapperConfig.Mapper().Map<List<Models.UOMMaster>>(_UOMMaster.GetAll());
+            if (!string.IsNullOrEmpty(searchString) && !string.IsNullOrEmpty(createdDate))
+                UOMMasters = AutoMapperConfig.Mapper().Map<List<Models.UOMMaster>>(_UOMMaster.GetAll().ToList().FindAll(p => p.UOMName.ToLower().Contains(searchString.ToLower()) && p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+            else if (!string.IsNullOrEmpty(searchString))
+                UOMMasters = AutoMapperConfig.Mapper().Map<List<Models.UOMMaster>>(_UOMMaster.GetAll().ToList().FindAll(p => p.UOMName.ToLower().Contains(searchString.ToLower())));
+            else if (!string.IsNullOrEmpty(createdDate))
+                UOMMasters = AutoMapperConfig.Mapper().Map<List<Models.UOMMaster>>(_UOMMaster.GetAll().ToList().FindAll(p => p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+
+            switch (sortOrder)
+            {
+                case "UOMName":
+                    UOMMasters = UOMMasters.OrderByDescending(stu => stu.UOMName).ToList();
+                    break;
+                case "DateAsc":
+                    UOMMasters = UOMMasters.OrderBy(stu => stu.CreatedDate).ToList();
+                    break;
+                case "DateDesc":
+                    UOMMasters = UOMMasters.OrderByDescending(stu => stu.CreatedDate).ToList();
+                    break;
+                default:
+                    UOMMasters = UOMMasters.OrderBy(stu => stu.UOMName).ToList();
+                    break;
+            }
+
+            int Size_Of_Page = 8;  //Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["GridPageSize"].ToString());
+            int No_Of_Page = (page ?? 1);
+            return UOMMasters.ToPagedList(No_Of_Page, Size_Of_Page);
         }
 
         //Function to get random number

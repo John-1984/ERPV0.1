@@ -1,15 +1,18 @@
 ﻿@using X.PagedList;
 @using X.PagedList.Mvc;
 @model IPagedList<ERP.Models.Employee>
-@*@model ERP.Models.Employee*@
+
 <div class="container">
     <div class="col-md-12 col-lg-12 commonPadding">
         <table class="table EmployeeAll">
             <thead>
                 <tr class="gridheader">
-                    <th>Name</th>
+                    <th>Employee CompanyID</th>
+                    <th>Employee Name</th>
+                    <th>Contact Number</th>
                     <th>Email</th>
-                    <th>Purpose</th>
+                    <th>Role</th>
+                    <th>Manager Name</th>
                     <th>View</th>
                     <th>Edit</th>
                     <th>Delete</th>
@@ -18,18 +21,19 @@
             <tbody>
                 @foreach (var Employee in Model)
                 {
+                <tr class="gridrow">
+                    <td class="gridrow">@Employee.StaffCode</td>
+                    <td class="gridrow">@Employee.EmployeeName</td>
+                    <td class="gridrow">@Employee.OfficialContactNo</td>
+                    <td class="gridrow">@Employee.OfficialEmail</td>
+                    <td class="gridrow "> @Employee.RoleName</td>
+                    <td class="gridrow "></td>
+                    <td class="gridrow "><img src="~/Content/view.gif" alt="View" class="EmployeeView pointer" data-url="@Url.Action("_EmployeeView", "Employee")" data-identity="@(Employee.Identity)" /> </td>
+                    <td class="gridrow "><img src="~/Content/edit.png" alt="Edit" class="EmployeeEdit pointer" data-url="@Url.Action("_EmployeeEdit", "Employee")" data-identity="@(Employee.Identity)" /></td>
+                    <td class="gridrow "><img src="~/Content/delete.png" alt="Delete" class="EmployeeDelete pointer" data-url="@Url.Action("Delete", "Employee")" data-identity="@(Employee.Identity)" /></td>
+                </tr>
 
-                    <tr class="gridrow">
-                        <td class="gridrow">@Employee</td>
-                        <td class="gridrow">@Employee.PersonalEmail</td>
-                        <td class="gridrow">@Employee.PersonalEmail</td>
-                        <td class="gridrow "><img src="~/Content/view.gif" alt="View" class="EmployeeView pointer" data-url="@Url.Action("_EmployeeView", "Employee")" data-identity="@(Employee.Identity)" /> </td>
-                        <td class="gridrow "><img src="~/Content/edit.png" alt="View" class="EmployeeEdit pointer" data-url="@Url.Action("_EmployeeEdit", "Employee")" data-identity="@(Employee.Identity)" /></td>
-                        <td class="gridrow "><img src="~/Content/delete.png" alt="View" class="EmployeeDelete pointer" data-url="@Url.Action("Delete", "Employee")" data-identity="@(Employee.Identity)" /></td>
-
-                    </tr>
                 }
-
             </tbody>
         </table>
     </div>

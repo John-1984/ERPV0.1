@@ -10,14 +10,12 @@ namespace BusinessModels
             LocationName = string.Empty;
         }
 
-        
         public Int32 Identity
         {
             get;
             set;
         }
 
-        
         public string LocationName
         {
             get;
@@ -47,6 +45,42 @@ namespace BusinessModels
             set;
         }
         public int CreatedBy
+        {
+            get;
+            set;
+        }
+        public string DistrictName
+        {
+            get;
+            set;
+        }
+
+        public string RegionName
+        {
+            get;
+            set;
+        }
+        public string CountryName
+        {
+            get;
+            set;
+        }
+        public string StateName
+        {
+            get;
+            set;
+        }
+        public int RegionID
+        {
+            get;
+            set;
+        }
+        public int CountryID
+        {
+            get;
+            set;
+        }
+        public int StateID
         {
             get;
             set;

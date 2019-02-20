@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Collections.Generic;
 
 namespace BusinessModels
 {
@@ -31,6 +31,24 @@ namespace BusinessModels
             set;
         }
 
+        public string CountryName
+        {
+            get;
+            set;
+        }
+
+        public string RegionName
+        {
+            get;
+            set;
+        }
+
+        public int RegionID
+        {
+            get;
+            set;
+        }
+
         public DateTime CreatedDate
         {
             get;
@@ -47,6 +65,12 @@ namespace BusinessModels
             set;
         }
         public int CreatedBy
+        {
+            get;
+            set;
+        }
+
+        public List<string> ErrorList
         {
             get;
             set;

@@ -6,83 +6,62 @@ namespace BusinessLayer
 {
     public class District
     {
+
+        private List<BusinessModels.District> Districts = new List<BusinessModels.District>();
+        private List<BusinessModels.Country> Countrys = new List<BusinessModels.Country>();
+        private DataLayer.DistrictDAL _dataLayer = null;
+        private DataLayer.RegionDAL _regdataLayer = null;
+        private DataLayer.CountryDAL _condataLayer = null;
+        private DataLayer.StateDAL _statedataLayer = null;
+
         public District()
         {
-            if (Districts == null)
-                TestData();
+            _dataLayer = new DataLayer.DistrictDAL();
+            _regdataLayer = new DataLayer.RegionDAL();
+            _condataLayer = new DataLayer.CountryDAL();
+            _statedataLayer = new DataLayer.StateDAL();
         }
 
-        private static List<BusinessModels.District> Districts = new List<BusinessModels.District>();
-
-        
         public BusinessModels.District GetDistrict(Int32 identity)
         {
-            return Districts.FirstOrDefault(p => p.Identity.Equals(identity));
+            return _dataLayer.GetDistrict(identity);
         }
-
+        public IEnumerable<BusinessModels.Country> GetAllCountrys()
+        {
+            //TestRegionData();
+            return _condataLayer.GetAll();
+        }
+        public IEnumerable<BusinessModels.Region> GetAllRegionss()
+        {
+            //TestRegionData();
+            return _regdataLayer.GetAll();
+        }
+        public IEnumerable<BusinessModels.State> GetAllState()
+        {
+            //TestRegionData();
+            return _statedataLayer.GetAll();
+        }
         public IEnumerable<BusinessModels.District> GetAll()
         {
-            return Districts;
+            return _dataLayer.GetAll();
         }
 
         public Boolean Delete(Int32 identity)
         {
-            Districts.Remove(Districts.Find(p => p.Identity.Equals(identity)));
-            return true;
+            return _dataLayer.Delete(identity);
         }
 
         public Boolean Update(BusinessModels.District District)
         {
-            Districts.Remove(Districts.Find(p => p.Identity.Equals(District.Identity)));
-            Districts.Add(District);
-            return true;
+            return _dataLayer.Update(District);
         }
 
         public Boolean Insert(BusinessModels.District District)
         {
-            Districts.Add(District);
-            return true;
+            return _dataLayer.Insert(District);
         }
 
-        public void TestData()
-        {
-            Districts.Add(
-                new BusinessModels.District()
-                {
-                    Identity = 1,
 
-                    DistrictName = "John",
-                    StateID = 1,
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-            Districts.Add(
-                new BusinessModels.District()
-                {
-                    Identity = 2,
-
-                    DistrictName = "John",
-                    StateID = 1,
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-            Districts.Add(
-                new BusinessModels.District()
-                {
-                    Identity = 3,
-
-                    DistrictName = "John",
-                    StateID = 1,
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-        }
 
     }
 

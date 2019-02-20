@@ -1,35 +1,44 @@
-﻿@model List<ERP.Models.State>
+﻿@using X.PagedList;
+@using X.PagedList.Mvc;
+@model IPagedList<ERP.Models.State>
 
 <div class="container">
-    <table class="table StateAll">
-        <thead>
-            <tr class="gridheader">
-                <th>StateName</th>
-                <th>Region</th>
-                <th>Country</th>                
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var State in Model)
-            {
-
+    <div class="col-md-12 col-lg-12 commonPadding">
+        <table class="table StateAll">
+            <thead>
+                <tr class="gridheader">
+                    <th>Region</th>
+                    <th>Country</th>
+                    <th>State Name</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var State in Model)
+                {
                 <tr class="gridrow">
-                    <td class="gridrow">@State.StateName</td>
-                    <td class="gridrow">@State.StateName</td>
-                    <td class="gridrow">@State.StateName</td>
-                    @*<td class="gridrow"><i class="fa fa-eye" aria-hidden="true" data-identity="@(State.Identity)"></i></td>
-                        <td class="gridrow"><i class="fa fa-pencil" aria-hidden="true" data-identity="@(State.Identity)"></i></td>
-                        <td class="gridrow"><i class="fa fa-times" aria-hidden="true" data-identity="@(State.Identity)"></i></td>*@
-                    
-                    <td class="gridrow "><img src="~/Content/edit.png" alt="View" class="StateEdit pointer" data-url="@Url.Action("_StateEdit", "State")" data-identity="@(State.Identity)" /></td>
-                    <td class="gridrow "><img src="~/Content/delete.png" alt="View" class="StateDelete pointer" data-url="@Url.Action("Delete", "State")" data-identity="@(State.Identity)" /></td>
+                    <td class="gridrow">@State.RegionName</td>
+                    <td class="gridrow">@State.CountryName</td>
+                    <td class="gridrow "> @State.StateName</td>
+                    <td class="gridrow "><img src="~/Content/edit.png" alt="Edit" class="StateEdit pointer" data-url="@Url.Action("_StateEdit", "State")" data-identity="@(State.Identity)" /></td>
+                    <td class="gridrow "><img src="~/Content/delete.png" alt="Delete" class="StateDelete pointer" data-url="@Url.Action("Delete", "State")" data-identity="@(State.Identity)" /></td>
                 </tr>
 
-            }
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-12 col-lg-12 nopadding textright">
+        <div class="col-md-6 col-lg-6">
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-        </tbody>
-    </table>
+
+        </div>
+        <div class="col-md-6 col-lg-6">
+            @Html.PagedListPager(Model, page => Url.Action("Sorting", new { page, sortOrder = ViewBag.CurrentSort, createdDate = ViewBag.CreatedDate, searchString = ViewBag.SearchString }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { InsertionMode = InsertionMode.Replace, HttpMethod = "GET", UpdateTargetId = "resultView" }))
+
+        </div>
+    </div>
 </div>
 

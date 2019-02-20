@@ -1,17 +1,141 @@
-﻿@{
-    Layout = null;
+﻿@model ERP.Models.ItemMaster
+
+@using (Html.BeginForm("Update", "ItemMaster", FormMethod.Post, new { @id = "registerFormId" }))
+{
+
+    <div class="container ItemMasterDetails col-md-12 col-lg-12 commonPadding">
+        <div class="row  col-md-12 col-lg-12ccommonPadding">
+            @*@{
+                    var categories = Model.ErrorList; // Cast the list
+                }
+
+                @if(Model.ErrorList != null && Model.ErrorList.Count > 0)
+                {
+                @foreach (var c in @categories) // Print the list
+                {
+                    @Html.Label(categories.ToString());
+                }
+                }*@
+
+            &nbsp;
+        </div>
+        <div class="row  col-md-12 col-lg-12">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;">Item Name :</div></div>
+                <div class="float-right col-md-8 col-lg-8">
+                    <input class="textareastyles" style="width:300px;height:35px;" type="text" name="ItemName" value="@(Model.ItemName)" placeholder="Enter Item Name" />
+                    @*<span class="input-validation-error" data-valmsg-for="ItemMasterName" data-valmsg-replace="true"></span>*@
+
+                </div>
+
+            </div>
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div>Vendor :</div></div>
+                <div class="float-right col-md-7 col-lg-8">
+                    @* @Html.DropDownList("Mobiledropdown1", Model.RegionList)*@
+                    @Html.DropDownList("drpVendor", (IEnumerable<SelectListItem>)Model.VendorList, "Select Vendor", new { @class = "dropdownstyles" })
+                    @*<span class="input-validation-error" data-valmsg-for="ItemMasterName" data-valmsg-replace="true"></span>*@
+
+                </div>
+
+
+            </div>
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div>Brand :</div></div>
+                <div class="float-right col-md-7 col-lg-8">
+                    @* @Html.DropDownList("Mobiledropdown1", Model.RegionList)*@
+                    @Html.DropDownList("drpBrand", (IEnumerable<SelectListItem>)Model.BrandList, "Select Brand", new { @class = "dropdownstyles" })
+                    @*<span class="input-validation-error" data-valmsg-for="ItemMasterName" data-valmsg-replace="true"></span>*@
+
+                </div>
+
+
+            </div>
+
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div>UOM :</div></div>
+                <div class="float-right col-md-7 col-lg-8">
+                    @* @Html.DropDownList("Mobiledropdown1", Model.RegionList)*@
+                    @Html.DropDownList("drpUOM", (IEnumerable<SelectListItem>)Model.UOMList, "Select UOM", new { @class = "dropdownstyles" })
+                    @*<span class="input-validation-error" data-valmsg-for="ItemMasterName" data-valmsg-replace="true"></span>*@
+
+                </div>
+
+
+            </div>
+
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;">Item Description :</div></div>
+                <div class="float-right col-md-8 col-lg-8">
+                    <textarea name="Description" rows="6" cols="30" class="textareastyles" placeholder="Enter Description">@(Model.Description)</textarea>
+                    @*<span class="input-validation-error" data-valmsg-for="ItemMasterName" data-valmsg-replace="true"></span>*@
+
+                </div>
+
+            </div>
+
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;">Item Weight :</div></div>
+                <div class="float-right col-md-8 col-lg-8">
+                    <input class="textareastyles" style="width:300px;height:35px;" type="text" name="ItemWeight" value="@(Model.ItemWeight)" placeholder="Enter Item weight" />
+                    @*<span class="input-validation-error" data-valmsg-for="ItemMasterName" data-valmsg-replace="true"></span>*@
+
+                </div>
+
+            </div>
+
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;">Item Retail Price :</div></div>
+                <div class="float-right col-md-8 col-lg-8">
+                    <input class="textareastyles" style="width:300px;height:35px;" type="text" name="RetailPrice" value="@(Model.RetailPrice)" placeholder="Enter Item Retail Price" />
+                    @*<span class="input-validation-error" data-valmsg-for="ItemMasterName" data-valmsg-replace="true"></span>*@
+
+                </div>
+
+            </div>
+
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;">Purchase Price :</div></div>
+                <div class="float-right col-md-8 col-lg-8">
+                    <input class="textareastyles" style="width:300px;height:35px;" type="text" name="PurchacePrice" value="@(Model.PurchacePrice)" placeholder="Enter Item Purchase Price" />
+                    @*<span class="input-validation-error" data-valmsg-for="ItemMasterName" data-valmsg-replace="true"></span>*@
+
+                </div>
+
+            </div>
+
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;">Item Size :</div></div>
+                <div class="float-right col-md-8 col-lg-8">
+                    <input class="textareastyles" style="width:300px;height:35px;" type="text" name="ItemSize" value="@(Model.ItemSize)" placeholder="Enter Item Size" />
+                    @*<span class="input-validation-error" data-valmsg-for="ItemMasterName" data-valmsg-replace="true"></span>*@
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row col-md-12 col-lg-12 commonPadding">
+            <div class="col-md-6 col-lg-6"><input type="button" data-url="@Url.Action("Update", "ItemMaster")" class="formbutton float-right ItemMasterAddEdit" data-identity="@(Model.Identity)" value="Update/Add" /></div>
+            <input type="hidden" name="Identity" value="@(Model.Identity)">
+        </div>
+
+
+
+    </div>
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
-    
-    </div>
-</body>
-</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

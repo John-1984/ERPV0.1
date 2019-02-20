@@ -1,83 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 namespace BusinessLayer
 {
     public class Modules
     {
+        private List<BusinessModels.Modules> Moduless = new List<BusinessModels.Modules>();
+        private DataLayer.ModulesDAL _dataLayer = null;
+
         public Modules()
         {
-            
+            _dataLayer = new DataLayer.ModulesDAL();
         }
-        private static List<BusinessModels.Modules> Moduless = new List<BusinessModels.Modules>();
-
-       
 
         public BusinessModels.Modules GetModules(Int32 identity)
         {
-            return Moduless.FirstOrDefault(p => p.Identity.Equals(identity));
+            return _dataLayer.GetModules(identity);
         }
 
         public IEnumerable<BusinessModels.Modules> GetAll()
         {
-            return Moduless;
+            return _dataLayer.GetAll();
         }
 
         public Boolean Delete(Int32 identity)
         {
-            Moduless.Remove(Moduless.Find(p => p.Identity.Equals(identity)));
-            return true;
+            return _dataLayer.Delete(identity);
         }
 
         public Boolean Update(BusinessModels.Modules Modules)
         {
-            Moduless.Remove(Moduless.Find(p => p.Identity.Equals(Modules.Identity)));
-            Moduless.Add(Modules);
-            return true;
+            return _dataLayer.Update(Modules);
         }
 
         public Boolean Insert(BusinessModels.Modules Modules)
         {
-            Moduless.Add(Modules);
-            return true;
+            return _dataLayer.Insert(Modules);
         }
 
-        public void TestData()
-        {
-            Moduless.Add(
-                new BusinessModels.Modules()
-                {
-                    Identity = 1,
 
-                    ModuleName = "John",
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-            Moduless.Add(
-                new BusinessModels.Modules()
-                {
-                    Identity = 2,
-
-                    ModuleName = "John",
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-            Moduless.Add(
-                new BusinessModels.Modules()
-                {
-                    Identity = 3,
-
-                    ModuleName = "John",
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-        }
 
     }
 

@@ -1,17 +1,44 @@
-﻿@{
-    Layout = null;
-}
+﻿@using X.PagedList;
+@using X.PagedList.Mvc;
+@model IPagedList<ERP.Models.Discount>
 
-<!DOCTYPE html>
+<div class="container">
+    <div class="col-md-12 col-lg-12 commonPadding">
+        <table class="table DiscountAll">
+            <thead>
+                <tr class="gridheader">
+                    <th>Item Name</th>
+                    <th>Discount Value</th>
+                   
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var Discount in Model)
+                {
+                    <tr class="gridrow">
+                        <td class="gridrow">@Discount.ItemName</td>
+                        <td class="gridrow">@Discount.DiscountValue</td>
+                       
+                        <td class="gridrow "><img src="~/Content/edit.png" alt="Edit" class="DiscountEdit pointer" data-url="@Url.Action("_DiscountEdit", "Discount")" data-identity="@(Discount.Identity)" /></td>
+                        <td class="gridrow "><img src="~/Content/delete.png" alt="Delete" class="DiscountDelete pointer" data-url="@Url.Action("Delete", "Discount")" data-identity="@(Discount.Identity)" /></td>
+                    </tr>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
-    
+                }
+            </tbody>
+        </table>
     </div>
-</body>
-</html>
+    <div class="col-md-12 col-lg-12 nopadding textright">
+        <div class="col-md-6 col-lg-6">
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+
+        </div>
+        <div class="col-md-6 col-lg-6">
+            @Html.PagedListPager(Model, page => Url.Action("Sorting", new { page, sortOrder = ViewBag.CurrentSort, createdDate = ViewBag.CreatedDate, searchString = ViewBag.SearchString }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { InsertionMode = InsertionMode.Replace, HttpMethod = "GET", UpdateTargetId = "resultView" }))
+
+        </div>
+    </div>
+</div>
+

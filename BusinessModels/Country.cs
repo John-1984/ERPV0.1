@@ -13,21 +13,18 @@ namespace BusinessModels
 
         public Country()
         {
-           
+
         }
 
-        
+
+       
         public Int32 Identity
         {
             get;
             set;
         }
 
-        public string RegionName
-        {
-            get;
-            set;
-        }
+       
         public string CountryName
         {
             get;
@@ -61,17 +58,16 @@ namespace BusinessModels
             get;
             set;
         }
-
+        public string RegionName
+        {
+            get;
+            set;
+        }
         public List<string> ErrorList
         {
             get;
             set;
         }
 
-        //public SelectList RegionList
-        //{
-        //    get;
-        //    set;
-        //}
     }
 }

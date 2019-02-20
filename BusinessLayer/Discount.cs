@@ -1,90 +1,56 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 namespace BusinessLayer
 {
     public class Discount
     {
+
+        private List<BusinessModels.Discount> Discounts = new List<BusinessModels.Discount>();
+        private List<BusinessModels.Country> Countrys = new List<BusinessModels.Country>();
+        private DataLayer.DiscountDAL _dataLayer = null;
+        private DataLayer.ItemMasterDAL _itemdataLayer = null;
+       
+
         public Discount()
         {
-          
+            _dataLayer = new DataLayer.DiscountDAL();
+            _itemdataLayer = new DataLayer.ItemMasterDAL();
+           
         }
-
-        private static List<BusinessModels.Discount> Discounts = new List<BusinessModels.Discount>();
-
-        
 
         public BusinessModels.Discount GetDiscount(Int32 identity)
         {
-            return Discounts.FirstOrDefault(p => p.Identity.Equals(identity));
+            return _dataLayer.GetDiscount(identity);
         }
-
+        public IEnumerable<BusinessModels.ItemMaster> GetAllItemMaster()
+        {
+            //TestRegionData();
+            return _itemdataLayer.GetAll();
+        }
+       
         public IEnumerable<BusinessModels.Discount> GetAll()
         {
-            return Discounts;
+            return _dataLayer.GetAll();
         }
 
         public Boolean Delete(Int32 identity)
         {
-            Discounts.Remove(Discounts.Find(p => p.Identity.Equals(identity)));
-            return true;
+            return _dataLayer.Delete(identity);
         }
 
         public Boolean Update(BusinessModels.Discount Discount)
         {
-            Discounts.Remove(Discounts.Find(p => p.Identity.Equals(Discount.Identity)));
-            Discounts.Add(Discount);
-            return true;
+            return _dataLayer.Update(Discount);
         }
 
         public Boolean Insert(BusinessModels.Discount Discount)
         {
-            Discounts.Add(Discount);
-            return true;
+            return _dataLayer.Insert(Discount);
         }
 
-        public void TestData()
-        {
-            Discounts.Add(
-                new BusinessModels.Discount()
-                {
-                    Identity = 1,
 
-                    DiscountValue = 1,
-                    BrandID= 1,
-                    ItemID = 1,
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-            Discounts.Add(
-                new BusinessModels.Discount()
-                {
-                    Identity = 2,
-
-                    DiscountValue = 1,
-                    BrandID = 1,
-                    ItemID = 1,
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-            Discounts.Add(
-                new BusinessModels.Discount()
-                {
-                    Identity = 3,
-
-                    DiscountValue = 1,
-                    BrandID = 1,
-                    ItemID = 1,
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-        }
 
     }
 

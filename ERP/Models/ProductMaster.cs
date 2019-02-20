@@ -22,6 +22,7 @@ namespace ERP.Models
         }
 
         [DefaultValue("")]
+        [Required(ErrorMessage ="Please enter product category")]
         public string ProductName
         {
             get;

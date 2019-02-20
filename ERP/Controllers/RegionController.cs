@@ -12,25 +12,9 @@ namespace ERP.Controllers
     public class RegionController : Controller
     {
         private BusinessLayer.Region _Region = new BusinessLayer.Region();
-
         public ActionResult Index()
         {
-            TempData["PageInfo"] = "View Region Info";
             return View();
-        }
-
-        [HttpPost]
-        public ActionResult Index(FormCollection formCollection)
-        {
-            if (ModelState.IsValid)
-            {
-                return RedirectToAction("Update", "Region");
-            }
-            else
-            {
-                return View();
-            }
-            //}
         }
 
         public PartialViewResult _RegionAll()
@@ -38,20 +22,16 @@ namespace ERP.Controllers
             return PartialView(GetRegions("", 1, "", ""));
         }
 
+        [HttpGet]
         public PartialViewResult _RegionEdit(int identity)
         {
             if (identity.Equals(-1))
-            {
-                TempData["PageInfo"] = "Add Region Info";
                 return PartialView(new Models.Region());
-            }
             else
-            {
-                TempData["PageInfo"] = "Edit Region Info";
                 return PartialView(AutoMapperConfig.Mapper().Map<Models.Region>(_Region.GetRegion(identity)));
-            }
         }
 
+        [HttpGet]
         public PartialViewResult _RegionView(int identity)
         {
             return PartialView(AutoMapperConfig.Mapper().Map<Models.Region>(_Region.GetRegion(identity)));
@@ -69,38 +49,13 @@ namespace ERP.Controllers
         {
             //IF success resturn grid view
             //IF Failure return json value
-            if (ModelState.IsValid)
+            if (Region.Identity.Equals(-1))
             {
-                if (Region.Identity.Equals(-1))
-                {
-                    Region.Identity = GetRandomNumber();
-                    _Region.Insert(AutoMapperConfig.Mapper().Map<BusinessModels.Region>(Region));
-                }
-                else
-                    _Region.Update(AutoMapperConfig.Mapper().Map<BusinessModels.Region>(Region));
-                return RedirectToAction("_RegionAll", Region);
-
+                _Region.Insert(AutoMapperConfig.Mapper().Map<BusinessModels.Region>(Region));
             }
             else
-            {
-                var errors = ModelState.Select(x => x.Value.Errors)
-                          .Where(y => y.Count > 0)
-                          .ToList();
-
-                List<string> lstErrors = new List<string>();
-                foreach (var error in errors)
-                {
-                    foreach (var er in error)
-                    {
-                        lstErrors.Add(((System.Web.Mvc.ModelError)er).ErrorMessage.ToString());
-                       // ModelState.AddModelError(string.Empty, ((System.Web.Mvc.ModelError)er).ErrorMessage.ToString());
-                    }
-                }
-                ViewData["ErrorData"] = lstErrors;
-                Region.ErrorList = lstErrors;
-                // return RedirectToAction("_RegionEdit", Region);
-                return PartialView(Region);
-            }
+                _Region.Update(AutoMapperConfig.Mapper().Map<BusinessModels.Region>(Region));
+            return RedirectToAction("_RegionAll");
         }
 
         [HttpPost]
@@ -145,7 +100,7 @@ namespace ERP.Controllers
                     break;
             }
 
-            int Size_Of_Page = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["GridPageSize"].ToString());
+            int Size_Of_Page = 8;  //Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["GridPageSize"].ToString());
             int No_Of_Page = (page ?? 1);
             return Regions.ToPagedList(No_Of_Page, Size_Of_Page);
         }

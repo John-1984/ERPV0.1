@@ -25,16 +25,13 @@ namespace ERP.Models
         }
 
         [DefaultValue("")]
+        [Required(ErrorMessage ="Please enter country name")]
         public string CountryName
         {
             get;
             set;
         }
-        public string RegionName
-        {
-            get;
-            set;
-        }
+        
         public int RegionID
         {
             get;
@@ -62,7 +59,11 @@ namespace ERP.Models
             get;
             set;
         }
-
+        public string RegionName
+        {
+            get;
+            set;
+        }
         public List<string> ErrorList
         {
             get;

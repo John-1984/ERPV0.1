@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Collections.Generic;
 
 namespace BusinessModels
 {
@@ -8,37 +8,37 @@ namespace BusinessModels
         public Company()
         {
             Identity = -1;
-            StoreName = string.Empty;
         }
 
-        
+
         public Int32 Identity
         {
             get;
             set;
         }
 
-        
-        public string StoreName
+        public string CompanyName
         {
             get;
             set;
         }
 
-        
-        public int Storetype
+        public int CompanytypeID
         {
             get;
             set;
         }
 
-        
         public int LocationID
         {
             get;
             set;
         }
-
+        public List<string> ErrorList
+        {
+            get;
+            set;
+        }
 
         public DateTime CreatedDate
         {
@@ -51,7 +51,7 @@ namespace BusinessModels
             set;
         }
 
-        
+
         public int ModifiedBy
         {
             get;
@@ -65,6 +65,55 @@ namespace BusinessModels
             set;
         }
 
-
+        public string RegionName
+        {
+            get;
+            set;
+        }
+        public string CountryName
+        {
+            get;
+            set;
+        }
+        public string StateName
+        {
+            get;
+            set;
+        }
+        public string DistrictName
+        {
+            get;
+            set;
+        }
+        public string LocationName
+        {
+            get;
+            set;
+        }
+        public string RegionID
+        {
+            get;
+            set;
+        }
+        public string CountryID
+        {
+            get;
+            set;
+        }
+        public string StateID
+        {
+            get;
+            set;
+        }
+        public string DistrictID
+        {
+            get;
+            set;
+        }
+        public string CompanyTypeName
+        {
+            get;
+            set;
+        }
     }
 }

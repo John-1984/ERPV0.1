@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Collections.Generic;
 
 namespace BusinessModels
 {
@@ -9,15 +9,12 @@ namespace BusinessModels
         {
             
         }
-
-        
         public Int32 Identity
         {
             get;
             set;
         }
 
-        
         public string DistrictName
         {
             get;
@@ -51,7 +48,35 @@ namespace BusinessModels
             get;
             set;
         }
-
-
+        public string RegionName
+        {
+            get;
+            set;
+        }
+        public string CountryName
+        {
+            get;
+            set;
+        }
+        public string StateName
+        {
+            get;
+            set;
+        }
+        public int RegionID
+        {
+            get;
+            set;
+        }
+        public int CountryID
+        {
+            get;
+            set;
+        }
+        public List<string> ErrorList
+        {
+            get;
+            set;
+        }
     }
 }

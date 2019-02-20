@@ -23,6 +23,7 @@ namespace ERP.Models
         }
 
         [DefaultValue("")]
+        [Required(ErrorMessage ="Please enter identfcation type")]
         public string IdentificationName
         {
             get;

@@ -6,67 +6,40 @@ namespace BusinessLayer
 {
     public class Status
     {
+        private List<BusinessModels.Status> Statuss = new List<BusinessModels.Status>();
+        private DataLayer.StatusDAL _dataLayer = null;
+
         public Status()
         {
-            
+            _dataLayer = new DataLayer.StatusDAL();
         }
-        private static List<BusinessModels.Status> Statuss = new List<BusinessModels.Status>();
-
 
         public BusinessModels.Status GetStatus(Int32 identity)
         {
-            return Statuss.FirstOrDefault(p => p.Identity.Equals(identity));
+            return _dataLayer.GetStatus(identity);
         }
 
         public IEnumerable<BusinessModels.Status> GetAll()
         {
-            return Statuss;
+            return _dataLayer.GetAll();
         }
 
         public Boolean Delete(Int32 identity)
         {
-            Statuss.Remove(Statuss.Find(p => p.Identity.Equals(identity)));
-            return true;
+            return _dataLayer.Delete(identity);
         }
 
         public Boolean Update(BusinessModels.Status Status)
         {
-            Statuss.Remove(Statuss.Find(p => p.Identity.Equals(Status.Identity)));
-            Statuss.Add(Status);
-            return true;
+            return _dataLayer.Update(Status);
         }
 
         public Boolean Insert(BusinessModels.Status Status)
         {
-            Statuss.Add(Status);
-            return true;
+            return _dataLayer.Insert(Status);
         }
 
-        public void TestData()
-        {
-            Statuss.Add(
-                new BusinessModels.Status()
-                {
-                    Identity = 1,
 
-                    StatusName = "John"
-                   
-                });
-            Statuss.Add(
-                new BusinessModels.Status()
-                {
-                    Identity = 2,
-
-                    StatusName = "John"
-                });
-            Statuss.Add(
-                new BusinessModels.Status()
-                {
-                    Identity = 3,
-
-                    StatusName = "John"
-                });
-        }
 
     }
 

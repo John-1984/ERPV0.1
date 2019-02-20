@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using System.Web.Mvc;
 
 namespace ERP.Models
 {
@@ -23,13 +24,8 @@ namespace ERP.Models
         }
 
         [DefaultValue(0)]
+        [Required(ErrorMessage ="Please enter discount value")]
         public decimal DiscountValue
-        {
-            get;
-            set;
-        }
-
-        public int BrandID
         {
             get;
             set;
@@ -41,6 +37,11 @@ namespace ERP.Models
             set;
         }
 
+        public string ItemName
+        {
+            get;
+            set;
+        }
 
         public DateTime CreatedDate
         {
@@ -63,6 +64,10 @@ namespace ERP.Models
             set;
         }
 
-
+        public SelectList itemList
+        {
+            get;
+            set;
+        }
     }
 }

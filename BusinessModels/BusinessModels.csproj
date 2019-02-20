@@ -34,12 +34,14 @@
     <Compile Include="Brand.cs" />
     <Compile Include="CallCenter.cs" />
     <Compile Include="CallCenterDetails.cs" />
+    <Compile Include="CompanyType.cs" />
     <Compile Include="Country.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="Discount.cs" />
     <Compile Include="District.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="EnquiryLevel.cs" />
+    <Compile Include="FloorMaster.cs" />
     <Compile Include="Header.cs" />
     <Compile Include="IdentificationsType.cs" />
     <Compile Include="ItemMaster.cs" />

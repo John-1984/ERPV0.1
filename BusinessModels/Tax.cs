@@ -24,7 +24,7 @@ namespace BusinessModels
             set;
         }
 
-        public int BrandID
+        public String ItemName
         {
             get;
             set;
@@ -55,6 +55,8 @@ namespace BusinessModels
             get;
             set;
         }
+
+        
 
 
     }

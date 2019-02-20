@@ -1,21 +1,25 @@
-﻿@{
+﻿
+@{
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="container">
+    <div class="col-md-12 col-lg-12 width-100">
+        <div class="col-md-12 col-lg-12 BodyWelcomeText textleft headermode" style="border-bottom:1px dashed #8A7B69; padding-top:5px;">
+            View Employee Info
+        </div>
 
-<div class="height-100 width-100">
-    <div class=" BodyWelcomeText centered">
-        @ViewData["PageType"]
-    </div>
+        <div class="col-md-12 col-lg-12 commonPadding EmployeeSearchDetials">
+            @{Html.RenderPartial("_EmployeeSearch");}
 
-    <div class="commonPadding height-10">
-        @{Html.RenderPartial("_EmployeeSearch");}
-    </div>
-    <div>
-        @ViewData["ActionUpdate"]
-    </div>
-    <div class="resultView height-90" id="resultView">
-        @{Html.RenderAction("_EmployeeAll", "Employee");}
+        </div>
+        <div class="col-md-12 col-lg-12 height-10">
+            @ViewData["ActionUpdate"]
+        </div>
+        <div class="col-md-12 col-lg-12 resultView commonPadding">
+            @{Html.RenderAction("_EmployeeAll", "Employee");}
+        </div>
+
     </div>
 
 </div>
-

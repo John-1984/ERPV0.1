@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using X.PagedList;
+using System.Runtime;
+using System.Globalization;
 
 namespace ERP.Controllers
 {
@@ -16,17 +19,46 @@ namespace ERP.Controllers
 
         public PartialViewResult _DistrictAll()
         {
-            return PartialView(AutoMapperConfig.Mapper().Map<List<Models.District>>(_District.GetAll()));
+            return PartialView(GetDistricts("", 1, "", ""));
         }
 
+        [HttpGet]
         public PartialViewResult _DistrictEdit(int identity)
         {
             if (identity.Equals(-1))
-                return PartialView(new Models.District());
+            {
+                Models.District mdDistrict = new Models.District();
+                mdDistrict.RegionList = null;
+                mdDistrict.RegionList = new SelectList(_District.GetAllRegionss(), "Identity", "RegionName");
+
+                mdDistrict.CountryList = null;
+                mdDistrict.CountryList = new SelectList(_District.GetAllCountrys(), "Identity", "CountryName");
+
+                mdDistrict.StateList = null;
+                mdDistrict.StateList = new SelectList(_District.GetAllState(), "Identity", "StateName");
+
+                TempData["PageInfo"] = "Add District Info";
+                return PartialView(mdDistrict);
+            }
             else
-                return PartialView(AutoMapperConfig.Mapper().Map<Models.District>(_District.GetDistrict(identity)));
+            {
+                Models.District mdDistrict = AutoMapperConfig.Mapper().Map<Models.District>(_District.GetDistrict(identity));
+                mdDistrict.RegionList = null;
+                mdDistrict.RegionList = new SelectList(_District.GetAllRegionss(), "Identity", "RegionName");
+
+                mdDistrict.CountryList = null;
+                mdDistrict.CountryList = new SelectList(_District.GetAllCountrys(), "Identity", "CountryName");
+
+                mdDistrict.StateList = null;
+                mdDistrict.StateList = new SelectList(_District.GetAllState(), "Identity", "StateName");
+
+                TempData["PageInfo"] = "Edit District Info";
+                TempData.Keep();
+                return PartialView(mdDistrict);
+            }
         }
 
+        [HttpGet]
         public PartialViewResult _DistrictView(int identity)
         {
             return PartialView(AutoMapperConfig.Mapper().Map<Models.District>(_District.GetDistrict(identity)));
@@ -46,7 +78,6 @@ namespace ERP.Controllers
             //IF Failure return json value
             if (District.Identity.Equals(-1))
             {
-                District.Identity = GetRandomNumber();
                 _District.Insert(AutoMapperConfig.Mapper().Map<BusinessModels.District>(District));
             }
             else
@@ -55,9 +86,50 @@ namespace ERP.Controllers
         }
 
         [HttpPost]
-        public PartialViewResult DistrictSearch(string searchString)
+        public PartialViewResult DistrictSearch(string searchString, string createdDate = "")
         {
-            return PartialView("_DistrictAll", AutoMapperConfig.Mapper().Map<List<Models.District>>(_District.GetAll().ToList().FindAll(p => p.DistrictName.ToLower().Contains(searchString.ToLower()))));
+            return PartialView("_DistrictAll", GetDistricts("", 1, createdDate, searchString));
+        }
+
+        public PartialViewResult Sorting(int? page, string sortOrder = "", string createdDate = "", string searchString = "")
+        {
+            return PartialView("_DistrictAll", GetDistricts(sortOrder, page, createdDate, searchString));
+        }
+
+        private IPagedList<Models.District> GetDistricts(string sortOrder, int? page, string createdDate = "", string searchString = "")
+        {
+
+            ViewBag.CreatedDate = string.IsNullOrEmpty(createdDate) ? "" : createdDate;
+            ViewBag.SearchString = string.IsNullOrEmpty(searchString) ? "" : searchString;
+            ViewBag.CurrentSort = string.IsNullOrEmpty(sortOrder) ? "DistrictName" : "";
+
+            var Districts = AutoMapperConfig.Mapper().Map<List<Models.District>>(_District.GetAll());
+            if (!string.IsNullOrEmpty(searchString) && !string.IsNullOrEmpty(createdDate))
+                Districts = AutoMapperConfig.Mapper().Map<List<Models.District>>(_District.GetAll().ToList().FindAll(p => p.DistrictName.ToLower().Contains(searchString.ToLower()) && p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+            else if (!string.IsNullOrEmpty(searchString))
+                Districts = AutoMapperConfig.Mapper().Map<List<Models.District>>(_District.GetAll().ToList().FindAll(p => p.DistrictName.ToLower().Contains(searchString.ToLower())));
+            else if (!string.IsNullOrEmpty(createdDate))
+                Districts = AutoMapperConfig.Mapper().Map<List<Models.District>>(_District.GetAll().ToList().FindAll(p => p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+
+            switch (sortOrder)
+            {
+                case "DistrictName":
+                    Districts = Districts.OrderByDescending(stu => stu.DistrictName).ToList();
+                    break;
+                case "DateAsc":
+                    Districts = Districts.OrderBy(stu => stu.CreatedDate).ToList();
+                    break;
+                case "DateDesc":
+                    Districts = Districts.OrderByDescending(stu => stu.CreatedDate).ToList();
+                    break;
+                default:
+                    Districts = Districts.OrderBy(stu => stu.DistrictName).ToList();
+                    break;
+            }
+
+            int Size_Of_Page = 8;  //Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["GridPageSize"].ToString());
+            int No_Of_Page = (page ?? 1);
+            return Districts.ToPagedList(No_Of_Page, Size_Of_Page);
         }
 
         //Function to get random number

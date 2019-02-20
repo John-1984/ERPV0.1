@@ -1,17 +1,84 @@
-﻿@{
-    Layout = null;
-}
+﻿@model ERP.Models.LocalSupplier
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
-    
+<div class="container LocalSupplierView col-md-12 col-lg-12 commonPadding">
+    <input type="hidden" value="@Model.Identity">
+    <div class="row commonPadding col-md-12 col-lg-12" style="padding-bottom:13px;">
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-5 col-lg-5 textright lablestyles">
+                    Supplier Name :
+                </div>
+                <div class="float-right col-md-7 col-lg-7 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                    @Model.SupplierName
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-6 ">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 textright lablestyles">
+                    Contact Number :
+                </div>
+                <div class="float-right col-md-8 col-lg-8 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                    @Model.ContactNumber
+                </div>
+            </div>
+        </div>
+
     </div>
-</body>
-</html>
+    <div class="row commonPadding col-md-12 col-lg-12" style="padding-bottom:13px;">
+
+        <div class="col-md-6 col-lg-6 textright">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-5 col-lg-5 textright lablestyles">
+                    Email :
+                </div>
+                <div class="float-right col-md-7 col-lg-7 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                    @Model.Email
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-6 textleft">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 textright lablestyles">
+                    Address :
+                </div>
+                <div class="float-right col-md-8 col-lg-8 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                    @Model.Address
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row commonPadding col-md-12 col-lg-12" style="padding-bottom:13px;">
+
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-5 col-lg-5 textright lablestyles">
+                   Location :
+                </div>
+                <div class="float-right col-md-7 col-lg-7 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                    @Model.LocationName
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 textright lablestyles">
+                    Item :
+                </div>
+                <div class="float-right col-md-8 col-lg-8 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                    @Model.ItemName
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    <div class="row commonPadding">
+        <div class="col-md-6 col-lg-5"><input type="button" class="formbutton float-right LocalSupplierEdit" data-url="@Url.Action("_LocalSupplierEdit", "LocalSupplier")" data-identity="@(Model.Identity)" value="Update" /></div>
+        <div class="col-md-6 col-lg-6"><input type="button" class="formbutton float-left LocalSupplierDelete" data-url="@Url.Action("Delete", "LocalSupplier")" data-identity="@(Model.Identity)" value="Delete" /></div>
+
+    </div>
+</div>

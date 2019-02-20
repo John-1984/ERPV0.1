@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using System.Web.Mvc;
 
 namespace ERP.Models
 {
@@ -23,6 +24,7 @@ namespace ERP.Models
         }
 
         [DefaultValue("")]
+        [Required(ErrorMessage ="Please specify role name")]
         public string RoleName
         {
             get;
@@ -35,13 +37,30 @@ namespace ERP.Models
             set;
         }
 
-        public int RegionID
+        public string RoleTypeName
+        {
+            get;
+            set;
+        }
+        public string RegionName
         {
             get;
             set;
         }
 
         public int ModuleID
+        {
+            get;
+            set;
+        }
+
+        public int RegionID
+        {
+            get;
+            set;
+        }
+
+        public string ModuleName
         {
             get;
             set;
@@ -67,6 +86,28 @@ namespace ERP.Models
             set;
         }
 
+        public SelectList RegionList
+        {
+            get;
+            set;
+        }
 
+        public SelectList RoleTypeList
+        {
+            get;
+            set;
+        }
+
+        public SelectList ModuleList
+        {
+            get;
+            set;
+        }
+
+        public List<string> ErrorList
+        {
+            get;
+            set;
+        }
     }
 }

@@ -1,86 +1,56 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 namespace BusinessLayer
 {
     public class Brand
     {
+
+        private List<BusinessModels.Brand> Brands = new List<BusinessModels.Brand>();
+        private List<BusinessModels.Country> Countrys = new List<BusinessModels.Country>();
+        private DataLayer.BrandDAL _dataLayer = null;
+        private DataLayer.VendorDAL _venddataLayer = null;
+       
+
         public Brand()
         {
-            
+            _dataLayer = new DataLayer.BrandDAL();
+            _venddataLayer = new DataLayer.VendorDAL();
+           
         }
-        private static List<BusinessModels.Brand> Brands = new List<BusinessModels.Brand>();
-
-      
 
         public BusinessModels.Brand GetBrand(Int32 identity)
         {
-            return Brands.FirstOrDefault(p => p.Identity.Equals(identity));
+            return _dataLayer.GetBrand(identity);
         }
-
+        public IEnumerable<BusinessModels.Vendor> GetAllVendors()
+        {
+            //TestRegionData();
+            return _venddataLayer.GetAll();
+        }
+       
         public IEnumerable<BusinessModels.Brand> GetAll()
         {
-            return Brands;
+            return _dataLayer.GetAll();
         }
 
         public Boolean Delete(Int32 identity)
         {
-            Brands.Remove(Brands.Find(p => p.Identity.Equals(identity)));
-            return true;
+            return _dataLayer.Delete(identity);
         }
 
         public Boolean Update(BusinessModels.Brand Brand)
         {
-            Brands.Remove(Brands.Find(p => p.Identity.Equals(Brand.Identity)));
-            Brands.Add(Brand);
-            return true;
+            return _dataLayer.Update(Brand);
         }
 
         public Boolean Insert(BusinessModels.Brand Brand)
         {
-            Brands.Add(Brand);
-            return true;
+            return _dataLayer.Insert(Brand);
         }
 
-        public void TestData()
-        {
-            Brands.Add(
-                new BusinessModels.Brand()
-                {
-                    Identity = 1,
-                    BrandName = "John",
-                    ProductMasterID=1,
-                    VendorID=1,                    
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-            Brands.Add(
-                new BusinessModels.Brand()
-                {
-                    Identity = 2,
-                    BrandName = "John",
-                    ProductMasterID = 1,
-                    VendorID = 1,
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-            Brands.Add(
-                new BusinessModels.Brand()
-                {
-                    Identity = 3,
-                    BrandName = "John",
-                    ProductMasterID = 1,
-                    VendorID = 1,
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-        }
+
 
     }
 

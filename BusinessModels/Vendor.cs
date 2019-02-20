@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace BusinessModels
 {
     public class Vendor
@@ -7,21 +9,19 @@ namespace BusinessModels
         {
           
         }
-
-        
         public Int32 Identity
         {
             get;
             set;
         }
 
-       
         public string VendorName
         {
             get;
             set;
-        }        
-
+        }
+        public int ProductMasterID
+        { get; set; }
         public DateTime CreatedDate
         {
             get;
@@ -38,6 +38,13 @@ namespace BusinessModels
             set;
         }
         public int CreatedBy
+        {
+            get;
+            set;
+        }
+
+     
+        public List<string> ErrorList
         {
             get;
             set;

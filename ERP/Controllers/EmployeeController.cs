@@ -6,7 +6,6 @@ using System.Web.Mvc;
 using X.PagedList;
 using System.Runtime;
 using System.Globalization;
-using System.Configuration;
 
 namespace ERP.Controllers
 {
@@ -23,14 +22,55 @@ namespace ERP.Controllers
             return PartialView(GetEmployees("", 1, "", ""));
         }
 
+        [HttpGet]
         public PartialViewResult _EmployeeEdit(int identity)
         {
             if (identity.Equals(-1))
-                return PartialView(new Models.Employee());
+            {
+                Models.Employee mdEmployee = new Models.Employee();
+                mdEmployee.CompanyList = null;
+                mdEmployee.CompanyList = new SelectList(_Employee.GetAllCompanies(), "Identity", "CompanyName");
+
+                mdEmployee.ComapnyTypeList = null;
+                mdEmployee.ComapnyTypeList = new SelectList(_Employee.GetAllCompanyType(), "Identity", "TypeName");
+
+                mdEmployee.IdentificationList = null;
+                mdEmployee.IdentificationList = new SelectList(_Employee.GetAllIdentificationTypes(), "Identity", "IdentificationName");
+
+                mdEmployee.LocationList = null;
+                mdEmployee.LocationList = new SelectList(_Employee.GetAllLocations(), "Identity", "LocationName");
+
+                mdEmployee.RoleList = null;
+                mdEmployee.RoleList = new SelectList(_Employee.GetAllRoles(), "Identity", "RoleName");
+
+                TempData["PageInfo"] = "Add Employee Info";
+                return PartialView(mdEmployee);
+            }
             else
-                return PartialView(AutoMapperConfig.Mapper().Map<Models.Employee>(_Employee.GetEmployee(identity)));
+            {
+                Models.Employee mdEmployee = AutoMapperConfig.Mapper().Map<Models.Employee>(_Employee.GetEmployee(identity));
+                mdEmployee.CompanyList = null;
+                mdEmployee.CompanyList = new SelectList(_Employee.GetAllCompanies(), "Identity", "CompanyName");
+
+                mdEmployee.ComapnyTypeList = null;
+                mdEmployee.ComapnyTypeList = new SelectList(_Employee.GetAllCompanyType(), "Identity", "TypeName");
+
+                mdEmployee.IdentificationList = null;
+                mdEmployee.IdentificationList = new SelectList(_Employee.GetAllIdentificationTypes(), "Identity", "IdentificationName");
+
+                mdEmployee.LocationList = null;
+                mdEmployee.LocationList = new SelectList(_Employee.GetAllLocations(), "Identity", "LocationName");
+
+                mdEmployee.RoleList = null;
+                mdEmployee.RoleList = new SelectList(_Employee.GetAllRoles(), "Identity", "RoleName");
+
+                TempData["PageInfo"] = "Edit Employee Info";
+                TempData.Keep();
+                return PartialView(mdEmployee);
+            }
         }
 
+        [HttpGet]
         public PartialViewResult _EmployeeView(int identity)
         {
             return PartialView(AutoMapperConfig.Mapper().Map<Models.Employee>(_Employee.GetEmployee(identity)));
@@ -50,7 +90,6 @@ namespace ERP.Controllers
             //IF Failure return json value
             if (Employee.Identity.Equals(-1))
             {
-                Employee.Identity = GetRandomNumber();
                 _Employee.Insert(AutoMapperConfig.Mapper().Map<BusinessModels.Employee>(Employee));
             }
             else
@@ -77,11 +116,12 @@ namespace ERP.Controllers
             ViewBag.CurrentSort = string.IsNullOrEmpty(sortOrder) ? "EmployeeName" : "";
 
             var Employees = AutoMapperConfig.Mapper().Map<List<Models.Employee>>(_Employee.GetAll());
-            //if (!string.IsNullOrEmpty(searchString) && !string.IsNullOrEmpty(createdDate))
-            //  //  Employees = AutoMapperConfig.Mapper().Map<List<Models.Employee>>(_Employee.GetAll().ToList().FindAll(p => p.EmployeeName.ToLower().Contains(searchString.ToLower()) && p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
-            //else if (!string.IsNullOrEmpty(searchString))
-            //    Employees = AutoMapperConfig.Mapper().Map<List<Models.Employee>>(_Employee.GetAll().ToList().FindAll(p => p.EmployeeName.ToLower().Contains(searchString.ToLower())));
-           
+            if (!string.IsNullOrEmpty(searchString) && !string.IsNullOrEmpty(createdDate))
+                Employees = AutoMapperConfig.Mapper().Map<List<Models.Employee>>(_Employee.GetAll().ToList().FindAll(p => p.EmployeeName.ToLower().Contains(searchString.ToLower()) && p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+            else if (!string.IsNullOrEmpty(searchString))
+                Employees = AutoMapperConfig.Mapper().Map<List<Models.Employee>>(_Employee.GetAll().ToList().FindAll(p => p.EmployeeName.ToLower().Contains(searchString.ToLower())));
+            else if (!string.IsNullOrEmpty(createdDate))
+                Employees = AutoMapperConfig.Mapper().Map<List<Models.Employee>>(_Employee.GetAll().ToList().FindAll(p => p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
 
             switch (sortOrder)
             {
@@ -89,18 +129,17 @@ namespace ERP.Controllers
                     Employees = Employees.OrderByDescending(stu => stu.EmployeeName).ToList();
                     break;
                 case "DateAsc":
-//Employees = Employees.OrderBy(stu => stu.CreatedDate).ToList();
+                    Employees = Employees.OrderBy(stu => stu.CreatedDate).ToList();
                     break;
                 case "DateDesc":
-                  //  Employees = Employees.OrderByDescending(stu => stu.CreatedDate).ToList();
+                    Employees = Employees.OrderByDescending(stu => stu.CreatedDate).ToList();
                     break;
                 default:
                     Employees = Employees.OrderBy(stu => stu.EmployeeName).ToList();
                     break;
             }
 
-
-            int Size_Of_Page = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["GridPageSize"].ToString());
+            int Size_Of_Page = 8;  //Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["GridPageSize"].ToString());
             int No_Of_Page = (page ?? 1);
             return Employees.ToPagedList(No_Of_Page, Size_Of_Page);
         }

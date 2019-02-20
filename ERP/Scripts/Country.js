@@ -37,16 +37,16 @@
     $(document).off("click", ".CountryEdit, .CountryAdd");
     $(document).on("click", ".CountryEdit, .CountryAdd", function (event) {
         var theUrl = $(this).attr("data-url");
-        $('.headermode').html('Edit Country Info');
-        $('.CountrySearchDetials').hide();
-        $('.CountryAdd').hide();
+        $('.headermode').html('Manage Country Info');
         $.ajax({
             url: theUrl,
             type: 'GET',  // http method
             data: { "identity": $(this).attr("data-identity") },
+            //async: true,
             success: function (data, status, xhr) {
 
-               
+                $('.CountrySearchDetials').hide();
+                $('.CountryAdd').hide();
                 $('.resultView').html(data);
                 showMessage(status, "Success");
             },

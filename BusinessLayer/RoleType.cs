@@ -1,84 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 namespace BusinessLayer
 {
     public class RoleType
     {
+        private List<BusinessModels.RoleType> RoleTypes = new List<BusinessModels.RoleType>();
+        private DataLayer.RoleTypeDAL _dataLayer = null;
+
         public RoleType()
         {
-           
+            _dataLayer = new DataLayer.RoleTypeDAL();
         }
-
-        private static List<BusinessModels.RoleType> RoleTypes = new List<BusinessModels.RoleType>();
-
-       
 
         public BusinessModels.RoleType GetRoleType(Int32 identity)
         {
-            return RoleTypes.FirstOrDefault(p => p.Identity.Equals(identity));
+            return _dataLayer.GetRoleType(identity);
         }
 
         public IEnumerable<BusinessModels.RoleType> GetAll()
         {
-            return RoleTypes;
+            return _dataLayer.GetAll();
         }
 
         public Boolean Delete(Int32 identity)
         {
-            RoleTypes.Remove(RoleTypes.Find(p => p.Identity.Equals(identity)));
-            return true;
+            return _dataLayer.Delete(identity);
         }
 
         public Boolean Update(BusinessModels.RoleType RoleType)
         {
-            RoleTypes.Remove(RoleTypes.Find(p => p.Identity.Equals(RoleType.Identity)));
-            RoleTypes.Add(RoleType);
-            return true;
+            return _dataLayer.Update(RoleType);
         }
 
         public Boolean Insert(BusinessModels.RoleType RoleType)
         {
-            RoleTypes.Add(RoleType);
-            return true;
+            return _dataLayer.Insert(RoleType);
         }
 
-        public void TestData()
-        {
-            RoleTypes.Add(
-                new BusinessModels.RoleType()
-                {
-                    Identity = 1,
 
-                    RoletypeName = "John",
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-            RoleTypes.Add(
-                new BusinessModels.RoleType()
-                {
-                    Identity = 2,
-
-                    RoletypeName = "John",
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-            RoleTypes.Add(
-                new BusinessModels.RoleType()
-                {
-                    Identity = 3,
-
-                    RoletypeName = "John",
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-        }
 
     }
 

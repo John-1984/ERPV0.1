@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using System.Web.Mvc;
 
 namespace ERP.Models
 {
@@ -23,11 +24,15 @@ namespace ERP.Models
         }
 
         [DefaultValue("")]
+        [Required(ErrorMessage ="Please enter vendor name")]
         public string VendorName
         {
             get;
             set;
-        }        
+        }  
+        
+        public int ProductMasterID
+        { get; set; }
 
         public DateTime CreatedDate
         {
@@ -50,6 +55,17 @@ namespace ERP.Models
             set;
         }
 
+        public SelectList ProductMasterList
+        {
+            get;
+            set;
+        }
+
+        public List<string> ErrorList
+        {
+            get;
+            set;
+        }
 
     }
 }

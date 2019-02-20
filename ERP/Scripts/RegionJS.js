@@ -17,6 +17,7 @@
     $(document).off("click", ".RegionView");
     $(document).on("click", ".RegionView", function (event) {
         var theUrl = $(this).attr("data-url");
+        $('.headermode').html('View Region Info');
         $.ajax({
             url: theUrl,
             type: 'GET',  // http method
@@ -36,11 +37,12 @@
     $(document).off("click", ".RegionEdit, .RegionAdd");
     $(document).on("click", ".RegionEdit, .RegionAdd", function (event) {
         var theUrl = $(this).attr("data-url");
-        
+        $('.headermode').html('Manage Region Info');
         $.ajax({
             url: theUrl,
             type: 'GET',  // http method
             data: { "identity": $(this).attr("data-identity") },
+            //async: true,
             success: function (data, status, xhr) {
                
                 $('.RegionSearchDetials').hide();
@@ -78,6 +80,7 @@
     $(document).off("click", ".RegionAddEdit");
     $(document).on("click", ".RegionAddEdit", function (event) {
         var theUrl = $(this).attr("data-url");
+        $('.headermode').html('View Region Info');
         $.ajax({
             url: theUrl,
             type: 'POST',  // http method
@@ -97,6 +100,7 @@
     $(document).off("click", ".RegionSearch");
     $(document).on("click", ".RegionSearch", function (event) {
         var theUrl = $(this).attr("data-url");
+        $('.headermode').html('View Region Info');
         $.ajax({
             url: theUrl,
             type: 'POST',  // http method

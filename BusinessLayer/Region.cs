@@ -1,86 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 namespace BusinessLayer
 {
     public class Region
     {
-        private static List<BusinessModels.Region> Regions = new List<BusinessModels.Region>();
+        private List<BusinessModels.Region> Regions = new List<BusinessModels.Region>();
+        private DataLayer.RegionDAL _dataLayer = null;
 
         public Region()
         {
-            if (Regions.Count == 0)
-                TestData();
+            _dataLayer = new DataLayer.RegionDAL();
         }
 
         public BusinessModels.Region GetRegion(Int32 identity)
         {
-            return Regions.FirstOrDefault(p => p.Identity.Equals(identity));
+            return _dataLayer.GetRegion(identity);
         }
 
         public IEnumerable<BusinessModels.Region> GetAll()
         {
-            return Regions;
+            return _dataLayer.GetAll();
         }
 
         public Boolean Delete(Int32 identity)
         {
-            Regions.Remove(Regions.Find(p => p.Identity.Equals(identity)));
-            return true;
+            return _dataLayer.Delete(identity);
         }
 
         public Boolean Update(BusinessModels.Region Region)
         {
-            Regions.Remove(Regions.Find(p => p.Identity.Equals(Region.Identity)));
-            Regions.Add(Region);
-            return true;
+            return _dataLayer.Update(Region);
         }
 
         public Boolean Insert(BusinessModels.Region Region)
         {
-            Regions.Add(Region);
-            return true;
+            return _dataLayer.Insert(Region);
         }
 
-        public void TestData()
-        {
-            for(int i=0;i<=20; i++)
-            { 
-            Regions.Add(
-                new BusinessModels.Region()
-                {
-                    RegionName = "John",
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    Identity = 1,
-
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-            Regions.Add(
-                new BusinessModels.Region()
-                {
-                    Identity = 2,
-
-                    RegionName = "John",
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-            Regions.Add(
-                new BusinessModels.Region()
-                {
-                    Identity = 3,
-
-                    RegionName = "John",
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-            }
-        }
+      
 
     }
 

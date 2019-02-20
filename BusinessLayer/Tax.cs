@@ -6,85 +6,51 @@ namespace BusinessLayer
 {
     public class Tax
     {
+
+        private List<BusinessModels.Tax> Taxs = new List<BusinessModels.Tax>();
+        private List<BusinessModels.Country> Countrys = new List<BusinessModels.Country>();
+        private DataLayer.TaxDAL _dataLayer = null;
+        private DataLayer.ItemMasterDAL _itedataLayer = null;
+        
+
         public Tax()
         {
-          
+            _dataLayer = new DataLayer.TaxDAL();
+            _itedataLayer = new DataLayer.ItemMasterDAL();
+            
         }
-
-        private static List<BusinessModels.Tax> Taxs = new List<BusinessModels.Tax>();
-
 
         public BusinessModels.Tax GetTax(Int32 identity)
         {
-            return Taxs.FirstOrDefault(p => p.Identity.Equals(identity));
+            return _dataLayer.GetTax(identity);
         }
-
+        public IEnumerable<BusinessModels.ItemMaster> GetAllitemMasters()
+        {
+            //TestRegionData();
+            return _itedataLayer.GetAll();
+        }
+       
         public IEnumerable<BusinessModels.Tax> GetAll()
         {
-            return Taxs;
+            return _dataLayer.GetAll();
         }
 
         public Boolean Delete(Int32 identity)
         {
-            Taxs.Remove(Taxs.Find(p => p.Identity.Equals(identity)));
-            return true;
+            return _dataLayer.Delete(identity);
         }
 
         public Boolean Update(BusinessModels.Tax Tax)
         {
-            Taxs.Remove(Taxs.Find(p => p.Identity.Equals(Tax.Identity)));
-            Taxs.Add(Tax);
-            return true;
+            return _dataLayer.Update(Tax);
         }
 
         public Boolean Insert(BusinessModels.Tax Tax)
         {
-            Taxs.Add(Tax);
-            return true;
+            return _dataLayer.Insert(Tax);
         }
 
-        public void TestData()
-        {
-            Taxs.Add(
-                new BusinessModels.Tax()
-                {
-                    Identity = 1,
 
-                    TaxValue = 10,
-                    BrandID=1,
-                    ItemID=1,
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-            Taxs.Add(
-                new BusinessModels.Tax()
-                {
-                    Identity = 2,
-
-                    TaxValue = 10,
-                    BrandID = 1,
-                    ItemID = 1,
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-            Taxs.Add(
-                new BusinessModels.Tax()
-                {
-                    Identity = 3,
-
-                    TaxValue = 10,
-                    BrandID = 1,
-                    ItemID = 1,
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-        }
 
     }
 

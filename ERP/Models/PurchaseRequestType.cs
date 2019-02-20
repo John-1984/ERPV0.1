@@ -23,6 +23,7 @@ namespace ERP.Models
         }
 
         [DefaultValue("")]
+        [Required(ErrorMessage ="Please enter request type")]
         public string Name
         {
             get;

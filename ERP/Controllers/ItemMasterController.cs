@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using X.PagedList;
+using System.Runtime;
+using System.Globalization;
 
 namespace ERP.Controllers
 {
@@ -16,17 +19,46 @@ namespace ERP.Controllers
 
         public PartialViewResult _ItemMasterAll()
         {
-            return PartialView(AutoMapperConfig.Mapper().Map<List<Models.ItemMaster>>(_ItemMaster.GetAll()));
+            return PartialView(GetItemMasters("", 1, "", ""));
         }
 
+        [HttpGet]
         public PartialViewResult _ItemMasterEdit(int identity)
         {
             if (identity.Equals(-1))
-                return PartialView(new Models.ItemMaster());
+            {
+                Models.ItemMaster mdItemMaster = new Models.ItemMaster();
+                mdItemMaster.VendorList = null;
+                mdItemMaster.VendorList = new SelectList(_ItemMaster.GetAllVendors(), "Identity", "VendorName");
+
+                mdItemMaster.BrandList = null;
+                mdItemMaster.BrandList = new SelectList(_ItemMaster.GetAllBrands(), "Identity", "BrandName");
+
+                mdItemMaster.UOMList = null;
+                mdItemMaster.UOMList = new SelectList(_ItemMaster.GetAllUOMs(), "Identity", "UOMName");               
+
+                TempData["PageInfo"] = "Add ItemMaster Info";
+                return PartialView(mdItemMaster);
+            }
             else
-                return PartialView(AutoMapperConfig.Mapper().Map<Models.ItemMaster>(_ItemMaster.GetItemMaster(identity)));
+            {
+                Models.ItemMaster mdItemMaster = AutoMapperConfig.Mapper().Map<Models.ItemMaster>(_ItemMaster.GetItemMaster(identity));
+                mdItemMaster.VendorList = null;
+                mdItemMaster.VendorList = new SelectList(_ItemMaster.GetAllVendors(), "Identity", "VendorName");
+
+                mdItemMaster.BrandList = null;
+                mdItemMaster.BrandList = new SelectList(_ItemMaster.GetAllBrands(), "Identity", "BrandName");
+
+                mdItemMaster.UOMList = null;
+                mdItemMaster.UOMList = new SelectList(_ItemMaster.GetAllUOMs(), "Identity", "UOMName");
+
+                TempData["PageInfo"] = "Edit ItemMaster Info";
+                TempData.Keep();
+                return PartialView(mdItemMaster);
+            }
         }
 
+        [HttpGet]
         public PartialViewResult _ItemMasterView(int identity)
         {
             return PartialView(AutoMapperConfig.Mapper().Map<Models.ItemMaster>(_ItemMaster.GetItemMaster(identity)));
@@ -46,7 +78,6 @@ namespace ERP.Controllers
             //IF Failure return json value
             if (ItemMaster.Identity.Equals(-1))
             {
-                ItemMaster.Identity = GetRandomNumber();
                 _ItemMaster.Insert(AutoMapperConfig.Mapper().Map<BusinessModels.ItemMaster>(ItemMaster));
             }
             else
@@ -55,9 +86,50 @@ namespace ERP.Controllers
         }
 
         [HttpPost]
-        public PartialViewResult ItemMasterSearch(string searchString)
+        public PartialViewResult ItemMasterSearch(string searchString, string createdDate = "")
         {
-            return PartialView("_ItemMasterAll", AutoMapperConfig.Mapper().Map<List<Models.ItemMaster>>(_ItemMaster.GetAll().ToList().FindAll(p => p.ItemName.ToLower().Contains(searchString.ToLower()))));
+            return PartialView("_ItemMasterAll", GetItemMasters("", 1, createdDate, searchString));
+        }
+
+        public PartialViewResult Sorting(int? page, string sortOrder = "", string createdDate = "", string searchString = "")
+        {
+            return PartialView("_ItemMasterAll", GetItemMasters(sortOrder, page, createdDate, searchString));
+        }
+
+        private IPagedList<Models.ItemMaster> GetItemMasters(string sortOrder, int? page, string createdDate = "", string searchString = "")
+        {
+
+            ViewBag.CreatedDate = string.IsNullOrEmpty(createdDate) ? "" : createdDate;
+            ViewBag.SearchString = string.IsNullOrEmpty(searchString) ? "" : searchString;
+            ViewBag.CurrentSort = string.IsNullOrEmpty(sortOrder) ? "ItemName" : "";
+
+            var ItemMasters = AutoMapperConfig.Mapper().Map<List<Models.ItemMaster>>(_ItemMaster.GetAll());
+            if (!string.IsNullOrEmpty(searchString) && !string.IsNullOrEmpty(createdDate))
+                ItemMasters = AutoMapperConfig.Mapper().Map<List<Models.ItemMaster>>(_ItemMaster.GetAll().ToList().FindAll(p => p.ItemName.ToLower().Contains(searchString.ToLower()) && p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+            else if (!string.IsNullOrEmpty(searchString))
+                ItemMasters = AutoMapperConfig.Mapper().Map<List<Models.ItemMaster>>(_ItemMaster.GetAll().ToList().FindAll(p => p.ItemName.ToLower().Contains(searchString.ToLower())));
+            else if (!string.IsNullOrEmpty(createdDate))
+                ItemMasters = AutoMapperConfig.Mapper().Map<List<Models.ItemMaster>>(_ItemMaster.GetAll().ToList().FindAll(p => p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+
+            switch (sortOrder)
+            {
+                case "ItemName":
+                    ItemMasters = ItemMasters.OrderByDescending(stu => stu.ItemName).ToList();
+                    break;
+                case "DateAsc":
+                    ItemMasters = ItemMasters.OrderBy(stu => stu.CreatedDate).ToList();
+                    break;
+                case "DateDesc":
+                    ItemMasters = ItemMasters.OrderByDescending(stu => stu.CreatedDate).ToList();
+                    break;
+                default:
+                    ItemMasters = ItemMasters.OrderBy(stu => stu.ItemName).ToList();
+                    break;
+            }
+
+            int Size_Of_Page = 8;  //Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["GridPageSize"].ToString());
+            int No_Of_Page = (page ?? 1);
+            return ItemMasters.ToPagedList(No_Of_Page, Size_Of_Page);
         }
 
         //Function to get random number

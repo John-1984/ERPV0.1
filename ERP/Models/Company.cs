@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using System.Web.Mvc;
 
 namespace ERP.Models
 {
@@ -12,7 +13,7 @@ namespace ERP.Models
         public Company()
         {
             Identity = -1;
-            StoreName = string.Empty;
+            CompanyName = string.Empty;
         }
 
         [DefaultValue(-1)]
@@ -23,20 +24,18 @@ namespace ERP.Models
         }
 
         [DefaultValue("")]
-        public string StoreName
+        public string CompanyName
         {
             get;
             set;
         }
 
-        [DefaultValue("1")]
-        public int Storetype
+        public int CompanytypeID
         {
             get;
             set;
         }
 
-        [DefaultValue(-1)]
         public int LocationID
         {
             get;
@@ -68,7 +67,96 @@ namespace ERP.Models
             get;
             set;
         }
+        public string RegionName
+        {
+            get;
+            set;
+        }
+        public string CountryName
+        {
+            get;
+            set;
+        }
+        public string StateName
+        {
+            get;
+            set;
+        }
+        public string DistrictName
+        {
+            get;
+            set;
+        }
+        public string LocationName
+        {
+            get;
+            set;
+        }
+        public string RegionID
+        {
+            get;
+            set;
+        }
+        public string CountryID
+        {
+            get;
+            set;
+        }
+        public string StateID
+        {
+            get;
+            set;
+        }
+        public string DistrictID
+        {
+            get;
+            set;
+        }
+        public string CompanyTypeName
+        {
+            get;
+            set;
+        }
+        public List<string> ErrorList
+        {
+            get;
+            set;
+        }
 
+        public SelectList CompanyTypeList
+        {
+            get;
+            set;
+        }
 
+        public SelectList LocationList
+        {
+            get;
+            set;
+        }
+
+        public SelectList RegionList
+        {
+            get;
+            set;
+        }
+
+        public SelectList CountryList
+        {
+            get;
+            set;
+        }
+
+        public SelectList StateList
+        {
+            get;
+            set;
+        }
+
+        public SelectList DistrictList
+        {
+            get;
+            set;
+        }
     }
 }

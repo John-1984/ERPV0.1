@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 namespace BusinessModels
 {
     public class Brand
@@ -21,12 +22,11 @@ namespace BusinessModels
             set;
         }
 
-        public int ProductMasterID
+        public int VendorName
         {
             get;
             set;
         }
-
         public int VendorID
         {
             get;
@@ -48,6 +48,11 @@ namespace BusinessModels
             set;
         }
         public int CreatedBy
+        {
+            get;
+            set;
+        }
+        public List<string> ErrorList
         {
             get;
             set;

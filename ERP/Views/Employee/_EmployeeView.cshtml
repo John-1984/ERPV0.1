@@ -7,7 +7,7 @@
         <div class="col-md-6 col-lg-6">
             <div class="row col-md-12 col-lg-12">
                 <div class="float-left col-md-5 col-lg-5 textright lablestyles">
-                    Name :
+                    Employee Name :
                 </div>
                 <div class="float-right col-md-7 col-lg-7 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
                     @Model.EmployeeName
@@ -18,10 +18,10 @@
         <div class="col-md-6 col-lg-6 ">
             <div class="row col-md-12 col-lg-12">
                 <div class="float-left col-md-4 col-lg-4 textright lablestyles">
-                    Profession :
+                    Employee Company ID :
                 </div>
                 <div class="float-right col-md-8 col-lg-8 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
-                    @Model.Profession
+                    @Model.StaffCode
                 </div>
             </div>
         </div>
@@ -32,10 +32,10 @@
         <div class="col-md-6 col-lg-6 textright">
             <div class="row col-md-12 col-lg-12">
                 <div class="float-left col-md-5 col-lg-5 textright lablestyles">
-                    Location :
+                    Personal Contact Number :
                 </div>
                 <div class="float-right col-md-7 col-lg-7 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
-                    @Model.Location
+                    @Model.PersonalContactNo
                 </div>
             </div>
         </div>
@@ -43,10 +43,10 @@
         <div class="col-md-6 col-lg-6 textleft">
             <div class="row col-md-12 col-lg-12">
                 <div class="float-left col-md-4 col-lg-4 textright lablestyles">
-                    Address Line1 :
+                    Official Contact Number :
                 </div>
                 <div class="float-right col-md-8 col-lg-8 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
-                    @Model.Address.Line1
+                    @Model.OfficialContactNo
                 </div>
             </div>
         </div>
@@ -56,10 +56,10 @@
         <div class="col-md-6 col-lg-6">
             <div class="row col-md-12 col-lg-12">
                 <div class="float-left col-md-5 col-lg-5 textright lablestyles">
-                    Email ID :
+                    Alternate Contact Number
                 </div>
                 <div class="float-right col-md-7 col-lg-7 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
-                    @Model.EmailID
+                    @Model.AlternateContactNo
                 </div>
             </div>
         </div>
@@ -67,10 +67,10 @@
         <div class="col-md-6 col-lg-6">
             <div class="row col-md-12 col-lg-12">
                 <div class="float-left col-md-4 col-lg-4 textright lablestyles">
-                    Address Line2 :
+                    Official EmaiID :
                 </div>
                 <div class="float-right col-md-8 col-lg-8 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
-                    @Model.Quantity
+                    @Model.OfficialEmail
                 </div>
             </div>
         </div>
@@ -79,10 +79,10 @@
         <div class="col-md-6 col-lg-6">
             <div class="row col-md-12 col-lg-12">
                 <div class="float-left col-md-5 col-lg-5 textright lablestyles">
-                    Purpose :
+                    Personal Email :
                 </div>
                 <div class="float-right col-md-7 col-lg-7 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
-                    @Model.Purpose
+                    @Model.PersonalEmail
                 </div>
             </div>
         </div>
@@ -90,13 +90,122 @@
         <div class="col-md-6 col-lg-6">
             <div class="row col-md-12 col-lg-12">
                 <div class="float-left col-md-4 col-lg-4 textright lablestyles">
-                    Quantity (sqft) :
+                    Address :
                 </div>
                 <div class="float-right col-md-8 col-lg-8 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
-                    @Model.Quantity
+                    @Model.Address
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="row col-md-12 col-lg-12 commonPadding" style="padding-bottom:13px;">
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-5 col-lg-5 textright lablestyles">
+                    Qualification :
+                </div>
+                <div class="float-right col-md-7 col-lg-7 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                    @Model.Qualification
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 textright lablestyles">
+                    Identification Mode :
+                </div>
+                <div class="float-right col-md-8 col-lg-8 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                    @Model.IdentificationName
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row col-md-12 col-lg-12 commonPadding" style="padding-bottom:13px;">
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-5 col-lg-5 textright lablestyles">
+                    Identification ID :
+                </div>
+                <div class="float-right col-md-7 col-lg-7 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                    @Model.IdentificationValue
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 textright lablestyles">
+                    Role :
+                </div>
+                <div class="float-right col-md-8 col-lg-8 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                    @Model.RoleName
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row col-md-12 col-lg-12 commonPadding" style="padding-bottom:13px;">
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-5 col-lg-5 textright lablestyles">
+                    Location :
+                </div>
+                <div class="float-right col-md-7 col-lg-7 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                    @Model.LocationName
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 textright lablestyles">
+                    Company :
+                </div>
+                <div class="float-right col-md-8 col-lg-8 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                    @Model.CompanyName
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row col-md-12 col-lg-12 commonPadding" style="padding-bottom:13px;">
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-5 col-lg-5 textright lablestyles">
+                    Company Type :
+                </div>
+                <div class="float-right col-md-7 col-lg-7 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                    @Model.TypeName
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 textright lablestyles">
+                    Manager Name :
+                </div>
+                <div class="float-right col-md-8 col-lg-8 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row col-md-12 col-lg-12 commonPadding" style="padding-bottom:13px;">
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-5 col-lg-5 textright lablestyles">
+                    Photo:
+                </div>
+                <div class="float-right col-md-7 col-lg-7 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                </div>
+            </div>
+        </div>
+
+        
     </div>
 
     <div class="row commonPadding">

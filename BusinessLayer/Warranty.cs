@@ -6,80 +6,51 @@ namespace BusinessLayer
 {
     public class Warranty
     {
-        private static List<BusinessModels.Warranty> Warrantys = new List<BusinessModels.Warranty>();
+
+        private List<BusinessModels.Warranty> Warrantys = new List<BusinessModels.Warranty>();
+        private List<BusinessModels.Country> Countrys = new List<BusinessModels.Country>();
+        private DataLayer.WarrantyDAL _dataLayer = null;
+        private DataLayer.ItemMasterDAL _itedataLayer = null;
+
 
         public Warranty()
         {
-            if (Warrantys.Count == 0)
-                TestData();
+            _dataLayer = new DataLayer.WarrantyDAL();
+            _itedataLayer = new DataLayer.ItemMasterDAL();
+
         }
 
         public BusinessModels.Warranty GetWarranty(Int32 identity)
         {
-            return Warrantys.FirstOrDefault(p => p.Identity.Equals(identity));
+            return _dataLayer.GetWarranty(identity);
+        }
+        public IEnumerable<BusinessModels.ItemMaster> GetAllitemMasters()
+        {
+            //TestRegionData();
+            return _itedataLayer.GetAll();
         }
 
         public IEnumerable<BusinessModels.Warranty> GetAll()
         {
-            return Warrantys;
+            return _dataLayer.GetAll();
         }
 
         public Boolean Delete(Int32 identity)
         {
-            Warrantys.Remove(Warrantys.Find(p => p.Identity.Equals(identity)));
-            return true;
+            return _dataLayer.Delete(identity);
         }
 
         public Boolean Update(BusinessModels.Warranty Warranty)
         {
-            Warrantys.Remove(Warrantys.Find(p => p.Identity.Equals(Warranty.Identity)));
-            Warrantys.Add(Warranty);
-            return true;
+            return _dataLayer.Update(Warranty);
         }
 
         public Boolean Insert(BusinessModels.Warranty Warranty)
         {
-            Warrantys.Add(Warranty);
-            return true;
+            return _dataLayer.Insert(Warranty);
         }
 
-        public void TestData()
-        {
-            Warrantys.Add(
-                new BusinessModels.Warranty()
-                {
-                    Identity=1,
-                    WarrantyValue = 10,
-                    ItemID = 1,
-                    CreatedDate =DateTime.Now,
-                    ModifiedDate = DateTime.Now,
-                    CreatedBy=1,
-                    ModifiedBy =1
-                    
-                });
-            Warrantys.Add(
-                new BusinessModels.Warranty()
-                {
-                    Identity = 2,
-                    WarrantyValue = 10,
-                    ItemID = 1,
-                    CreatedDate = DateTime.Now,
-                    ModifiedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedBy = 1
-                });
-            Warrantys.Add(
-                new BusinessModels.Warranty()
-                {
-                    Identity = 3,
-                    WarrantyValue = 10,
-                    ItemID = 1,
-                    CreatedDate = DateTime.Now,
-                    ModifiedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedBy = 1
-                });
-        }
+
 
     }
 

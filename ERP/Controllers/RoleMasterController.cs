@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using X.PagedList;
+using System.Runtime;
+using System.Globalization;
 
 namespace ERP.Controllers
 {
@@ -16,17 +19,51 @@ namespace ERP.Controllers
 
         public PartialViewResult _RoleMasterAll()
         {
-            return PartialView(AutoMapperConfig.Mapper().Map<List<Models.RoleMaster>>(_RoleMaster.GetAll()));
+            return PartialView(GetRoleMasters("", 1, "", ""));
         }
 
+        [HttpGet]
         public PartialViewResult _RoleMasterEdit(int identity)
         {
             if (identity.Equals(-1))
-                return PartialView(new Models.RoleMaster());
+            {
+                Models.RoleMaster mdRoleMaster = new Models.RoleMaster();
+                mdRoleMaster.RegionList = null;
+                mdRoleMaster.RegionList = new SelectList(_RoleMaster.GetAllRegionss(), "Identity", "RegionName");
+
+                mdRoleMaster.ModuleList = null;
+                mdRoleMaster.ModuleList = new SelectList(_RoleMaster.GetAllModules(), "Identity", "ModuleName");
+
+                mdRoleMaster.RoleTypeList = null;
+                mdRoleMaster.RoleTypeList = new SelectList(_RoleMaster.GetAllRoleTypes(), "Identity", "RoleTypeName");
+
+             
+
+                TempData["PageInfo"] = "Add Role Master Info";
+                return PartialView(mdRoleMaster);
+            }
             else
-                return PartialView(AutoMapperConfig.Mapper().Map<Models.RoleMaster>(_RoleMaster.GetRoleMaster(identity)));
+            {
+                Models.RoleMaster mdRoleMaster = AutoMapperConfig.Mapper().Map<Models.RoleMaster>(_RoleMaster.GetRoleMaster(identity));
+                mdRoleMaster.RegionList = null;
+                mdRoleMaster.RegionList = new SelectList(_RoleMaster.GetAllRegionss(), "Identity", "RegionName");
+
+                mdRoleMaster.RegionList = null;
+                mdRoleMaster.RegionList = new SelectList(_RoleMaster.GetAllRegionss(), "Identity", "RegionName");
+
+                mdRoleMaster.ModuleList = null;
+                mdRoleMaster.ModuleList = new SelectList(_RoleMaster.GetAllModules(), "Identity", "ModuleName");
+
+                mdRoleMaster.RoleTypeList = null;
+                mdRoleMaster.RoleTypeList = new SelectList(_RoleMaster.GetAllRoleTypes(), "Identity", "RoleTypeName");
+
+                TempData["PageInfo"] = "Edit Role Master Info";
+                TempData.Keep();
+                return PartialView(mdRoleMaster);
+            }
         }
 
+        [HttpGet]
         public PartialViewResult _RoleMasterView(int identity)
         {
             return PartialView(AutoMapperConfig.Mapper().Map<Models.RoleMaster>(_RoleMaster.GetRoleMaster(identity)));
@@ -46,7 +83,6 @@ namespace ERP.Controllers
             //IF Failure return json value
             if (RoleMaster.Identity.Equals(-1))
             {
-                RoleMaster.Identity = GetRandomNumber();
                 _RoleMaster.Insert(AutoMapperConfig.Mapper().Map<BusinessModels.RoleMaster>(RoleMaster));
             }
             else
@@ -55,9 +91,50 @@ namespace ERP.Controllers
         }
 
         [HttpPost]
-        public PartialViewResult RoleMasterSearch(string searchString)
+        public PartialViewResult RoleMasterSearch(string searchString, string createdDate = "")
         {
-            return PartialView("_RoleMasterAll", AutoMapperConfig.Mapper().Map<List<Models.RoleMaster>>(_RoleMaster.GetAll().ToList().FindAll(p => p.RoleName.ToLower().Contains(searchString.ToLower()))));
+            return PartialView("_RoleMasterAll", GetRoleMasters("", 1, createdDate, searchString));
+        }
+
+        public PartialViewResult Sorting(int? page, string sortOrder = "", string createdDate = "", string searchString = "")
+        {
+            return PartialView("_RoleMasterAll", GetRoleMasters(sortOrder, page, createdDate, searchString));
+        }
+
+        private IPagedList<Models.RoleMaster> GetRoleMasters(string sortOrder, int? page, string createdDate = "", string searchString = "")
+        {
+
+            ViewBag.CreatedDate = string.IsNullOrEmpty(createdDate) ? "" : createdDate;
+            ViewBag.SearchString = string.IsNullOrEmpty(searchString) ? "" : searchString;
+            ViewBag.CurrentSort = string.IsNullOrEmpty(sortOrder) ? "RoleName" : "";
+
+            var RoleMasters = AutoMapperConfig.Mapper().Map<List<Models.RoleMaster>>(_RoleMaster.GetAll());
+            if (!string.IsNullOrEmpty(searchString) && !string.IsNullOrEmpty(createdDate))
+                RoleMasters = AutoMapperConfig.Mapper().Map<List<Models.RoleMaster>>(_RoleMaster.GetAll().ToList().FindAll(p => p.RoleName.ToLower().Contains(searchString.ToLower()) && p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+            else if (!string.IsNullOrEmpty(searchString))
+                RoleMasters = AutoMapperConfig.Mapper().Map<List<Models.RoleMaster>>(_RoleMaster.GetAll().ToList().FindAll(p => p.RoleName.ToLower().Contains(searchString.ToLower())));
+            else if (!string.IsNullOrEmpty(createdDate))
+                RoleMasters = AutoMapperConfig.Mapper().Map<List<Models.RoleMaster>>(_RoleMaster.GetAll().ToList().FindAll(p => p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+
+            switch (sortOrder)
+            {
+                case "RoleName":
+                    RoleMasters = RoleMasters.OrderByDescending(stu => stu.RoleName).ToList();
+                    break;
+                case "DateAsc":
+                    RoleMasters = RoleMasters.OrderBy(stu => stu.CreatedDate).ToList();
+                    break;
+                case "DateDesc":
+                    RoleMasters = RoleMasters.OrderByDescending(stu => stu.CreatedDate).ToList();
+                    break;
+                default:
+                    RoleMasters = RoleMasters.OrderBy(stu => stu.RoleName).ToList();
+                    break;
+            }
+
+            int Size_Of_Page = 8;  //Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["GridPageSize"].ToString());
+            int No_Of_Page = (page ?? 1);
+            return RoleMasters.ToPagedList(No_Of_Page, Size_Of_Page);
         }
 
         //Function to get random number

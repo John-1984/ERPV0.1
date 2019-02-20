@@ -22,6 +22,11 @@ namespace BusinessLayer
             return _dataLayer.GetAll();
         }
 
+        public IEnumerable<BusinessModels.Customer> GetMatchingCustomers(string prefix)
+        {
+            return _dataLayer.GetMatchingCustomers(prefix);
+        }
+
         public Boolean Delete(Int32 identity){
             return _dataLayer.Delete(identity);
         }

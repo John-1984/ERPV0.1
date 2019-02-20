@@ -48,6 +48,28 @@ namespace DataLayer
             return _customers;
         }
 
+        public IEnumerable<BusinessModels.Customer> GetMatchingCustomers(string prefix)
+        {
+            var _customers = new List<BusinessModels.Customer>();
+            using (var dbContext = new CustomerDbContext())
+            {
+                try
+                {
+                    dbContext.Configuration.LazyLoadingEnabled = false;
+                    _customers = dbContext.Customer
+                                .ToList()
+                                .Where(p => (p != null && !string.IsNullOrEmpty(p.CustomerName) && p.CustomerName.Contains(prefix)))
+                                .ToList();
+                }
+                catch (Exception ex)
+                {
+                    var et = ex.Message;
+                }
+            }
+
+            return _customers;
+        }
+
         public Boolean Update(BusinessModels.Customer customer) {
             using (var dbContext = new CustomerDbContext())
             {

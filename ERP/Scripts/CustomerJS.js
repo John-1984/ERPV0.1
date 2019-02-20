@@ -88,7 +88,7 @@ var theUrl = $(this).attr("data-url");
 $.ajax({
     url:theUrl,
     type: 'POST',  // http method
-    data: $(".customerDetails").find("input").serialize(), 
+    data: $(".customerDetails").find("input, textarea").serialize(), 
     success: function (data, status, xhr) {
 
         $('.customerSearchDetials').show();
@@ -120,6 +120,37 @@ $.ajax({
 });
 });
 
+$("#customerName").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: '/Customer/AutoComplete/',
+                    data: "{ 'prefix': '" + request.term + "'}",
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.CustomerName,
+                                value: item.CustomerName,
+                                identity: item.Identity
+                            };
+                        }))
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            },
+            select: function (e, i) {
+                $("#customerID").val(i.item.identity);
+            },
+            minLength: 1,
+            cache: false
+        });
 });
 
 

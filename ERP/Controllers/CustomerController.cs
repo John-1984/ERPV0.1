@@ -9,6 +9,8 @@ using System.Globalization;
 
 namespace ERP.Controllers
 {
+    [ERP.CustomeFilters.LoggingFilter]
+    [ERP.CustomeFilters.ExceptionFilter]
     public class CustomerController : Controller
     {
         private BusinessLayer.Customer _customer = new BusinessLayer.Customer();
@@ -109,6 +111,14 @@ namespace ERP.Controllers
             {
                 return getrandom.Next(min, max);
             }
+        }
+
+        [HttpPost]
+        public JsonResult AutoComplete(string prefix)
+        {
+            var customers = _customer.GetMatchingCustomers(prefix);
+
+            return Json(customers);
         }
 
     }

@@ -100,6 +100,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\DB\" />
+    <Folder Include="CustomeFilters\" />
+    <Folder Include="Views\Error\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\BrandController.cs" />
@@ -193,6 +195,10 @@
     <Compile Include="Models\Vendor.cs" />
     <Compile Include="Models\WarehouseMaster.cs" />
     <Compile Include="Models\Warranty.cs" />
+    <Compile Include="CustomeFilters\LoggingFilter.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="CustomeFilters\ExceptionFilter.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bodybglogin.jfif" />
@@ -269,6 +275,8 @@
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessModels\BusinessModels.csproj">
@@ -286,6 +294,10 @@
     <ProjectReference Include="..\BusinessLayer\BusinessLayer.csproj">
       <Project>{F28A8B70-EBD4-40DC-A47F-8CAC6C646AE6}</Project>
       <Name>BusinessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LoggingModule\LoggingModule.csproj">
+      <Project>{6AB77425-2932-49C0-8EDC-53B725DC56DE}</Project>
+      <Name>LoggingModule</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -491,7 +503,7 @@
   <ProjectExtensions>
     <MonoDevelop>
       <Properties>
-        <XspParameters Port="8080" Address="127.0.0.1" SslMode="None" SslProtocol="Default" KeyType="None" CertFile="" KeyFile="" PasswordOptions="None" Password="" Verbose="True" />
+        <XspParameters Port="8082" Address="127.0.0.1" SslMode="None" SslProtocol="Default" KeyType="None" CertFile="" KeyFile="" PasswordOptions="None" Password="" Verbose="True" />
       </Properties>
     </MonoDevelop>
     <VisualStudio>

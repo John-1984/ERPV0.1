@@ -39,7 +39,19 @@ namespace DataLayer
             using (var dbContext = new RegionDbContext())
             {
                 dbContext.Configuration.LazyLoadingEnabled = false;
-                _Regions = dbContext.Region.ToList();
+                _Regions = dbContext.Region.Where(p=>p.RegionName!="All").ToList();
+            }
+
+            return _Regions;
+        }
+
+        public IEnumerable<BusinessModels.Region> GetAbroadRegions()
+        {
+            var _Regions = new List<BusinessModels.Region>();
+            using (var dbContext = new RegionDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _Regions = dbContext.Region.Where(p => p.RegionName == "Abroad").ToList();
             }
 
             return _Regions;

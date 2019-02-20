@@ -40,15 +40,27 @@ namespace ERP.Controllers
             else
             {
                 Models.State mdState = AutoMapperConfig.Mapper().Map<Models.State>(_State.GetState(identity));
-                mdState.RegionList = null;
-                mdState.RegionList = new SelectList(_State.GetAllRegionss(), "Identity", "RegionName");
 
                 mdState.CountryList = null;
-                mdState.CountryList = new SelectList(_State.GetAllCountrys(), "Identity", "CountryName");
+                mdState.CountryList = new SelectList(_State.GetAllCountrys(mdState.Country.RegionID.ToString()), "Identity", "CountryName", mdState.CountryID);
+
+                mdState.RegionList = null;
+                mdState.RegionList = new SelectList(_State.GetAllRegionss(), "Identity", "RegionName",mdState.Country.RegionID);
+
+               
                 TempData["PageInfo"] = "Edit State Info";
                 TempData.Keep();
                 return PartialView(mdState);
             }
+        }
+
+        [HttpPost]
+        public JsonResult Country(string identity)
+        {
+            if(identity=="6")
+                return Json(new SelectList(_State.GetAllCountrys(), "Identity", "CountryName"));
+            else
+            return Json(new SelectList(_State.GetAllCountrys(identity), "Identity", "CountryName"));
         }
 
         [HttpGet]
@@ -64,17 +76,31 @@ namespace ERP.Controllers
             return RedirectToAction("_StateAll");
         }
 
+        [HttpGet]
+        public ActionResult _StateCancel(int identity)
+        {
+            return RedirectToAction("_StateAll");
+        }
+
         [HttpPost]
-        public ActionResult Update(Models.State State)
+        public ActionResult Update(Models.State State, FormCollection frmFields)
         {
             //IF success resturn grid view
             //IF Failure return json value
+            BusinessModels.State mdState = AutoMapperConfig.Mapper().Map<BusinessModels.State>(State);
+            var regvalue = frmFields["hdnRegion"];
+            var convalue = frmFields["hdnCountry"];
+            mdState.CountryID = int.Parse(convalue);
+
             if (State.Identity.Equals(-1))
             {
-                _State.Insert(AutoMapperConfig.Mapper().Map<BusinessModels.State>(State));
+                _State.Insert(mdState);
             }
             else
-                _State.Update(AutoMapperConfig.Mapper().Map<BusinessModels.State>(State));
+            {
+               
+                _State.Update(mdState);
+            }
             return RedirectToAction("_StateAll");
         }
 

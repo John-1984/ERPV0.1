@@ -92,7 +92,18 @@ namespace ERP.Models
             set;
         }
 
-        
+        public Region Region
+        {
+            get;
+            set;
+        }
+
+        public Country Country
+        {
+            get;
+            set;
+        }
+
     }
 }
 

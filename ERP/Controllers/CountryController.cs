@@ -45,6 +45,12 @@ namespace ERP.Controllers
         }
 
         [HttpGet]
+        public ActionResult _CountryCancel(int identity)
+        {
+            return RedirectToAction("_CountryAll");
+        }
+
+        [HttpGet]
         public PartialViewResult _CountryView(int identity)
         {
             return PartialView(AutoMapperConfig.Mapper().Map<Models.Country>(_Country.GetCountry(identity)));
@@ -58,24 +64,30 @@ namespace ERP.Controllers
         }
 
         [HttpPost]
-        public ActionResult Update(Models.Country Country)
+        public ActionResult Update(Models.Country Country,FormCollection frmCountry)
         {
             //IF success resturn grid view
             //IF Failure return json value
             BusinessModels.Country con = AutoMapperConfig.Mapper().Map<BusinessModels.Country>(Country);
 
-            string SelectedValue = Country.SelectedRegion.ToString();
+            var value = frmCountry["hdnRegion"];
+
+            con.RegionID = int.Parse(value);
+
+            //   string SelectedValue = Country.SelectedRegion.ToString();
 
             if (Country.Identity.Equals(-1))
             {
-                _Country.Insert(AutoMapperConfig.Mapper().Map<BusinessModels.Country>(Country));
+                con.CreatedDate = DateTime.Now;
+                _Country.Insert(con);
             }
             else
             {
-               
+                
+                con.ModifiedDate = DateTime.Now;  
                 _Country.Update(con);
             }
-            return RedirectToAction("_CountryAll");
+            return RedirectToAction("index");
         }
 
         [HttpPost]

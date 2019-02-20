@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace DataLayer
 {
@@ -20,7 +21,8 @@ namespace DataLayer
             using (var dbContext = new StateDbContext())
             {
                 _State = dbContext.State
-                            .Include("Region")
+                            .Include(K => K.Country)
+                            .Include(o => o.Country.Region)
                             .FirstOrDefault(p => p.Identity.Equals(identity));
             }
             return _State;
@@ -31,11 +33,12 @@ namespace DataLayer
             //Need to do
             var _States = new List<BusinessModels.State>();
             using (var dbContext = new StateDbContext())
-            {
+            {               
                 dbContext.Configuration.LazyLoadingEnabled = false;
                 _States = dbContext.State
-                             .Include("Country")
-                            .ToList();
+                        .Include(K => K.Country)
+                        .Include(o=>o.Country.Region)
+                        .ToList();              
             }
 
             return _States;

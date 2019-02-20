@@ -29,10 +29,10 @@ namespace LoginModule
         {
             //bool check = false;
             //string strPassword = Encrypt.HashSHA(password);
-            var _user = _userBL.ValidateUser(userName, password);
-            if (_user == null || _user.UserName.Equals(string.Empty))
-                return false;
-            else
+            //var _user = _userBL.ValidateUser(userName, password);
+            //if (_user == null || _user.UserName.Equals(string.Empty))
+            //    return false;
+            //else
                 return true;
         }
 

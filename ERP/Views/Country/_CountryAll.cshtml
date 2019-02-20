@@ -18,7 +18,7 @@
                 {
                     <tr class="gridrow">
                         <td class="gridrow">@Country.CountryName</td>
-                        <td class="gridrow "> @Country.RegionName</td>
+                        <td class="gridrow "> @Country.Region.RegionName</td>
                         <td class="gridrow "><img src="~/Content/edit.png" alt="Edit" class="CountryEdit pointer" data-url="@Url.Action("_CountryEdit", "Country")" data-identity="@(Country.Identity)" /></td>
                         <td class="gridrow "><img src="~/Content/delete.png" alt="Delete" class="CountryDelete pointer" data-url="@Url.Action("Delete", "Country")" data-identity="@(Country.Identity)" /></td>
                     </tr>

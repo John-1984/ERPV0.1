@@ -56,6 +56,28 @@
         });
     });
 
+    $(document).off("click", ".CountryCancel");
+    $(document).on("click", ".CountryCancel", function (event) {
+        var theUrl = $(this).attr("data-url");
+        $('.headermode').html('View Country Info');
+        $.ajax({
+            url: theUrl,
+            type: 'GET',  // http method
+            data: { "identity": $(this).attr("data-identity") },
+            //async: true,
+            success: function (data, status, xhr) {
+
+                $('.CountrySearchDetials').show();
+                $('.CountryAdd').show();
+                $('.resultView').html(data);
+                showMessage(status, "Success");
+            },
+            error: function (jqXhr, textStatus, errorMessage) {
+                showMessage(textStatus, errorMessage);
+            }
+        });
+    });
+
     $(document).off("click", ".CountryDelete");
     $(document).on("click", ".CountryDelete", function (event) {
         if (!confirm("Do you want to delete")) {
@@ -75,6 +97,13 @@
                 }
             });
         }
+    });
+
+    $(document).on('change', '#drpRegion', function () {  
+        //alert("Test");
+       // debugger;
+        varregionText = $("#drpRegion").val();
+        $("#hdnRegion").val(varregionText);
     });
 
     $(document).off("click", ".CountryAddEdit");

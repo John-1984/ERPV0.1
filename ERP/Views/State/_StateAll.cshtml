@@ -18,8 +18,8 @@
                 @foreach (var State in Model)
                 {
                 <tr class="gridrow">
-                    <td class="gridrow">@State.RegionName</td>
-                    <td class="gridrow">@State.CountryName</td>
+                    <td class="gridrow">@State.Country.Region.RegionName</td>
+                    <td class="gridrow">@State.Country.CountryName</td>
                     <td class="gridrow "> @State.StateName</td>
                     <td class="gridrow "><img src="~/Content/edit.png" alt="Edit" class="StateEdit pointer" data-url="@Url.Action("_StateEdit", "State")" data-identity="@(State.Identity)" /></td>
                     <td class="gridrow "><img src="~/Content/delete.png" alt="Delete" class="StateDelete pointer" data-url="@Url.Action("Delete", "State")" data-identity="@(State.Identity)" /></td>

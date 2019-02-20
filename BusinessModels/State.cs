@@ -27,29 +27,30 @@ namespace BusinessModels
             set;
         }
 
+        [ForeignKey("Country")]
         public int CountryID
         {
             get;
             set;
         }
 
-        public string CountryName
-        {
-            get;
-            set;
-        }
+        //public string CountryName
+        //{
+        //    get;
+        //    set;
+        //}
 
-        public string RegionName
-        {
-            get;
-            set;
-        }
+        //public string RegionName
+        //{
+        //    get;
+        //    set;
+        //}
 
-        public int RegionID
-        {
-            get;
-            set;
-        }
+        //public int RegionID
+        //{
+        //    get;
+        //    set;
+        //}
 
         public DateTime CreatedDate
         {
@@ -72,11 +73,18 @@ namespace BusinessModels
             set;
         }
 
-        public List<string> ErrorList
+        //public Region Region
+        //{
+        //    get;
+        //    set;
+        //}
+
+        public Country Country
         {
             get;
             set;
         }
+
 
     }
 }

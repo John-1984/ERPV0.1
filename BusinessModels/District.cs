@@ -52,31 +52,31 @@ namespace BusinessModels
             get;
             set;
         }
-        public string RegionName
-        {
-            get;
-            set;
-        }
-        public string CountryName
-        {
-            get;
-            set;
-        }
-        public string StateName
-        {
-            get;
-            set;
-        }
-        public int RegionID
-        {
-            get;
-            set;
-        }
-        public int CountryID
-        {
-            get;
-            set;
-        }
+        //public string RegionName
+        //{
+        //    get;
+        //    set;
+        //}
+        //public string CountryName
+        //{
+        //    get;
+        //    set;
+        //}
+        //public string StateName
+        //{
+        //    get;
+        //    set;
+        //}
+        //public int RegionID
+        //{
+        //    get;
+        //    set;
+        //}
+        //public int CountryID
+        //{
+        //    get;
+        //    set;
+        //}
         public List<string> ErrorList
         {
             get;

@@ -89,6 +89,6 @@ namespace ERP.Models
             set;
         }
 
-        public string SelectedRegion { get; set; }
+        
     }
 }

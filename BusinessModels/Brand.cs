@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace BusinessModels
 {
     public class Brand
@@ -8,7 +10,9 @@ namespace BusinessModels
         {
             
         }
-       
+
+        [System.ComponentModel.DataAnnotations.Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Int32 Identity
         {
             get;

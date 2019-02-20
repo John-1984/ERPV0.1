@@ -1,0 +1,80 @@
+2019-02-20 15:24:47,377 [5] INFO LoggingModule.Logging - OnActionExecuting:: IP: ::1 - DateTime: 20-02-2019 15:24:45 - Action: Index - Controller: Login - Parameters:  - URL: http://localhost:49744/Login/Index
+2019-02-20 15:24:47,495 [5] INFO LoggingModule.Logging - OnActionExecuted:: IP: ::1 - DateTime: 20-02-2019 15:24:45 - Action: Index - Controller: Login - Parameters:  - URL: http://localhost:49744/Login/Index
+2019-02-20 15:24:47,501 [5] INFO LoggingModule.Logging - OnResultExecuting:: IP: ::1 - DateTime: 20-02-2019 15:24:45 - URL: http://localhost:49744/Login/Index
+2019-02-20 15:24:52,586 [5] INFO LoggingModule.Logging - OnResultExecuted:: IP: ::1 - DateTime: 20-02-2019 15:24:45 - URL: http://localhost:49744/Login/Index
+2019-02-20 15:25:24,441 [5] INFO LoggingModule.Logging - OnActionExecuting:: IP: ::1 - DateTime: 20-02-2019 15:25:24 - Action: Index - Controller: Login - Parameters: formCollection|System.Web.Mvc.FormCollection, - URL: http://localhost:49744/
+2019-02-20 15:25:54,321 [5] INFO LoggingModule.Logging - OnActionExecuted:: IP: ::1 - DateTime: 20-02-2019 15:25:24 - Action: Index - Controller: Login - Parameters:  - URL: http://localhost:49744/
+2019-02-20 15:25:54,321 [5] INFO LoggingModule.Logging - OnResultExecuting:: IP: ::1 - DateTime: 20-02-2019 15:25:24 - URL: http://localhost:49744/
+2019-02-20 15:25:54,347 [5] INFO LoggingModule.Logging - OnResultExecuted:: IP: ::1 - DateTime: 20-02-2019 15:25:24 - URL: http://localhost:49744/
+2019-02-20 15:40:08,992 [5] INFO LoggingModule.Logging - OnActionExecuting:: IP: ::1 - DateTime: 20-02-2019 15:40:07 - Action: Index - Controller: Login - Parameters:  - URL: http://localhost:49744/Login/Index
+2019-02-20 15:40:09,106 [5] INFO LoggingModule.Logging - OnActionExecuted:: IP: ::1 - DateTime: 20-02-2019 15:40:07 - Action: Index - Controller: Login - Parameters:  - URL: http://localhost:49744/Login/Index
+2019-02-20 15:40:09,109 [5] INFO LoggingModule.Logging - OnResultExecuting:: IP: ::1 - DateTime: 20-02-2019 15:40:07 - URL: http://localhost:49744/Login/Index
+2019-02-20 15:40:14,108 [5] INFO LoggingModule.Logging - OnResultExecuted:: IP: ::1 - DateTime: 20-02-2019 15:40:07 - URL: http://localhost:49744/Login/Index
+2019-02-20 15:40:39,786 [5] INFO LoggingModule.Logging - OnActionExecuting:: IP: ::1 - DateTime: 20-02-2019 15:40:39 - Action: Index - Controller: Login - Parameters: formCollection|System.Web.Mvc.FormCollection, - URL: http://localhost:49744/
+2019-02-20 15:40:55,604 [5] INFO LoggingModule.Logging - OnActionExecuted:: IP: ::1 - DateTime: 20-02-2019 15:40:39 - Action: Index - Controller: Login - Parameters:  - URL: http://localhost:49744/
+2019-02-20 15:40:55,604 [5] INFO LoggingModule.Logging - OnResultExecuting:: IP: ::1 - DateTime: 20-02-2019 15:40:39 - URL: http://localhost:49744/
+2019-02-20 15:40:55,655 [5] INFO LoggingModule.Logging - OnResultExecuted:: IP: ::1 - DateTime: 20-02-2019 15:40:39 - URL: http://localhost:49744/
+2019-02-20 15:55:10,390 [5] INFO LoggingModule.Logging - OnActionExecuting:: IP: ::1 - DateTime: 20-02-2019 15:55:08 - Action: Index - Controller: Login - Parameters:  - URL: http://localhost:49744/Login/Index
+2019-02-20 15:55:10,533 [5] INFO LoggingModule.Logging - OnActionExecuted:: IP: ::1 - DateTime: 20-02-2019 15:55:08 - Action: Index - Controller: Login - Parameters:  - URL: http://localhost:49744/Login/Index
+2019-02-20 15:55:10,538 [5] INFO LoggingModule.Logging - OnResultExecuting:: IP: ::1 - DateTime: 20-02-2019 15:55:08 - URL: http://localhost:49744/Login/Index
+2019-02-20 15:55:15,425 [5] INFO LoggingModule.Logging - OnResultExecuted:: IP: ::1 - DateTime: 20-02-2019 15:55:08 - URL: http://localhost:49744/Login/Index
+2019-02-20 15:55:29,840 [6] INFO LoggingModule.Logging - OnActionExecuting:: IP: ::1 - DateTime: 20-02-2019 15:55:29 - Action: Index - Controller: Login - Parameters: formCollection|System.Web.Mvc.FormCollection, - URL: http://localhost:49744/
+2019-02-20 15:55:48,153 [6] INFO LoggingModule.Logging - OnActionExecuted:: IP: ::1 - DateTime: 20-02-2019 15:55:29 - Action: Index - Controller: Login - Parameters:  - URL: http://localhost:49744/
+2019-02-20 15:55:48,153 [6] INFO LoggingModule.Logging - OnResultExecuting:: IP: ::1 - DateTime: 20-02-2019 15:55:29 - URL: http://localhost:49744/
+2019-02-20 15:55:48,190 [6] INFO LoggingModule.Logging - OnResultExecuted:: IP: ::1 - DateTime: 20-02-2019 15:55:29 - URL: http://localhost:49744/
+2019-02-20 15:59:39,346 [6] INFO LoggingModule.Logging - OnActionExecuting:: IP: ::1 - DateTime: 20-02-2019 15:59:38 - Action: Index - Controller: Login - Parameters:  - URL: http://localhost:49744/Login/Index
+2019-02-20 15:59:39,429 [6] INFO LoggingModule.Logging - OnActionExecuted:: IP: ::1 - DateTime: 20-02-2019 15:59:38 - Action: Index - Controller: Login - Parameters:  - URL: http://localhost:49744/Login/Index
+2019-02-20 15:59:39,432 [6] INFO LoggingModule.Logging - OnResultExecuting:: IP: ::1 - DateTime: 20-02-2019 15:59:38 - URL: http://localhost:49744/Login/Index
+2019-02-20 15:59:43,197 [6] INFO LoggingModule.Logging - OnResultExecuted:: IP: ::1 - DateTime: 20-02-2019 15:59:38 - URL: http://localhost:49744/Login/Index
+2019-02-20 16:00:02,815 [6] INFO LoggingModule.Logging - OnActionExecuting:: IP: ::1 - DateTime: 20-02-2019 16:00:02 - Action: Index - Controller: Login - Parameters: formCollection|System.Web.Mvc.FormCollection, - URL: http://localhost:49744/
+2019-02-20 16:00:11,634 [6] INFO LoggingModule.Logging - OnActionExecuted:: IP: ::1 - DateTime: 20-02-2019 16:00:02 - Action: Index - Controller: Login - Parameters:  - URL: http://localhost:49744/
+2019-02-20 16:00:11,638 [6] INFO LoggingModule.Logging - OnResultExecuting:: IP: ::1 - DateTime: 20-02-2019 16:00:02 - URL: http://localhost:49744/
+2019-02-20 16:00:11,647 [6] INFO LoggingModule.Logging - OnResultExecuted:: IP: ::1 - DateTime: 20-02-2019 16:00:02 - URL: http://localhost:49744/
+2019-02-20 16:01:58,578 [6] INFO LoggingModule.Logging - OnActionExecuting:: IP: ::1 - DateTime: 20-02-2019 16:01:57 - Action: Index - Controller: Login - Parameters:  - URL: http://localhost:49744/Login/Index
+2019-02-20 16:01:58,632 [6] INFO LoggingModule.Logging - OnActionExecuted:: IP: ::1 - DateTime: 20-02-2019 16:01:57 - Action: Index - Controller: Login - Parameters:  - URL: http://localhost:49744/Login/Index
+2019-02-20 16:01:58,635 [6] INFO LoggingModule.Logging - OnResultExecuting:: IP: ::1 - DateTime: 20-02-2019 16:01:57 - URL: http://localhost:49744/Login/Index
+2019-02-20 16:02:01,971 [6] INFO LoggingModule.Logging - OnResultExecuted:: IP: ::1 - DateTime: 20-02-2019 16:01:57 - URL: http://localhost:49744/Login/Index
+2019-02-20 16:02:24,293 [6] INFO LoggingModule.Logging - OnActionExecuting:: IP: ::1 - DateTime: 20-02-2019 16:02:24 - Action: Index - Controller: Login - Parameters: formCollection|System.Web.Mvc.FormCollection, - URL: http://localhost:49744/
+2019-02-20 16:02:39,642 [6] INFO LoggingModule.Logging - OnActionExecuted:: IP: ::1 - DateTime: 20-02-2019 16:02:24 - Action: Index - Controller: Login - Parameters:  - URL: http://localhost:49744/
+2019-02-20 16:02:39,642 [6] INFO LoggingModule.Logging - OnResultExecuting:: IP: ::1 - DateTime: 20-02-2019 16:02:24 - URL: http://localhost:49744/
+2019-02-20 16:02:39,647 [6] INFO LoggingModule.Logging - OnResultExecuted:: IP: ::1 - DateTime: 20-02-2019 16:02:24 - URL: http://localhost:49744/
+2019-02-20 16:25:07,686 [5] INFO LoggingModule.Logging - OnActionExecuting:: IP: ::1 - DateTime: 20-02-2019 16:25:05 - Action: Index - Controller: Login - Parameters:  - URL: http://localhost:49744/Login/Index
+2019-02-20 16:25:07,821 [5] INFO LoggingModule.Logging - OnActionExecuted:: IP: ::1 - DateTime: 20-02-2019 16:25:05 - Action: Index - Controller: Login - Parameters:  - URL: http://localhost:49744/Login/Index
+2019-02-20 16:25:07,829 [5] INFO LoggingModule.Logging - OnResultExecuting:: IP: ::1 - DateTime: 20-02-2019 16:25:05 - URL: http://localhost:49744/Login/Index
+2019-02-20 16:25:13,407 [5] INFO LoggingModule.Logging - OnResultExecuted:: IP: ::1 - DateTime: 20-02-2019 16:25:05 - URL: http://localhost:49744/Login/Index
+2019-02-20 16:25:32,862 [5] INFO LoggingModule.Logging - OnActionExecuting:: IP: ::1 - DateTime: 20-02-2019 16:25:32 - Action: Index - Controller: Login - Parameters: formCollection|System.Web.Mvc.FormCollection, - URL: http://localhost:49744/
+2019-02-20 16:25:49,818 [5] INFO LoggingModule.Logging - OnActionExecuted:: IP: ::1 - DateTime: 20-02-2019 16:25:32 - Action: Index - Controller: Login - Parameters:  - URL: http://localhost:49744/
+2019-02-20 16:25:49,818 [5] INFO LoggingModule.Logging - OnResultExecuting:: IP: ::1 - DateTime: 20-02-2019 16:25:32 - URL: http://localhost:49744/
+2019-02-20 16:25:49,858 [5] INFO LoggingModule.Logging - OnResultExecuted:: IP: ::1 - DateTime: 20-02-2019 16:25:32 - URL: http://localhost:49744/
+2019-02-20 16:46:03,662 [6] INFO LoggingModule.Logging - OnActionExecuting:: IP: ::1 - DateTime: 20-02-2019 16:46:02 - Action: Index - Controller: Login - Parameters:  - URL: http://localhost:49744/Login/Index
+2019-02-20 16:46:03,724 [6] INFO LoggingModule.Logging - OnActionExecuted:: IP: ::1 - DateTime: 20-02-2019 16:46:02 - Action: Index - Controller: Login - Parameters:  - URL: http://localhost:49744/Login/Index
+2019-02-20 16:46:03,724 [6] INFO LoggingModule.Logging - OnResultExecuting:: IP: ::1 - DateTime: 20-02-2019 16:46:02 - URL: http://localhost:49744/Login/Index
+2019-02-20 16:46:04,662 [6] INFO LoggingModule.Logging - OnResultExecuted:: IP: ::1 - DateTime: 20-02-2019 16:46:02 - URL: http://localhost:49744/Login/Index
+2019-02-20 16:46:27,660 [6] INFO LoggingModule.Logging - OnActionExecuting:: IP: ::1 - DateTime: 20-02-2019 16:46:27 - Action: Index - Controller: Login - Parameters: formCollection|System.Web.Mvc.FormCollection, - URL: http://localhost:49744/
+2019-02-20 16:46:43,402 [6] INFO LoggingModule.Logging - OnActionExecuted:: IP: ::1 - DateTime: 20-02-2019 16:46:27 - Action: Index - Controller: Login - Parameters:  - URL: http://localhost:49744/
+2019-02-20 16:46:43,402 [6] INFO LoggingModule.Logging - OnResultExecuting:: IP: ::1 - DateTime: 20-02-2019 16:46:27 - URL: http://localhost:49744/
+2019-02-20 16:46:43,402 [6] INFO LoggingModule.Logging - OnResultExecuted:: IP: ::1 - DateTime: 20-02-2019 16:46:27 - URL: http://localhost:49744/
+2019-02-20 17:14:41,273 [5] INFO LoggingModule.Logging - OnActionExecuting:: IP: ::1 - DateTime: 20-02-2019 17:14:39 - Action: Index - Controller: Login - Parameters:  - URL: http://localhost:49744/Login/Index
+2019-02-20 17:14:41,398 [5] INFO LoggingModule.Logging - OnActionExecuted:: IP: ::1 - DateTime: 20-02-2019 17:14:39 - Action: Index - Controller: Login - Parameters:  - URL: http://localhost:49744/Login/Index
+2019-02-20 17:14:41,398 [5] INFO LoggingModule.Logging - OnResultExecuting:: IP: ::1 - DateTime: 20-02-2019 17:14:39 - URL: http://localhost:49744/Login/Index
+2019-02-20 17:14:47,304 [5] INFO LoggingModule.Logging - OnResultExecuted:: IP: ::1 - DateTime: 20-02-2019 17:14:39 - URL: http://localhost:49744/Login/Index
+2019-02-20 17:15:08,240 [5] INFO LoggingModule.Logging - OnActionExecuting:: IP: ::1 - DateTime: 20-02-2019 17:15:07 - Action: Index - Controller: Login - Parameters: formCollection|System.Web.Mvc.FormCollection, - URL: http://localhost:49744/
+2019-02-20 17:15:50,348 [5] INFO LoggingModule.Logging - OnActionExecuted:: IP: ::1 - DateTime: 20-02-2019 17:15:07 - Action: Index - Controller: Login - Parameters:  - URL: http://localhost:49744/
+2019-02-20 17:15:50,348 [5] INFO LoggingModule.Logging - OnResultExecuting:: IP: ::1 - DateTime: 20-02-2019 17:15:07 - URL: http://localhost:49744/
+2019-02-20 17:15:50,380 [5] INFO LoggingModule.Logging - OnResultExecuted:: IP: ::1 - DateTime: 20-02-2019 17:15:07 - URL: http://localhost:49744/
+2019-02-20 17:17:33,107 [4] INFO LoggingModule.Logging - OnActionExecuting:: IP: ::1 - DateTime: 20-02-2019 17:17:32 - Action: Index - Controller: Login - Parameters:  - URL: http://localhost:49744/Login/Index
+2019-02-20 17:17:33,169 [4] INFO LoggingModule.Logging - OnActionExecuted:: IP: ::1 - DateTime: 20-02-2019 17:17:32 - Action: Index - Controller: Login - Parameters:  - URL: http://localhost:49744/Login/Index
+2019-02-20 17:17:33,169 [4] INFO LoggingModule.Logging - OnResultExecuting:: IP: ::1 - DateTime: 20-02-2019 17:17:32 - URL: http://localhost:49744/Login/Index
+2019-02-20 17:17:36,778 [4] INFO LoggingModule.Logging - OnResultExecuted:: IP: ::1 - DateTime: 20-02-2019 17:17:32 - URL: http://localhost:49744/Login/Index
+2019-02-20 17:17:54,074 [4] INFO LoggingModule.Logging - OnActionExecuting:: IP: ::1 - DateTime: 20-02-2019 17:17:54 - Action: Index - Controller: Login - Parameters: formCollection|System.Web.Mvc.FormCollection, - URL: http://localhost:49744/
+2019-02-20 17:18:01,852 [4] INFO LoggingModule.Logging - OnActionExecuted:: IP: ::1 - DateTime: 20-02-2019 17:17:54 - Action: Index - Controller: Login - Parameters:  - URL: http://localhost:49744/
+2019-02-20 17:18:01,853 [4] INFO LoggingModule.Logging - OnResultExecuting:: IP: ::1 - DateTime: 20-02-2019 17:17:54 - URL: http://localhost:49744/
+2019-02-20 17:18:01,857 [4] INFO LoggingModule.Logging - OnResultExecuted:: IP: ::1 - DateTime: 20-02-2019 17:17:54 - URL: http://localhost:49744/
+2019-02-20 17:23:39,870 [6] INFO LoggingModule.Logging - OnActionExecuting:: IP: ::1 - DateTime: 20-02-2019 17:23:38 - Action: Index - Controller: Login - Parameters:  - URL: http://localhost:49744/Login/Index
+2019-02-20 17:23:39,932 [6] INFO LoggingModule.Logging - OnActionExecuted:: IP: ::1 - DateTime: 20-02-2019 17:23:38 - Action: Index - Controller: Login - Parameters:  - URL: http://localhost:49744/Login/Index
+2019-02-20 17:23:39,932 [6] INFO LoggingModule.Logging - OnResultExecuting:: IP: ::1 - DateTime: 20-02-2019 17:23:38 - URL: http://localhost:49744/Login/Index
+2019-02-20 17:23:43,572 [6] INFO LoggingModule.Logging - OnResultExecuted:: IP: ::1 - DateTime: 20-02-2019 17:23:38 - URL: http://localhost:49744/Login/Index
+2019-02-20 17:24:14,898 [6] INFO LoggingModule.Logging - OnActionExecuting:: IP: ::1 - DateTime: 20-02-2019 17:24:14 - Action: Index - Controller: Login - Parameters: formCollection|System.Web.Mvc.FormCollection, - URL: http://localhost:49744/
+2019-02-20 17:24:24,020 [6] INFO LoggingModule.Logging - OnActionExecuted:: IP: ::1 - DateTime: 20-02-2019 17:24:14 - Action: Index - Controller: Login - Parameters:  - URL: http://localhost:49744/
+2019-02-20 17:24:24,020 [6] INFO LoggingModule.Logging - OnResultExecuting:: IP: ::1 - DateTime: 20-02-2019 17:24:14 - URL: http://localhost:49744/
+2019-02-20 17:24:24,020 [6] INFO LoggingModule.Logging - OnResultExecuted:: IP: ::1 - DateTime: 20-02-2019 17:24:14 - URL: http://localhost:49744/

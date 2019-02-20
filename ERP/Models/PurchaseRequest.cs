@@ -17,6 +17,7 @@ namespace ERP.Models
             SOCode = String.Empty;
         }
 
+        [Key]
         [DefaultValue(-1)]
         public Int32 Identity
         {

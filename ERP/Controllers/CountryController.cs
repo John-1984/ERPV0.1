@@ -37,7 +37,7 @@ namespace ERP.Controllers
             {
                 Models.Country mdCountry = AutoMapperConfig.Mapper().Map<Models.Country>(_Country.GetCountry(identity));
                 mdCountry.RegionList = null;
-                mdCountry.RegionList = new SelectList(_Country.GetAllRegions(), "Identity", "RegionName");
+                mdCountry.RegionList = new SelectList(_Country.GetAllRegions(), "Identity", "RegionName", mdCountry.RegionID);
                 TempData["PageInfo"] = "Edit Country Info";
                 TempData.Keep();
                 return PartialView(mdCountry);
@@ -62,12 +62,19 @@ namespace ERP.Controllers
         {
             //IF success resturn grid view
             //IF Failure return json value
+            BusinessModels.Country con = AutoMapperConfig.Mapper().Map<BusinessModels.Country>(Country);
+
+            string SelectedValue = Country.SelectedRegion.ToString();
+
             if (Country.Identity.Equals(-1))
             {
                 _Country.Insert(AutoMapperConfig.Mapper().Map<BusinessModels.Country>(Country));
             }
             else
-                _Country.Update(AutoMapperConfig.Mapper().Map<BusinessModels.Country>(Country));
+            {
+               
+                _Country.Update(con);
+            }
             return RedirectToAction("_CountryAll");
         }
 

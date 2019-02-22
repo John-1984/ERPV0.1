@@ -21,6 +21,41 @@ namespace ERP.Controllers
         {
             return PartialView(GetCompanys("", 1, "", ""));
         }
+        [HttpGet]
+        public ActionResult _CompanyCancel(int identity)
+        {
+            return RedirectToAction("_CompanyAll");
+        }
+
+        [HttpPost]
+        public JsonResult Country(string identity)
+        {
+            if (identity == "6")
+                return Json(new SelectList(_Company.GetAllCountry(), "Identity", "CountryName"));
+            else
+                return Json(new SelectList(_Company.GetAllCountrys(identity), "Identity", "CountryName"));
+        }
+
+        [HttpPost]
+        public JsonResult State(string identity)
+        {
+
+            return Json(new SelectList(_Company.GetAllStates(identity), "Identity", "StateName"));
+        }
+
+        [HttpPost]
+        public JsonResult District(string identity)
+        {
+
+            return Json(new SelectList(_Company.GetAllDistricts(identity), "Identity", "DistrictName"));
+        }
+
+        [HttpPost]
+        public JsonResult Location(string identity)
+        {
+
+            return Json(new SelectList(_Company.GetAllLocations(identity), "Identity", "LocationName"));
+        }
 
         [HttpGet]
         public PartialViewResult _CompanyEdit(int identity)
@@ -41,10 +76,7 @@ namespace ERP.Controllers
                 mdCompany.DistrictList = new SelectList(_Company.GetAllDistrict(), "Identity", "DistrictName");
 
                 mdCompany.LocationList = null;
-                mdCompany.LocationList = new SelectList(_Company.GetAllLocaton(), "Identity", "LocationName");
-
-                mdCompany.CompanyTypeList = null;
-                mdCompany.CompanyTypeList = new SelectList(_Company.GetAllCompanyType(), "Identity", "TypeName");
+                mdCompany.LocationList = new SelectList(_Company.GetAllLocaton(), "Identity", "LocationName");                
 
                 TempData["PageInfo"] = "Add Company Info";
                 return PartialView(mdCompany);
@@ -53,25 +85,21 @@ namespace ERP.Controllers
             {
                 Models.Company mdCompany = AutoMapperConfig.Mapper().Map<Models.Company>(_Company.GetCompany(identity));
                 mdCompany.RegionList = null;
-                mdCompany.RegionList = new SelectList(_Company.GetAllRegions(), "Identity", "RegionName");
+                mdCompany.RegionList = new SelectList(_Company.GetAllRegions(), "Identity", "RegionName", mdCompany.Location.District.State.Country.RegionID);
 
                 mdCompany.CountryList = null;
-                mdCompany.CountryList = new SelectList(_Company.GetAllCountry(), "Identity", "CountryName");
+                mdCompany.CountryList = new SelectList(_Company.GetAllCountrys(mdCompany.Location.District.State.Country.RegionID.ToString()), "Identity", "CountryName", mdCompany.Location.District.State.CountryID);
 
                 mdCompany.StateList = null;
-                mdCompany.StateList = new SelectList(_Company.GetAllStates(), "Identity", "StateName");
+                mdCompany.StateList = new SelectList(_Company.GetAllStates(mdCompany.Location.District.State.CountryID.ToString()), "Identity", "StateName", mdCompany.Location.District.StateID);
 
                 mdCompany.DistrictList = null;
-                mdCompany.DistrictList = new SelectList(_Company.GetAllDistrict(), "Identity", "DistrictName");
+                mdCompany.DistrictList = new SelectList(_Company.GetAllDistricts(mdCompany.Location.District.StateID.ToString()), "Identity", "DistrictName", mdCompany.Location.DistrictID);
 
                 mdCompany.LocationList = null;
-                mdCompany.LocationList = new SelectList(_Company.GetAllLocaton(), "Identity", "LocationName");
+                mdCompany.LocationList = new SelectList(_Company.GetAllLocations(mdCompany.Location.DistrictID.ToString()), "Identity", "LocationName",mdCompany.LocationID);
 
-                mdCompany.CompanyTypeList = null;
-                mdCompany.CompanyTypeList = new SelectList(_Company.GetAllCompanyType(), "Identity", "TypeName");
-
-
-                TempData["PageInfo"] = "Edit Company Info";
+               TempData["PageInfo"] = "Edit Company Info";
                 TempData.Keep();
                 return PartialView(mdCompany);
             }
@@ -91,16 +119,25 @@ namespace ERP.Controllers
         }
 
         [HttpPost]
-        public ActionResult Update(Models.Company Company)
+        public ActionResult Update(Models.Company Company, FormCollection frmFields)
         {
+            BusinessModels.Company mdCompany = AutoMapperConfig.Mapper().Map<BusinessModels.Company>(Company);
+            var locvalue = frmFields["hdnLocation"];
+
+            if (!String.IsNullOrEmpty(locvalue))
+                mdCompany.LocationID = int.Parse(locvalue);
             //IF success resturn grid view
             //IF Failure return json value
             if (Company.Identity.Equals(-1))
             {
-                _Company.Insert(AutoMapperConfig.Mapper().Map<BusinessModels.Company>(Company));
+                mdCompany.CreatedDate = DateTime.Now;
+                _Company.Insert(mdCompany);
             }
             else
-                _Company.Update(AutoMapperConfig.Mapper().Map<BusinessModels.Company>(Company));
+            {
+                mdCompany.ModifiedDate = DateTime.Now;
+                _Company.Update(mdCompany);
+            }
             return RedirectToAction("_CompanyAll");
         }
 

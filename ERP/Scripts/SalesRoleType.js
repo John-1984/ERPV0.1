@@ -13,6 +13,27 @@
         }
     };
 
+    $(document).off("click", ".SalesRoleTypeCancel");
+    $(document).on("click", ".SalesRoleTypeCancel", function (event) {
+        var theUrl = $(this).attr("data-url");
+        $('.headermode').html('View Sales Role Type Info');
+        $.ajax({
+            url: theUrl,
+            type: 'GET',  // http method
+            data: { "identity": $(this).attr("data-identity") },
+            //async: true,
+            success: function (data, status, xhr) {
+
+                $('.SalesRoleTypeSearchDetials').show();
+                $('.SalesRoleTypeAdd').show();
+                $('.resultView').html(data);
+                showMessage(status, "Success");
+            },
+            error: function (jqXhr, textStatus, errorMessage) {
+                showMessage(textStatus, errorMessage);
+            }
+        });
+    });
 
     $(document).off("click", ".SalesRoleTypeView");
     $(document).on("click", ".SalesRoleTypeView", function (event) {

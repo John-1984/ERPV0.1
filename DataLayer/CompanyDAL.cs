@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Data.Entity;
 namespace DataLayer
 {
     public class CompanyDAL
@@ -20,8 +20,11 @@ namespace DataLayer
             using (var dbContext = new CompanyDbContext())
             {
                 _Company = dbContext.Company
-                             .Include("Location")
-                              .Include("CompanyType")
+                             .Include(K => K.Location)
+                             .Include(K => K.Location.District)
+                            .Include(o => o.Location.District.State)
+                            .Include(o => o.Location.District.State.Country)
+                            .Include(o => o.Location.District.State.Country.Region)
                             .FirstOrDefault(p => p.Identity.Equals(identity));
             }
             return _Company;
@@ -34,8 +37,30 @@ namespace DataLayer
             {
                 dbContext.Configuration.LazyLoadingEnabled = false;
                 _Companys = dbContext.Company
-                             .Include("Location")
-                              .Include("CompanyType")
+                             .Include(K => K.Location)
+                             .Include(K => K.Location.District)
+                            .Include(o => o.Location.District.State)
+                            .Include(o => o.Location.District.State.Country)
+                            .Include(o => o.Location.District.State.Country.Region)
+                            .ToList();
+            }
+
+            return _Companys;
+        }
+
+        public IEnumerable<BusinessModels.Company> GetAll(int stidentity)
+        {
+            var _Companys = new List<BusinessModels.Company>();
+            using (var dbContext = new CompanyDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _Companys = dbContext.Company
+                             .Include(K => K.Location)
+                             .Include(K => K.Location.District)
+                            .Include(o => o.Location.District.State)
+                            .Include(o => o.Location.District.State.Country)
+                            .Include(o => o.Location.District.State.Country.Region)
+                             .Where(p => p.Location.Identity == stidentity)
                             .ToList();
             }
 

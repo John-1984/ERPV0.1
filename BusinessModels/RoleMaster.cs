@@ -7,8 +7,7 @@ namespace BusinessModels
     {
         public RoleMaster()
         {
-            Identity = -1;
-            RoleName = string.Empty;
+           
         }
 
         [System.ComponentModel.DataAnnotations.Key]
@@ -25,24 +24,14 @@ namespace BusinessModels
             set;
         }
 
+        [ForeignKey("RoleType")]
         public int RoleTypeID
         {
             get;
             set;
         }
 
-        public string RoleTypeName
-        {
-            get;
-            set;
-        }
-
-        public string RegionName
-        {
-            get;
-            set;
-        }
-
+       
         public int ModuleID
         {
             get;
@@ -55,11 +44,7 @@ namespace BusinessModels
             set;
         }
 
-        public string ModuleName
-        {
-            get;
-            set;
-        }
+        
         public DateTime CreatedDate
         {
             get;
@@ -81,6 +66,22 @@ namespace BusinessModels
             set;
         }
 
+        public RoleType RoleType
+        {
+            get;
+            set;
+        }
 
+        public Modules Modules
+        {
+            get;
+            set;
+        }
+
+        public Region Region
+        {
+            get;
+            set;
+        }
     }
 }

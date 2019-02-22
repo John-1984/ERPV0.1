@@ -32,6 +32,28 @@ namespace BusinessLayer
         {
             return _dataLayer.GetCompany(identity);
         }
+        public IEnumerable<BusinessModels.Country> GetAllCountrys(string identity)
+        {
+            //TestRegionData();
+            return _condataLayer.GetAll(int.Parse(identity));
+        }
+        public IEnumerable<BusinessModels.State> GetAllStates(string identity)
+        {
+            //TestRegionData();
+            return _statedataLayer.GetAll(int.Parse(identity));
+        }
+
+        public IEnumerable<BusinessModels.District> GetAllDistricts(string identity)
+        {
+            //TestRegionData();
+            return _distdataLayer.GetAll(int.Parse(identity));
+        }
+
+        public IEnumerable<BusinessModels.Location> GetAllLocations(string identity)
+        {
+            //TestRegionData();
+            return _locdataLayer.GetAll(int.Parse(identity));
+        }
         public IEnumerable<BusinessModels.Region> GetAllRegions()
         {
             //TestRegionData();
@@ -57,11 +79,7 @@ namespace BusinessLayer
             //TestRegionData();
             return _locdataLayer.GetAll();
         }
-        public IEnumerable<BusinessModels.CompanyType> GetAllCompanyType()
-        {
-            //TestRegionData();
-            return _comptypedataLayer.GetAll();
-        }
+        
         public IEnumerable<BusinessModels.Company> GetAll()
         {
             return _dataLayer.GetAll();

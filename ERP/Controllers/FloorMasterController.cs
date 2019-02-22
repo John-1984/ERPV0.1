@@ -16,6 +16,54 @@ namespace ERP.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public ActionResult _FloorMasterCancel(int identity)
+        {
+            return RedirectToAction("_FloorMasterAll");
+        }
+
+        [HttpPost]
+        public JsonResult Country(string identity)
+        {
+            if (identity == "6")
+                return Json(new SelectList(_FloorMaster.GetAllCountry(), "Identity", "CountryName"));
+            else
+                return Json(new SelectList(_FloorMaster.GetAllCountrys(identity), "Identity", "CountryName"));
+        }
+
+        [HttpPost]
+        public JsonResult State(string identity)
+        {
+
+            return Json(new SelectList(_FloorMaster.GetAllStates(identity), "Identity", "StateName"));
+        }
+
+        [HttpPost]
+        public JsonResult District(string identity)
+        {
+
+            return Json(new SelectList(_FloorMaster.GetAllDistricts(identity), "Identity", "DistrictName"));
+        }
+        [HttpPost]
+        public JsonResult Location(string identity)
+        {
+
+            return Json(new SelectList(_FloorMaster.GetAllLocations(identity), "Identity", "LocationName"));
+        }
+
+        [HttpPost]
+        public JsonResult Company(string identity)
+        {
+
+            return Json(new SelectList(_FloorMaster.GetAllCompanies(identity), "Identity", "CompanyName"));
+        }
+
+        [HttpPost]
+        public JsonResult CompanyType(string identity)
+        {
+
+            return Json(new SelectList(_FloorMaster.GetAllCompanyTypes(identity), "Identity", "TypeName"));
+        }
 
         public PartialViewResult _FloorMasterAll()
         {
@@ -28,6 +76,21 @@ namespace ERP.Controllers
             if (identity.Equals(-1))
             {
                 Models.FloorMaster mdFloorMaster = new Models.FloorMaster();
+                mdFloorMaster.RegionList = null;
+                mdFloorMaster.RegionList = new SelectList(_FloorMaster.GetAllRegions(), "Identity", "RegionName");
+
+                mdFloorMaster.CountryList = null;
+                mdFloorMaster.CountryList = new SelectList(_FloorMaster.GetAllCountry(), "Identity", "CountryName");
+
+                mdFloorMaster.StateList = null;
+                mdFloorMaster.StateList = new SelectList(_FloorMaster.GetAllStates(), "Identity", "StateName");
+
+                mdFloorMaster.DistrictList = null;
+                mdFloorMaster.DistrictList = new SelectList(_FloorMaster.GetAllDistrict(), "Identity", "DistrictName");
+
+                mdFloorMaster.LocationList = null;
+                mdFloorMaster.LocationList = new SelectList(_FloorMaster.GetAllLocaton(), "Identity", "LocationName");
+
                 mdFloorMaster.CompanyList = null;
                 mdFloorMaster.CompanyList = new SelectList(_FloorMaster.GetAllCompanies(), "Identity", "CompanyName");
 
@@ -42,11 +105,28 @@ namespace ERP.Controllers
             else
             {
                 Models.FloorMaster mdFloorMaster = AutoMapperConfig.Mapper().Map<Models.FloorMaster>(_FloorMaster.GetFloorMaster(identity));
-                mdFloorMaster.CompanyList = null;
-                mdFloorMaster.CompanyList = new SelectList(_FloorMaster.GetAllCompanies(), "Identity", "CompanyName");
 
+                mdFloorMaster.RegionList = null;
+                mdFloorMaster.RegionList = new SelectList(_FloorMaster.GetAllRegions(), "Identity", "RegionName", mdFloorMaster.CompanyType.Company.Location.District.State.Country.RegionID);
+
+                mdFloorMaster.CountryList = null;
+                mdFloorMaster.CountryList = new SelectList(_FloorMaster.GetAllCountrys(mdFloorMaster.CompanyType.Company.Location.District.State.Country.RegionID.ToString()), "Identity", "CountryName", mdFloorMaster.CompanyType.Company.Location.District.State.CountryID);
+
+                mdFloorMaster.StateList = null;
+                mdFloorMaster.StateList = new SelectList(_FloorMaster.GetAllStates(mdFloorMaster.CompanyType.Company.Location.District.State.CountryID.ToString()), "Identity", "StateName", mdFloorMaster.CompanyType.Company.Location.District.StateID);
+
+                mdFloorMaster.DistrictList = null;
+                mdFloorMaster.DistrictList = new SelectList(_FloorMaster.GetAllDistricts(mdFloorMaster.CompanyType.Company.Location.District.StateID.ToString()), "Identity", "DistrictName", mdFloorMaster.CompanyType.Company.Location.DistrictID);
+
+                mdFloorMaster.LocationList = null;
+                mdFloorMaster.LocationList = new SelectList(_FloorMaster.GetAllLocations(mdFloorMaster.CompanyType.Company.Location.DistrictID.ToString()), "Identity", "LocationName", mdFloorMaster.CompanyType.Company.LocationID);
+
+                mdFloorMaster.CompanyList = null;
+                mdFloorMaster.CompanyList = new SelectList(_FloorMaster.GetAllCompanies(mdFloorMaster.CompanyType.Company.LocationID.ToString()), "Identity", "CompanyName", mdFloorMaster.CompanyType.CompanyID);
+
+               
                 mdFloorMaster.CompanyTypeList = null;
-                mdFloorMaster.CompanyTypeList = new SelectList(_FloorMaster.GetAllCompanyTypes(), "Identity", "TypeName");
+                mdFloorMaster.CompanyTypeList = new SelectList(_FloorMaster.GetAllCompanyTypes(mdFloorMaster.CompanyType.CompanyID.ToString()), "Identity", "TypeName",mdFloorMaster.CompanyTypeID);
 
 
                 TempData["PageInfo"] = "Edit FloorMaster Info";
@@ -69,16 +149,25 @@ namespace ERP.Controllers
         }
 
         [HttpPost]
-        public ActionResult Update(Models.FloorMaster FloorMaster)
+        public ActionResult Update(Models.FloorMaster FloorMaster, FormCollection frmFields)
         {
+            BusinessModels.FloorMaster mdFloorMaster = AutoMapperConfig.Mapper().Map<BusinessModels.FloorMaster>(FloorMaster);
+            var companytypevalue = frmFields["hdnCompanyType"];
+
+            if (!String.IsNullOrEmpty(companytypevalue))
+                mdFloorMaster.CompanyTypeID = int.Parse(companytypevalue);
             //IF success resturn grid view
             //IF Failure return json value
             if (FloorMaster.Identity.Equals(-1))
             {
-                _FloorMaster.Insert(AutoMapperConfig.Mapper().Map<BusinessModels.FloorMaster>(FloorMaster));
+                mdFloorMaster.CreatedDate = DateTime.Now;
+                _FloorMaster.Insert(mdFloorMaster);
             }
             else
-                _FloorMaster.Update(AutoMapperConfig.Mapper().Map<BusinessModels.FloorMaster>(FloorMaster));
+            {
+                mdFloorMaster.ModifiedDate = DateTime.Now;
+                _FloorMaster.Update(mdFloorMaster);
+            }
             return RedirectToAction("_FloorMasterAll");
         }
 
@@ -102,16 +191,16 @@ namespace ERP.Controllers
 
             var FloorMasters = AutoMapperConfig.Mapper().Map<List<Models.FloorMaster>>(_FloorMaster.GetAll());
             if (!string.IsNullOrEmpty(searchString) && !string.IsNullOrEmpty(createdDate))
-                FloorMasters = AutoMapperConfig.Mapper().Map<List<Models.FloorMaster>>(_FloorMaster.GetAll().ToList().FindAll(p => p.CompanyName.ToLower().Contains(searchString.ToLower()) && p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+                FloorMasters = AutoMapperConfig.Mapper().Map<List<Models.FloorMaster>>(_FloorMaster.GetAll().ToList().FindAll(p => p.CompanyType.Company.CompanyName.ToLower().Contains(searchString.ToLower()) && p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
             else if (!string.IsNullOrEmpty(searchString))
-                FloorMasters = AutoMapperConfig.Mapper().Map<List<Models.FloorMaster>>(_FloorMaster.GetAll().ToList().FindAll(p => p.CompanyName.ToLower().Contains(searchString.ToLower())));
+                FloorMasters = AutoMapperConfig.Mapper().Map<List<Models.FloorMaster>>(_FloorMaster.GetAll().ToList().FindAll(p => p.CompanyType.Company.CompanyName.ToLower().Contains(searchString.ToLower())));
             else if (!string.IsNullOrEmpty(createdDate))
                 FloorMasters = AutoMapperConfig.Mapper().Map<List<Models.FloorMaster>>(_FloorMaster.GetAll().ToList().FindAll(p => p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
 
             switch (sortOrder)
             {
                 case "CompanyName":
-                    FloorMasters = FloorMasters.OrderByDescending(stu => stu.CompanyName).ToList();
+                    FloorMasters = FloorMasters.OrderByDescending(stu => stu.CompanyType.Company.CompanyName).ToList();
                     break;
                 case "DateAsc":
                     FloorMasters = FloorMasters.OrderBy(stu => stu.CreatedDate).ToList();
@@ -120,7 +209,7 @@ namespace ERP.Controllers
                     FloorMasters = FloorMasters.OrderByDescending(stu => stu.CreatedDate).ToList();
                     break;
                 default:
-                    FloorMasters = FloorMasters.OrderBy(stu => stu.CompanyName).ToList();
+                    FloorMasters = FloorMasters.OrderBy(stu => stu.CompanyType.Company.CompanyName).ToList();
                     break;
             }
 

@@ -19,7 +19,7 @@
         varregionText = $("#drpRegion").val();
         $("#hdnRegion").val(varregionText);
         var drpCountry = $("#drpCountry");
-        alert("Test");
+      //  alert("Test");
         $.ajax({            
             type: 'POST',
             url: '/State/Country',

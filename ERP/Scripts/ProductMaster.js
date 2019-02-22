@@ -13,6 +13,27 @@
         }
     };
 
+    $(document).off("click", ".ProductMasterCancel");
+    $(document).on("click", ".ProductMasterCancel", function (event) {
+        var theUrl = $(this).attr("data-url");
+        $('.headermode').html('View Product Master Info');
+        $.ajax({
+            url: theUrl,
+            type: 'GET',  // http method
+            data: { "identity": $(this).attr("data-identity") },
+            //async: true,
+            success: function (data, status, xhr) {
+
+                $('.ProductMasterSearchDetials').show();
+                $('.ProductMasterAdd').show();
+                $('.resultView').html(data);
+                showMessage(status, "Success");
+            },
+            error: function (jqXhr, textStatus, errorMessage) {
+                showMessage(textStatus, errorMessage);
+            }
+        });
+    });
 
     $(document).off("click", ".ProductMasterView");
     $(document).on("click", ".ProductMasterView", function (event) {

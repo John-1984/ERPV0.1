@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Data.Entity;
 namespace DataLayer
 {
     public class LocationDAL
@@ -20,7 +20,10 @@ namespace DataLayer
             using (var dbContext = new LocationDbContext())
             {
                 _Location = dbContext.Location
-                            .Include("District")
+                            .Include(K => K.District)
+                            .Include(o => o.District.State)
+                            .Include(o => o.District.State.Country)
+                            .Include(o => o.District.State.Country.Region)
                             .FirstOrDefault(p => p.Identity.Equals(identity));
             }
             return _Location;
@@ -34,24 +37,34 @@ namespace DataLayer
             {
                 dbContext.Configuration.LazyLoadingEnabled = false;
                 _Locations = dbContext.Location
-                             .Include("District")
+                            .Include(K => K.District)
+                            .Include(o => o.District.State)
+                            .Include(o => o.District.State.Country)
+                            .Include(o => o.District.State.Country.Region)
                             .ToList();
             }
 
             return _Locations;
         }
 
-        public IEnumerable<BusinessModels.Country> GetCountry()
+        public IEnumerable<BusinessModels.Location> GetAll(int stidentity)
         {
-            var _Countrys = new List<BusinessModels.Country>();
-            using (var dbContext = new CountryDbContext())
+            //Need to do
+            var _Locations = new List<BusinessModels.Location>();
+            using (var dbContext = new LocationDbContext())
             {
                 dbContext.Configuration.LazyLoadingEnabled = false;
-                _Countrys = dbContext.Country
+                _Locations = dbContext.Location
+                            .Include(K => K.District)
+                            .Include(o => o.District.State)
+                            .Include(o => o.District.State.Country)
+                            .Include(o => o.District.State.Country.Region)
+                             .Where(p => p.District.Identity == stidentity)
                             .ToList();
             }
-            return _Countrys;
-        }
+
+            return _Locations;
+        }      
 
         public Boolean Update(BusinessModels.Location Location)
         {

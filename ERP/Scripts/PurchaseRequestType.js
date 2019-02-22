@@ -13,6 +13,27 @@
         }
     };
 
+    $(document).off("click", ".PurchaseRequestTypeCancel");
+    $(document).on("click", ".PurchaseRequestTypeCancel", function (event) {
+        var theUrl = $(this).attr("data-url");
+        $('.headermode').html('View Purchase Request Type Info');
+        $.ajax({
+            url: theUrl,
+            type: 'GET',  // http method
+            data: { "identity": $(this).attr("data-identity") },
+            //async: true,
+            success: function (data, status, xhr) {
+
+                $('.PurchaseRequestTypeSearchDetials').show();
+                $('.PurchaseRequestTypeAdd').show();
+                $('.resultView').html(data);
+                showMessage(status, "Success");
+            },
+            error: function (jqXhr, textStatus, errorMessage) {
+                showMessage(textStatus, errorMessage);
+            }
+        });
+    });
 
     $(document).off("click", ".PurchaseRequestTypeView");
     $(document).on("click", ".PurchaseRequestTypeView", function (event) {

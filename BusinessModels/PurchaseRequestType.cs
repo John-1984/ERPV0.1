@@ -7,8 +7,7 @@ namespace BusinessModels
     {
         public PurchaseRequestType()
         {
-            Identity = -1;
-            Name = string.Empty;
+           
         }
 
         [System.ComponentModel.DataAnnotations.Key]

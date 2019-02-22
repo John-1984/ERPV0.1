@@ -100,8 +100,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\DB\" />
-    <Folder Include="CustomeFilters\" />
-    <Folder Include="Views\Error\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\BrandController.cs" />
@@ -486,8 +484,8 @@
     <Content Include="Views\Warranty\_WarrantyAll.cshtml" />
     <Content Include="Views\CompanyType\Index.cshtml" />
     <Content Include="Views\CompanyType\_CompanyTypeSearch.cshtml" />
-    <Content Include="Views\CompanyType\_CompanyTypEdit.cshtml" />
-    <Content Include="Views\CompanyType\_CompanyTypAll.cshtml" />
+    <Content Include="Views\CompanyType\_CompanyTypeEdit.cshtml" />
+    <Content Include="Views\CompanyType\_CompanyTypeAll.cshtml" />
     <Content Include="Views\RoleType\_RoleTypeAll.cshtml" />
     <Content Include="Views\RoleType\_RoleTypEdit.cshtml" />
     <Content Include="Views\RoleType\_RoleTypSearch.cshtml" />

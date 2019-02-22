@@ -106,5 +106,11 @@ namespace ERP.Models
             set;
         }
 
+        public State State
+        {
+            get;
+            set;
+        }
+
     }
 }

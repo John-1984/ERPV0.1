@@ -47,21 +47,50 @@ namespace ERP.Controllers
             {
                 Models.Location mdLocation = AutoMapperConfig.Mapper().Map<Models.Location>(_Location.GetLocation(identity));
                 mdLocation.RegionList = null;
-                mdLocation.RegionList = new SelectList(_Location.GetAllRegionss(), "Identity", "RegionName");
+                mdLocation.RegionList = new SelectList(_Location.GetAllRegionss(), "Identity", "RegionName", mdLocation.District.State.Country.RegionID);
 
                 mdLocation.CountryList = null;
-                mdLocation.CountryList = new SelectList(_Location.GetAllCountrys(), "Identity", "CountryName");
+                mdLocation.CountryList = new SelectList(_Location.GetAllCountrys(mdLocation.District.State.Country.RegionID.ToString()), "Identity", "CountryName", mdLocation.District.State.CountryID);
 
                 mdLocation.StateList = null;
-                mdLocation.StateList = new SelectList(_Location.GetAllStates(), "Identity", "StateName");
+                mdLocation.StateList = new SelectList(_Location.GetAllStates(mdLocation.District.State.CountryID.ToString()), "Identity", "StateName", mdLocation.District.StateID);
 
                 mdLocation.DistrictList = null;
-                mdLocation.DistrictList = new SelectList(_Location.GetAllDistrict(), "Identity", "DistrictName");
+                mdLocation.DistrictList = new SelectList(_Location.GetAllDistricts(mdLocation.District.StateID.ToString()), "Identity", "DistrictName",mdLocation.DistrictID);
 
                 TempData["PageInfo"] = "Edit Location Info";
                 TempData.Keep();
                 return PartialView(mdLocation);
             }
+        }
+
+        [HttpGet]
+        public ActionResult _LocationCancel(int identity)
+        {
+            return RedirectToAction("_LocationAll");
+        }
+
+        [HttpPost]
+        public JsonResult Country(string identity)
+        {
+            if (identity == "6")
+                return Json(new SelectList(_Location.GetAllCountrys(), "Identity", "CountryName"));
+            else
+                return Json(new SelectList(_Location.GetAllCountrys(identity), "Identity", "CountryName"));
+        }
+
+        [HttpPost]
+        public JsonResult State(string identity)
+        {
+
+            return Json(new SelectList(_Location.GetAllStates(identity), "Identity", "StateName"));
+        }
+
+        [HttpPost]
+        public JsonResult District(string identity)
+        {
+
+            return Json(new SelectList(_Location.GetAllDistricts(identity), "Identity", "DistrictName"));
         }
 
         [HttpGet]
@@ -78,16 +107,28 @@ namespace ERP.Controllers
         }
 
         [HttpPost]
-        public ActionResult Update(Models.Location Location)
+        public ActionResult Update(Models.Location Location, FormCollection frmFields)
         {
             //IF success resturn grid view
             //IF Failure return json value
+
+            BusinessModels.Location mdLocation = AutoMapperConfig.Mapper().Map<BusinessModels.Location>(Location);
+            var regvalue = frmFields["hdnRegion"];
+            var districtvalue = frmFields["hdnDistrict"];
+
+            if(!String.IsNullOrEmpty(districtvalue))
+                mdLocation.DistrictID = int.Parse(districtvalue);
+
             if (Location.Identity.Equals(-1))
             {
-                _Location.Insert(AutoMapperConfig.Mapper().Map<BusinessModels.Location>(Location));
+                mdLocation.CreatedDate = DateTime.Now;
+                _Location.Insert(mdLocation);
             }
             else
-                _Location.Update(AutoMapperConfig.Mapper().Map<BusinessModels.Location>(Location));
+            {
+                mdLocation.ModifiedDate = DateTime.Now;
+                _Location.Update(mdLocation);
+            }
             return RedirectToAction("_LocationAll");
         }
 

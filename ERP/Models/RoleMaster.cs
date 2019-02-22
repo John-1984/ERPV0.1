@@ -110,5 +110,23 @@ namespace ERP.Models
             get;
             set;
         }
+
+        public RoleType RoleType
+        {
+            get;
+            set;
+        }
+
+        public Modules Modules
+        {
+            get;
+            set;
+        }
+
+        public Region Region
+        {
+            get;
+            set;
+        }
     }
 }

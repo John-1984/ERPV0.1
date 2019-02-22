@@ -30,7 +30,11 @@ namespace ERP.Controllers
             else
                 return PartialView(AutoMapperConfig.Mapper().Map<Models.SalesRoleType>(_SalesRoleType.GetSalesRoleType(identity)));
         }
-
+        [HttpGet]
+        public ActionResult _SalesRoleTypeCancel(int identity)
+        {
+            return RedirectToAction("_SalesRoleTypeAll");
+        }
         [HttpGet]
         public PartialViewResult _SalesRoleTypeView(int identity)
         {
@@ -45,16 +49,24 @@ namespace ERP.Controllers
         }
 
         [HttpPost]
-        public ActionResult Update(Models.SalesRoleType SalesRoleType)
+        public ActionResult Update(Models.SalesRoleType SalesRoleType, FormCollection frmFields)
         {
             //IF success resturn grid view
             //IF Failure return json value
+
+            BusinessModels.SalesRoleType mdsalesRoleType=AutoMapperConfig.Mapper().Map<BusinessModels.SalesRoleType>(SalesRoleType);
+
+
             if (SalesRoleType.Identity.Equals(-1))
             {
-                _SalesRoleType.Insert(AutoMapperConfig.Mapper().Map<BusinessModels.SalesRoleType>(SalesRoleType));
+                mdsalesRoleType.CreatedDate = DateTime.Now;
+                _SalesRoleType.Insert(mdsalesRoleType);
             }
             else
-                _SalesRoleType.Update(AutoMapperConfig.Mapper().Map<BusinessModels.SalesRoleType>(SalesRoleType));
+            {
+                mdsalesRoleType.ModifiedDate = DateTime.Now;
+                _SalesRoleType.Update(mdsalesRoleType);
+            }
             return RedirectToAction("_SalesRoleTypeAll");
         }
 

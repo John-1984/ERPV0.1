@@ -124,5 +124,11 @@ namespace ERP.Models
             set;
         }
 
+        public District District
+        {
+            get;
+            set;
+        }
+
     }
 }

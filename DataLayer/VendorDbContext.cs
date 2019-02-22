@@ -8,13 +8,14 @@ namespace DataLayer
     {
         public VendorDbContext() : base("LocalMySqlServer")
         {
-            var test = this.Database.Exists();
-            this.Database.Connection.Open();
-            this.Database.Connection.Close();
-            var test1 = this.Database.Connection.ConnectionString;
+            //var test = this.Database.Exists();
+            //this.Database.Connection.Open();
+            //this.Database.Connection.Close();
+            //var test1 = this.Database.Connection.ConnectionString;
         }
 
         public DbSet<BusinessModels.Vendor> Vendor { get; set; }
+        public DbSet<BusinessModels.ProductMaster> ProductMaster { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

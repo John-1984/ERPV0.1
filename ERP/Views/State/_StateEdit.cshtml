@@ -40,7 +40,7 @@
                     @Html.DropDownList("drpCountry", (IEnumerable<SelectListItem>)Model.CountryList, "Select Country", new { @class = "dropdownstyles" , name= "drpCountry" })
                     @*<span class="input-validation-error" data-valmsg-for="StateName" data-valmsg-replace="true"></span>*@
 
-                    <input type="hidden" name="hdnCountry" id="hdnCountry" />
+                    <input type="hidden" name="hdnCountry" id="hdnCountry" value="@Model.CountryID" />
                 </div>
 
 

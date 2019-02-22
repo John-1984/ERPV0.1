@@ -28,6 +28,23 @@ namespace BusinessLayer
         {
             return _dataLayer.GetLocation(identity);
         }
+
+        public IEnumerable<BusinessModels.Country> GetAllCountrys(string identity)
+        {
+            //TestRegionData();
+            return _condataLayer.GetAll(int.Parse(identity));
+        }
+        public IEnumerable<BusinessModels.State> GetAllStates(string identity)
+        {
+            //TestRegionData();
+            return _statedataLayer.GetAll(int.Parse(identity));
+        }
+
+        public IEnumerable<BusinessModels.District> GetAllDistricts(string identity)
+        {
+            //TestRegionData();
+            return _dstdataLayer.GetAll(int.Parse(identity));
+        }
         public IEnumerable<BusinessModels.Country> GetAllCountrys()
         {
             //TestRegionData();

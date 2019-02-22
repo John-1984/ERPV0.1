@@ -13,6 +13,34 @@
         }
     };
 
+    $(document).off("click", ".BrandCancel");
+    $(document).on("click", ".BrandCancel", function (event) {
+        var theUrl = $(this).attr("data-url");
+        $('.headermode').html('View Brand Info');
+        $.ajax({
+            url: theUrl,
+            type: 'GET',  // http method
+            data: { "identity": $(this).attr("data-identity") },
+            //async: true,
+            success: function (data, status, xhr) {
+
+                $('.BrandSearchDetials').show();
+                $('.BrandAdd').show();
+                $('.resultView').html(data);
+                showMessage(status, "Success");
+            },
+            error: function (jqXhr, textStatus, errorMessage) {
+                showMessage(textStatus, errorMessage);
+            }
+        });
+    });
+
+    $(document).on('change', '#drpBrandVendor', function () {
+        //alert("Test");
+        // debugger;
+        varvendorText = $("#drpBrandVendor").val();
+        $("#hdnVendor").val(varvendorText);
+    });
 
     $(document).off("click", ".BrandView");
     $(document).on("click", ".BrandView", function (event) {

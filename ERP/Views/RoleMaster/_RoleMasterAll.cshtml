@@ -7,10 +7,10 @@
         <table class="table RoleMasterAll">
             <thead>
                 <tr class="gridheader">
-                    <th>Region</th>
-                    <th>Module</th>
-                    <th>Role Type</th>                   
                     <th>Role Name</th>
+                    <th>Role Type</th>
+                    <th>Module</th>
+                    <th>Region</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
@@ -18,14 +18,14 @@
             <tbody>
                 @foreach (var RoleMaster in Model)
                 {
-                    <tr class="gridrow">
-                        <td class="gridrow">@RoleMaster.RegionName</td>
-                        <td class="gridrow">@RoleMaster.ModuleName</td>
-                        <td class="gridrow">@RoleMaster.RoleTypeName</td>
-                        <td class="gridrow">@RoleMaster.RoleName</td>                       
-                        <td class="gridrow "><img src="~/Content/edit.png" alt="Edit" class="RoleMasterEdit pointer" data-url="@Url.Action("_RoleMasterEdit", "RoleMaster")" data-identity="@(RoleMaster.Identity)" /></td>
-                        <td class="gridrow "><img src="~/Content/delete.png" alt="Delete" class="RoleMasterDelete pointer" data-url="@Url.Action("Delete", "RoleMaster")" data-identity="@(RoleMaster.Identity)" /></td>
-                    </tr>
+                <tr class="gridrow">
+                    <td class="gridrow">@RoleMaster.RoleName</td>
+                    <td class="gridrow">@RoleMaster.RoleType.RoletypeName</td>
+                    <td class="gridrow">@RoleMaster.Modules.ModuleName</td>
+                    <td class="gridrow">@RoleMaster.Region.RegionName</td>
+                    <td class="gridrow "><img src="~/Content/edit.png" alt="Edit" class="RoleMasterEdit pointer" data-url="@Url.Action("_RoleMasterEdit", "RoleMaster")" data-identity="@(RoleMaster.Identity)" /></td>
+                    <td class="gridrow "><img src="~/Content/delete.png" alt="Delete" class="RoleMasterDelete pointer" data-url="@Url.Action("Delete", "RoleMaster")" data-identity="@(RoleMaster.Identity)" /></td>
+                </tr>
 
                 }
             </tbody>

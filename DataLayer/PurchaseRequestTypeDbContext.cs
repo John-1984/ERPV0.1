@@ -8,10 +8,10 @@ namespace DataLayer
     {
         public PurchaseRequestTypeDbContext() : base("LocalMySqlServer")
         {
-            var test = this.Database.Exists();
-            this.Database.Connection.Open();
-            this.Database.Connection.Close();
-            var test1 = this.Database.Connection.ConnectionString;
+            //var test = this.Database.Exists();
+            //this.Database.Connection.Open();
+            //this.Database.Connection.Close();
+            //var test1 = this.Database.Connection.ConnectionString;
         }
 
         public DbSet<BusinessModels.PurchaseRequestType> PurchaseRequestType { get; set; }

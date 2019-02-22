@@ -13,6 +13,27 @@
         }
     };
 
+    $(document).off("click", ".RoleTypeCancel");
+    $(document).on("click", ".RoleTypeCancel", function (event) {
+        var theUrl = $(this).attr("data-url");
+        $('.headermode').html('View Role Type Info');
+        $.ajax({
+            url: theUrl,
+            type: 'GET',  // http method
+            data: { "identity": $(this).attr("data-identity") },
+            //async: true,
+            success: function (data, status, xhr) {
+
+                $('.RoleTypeSearchDetials').show();
+                $('.RoleTypeAdd').show();
+                $('.resultView').html(data);
+                showMessage(status, "Success");
+            },
+            error: function (jqXhr, textStatus, errorMessage) {
+                showMessage(textStatus, errorMessage);
+            }
+        });
+    });
 
     $(document).off("click", ".RoleTypeView");
     $(document).on("click", ".RoleTypeView", function (event) {

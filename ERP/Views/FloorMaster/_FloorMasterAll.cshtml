@@ -7,7 +7,13 @@
         <table class="table FloorMasterAll">
             <thead>
                 <tr class="gridheader">
-                    <th>Company Name</th>                    
+                    <th>Region</th>
+                    <th>Country</th>
+                    <th>State</th>
+                    <th>District</th>
+                    <th>Location</th>
+                    <th>Company Name</th>
+                    <th>Company Type Name</th>
                     <th>Floor Name</th>
                     <th>Edit</th>
                     <th>Delete</th>
@@ -17,9 +23,15 @@
                 @foreach (var FloorMaster in Model)
                 {
                 <tr class="gridrow">
-                    <td class="gridrow">@FloorMaster.CompanyName</td>
+                    <td class="gridrow">@FloorMaster.CompanyType.Company.Location.District.State.Country.Region.RegionName</td>
+                    <td class="gridrow "> @FloorMaster.CompanyType.Company.Location.District.State.Country.CountryName</td>
+                    <td class="gridrow">@FloorMaster.CompanyType.Company.Location.District.State.StateName</td>
+                    <td class="gridrow "> @FloorMaster.CompanyType.Company.Location.District.DistrictName</td>
+                    <td class="gridrow">@FloorMaster.CompanyType.Company.Location.LocationName</td>
+                    <td class="gridrow">@FloorMaster.CompanyType.Company.CompanyName</td>
+                    <td class="gridrow">@FloorMaster.CompanyType.TypeName</td>
                     <td class="gridrow">@FloorMaster.FloorName</td>
-                    
+
                     <td class="gridrow "><img src="~/Content/edit.png" alt="Edit" class="FloorMasterEdit pointer" data-url="@Url.Action("_FloorMasterEdit", "FloorMaster")" data-identity="@(FloorMaster.Identity)" /></td>
                     <td class="gridrow "><img src="~/Content/delete.png" alt="Delete" class="FloorMasterDelete pointer" data-url="@Url.Action("Delete", "FloorMaster")" data-identity="@(FloorMaster.Identity)" /></td>
                 </tr>

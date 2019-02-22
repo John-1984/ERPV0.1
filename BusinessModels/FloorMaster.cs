@@ -22,27 +22,10 @@ namespace BusinessModels
         public string FloorName
         { get; set; }
 
+        [ForeignKey("CompanyType")]
         public int CompanyTypeID
         { get; set; }
-
-
-
-        public int CompanyID
-        { get; set; }
-
-        public string CompanyName
-        { get; set; }
-
-        public string TypeName
-        { get; set; }
-
-        public List<string> ErrorList
-        {
-            get;
-            set;
-        }
-
-
+       
         public DateTime CreatedDate
         {
             get;
@@ -59,6 +42,12 @@ namespace BusinessModels
             set;
         }
         public int CreatedBy
+        {
+            get;
+            set;
+        }
+
+        public CompanyType CompanyType
         {
             get;
             set;

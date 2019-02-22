@@ -13,6 +13,27 @@
         }
     };
 
+    $(document).off("click", ".IdentificationsTypeCancel");
+    $(document).on("click", ".IdentificationsTypeCancel", function (event) {
+        var theUrl = $(this).attr("data-url");
+        $('.headermode').html('View Identifications Type Info');
+        $.ajax({
+            url: theUrl,
+            type: 'GET',  // http method
+            data: { "identity": $(this).attr("data-identity") },
+            //async: true,
+            success: function (data, status, xhr) {
+
+                $('.IdentificationsTypeSearchDetials').show();
+                $('.IdentificationsTypeAdd').show();
+                $('.resultView').html(data);
+                showMessage(status, "Success");
+            },
+            error: function (jqXhr, textStatus, errorMessage) {
+                showMessage(textStatus, errorMessage);
+            }
+        });
+    });
 
     $(document).off("click", ".IdentificationsTypeView");
     $(document).on("click", ".IdentificationsTypeView", function (event) {

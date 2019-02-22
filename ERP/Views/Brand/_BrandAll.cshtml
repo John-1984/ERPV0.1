@@ -7,8 +7,10 @@
         <table class="table BrandAll">
             <thead>
                 <tr class="gridheader">
-                    <th>Vendor</th>                   
+
                     <th>Brand Name</th>
+                    <th>Vendor</th>
+                    <th>Product Category</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
@@ -16,13 +18,14 @@
             <tbody>
                 @foreach (var Brand in Model)
                 {
-                    <tr class="gridrow">
-                        <td class="gridrow">@Brand.VendorName</td>
-                        
-                        <td class="gridrow "> @Brand.BrandName</td>
-                        <td class="gridrow "><img src="~/Content/edit.png" alt="Edit" class="BrandEdit pointer" data-url="@Url.Action("_BrandEdit", "Brand")" data-identity="@(Brand.Identity)" /></td>
-                        <td class="gridrow "><img src="~/Content/delete.png" alt="Delete" class="BrandDelete pointer" data-url="@Url.Action("Delete", "Brand")" data-identity="@(Brand.Identity)" /></td>
-                    </tr>
+                <tr class="gridrow">
+
+                    <td class="gridrow "> @Brand.BrandName</td>
+                    <td class="gridrow">@Brand.VendorName</td>
+                    <td class="gridrow">@Brand.Vendor.ProductMaster.ProductName</td>
+                    <td class="gridrow "><img src="~/Content/edit.png" alt="Edit" class="BrandEdit pointer" data-url="@Url.Action("_BrandEdit", "Brand")" data-identity="@(Brand.Identity)" /></td>
+                    <td class="gridrow "><img src="~/Content/delete.png" alt="Delete" class="BrandDelete pointer" data-url="@Url.Action("Delete", "Brand")" data-identity="@(Brand.Identity)" /></td>
+                </tr>
 
                 }
             </tbody>

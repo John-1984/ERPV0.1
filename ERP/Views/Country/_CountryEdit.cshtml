@@ -29,7 +29,7 @@
                         @*<span class="input-validation-error" data-valmsg-for="CountryName" data-valmsg-replace="true"></span>*@
 
                         @*@Html.DropDownListFor(model => model.RegionID, Model.RegionList as SelectList, new { @class = "dropdownstyles" })*@
-                        <input type="hidden" name="hdnRegion" id="hdnRegion" />
+                        <input type="hidden" name="hdnRegion" id="hdnRegion" value="@(Model.RegionID)" />
                     </div>
 
                 </div>

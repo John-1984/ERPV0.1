@@ -24,8 +24,11 @@ namespace BusinessModels
             get;
             set;
         }
+
+        [ForeignKey("ProductMaster")]
         public int ProductMasterID
         { get; set; }
+
         public DateTime CreatedDate
         {
             get;
@@ -47,12 +50,12 @@ namespace BusinessModels
             set;
         }
 
-     
-        public List<string> ErrorList
+        public ProductMaster ProductMaster
         {
             get;
             set;
         }
+       
 
 
     }

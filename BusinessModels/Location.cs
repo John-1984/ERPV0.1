@@ -25,6 +25,7 @@ namespace BusinessModels
             set;
         }
 
+        [ForeignKey("District")]
         public int DistrictID
         {
             get;
@@ -52,43 +53,13 @@ namespace BusinessModels
             get;
             set;
         }
-        public string DistrictName
-        {
-            get;
-            set;
-        }
+       
 
-        public string RegionName
+        public District District
         {
             get;
             set;
         }
-        public string CountryName
-        {
-            get;
-            set;
-        }
-        public string StateName
-        {
-            get;
-            set;
-        }
-        public int RegionID
-        {
-            get;
-            set;
-        }
-        public int CountryID
-        {
-            get;
-            set;
-        }
-        public int StateID
-        {
-            get;
-            set;
-        }
-
 
     }
 }

@@ -32,6 +32,12 @@ namespace ERP.Controllers
         }
 
         [HttpGet]
+        public ActionResult _PurchaseRequestTypeCancel(int identity)
+        {
+            return RedirectToAction("_PurchaseRequestTypeAll");
+        }
+
+        [HttpGet]
         public PartialViewResult _PurchaseRequestTypeView(int identity)
         {
             return PartialView(AutoMapperConfig.Mapper().Map<Models.PurchaseRequestType>(_PurchaseRequestType.GetPurchaseRequestType(identity)));
@@ -45,16 +51,24 @@ namespace ERP.Controllers
         }
 
         [HttpPost]
-        public ActionResult Update(Models.PurchaseRequestType PurchaseRequestType)
+        public ActionResult Update(Models.PurchaseRequestType PurchaseRequestType, FormCollection frmFields)
         {
             //IF success resturn grid view
             //IF Failure return json value
+
+            BusinessModels.PurchaseRequestType mdPurchase = AutoMapperConfig.Mapper().Map<BusinessModels.PurchaseRequestType>(PurchaseRequestType);
+
             if (PurchaseRequestType.Identity.Equals(-1))
             {
-                _PurchaseRequestType.Insert(AutoMapperConfig.Mapper().Map<BusinessModels.PurchaseRequestType>(PurchaseRequestType));
+                mdPurchase.CreatedDate = DateTime.Now;
+
+                _PurchaseRequestType.Insert(mdPurchase);
             }
             else
-                _PurchaseRequestType.Update(AutoMapperConfig.Mapper().Map<BusinessModels.PurchaseRequestType>(PurchaseRequestType));
+            {
+                mdPurchase.ModifiedDate = DateTime.Now;
+                _PurchaseRequestType.Update(mdPurchase);
+            }
             return RedirectToAction("_PurchaseRequestTypeAll");
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 
 namespace DataLayer
 {
@@ -28,6 +29,7 @@ namespace DataLayer
             using (var dbContext = new VendorDbContext())
             {
                 _Vendor = dbContext.Vendor
+                    .Include(K => K.ProductMaster)
                             .FirstOrDefault(p => p.Identity.Equals(identity));
             }
             return _Vendor;
@@ -39,7 +41,23 @@ namespace DataLayer
             using (var dbContext = new VendorDbContext())
             {
                 dbContext.Configuration.LazyLoadingEnabled = false;
-                _Vendors = dbContext.Vendor.ToList();
+                _Vendors = dbContext.Vendor
+                     .Include(K => K.ProductMaster)
+                    .ToList();
+            }
+
+            return _Vendors;
+        }
+
+        public IEnumerable<BusinessModels.Vendor> GetAll(int masteridentity)
+        {
+            var _Vendors = new List<BusinessModels.Vendor>();
+            using (var dbContext = new VendorDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _Vendors = dbContext.Vendor
+                     .Include(K => K.ProductMaster).Where(p => p.ProductMaster.Identity == masteridentity)
+                    .ToList();
             }
 
             return _Vendors;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Data.Entity;
 namespace DataLayer
 {
     public class FloorMasterDAL
@@ -20,8 +20,13 @@ namespace DataLayer
             using (var dbContext = new FloorMasterDbContext())
             {
                 _FloorMaster = dbContext.FloorMaster
-                            .Include("Company")
-                             .Include("CompanyType")
+                            .Include(K => K.CompanyType)
+                            .Include(K => K.CompanyType.Company)
+                            .Include(K => K.CompanyType.Company.Location)
+                             .Include(K => K.CompanyType.Company.Location.District)
+                            .Include(o => o.CompanyType.Company.Location.District.State)
+                            .Include(o => o.CompanyType.Company.Location.District.State.Country)
+                            .Include(o => o.CompanyType.Company.Location.District.State.Country.Region)
                             .FirstOrDefault(p => p.Identity.Equals(identity));
             }
             return _FloorMaster;
@@ -35,8 +40,35 @@ namespace DataLayer
             {
                 dbContext.Configuration.LazyLoadingEnabled = false;
                 _FloorMasters = dbContext.FloorMaster
-                              .Include("Company")
-                             .Include("CompanyType")
+                              .Include(K => K.CompanyType)
+                            .Include(K => K.CompanyType.Company)
+                            .Include(K => K.CompanyType.Company.Location)
+                             .Include(K => K.CompanyType.Company.Location.District)
+                            .Include(o => o.CompanyType.Company.Location.District.State)
+                            .Include(o => o.CompanyType.Company.Location.District.State.Country)
+                            .Include(o => o.CompanyType.Company.Location.District.State.Country.Region)
+                            .ToList();
+            }
+
+            return _FloorMasters;
+        }
+
+        public IEnumerable<BusinessModels.FloorMaster> GetAll(int stidentity)
+        {
+            //Need to do
+            var _FloorMasters = new List<BusinessModels.FloorMaster>();
+            using (var dbContext = new FloorMasterDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _FloorMasters = dbContext.FloorMaster
+                              .Include(K => K.CompanyType)
+                            .Include(K => K.CompanyType.Company)
+                            .Include(K => K.CompanyType.Company.Location)
+                             .Include(K => K.CompanyType.Company.Location.District)
+                            .Include(o => o.CompanyType.Company.Location.District.State)
+                            .Include(o => o.CompanyType.Company.Location.District.State.Country)
+                            .Include(o => o.CompanyType.Company.Location.District.State.Country.Region)
+                             .Where(p => p.CompanyType.Identity == stidentity)
                             .ToList();
             }
 

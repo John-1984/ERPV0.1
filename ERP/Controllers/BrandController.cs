@@ -28,6 +28,7 @@ namespace ERP.Controllers
             if (identity.Equals(-1))
             {
                 Models.Brand mdBrand = new Models.Brand();
+
                 mdBrand.VendorList = null;
                 mdBrand.VendorList = new SelectList(_Brand.GetAllVendors(), "Identity", "VendorName");               
 
@@ -37,8 +38,9 @@ namespace ERP.Controllers
             else
             {
                 Models.Brand mdBrand = AutoMapperConfig.Mapper().Map<Models.Brand>(_Brand.GetBrand(identity));
+
                 mdBrand.VendorList = null;
-                mdBrand.VendorList = new SelectList(_Brand.GetAllVendors(), "Identity", "VendorName");
+                mdBrand.VendorList = new SelectList(_Brand.GetAllVendors(), "Identity", "VendorName",mdBrand.VendorID );
 
                 TempData["PageInfo"] = "Edit Brand Info";
                 TempData.Keep();
@@ -46,6 +48,11 @@ namespace ERP.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult _BrandCancel(int identity)
+        {
+            return RedirectToAction("_BrandAll");
+        }
         [HttpGet]
         public PartialViewResult _BrandView(int identity)
         {
@@ -60,16 +67,28 @@ namespace ERP.Controllers
         }
 
         [HttpPost]
-        public ActionResult Update(Models.Brand Brand)
+        public ActionResult Update(Models.Brand Brand, FormCollection frmFields)
         {
             //IF success resturn grid view
             //IF Failure return json value
+
+            BusinessModels.Brand mdBrand = AutoMapperConfig.Mapper().Map<BusinessModels.Brand>(Brand);
+            var value = frmFields["hdnVendor"];
+
+            if (!String.IsNullOrEmpty(value))
+                mdBrand.VendorID = int.Parse(value);
+
             if (Brand.Identity.Equals(-1))
             {
-                _Brand.Insert(AutoMapperConfig.Mapper().Map<BusinessModels.Brand>(Brand));
+                mdBrand.CreatedDate = DateTime.Now;
+                _Brand.Insert(mdBrand);
             }
             else
-                _Brand.Update(AutoMapperConfig.Mapper().Map<BusinessModels.Brand>(Brand));
+            {
+                mdBrand.ModifiedDate = DateTime.Now;
+               
+                _Brand.Update(mdBrand);
+            }
             return RedirectToAction("_BrandAll");
         }
 

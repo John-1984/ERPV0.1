@@ -31,6 +31,8 @@ namespace BusinessLayer
             //TestRegionData();
             return _condataLayer.GetAll();
         }
+
+       
         public IEnumerable<BusinessModels.Region> GetAllRegionss()
         {
             //TestRegionData();
@@ -40,6 +42,16 @@ namespace BusinessLayer
         {
             //TestRegionData();
             return _statedataLayer.GetAll();
+        }
+        public IEnumerable<BusinessModels.Country> GetAllCountrys(string identity)
+        {
+            //TestRegionData();
+            return _condataLayer.GetAll(int.Parse(identity));
+        }
+        public IEnumerable<BusinessModels.State> GetAllStates(string identity)
+        {
+            //TestRegionData();
+            return _statedataLayer.GetAll(int.Parse(identity));
         }
         public IEnumerable<BusinessModels.District> GetAll()
         {

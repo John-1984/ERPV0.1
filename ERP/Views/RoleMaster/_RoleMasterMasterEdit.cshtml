@@ -22,56 +22,55 @@
         <div class="row  col-md-12 col-lg-12">
 
             <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div>Region :</div></div>
+                <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div><label>Region :</label></div></div>
                 <div class="float-right col-md-7 col-lg-8">
                     @* @Html.DropDownList("Mobiledropdown1", Model.RegionList)*@
-                    @Html.DropDownList("drpRegion", (IEnumerable<SelectListItem>)Model.RegionList, "Select Region", new { @class = "dropdownstyles" })
+                    @Html.DropDownList("drpRoleMasterRegion", (IEnumerable<SelectListItem>)Model.RegionList, "Select Region", new { @class = "dropdownstyles", name = "drpRoleMasterRegion" })
                     @*<span class="input-validation-error" data-valmsg-for="RoleMasterName" data-valmsg-replace="true"></span>*@
-
+                    <input type="hidden" name="hdnRegion" id="hdnRegion" value="@(Model.Region.Identity)" />
                 </div>
 
 
             </div>
             <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div>Module :</div></div>
+                <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div><label>Module :</label></div></div>
                 <div class="float-right col-md-7 col-lg-8">
                     @* @Html.DropDownList("Mobiledropdown1", Model.RegionList)*@
-                    @Html.DropDownList("drpModule", (IEnumerable<SelectListItem>)Model.ModuleList, "Select Module", new { @class = "dropdownstyles" })
+                    @Html.DropDownList("drpRoleMasterModules", (IEnumerable<SelectListItem>)Model.ModuleList, "Select Module", new { @class = "dropdownstyles", name = "drpRoleMasterModules" })
                     @*<span class="input-validation-error" data-valmsg-for="RoleMasterName" data-valmsg-replace="true"></span>*@
-
+                    <input type="hidden" name="hdnModules" id="hdnModules" value="@(Model.Modules.Identity)" />
                 </div>
 
 
             </div>
 
             <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div>Role Type :</div></div>
+                <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div><label>Role Type :</label></div></div>
                 <div class="float-right col-md-7 col-lg-8">
                     @* @Html.DropDownList("Mobiledropdown1", Model.RegionList)*@
-                    @Html.DropDownList("drpRoletype", (IEnumerable<SelectListItem>)Model.RoleTypeList, "Select State", new { @class = "dropdownstyles" })
+                    @Html.DropDownList("drpRoleMasterRoleType", (IEnumerable<SelectListItem>)Model.RoleTypeList, "Select State", new { @class = "dropdownstyles", name = "drpRoleMasterRoleType" })
                     @*<span class="input-validation-error" data-valmsg-for="RoleMasterName" data-valmsg-replace="true"></span>*@
-
+                    <input type="hidden" name="hdnRoleType" id="hdnRoleType" value="@(Model.RoleType.Identity)" />
                 </div>
 
 
             </div>
-           
 
             <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;">Role Name :</div></div>
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;"><label>Role Name :</label></div></div>
                 <div class="float-right col-md-8 col-lg-8">
                     <input class="textareastyles" style="width:300px;height:35px;" type="text" name="RoleName" value="@(Model.RoleName)" placeholder="Enter Role Name" />
                     @*<span class="input-validation-error" data-valmsg-for="RoleMasterName" data-valmsg-replace="true"></span>*@
 
                 </div>
-
             </div>
-
-
         </div>
 
         <div class="row col-md-12 col-lg-12 commonPadding">
             <div class="col-md-6 col-lg-6"><input type="button" data-url="@Url.Action("Update", "RoleMaster")" class="formbutton float-right RoleMasterAddEdit" data-identity="@(Model.Identity)" value="Update/Add" /></div>
+            <div class="col-md-6 col-lg-6">
+                <input type="button" value="Cancel" data-url="@Url.Action("_RoleMasterCancel", "RoleMaster")" data-identity="-1" class="formbutton RoleMasterCancel" />
+            </div>
             <input type="hidden" name="Identity" value="@(Model.Identity)">
         </div>
 

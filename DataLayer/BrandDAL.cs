@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Data.Entity;
 namespace DataLayer
 {
     public class BrandDAL
@@ -20,7 +20,8 @@ namespace DataLayer
             using (var dbContext = new BrandDbContext())
             {
                 _Brand = dbContext.Brand
-                            .Include("Vendor")
+                             .Include(K => K.Vendor)
+                             .Include(l => l.Vendor.ProductMaster)
                             .FirstOrDefault(p => p.Identity.Equals(identity));
             }
             return _Brand;
@@ -34,7 +35,25 @@ namespace DataLayer
             {
                 dbContext.Configuration.LazyLoadingEnabled = false;
                 _Brands = dbContext.Brand
-                             .Include("Vendor")
+                             .Include(K => K.Vendor)
+                             .Include(l => l.Vendor.ProductMaster)
+                            .ToList();
+            }
+
+            return _Brands;
+        }
+
+        public IEnumerable<BusinessModels.Brand> GetAll(int bridentity)
+        {
+            //Need to do
+            var _Brands = new List<BusinessModels.Brand>();
+            using (var dbContext = new BrandDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _Brands = dbContext.Brand
+                            .Include(K => K.Vendor)
+                            .Include(l => l.Vendor.ProductMaster)
+                            .Where(p => p.Vendor.Identity == bridentity)
                             .ToList();
             }
 

@@ -13,6 +13,113 @@
         }
     };
 
+    $(document).on('change', '#drpRegion', function () {
+        //alert("Test");
+        // debugger;
+        varregionText = $("#drpRegion").val();
+        $("#hdnRegion").val(varregionText);
+        var drpCountry = $("#drpCountry");
+        // alert("Test");
+        $.ajax({
+            type: 'POST',
+            url: '/Location/Country',
+            data: JSON.stringify({ identity: $("#drpRegion").val() }),
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function (response) {
+                drpCountry.empty().append('<option selected="selected" value="0">Select Country</option>');
+                $.each(response, function () {
+                    drpCountry.append($("<option></option>").val(this['Value']).html(this['Text']));
+                });
+            },
+            error: function (response) {
+                showMessage(response.responseText);
+            }
+        });
+    });
+
+    $(document).on('change', '#drpCountry', function () {
+        //alert("Test");
+        // debugger;
+        varcountryText = $("#drpCountry").val();
+        $("#hdnCountry").val(varcountryText);
+        var drpState = $("#drpState");
+        //alert("Test");
+        $.ajax({
+            type: 'POST',
+            url: '/Location/State',
+            data: JSON.stringify({ identity: $("#drpCountry").val() }),
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function (response) {
+                drpState.empty().append('<option selected="selected" value="0">Select State</option>');
+                $.each(response, function () {
+                    drpState.append($("<option></option>").val(this['Value']).html(this['Text']));
+                });
+            },
+            error: function (response) {
+                showMessage(response.responseText);
+            }
+        });
+    });
+
+    $(document).on('change', '#drpState', function () {
+        //alert("Test");
+        // debugger;
+        alert("Test");
+        varstateText = $("#drpState").val();
+        $("#hdnState").val(varstateText);
+        var drpDistrict = $("#drpdistrict");
+        //alert("Test");
+        $.ajax({
+            type: 'POST',
+            url: '/Location/District',
+            data: JSON.stringify({ identity: $("#drpState").val() }),
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function (response) {
+                drpDistrict.empty().append('<option selected="selected" value="0">Select District</option>');
+                $.each(response, function () {
+                    drpDistrict.append($("<option></option>").val(this['Value']).html(this['Text']));
+                });
+            },
+            error: function (response) {
+                showMessage(response.responseText);
+            }
+        });
+    });
+
+
+    $(document).on('change', '#drpdistrict', function () {
+        //alert("Test");
+        // debugger;
+        vardistrictText = $("#drpdistrict").val();
+        $("#hdnDistrict").val(vardistrictText);
+
+        alert(vardistrictText);
+    });
+
+    $(document).off("click", ".LocationCancel");
+    $(document).on("click", ".LocationCancel", function (event) {
+        var theUrl = $(this).attr("data-url");
+        $('.headermode').html('View Location Info');
+        $.ajax({
+            url: theUrl,
+            type: 'GET',  // http method
+            data: { "identity": $(this).attr("data-identity") },
+            //async: true,
+            success: function (data, status, xhr) {
+
+                $('.LocationSearchDetials').show();
+                $('.LocationAdd').show();
+                $('.resultView').html(data);
+                showMessage(status, "Success");
+            },
+            error: function (jqXhr, textStatus, errorMessage) {
+                showMessage(textStatus, errorMessage);
+            }
+        });
+    });
 
     $(document).off("click", ".LocationView");
     $(document).on("click", ".LocationView", function (event) {

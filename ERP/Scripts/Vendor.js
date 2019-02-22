@@ -13,6 +13,34 @@
         }
     };
 
+    $(document).off("click", ".VendorCancel");
+    $(document).on("click", ".VendorCancel", function (event) {
+        var theUrl = $(this).attr("data-url");
+        $('.headermode').html('View Vendor Info');
+        $.ajax({
+            url: theUrl,
+            type: 'GET',  // http method
+            data: { "identity": $(this).attr("data-identity") },
+            //async: true,
+            success: function (data, status, xhr) {
+
+                $('.VendorSearchDetials').show();
+                $('.VendorAdd').show();
+                $('.resultView').html(data);
+                showMessage(status, "Success");
+            },
+            error: function (jqXhr, textStatus, errorMessage) {
+                showMessage(textStatus, errorMessage);
+            }
+        });
+    });
+
+    $(document).on('change', '#drpVendorProductMaster', function () {
+        //alert("Test");
+        // debugger;
+        varprodmastText = $("#drpVendorProductMaster").val();
+        $("#hdnProductMaster").val(varprodmastText);
+    });
 
     $(document).off("click", ".VendorView");
     $(document).on("click", ".VendorView", function (event) {

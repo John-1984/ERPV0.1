@@ -44,13 +44,15 @@ namespace ERP.Controllers
             {
                 Models.District mdDistrict = AutoMapperConfig.Mapper().Map<Models.District>(_District.GetDistrict(identity));
                 mdDistrict.RegionList = null;
-                mdDistrict.RegionList = new SelectList(_District.GetAllRegionss(), "Identity", "RegionName");
+                mdDistrict.RegionList = new SelectList(_District.GetAllRegionss(), "Identity", "RegionName", mdDistrict.State.Country.RegionID);
 
                 mdDistrict.CountryList = null;
-                mdDistrict.CountryList = new SelectList(_District.GetAllCountrys(), "Identity", "CountryName");
+                mdDistrict.CountryList = new SelectList(_District.GetAllCountrys(mdDistrict.State.Country.RegionID.ToString()), "Identity", "CountryName", mdDistrict.State.CountryID);
 
                 mdDistrict.StateList = null;
-                mdDistrict.StateList = new SelectList(_District.GetAllState(), "Identity", "StateName");
+                mdDistrict.StateList = new SelectList(_District.GetAllStates(mdDistrict.State.CountryID.ToString()), "Identity", "StateName", mdDistrict.StateID);
+
+               
 
                 TempData["PageInfo"] = "Edit District Info";
                 TempData.Keep();
@@ -71,17 +73,49 @@ namespace ERP.Controllers
             return RedirectToAction("_DistrictAll");
         }
 
+        [HttpGet]
+        public ActionResult _DistrictCancel(int identity)
+        {
+            return RedirectToAction("_DistrictAll");
+        }
+
         [HttpPost]
-        public ActionResult Update(Models.District District)
+        public JsonResult Country(string identity)
+        {
+            if (identity == "6")
+                return Json(new SelectList(_District.GetAllCountrys(), "Identity", "CountryName"));
+            else
+                return Json(new SelectList(_District.GetAllCountrys(identity), "Identity", "CountryName"));
+        }
+
+        [HttpPost]
+        public JsonResult State(string identity)
+        {
+          
+                return Json(new SelectList(_District.GetAllStates(identity), "Identity", "StateName"));
+        }
+
+        [HttpPost]
+        public ActionResult Update(Models.District District, FormCollection frmFields)
         {
             //IF success resturn grid view
             //IF Failure return json value
+
+            BusinessModels.District mdDistrict = AutoMapperConfig.Mapper().Map<BusinessModels.District>(District);
+            var regvalue = frmFields["hdnRegion"];
+            var statevalue = frmFields["hdnState"];
+
+            if (!String.IsNullOrEmpty(statevalue))
+                mdDistrict.StateID= int.Parse(statevalue);
+
             if (District.Identity.Equals(-1))
             {
-                _District.Insert(AutoMapperConfig.Mapper().Map<BusinessModels.District>(District));
+                _District.Insert(mdDistrict);
             }
             else
-                _District.Update(AutoMapperConfig.Mapper().Map<BusinessModels.District>(District));
+                _District.Update(mdDistrict);
+
+
             return RedirectToAction("_DistrictAll");
         }
 

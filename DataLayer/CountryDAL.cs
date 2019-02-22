@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Data.Entity;
 namespace DataLayer
 {
     public class CountryDAL
@@ -20,7 +20,7 @@ namespace DataLayer
             using (var dbContext = new CountryDbContext())
             {
                 _Country = dbContext.Country
-                            .Include("Region")
+                            .Include(K => K.Region)
                             .FirstOrDefault(p => p.Identity.Equals(identity));
             }
             return _Country;
@@ -33,7 +33,7 @@ namespace DataLayer
             {
                 dbContext.Configuration.LazyLoadingEnabled = false;
                 _Countrys = dbContext.Country
-                             .Include("Region")
+                             .Include(K => K.Region)
                             .ToList();
             }
 
@@ -47,7 +47,7 @@ namespace DataLayer
             {
                 dbContext.Configuration.LazyLoadingEnabled = false;
                 _Countrys = dbContext.Country
-                             .Include("Region").Where(p=>p.Region.Identity== regidentity)
+                              .Include(K => K.Region).Where(p=>p.Region.Identity== regidentity)
                             .ToList();
             }
 

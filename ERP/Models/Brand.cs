@@ -75,6 +75,10 @@ namespace ERP.Models
         }
 
 
-
+        public Vendor Vendor
+        {
+            get;
+            set;
+        }
     }
 }

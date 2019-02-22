@@ -13,7 +13,7 @@
                     <th>District</th>
                     <th>Location</th>
                     <th>Company Name</th>
-                    <th>Company Type</th>
+                    
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
@@ -22,13 +22,12 @@
                 @foreach (var Company in Model)
                 {
                 <tr class="gridrow">
-                    <td class="gridrow">@Company.RegionName</td>
-                    <td class="gridrow "> @Company.CountryName</td>
-                    <td class="gridrow">@Company.StateName</td>
-                    <td class="gridrow "> @Company.DistrictName</td>
-                    <td class="gridrow">@Company.LocationName</td>
-                    <td class="gridrow "> @Company.CompanyName</td>
-                    <td class="gridrow "> @Company.CompanyTypeName</td>
+                    <td class="gridrow">@Company.Location.District.State.Country.Region.RegionName</td>
+                    <td class="gridrow "> @Company.Location.District.State.Country.CountryName</td>
+                    <td class="gridrow">@Company.Location.District.State.StateName</td>
+                    <td class="gridrow "> @Company.Location.District.DistrictName</td>
+                    <td class="gridrow">@Company.Location.LocationName</td>
+                    <td class="gridrow "> @Company.CompanyName</td>                  
                     <td class="gridrow "><img src="~/Content/edit.png" alt="Edit" class="CompanyEdit pointer" data-url="@Url.Action("_CompanyEdit", "Company")" data-identity="@(Company.Identity)" /></td>
                     <td class="gridrow "><img src="~/Content/delete.png" alt="Delete" class="CompanyDelete pointer" data-url="@Url.Action("Delete", "Company")" data-identity="@(Company.Identity)" /></td>
                 </tr>

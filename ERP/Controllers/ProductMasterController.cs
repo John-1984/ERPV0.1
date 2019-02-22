@@ -23,6 +23,11 @@ namespace ERP.Controllers
         }
 
         [HttpGet]
+        public ActionResult _ProductMasterCancel(int identity)
+        {
+            return RedirectToAction("_ProductMasterAll");
+        }
+        [HttpGet]
         public PartialViewResult _ProductMasterEdit(int identity)
         {
             if (identity.Equals(-1))

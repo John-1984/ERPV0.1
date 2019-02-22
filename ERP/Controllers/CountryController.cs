@@ -72,7 +72,8 @@ namespace ERP.Controllers
 
             var value = frmCountry["hdnRegion"];
 
-            con.RegionID = int.Parse(value);
+            if (!String.IsNullOrEmpty(value))
+                con.RegionID = int.Parse(value);
 
             //   string SelectedValue = Country.SelectedRegion.ToString();
 

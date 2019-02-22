@@ -90,7 +90,9 @@ namespace ERP.Controllers
             BusinessModels.State mdState = AutoMapperConfig.Mapper().Map<BusinessModels.State>(State);
             var regvalue = frmFields["hdnRegion"];
             var convalue = frmFields["hdnCountry"];
-            mdState.CountryID = int.Parse(convalue);
+
+            if (!String.IsNullOrEmpty(convalue))
+                mdState.CountryID = int.Parse(convalue);
 
             if (State.Identity.Equals(-1))
             {

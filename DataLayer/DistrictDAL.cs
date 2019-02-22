@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace DataLayer
 {
@@ -20,7 +21,9 @@ namespace DataLayer
             using (var dbContext = new DistrictDbContext())
             {
                 _District = dbContext.District
-                            .Include("Country")
+                            .Include(K => K.State)
+                            .Include(o => o.State.Country)
+                            .Include(o => o.State.Country.Region)
                             .FirstOrDefault(p => p.Identity.Equals(identity));
             }
             return _District;
@@ -34,24 +37,31 @@ namespace DataLayer
             {
                 dbContext.Configuration.LazyLoadingEnabled = false;
                 _Districts = dbContext.District
-                             .Include("Country")
+                             .Include(K => K.State)
+                            .Include(o => o.State.Country)
+                            .Include(o => o.State.Country.Region)
                             .ToList();
             }
 
             return _Districts;
         }
 
-        public IEnumerable<BusinessModels.Country> GetCountry()
+        public IEnumerable<BusinessModels.District> GetAll(int stidentity)
         {
-            var _Countrys = new List<BusinessModels.Country>();
-            using (var dbContext = new CountryDbContext())
+            var _Districts = new List<BusinessModels.District>();
+            using (var dbContext = new DistrictDbContext())
             {
                 dbContext.Configuration.LazyLoadingEnabled = false;
-                _Countrys = dbContext.Country
+                _Districts = dbContext.District
+                             .Include(K => K.State)
+                            .Include(o => o.State.Country)
+                            .Include(o => o.State.Country.Region).Where(p => p.State.Identity == stidentity)
                             .ToList();
             }
-            return _Countrys;
+
+            return _Districts;
         }
+        
 
         public Boolean Update(BusinessModels.District District)
         {

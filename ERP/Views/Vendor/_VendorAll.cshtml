@@ -8,6 +8,7 @@
             <thead>
                 <tr class="gridheader">
                     <th>Vendor Name</th>
+                    <th>Product Category</th>
                     @*<th>View</th>*@
                     <th>Edit</th>
                     <th>Delete</th>
@@ -16,12 +17,13 @@
             <tbody>
                 @foreach (var Vendor in Model)
                 {
-                    <tr class="gridrow">
-                        <td class="gridrow">@Vendor.VendorName</td>
-                        @*<td class="gridrow "> <img src="~/Content/view.gif" alt="View" class="VendorView pointer" data-url="@Url.Action("_VendorView", "Vendor")" data-identity="@(Vendor.Identity)" /> </td>*@
-                        <td class="gridrow "><img src="~/Content/edit.png" alt="Edit" class="VendorEdit pointer" data-url="@Url.Action("_VendorEdit", "Vendor")" data-identity="@(Vendor.Identity)" /></td>
-                        <td class="gridrow "><img src="~/Content/delete.png" alt="Delete" class="VendorDelete pointer" data-url="@Url.Action("Delete", "Vendor")" data-identity="@(Vendor.Identity)" /></td>
-                    </tr>
+                <tr class="gridrow">
+                    <td class="gridrow">@Vendor.VendorName</td>
+                    <td class="gridrow">@Vendor.ProductMaster.ProductName</td>
+                    @*<td class="gridrow "> <img src="~/Content/view.gif" alt="View" class="VendorView pointer" data-url="@Url.Action("_VendorView", "Vendor")" data-identity="@(Vendor.Identity)" /> </td>*@
+                    <td class="gridrow "><img src="~/Content/edit.png" alt="Edit" class="VendorEdit pointer" data-url="@Url.Action("_VendorEdit", "Vendor")" data-identity="@(Vendor.Identity)" /></td>
+                    <td class="gridrow "><img src="~/Content/delete.png" alt="Delete" class="VendorDelete pointer" data-url="@Url.Action("Delete", "Vendor")" data-identity="@(Vendor.Identity)" /></td>
+                </tr>
 
                 }
             </tbody>

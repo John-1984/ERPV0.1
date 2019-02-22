@@ -44,6 +44,19 @@ namespace DataLayer
             return _States;
         }
 
+        public IEnumerable<BusinessModels.State> GetAll(int conidentity)
+        {
+            var _States = new List<BusinessModels.State>();
+            using (var dbContext = new StateDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _States = dbContext.State
+                             .Include(K => K.Country).Where(p => p.Country.Identity == conidentity)
+                            .ToList();
+            }
+
+            return _States;
+        }
         public IEnumerable<BusinessModels.Country> GetCountry()
         {
             var _Countrys = new List<BusinessModels.Country>();

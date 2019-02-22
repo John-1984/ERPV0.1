@@ -12,6 +12,8 @@ namespace ERP.Models
     {
         public FloorMaster()
         {
+            Identity = -1;
+            FloorName = string.Empty;
         }
 
         [Key]
@@ -56,7 +58,32 @@ namespace ERP.Models
             get;
             set;
         }
+        public SelectList RegionList
+        {
+            get;
+            set;
+        }
+        public SelectList CountryList
+        {
+            get;
+            set;
+        }
+        public SelectList StateList
+        {
+            get;
+            set;
+        }
 
+        public SelectList DistrictList
+        {
+            get;
+            set;
+        }
+        public SelectList LocationList
+        {
+            get;
+            set;
+        }
         public DateTime CreatedDate
         {
             get;
@@ -73,6 +100,12 @@ namespace ERP.Models
             set;
         }
         public int CreatedBy
+        {
+            get;
+            set;
+        }
+
+        public CompanyType CompanyType
         {
             get;
             set;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Data.Entity;
 namespace DataLayer
 {
     public class CompanyTypeDAL
@@ -20,7 +20,12 @@ namespace DataLayer
             using (var dbContext = new CompanyTypeDbContext())
             {
                 _CompanyType = dbContext.CompanyType
-                    .Include("Company")
+                            .Include(K => K.Company)
+                            .Include(K => K.Company.Location)
+                             .Include(K => K.Company.Location.District)
+                            .Include(o => o.Company.Location.District.State)
+                            .Include(o => o.Company.Location.District.State.Country)
+                            .Include(o => o.Company.Location.District.State.Country.Region)
                             .FirstOrDefault(p => p.Identity.Equals(identity));
             }
             return _CompanyType;
@@ -33,7 +38,32 @@ namespace DataLayer
             {
                 dbContext.Configuration.LazyLoadingEnabled = false;
                 _CompanyTypes = dbContext.CompanyType
-                    .Include("Company")
+                            .Include(K => K.Company)
+                            .Include(K => K.Company.Location)
+                             .Include(K => K.Company.Location.District)
+                            .Include(o => o.Company.Location.District.State)
+                            .Include(o => o.Company.Location.District.State.Country)
+                            .Include(o => o.Company.Location.District.State.Country.Region)
+                            .ToList();
+            }
+
+            return _CompanyTypes;
+        }
+
+        public IEnumerable<BusinessModels.CompanyType> GetAll(int stidentity)
+        {
+            var _CompanyTypes = new List<BusinessModels.CompanyType>();
+            using (var dbContext = new CompanyTypeDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _CompanyTypes = dbContext.CompanyType
+                            .Include(K => K.Company)
+                            .Include(K => K.Company.Location)
+                             .Include(K => K.Company.Location.District)
+                            .Include(o => o.Company.Location.District.State)
+                            .Include(o => o.Company.Location.District.State.Country)
+                            .Include(o => o.Company.Location.District.State.Country.Region)
+                             .Where(p => p.Company.Identity == stidentity)
                             .ToList();
             }
 

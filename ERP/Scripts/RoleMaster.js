@@ -13,6 +13,48 @@
         }
     };
 
+    $(document).off("click", ".RoleMasterCancel");
+    $(document).on("click", ".RoleMasterCancel", function (event) {
+        var theUrl = $(this).attr("data-url");
+        $('.headermode').html('View Role Master Info');
+        $.ajax({
+            url: theUrl,
+            type: 'GET',  // http method
+            data: { "identity": $(this).attr("data-identity") },
+            //async: true,
+            success: function (data, status, xhr) {
+
+                $('.RoleMasterSearchDetials').show();
+                $('.RoleMasterAdd').show();
+                $('.resultView').html(data);
+                showMessage(status, "Success");
+            },
+            error: function (jqXhr, textStatus, errorMessage) {
+                showMessage(textStatus, errorMessage);
+            }
+        });
+    });
+
+    $(document).on('change', '#drpRoleMasterRoleType', function () {
+        //alert("Test");
+        // debugger;
+        varRoleTypeText = $("#drpRoleMasterRoleType").val();
+        $("#hdnRoleType").val(varRoleTypeText);
+    });
+
+    $(document).on('change', '#drpRoleMasterModules', function () {
+        //alert("Test");
+        // debugger;
+        varModulesText = $("#drpRoleMasterModules").val();
+        $("#hdnModules").val(varModulesText);
+    });
+
+    $(document).on('change', '#drpRoleMasterRegion', function () {
+        //alert("Test");
+        // debugger;
+        varRegionText = $("#drpRoleMasterRegion").val();
+        $("#hdnRegion").val(varvText);
+    });
 
     $(document).off("click", ".RoleMasterView");
     $(document).on("click", ".RoleMasterView", function (event) {

@@ -25,22 +25,13 @@ namespace BusinessModels
             set;
         }
 
-        public int CompanytypeID
-        {
-            get;
-            set;
-        }
-
+        [ForeignKey("Location")]
         public int LocationID
         {
             get;
             set;
         }
-        public List<string> ErrorList
-        {
-            get;
-            set;
-        }
+       
 
         public DateTime CreatedDate
         {
@@ -67,52 +58,7 @@ namespace BusinessModels
             set;
         }
 
-        public string RegionName
-        {
-            get;
-            set;
-        }
-        public string CountryName
-        {
-            get;
-            set;
-        }
-        public string StateName
-        {
-            get;
-            set;
-        }
-        public string DistrictName
-        {
-            get;
-            set;
-        }
-        public string LocationName
-        {
-            get;
-            set;
-        }
-        public string RegionID
-        {
-            get;
-            set;
-        }
-        public string CountryID
-        {
-            get;
-            set;
-        }
-        public string StateID
-        {
-            get;
-            set;
-        }
-        public string DistrictID
-        {
-            get;
-            set;
-        }
-        public string CompanyTypeName
+        public Location Location
         {
             get;
             set;

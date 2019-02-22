@@ -159,5 +159,11 @@ namespace ERP.Models
             get;
             set;
         }
+
+        public Location Location
+        {
+            get;
+            set;
+        }
     }
 }

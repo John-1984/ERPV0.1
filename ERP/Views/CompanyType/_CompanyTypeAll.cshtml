@@ -7,6 +7,11 @@
         <table class="table CompanyTypeAll">
             <thead>
                 <tr class="gridheader">
+                    <th>Region</th>
+                    <th>Country</th>
+                    <th>State</th>
+                    <th>District</th>
+                    <th>Location</th>
                     <th>Company Name</th>
                     <th>Company Type Name</th>
 
@@ -19,7 +24,12 @@
                 @foreach (var CompanyType in Model)
                 {
                 <tr class="gridrow">
-                    <td class="gridrow">@CompanyType.CompanyName</td>
+                    <td class="gridrow">@CompanyType.Company.Location.District.State.Country.Region.RegionName</td>
+                    <td class="gridrow "> @CompanyType.Company.Location.District.State.Country.CountryName</td>
+                    <td class="gridrow">@CompanyType.Company.Location.District.State.StateName</td>
+                    <td class="gridrow "> @CompanyType.Company.Location.District.DistrictName</td>
+                    <td class="gridrow">@CompanyType.Company.Location.LocationName</td>
+                    <td class="gridrow">@CompanyType.Company.CompanyName</td>
                     <td class="gridrow">@CompanyType.TypeName</td>
                     @*<td class="gridrow "> <img src="~/Content/view.gif" alt="View" class="CompanyTypeView pointer" data-url="@Url.Action("_CompanyTypeView", "CompanyType")" data-identity="@(CompanyType.Identity)" /> </td>*@
                     <td class="gridrow "><img src="~/Content/edit.png" alt="Edit" class="CompanyTypeEdit pointer" data-url="@Url.Action("_CompanyTypeEdit", "CompanyType")" data-identity="@(CompanyType.Identity)" /></td>

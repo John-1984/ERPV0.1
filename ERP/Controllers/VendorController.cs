@@ -21,6 +21,11 @@ namespace ERP.Controllers
         {
             return PartialView(GetVendors("", 1, "", ""));
         }
+        [HttpGet]
+        public ActionResult _VendorCancel(int identity)
+        {
+            return RedirectToAction("_VendorAll");
+        }
 
         [HttpGet]
         public PartialViewResult _VendorEdit(int identity)
@@ -28,6 +33,8 @@ namespace ERP.Controllers
             if (identity.Equals(-1))
             {
                 Models.Vendor mdvendor = new Models.Vendor();
+                mdvendor.ProductMasterList = null;
+                mdvendor.ProductMasterList = new SelectList(_Vendor.GetAllProductMaster(), "Identity", "ProductName");
                 return PartialView(mdvendor);
             } 
             else
@@ -35,7 +42,7 @@ namespace ERP.Controllers
                 Models.Vendor mdvendor = AutoMapperConfig.Mapper().Map<Models.Vendor>(_Vendor.GetVendor(identity));
 
                 mdvendor.ProductMasterList = null;
-                mdvendor.ProductMasterList = new SelectList(_Vendor.GetAllProductMaster(), "Identity", "ProductName");
+                mdvendor.ProductMasterList = new SelectList(_Vendor.GetAllProductMaster(), "Identity", "ProductName",mdvendor.ProductMasterID);
 
                 return PartialView(mdvendor);
             }
@@ -56,16 +63,29 @@ namespace ERP.Controllers
         }
 
         [HttpPost]
-        public ActionResult Update(Models.Vendor Vendor)
+        public ActionResult Update(Models.Vendor Vendor, FormCollection frmFields)
         {
             //IF success resturn grid view
             //IF Failure return json value
+            BusinessModels.Vendor mdVendor = AutoMapperConfig.Mapper().Map<BusinessModels.Vendor>(Vendor);
+
+            var value = frmFields["hdnProductMaster"];
+
+            if (!String.IsNullOrEmpty(value))
+                mdVendor.ProductMasterID = int.Parse(value);
+
+
             if (Vendor.Identity.Equals(-1))
             {
-                _Vendor.Insert(AutoMapperConfig.Mapper().Map<BusinessModels.Vendor>(Vendor));
+                mdVendor.CreatedDate = DateTime.Now;
+                _Vendor.Insert(mdVendor);
             }
             else
-                _Vendor.Update(AutoMapperConfig.Mapper().Map<BusinessModels.Vendor>(Vendor));
+            {
+                mdVendor.ModifiedDate = DateTime.Now;
+                _Vendor.Update(mdVendor);
+
+            }
             return RedirectToAction("_VendorAll");
         }
 

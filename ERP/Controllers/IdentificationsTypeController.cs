@@ -23,6 +23,12 @@ namespace ERP.Controllers
         }
 
         [HttpGet]
+        public ActionResult _IdentificationsTypeCancel(int identity)
+        {
+            return RedirectToAction("_IdentificationsTypeAll");
+        }
+
+        [HttpGet]
         public PartialViewResult _IdentificationsTypeEdit(int identity)
         {
             if (identity.Equals(-1))
@@ -45,16 +51,21 @@ namespace ERP.Controllers
         }
 
         [HttpPost]
-        public ActionResult Update(Models.IdentificationsType IdentificationsType)
+        public ActionResult Update(Models.IdentificationsType identificationsType, FormCollection frmFields)
         {
             //IF success resturn grid view
             //IF Failure return json value
-            if (IdentificationsType.Identity.Equals(-1))
+            BusinessModels.IdentificationsType mdidentificaton = AutoMapperConfig.Mapper().Map<BusinessModels.IdentificationsType>(identificationsType);
+            if (identificationsType.Identity.Equals(-1))
             {
-                _IdentificationsType.Insert(AutoMapperConfig.Mapper().Map<BusinessModels.IdentificationsType>(IdentificationsType));
+                mdidentificaton.CreatedDate = DateTime.Now;
+                _IdentificationsType.Insert(mdidentificaton);
             }
             else
-                _IdentificationsType.Update(AutoMapperConfig.Mapper().Map<BusinessModels.IdentificationsType>(IdentificationsType));
+            {
+                mdidentificaton.ModifiedDate = DateTime.Now;
+                _IdentificationsType.Update(mdidentificaton);
+            }
             return RedirectToAction("_IdentificationsTypeAll");
         }
 

@@ -49,12 +49,25 @@ namespace ERP.Controllers
         {
             //IF success resturn grid view
             //IF Failure return json value
+            BusinessModels.Region mdRegion = AutoMapperConfig.Mapper().Map<BusinessModels.Region>(Region);
+
             if (Region.Identity.Equals(-1))
             {
-                _Region.Insert(AutoMapperConfig.Mapper().Map<BusinessModels.Region>(Region));
+                mdRegion.CreatedDate = DateTime.Now;
+                _Region.Insert(mdRegion);
             }
             else
-                _Region.Update(AutoMapperConfig.Mapper().Map<BusinessModels.Region>(Region));
+            {
+                mdRegion.ModifiedDate = DateTime.Now;
+                _Region.Update(mdRegion);
+            } 
+            return RedirectToAction("_RegionAll");
+        }
+
+
+        [HttpGet]
+        public ActionResult _RegionCancel(int identity)
+        {
             return RedirectToAction("_RegionAll");
         }
 

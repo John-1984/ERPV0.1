@@ -28,16 +28,14 @@ namespace BusinessModels
             get;
             set;
         }
+
+        [ForeignKey("Company")]
         public int CompanyID
         {
             get;
             set;
         }
-        public string CompanyName
-        {
-            get;
-            set;
-        }
+        
         public DateTime CreatedDate
         {
             get;
@@ -62,7 +60,8 @@ namespace BusinessModels
             get;
             set;
         }
-        public List<string> ErrorList
+
+        public Company Company
         {
             get;
             set;

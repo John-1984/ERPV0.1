@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Data.Entity;
 namespace DataLayer
 {
     public class RoleMasterDAL
@@ -20,9 +20,9 @@ namespace DataLayer
             using (var dbContext = new RoleMasterDbContext())
             {
                 _RoleMaster = dbContext.RoleMaster
-                            .Include("Region")
-                             .Include("Modules")
-                             .Include("RoleType")
+                            .Include(K => K.Region)
+                            .Include(o => o.Modules)
+                            .Include(l => l.RoleType)
                             .FirstOrDefault(p => p.Identity.Equals(identity));
             }
             return _RoleMaster;
@@ -36,10 +36,65 @@ namespace DataLayer
             {
                 dbContext.Configuration.LazyLoadingEnabled = false;
                 _RoleMasters = dbContext.RoleMaster
-                              .Include("Region")
-                             .Include("Modules")
-                             .Include("RoleType")
-                            .ToList();
+                              .Include(K => K.Region)
+                              .Include(o => o.Modules)
+                              .Include(l => l.RoleType)
+                              .ToList();
+            }
+
+            return _RoleMasters;
+        }
+
+        public IEnumerable<BusinessModels.RoleMaster> GetAllWithRegionID(int stidentity)
+        {
+            //Need to do
+            var _RoleMasters = new List<BusinessModels.RoleMaster>();
+            using (var dbContext = new RoleMasterDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _RoleMasters = dbContext.RoleMaster
+                              .Include(K => K.Region)
+                              .Include(o => o.Modules)
+                              .Include(l => l.RoleType)
+                              .Where(p => p.Region.Identity == stidentity)
+                              .ToList();
+            }
+
+            return _RoleMasters;
+        }
+
+        public IEnumerable<BusinessModels.RoleMaster> GetAllWithModuleID(int stidentity)
+        {
+            //Need to do
+            var _RoleMasters = new List<BusinessModels.RoleMaster>();
+            using (var dbContext = new RoleMasterDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _RoleMasters = dbContext.RoleMaster
+                              .Include(K => K.Region)
+                              .Include(o => o.Modules)
+                              .Include(l => l.RoleType)
+                              .Where(p => p.Modules.Identity == stidentity)
+                              .ToList();
+            }
+
+            return _RoleMasters;
+        }
+
+
+        public IEnumerable<BusinessModels.RoleMaster> GetAllWithRoleTypeID(int stidentity)
+        {
+            //Need to do
+            var _RoleMasters = new List<BusinessModels.RoleMaster>();
+            using (var dbContext = new RoleMasterDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _RoleMasters = dbContext.RoleMaster
+                              .Include(K => K.Region)
+                              .Include(o => o.Modules)
+                              .Include(l => l.RoleType)
+                              .Where(p => p.RoleType.Identity == stidentity)
+                              .ToList();
             }
 
             return _RoleMasters;

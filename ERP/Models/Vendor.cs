@@ -68,5 +68,11 @@ namespace ERP.Models
             set;
         }
 
+        public ProductMaster ProductMaster
+        {
+            get;
+            set;
+        }
+
     }
 }

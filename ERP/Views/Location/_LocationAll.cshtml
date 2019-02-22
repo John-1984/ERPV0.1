@@ -20,10 +20,10 @@
                 @foreach (var Location in Model)
                 {
                 <tr class="gridrow">
-                    <td class="gridrow">@Location.RegionName</td>
-                    <td class="gridrow">@Location.CountryName</td>
-                    <td class="gridrow">@Location.StateName</td>
-                    <td class="gridrow">@Location.DistrictName</td>
+                    <td class="gridrow">@Location.District.State.Country.Region.RegionName</td>
+                    <td class="gridrow">@Location.District.State.Country.CountryName</td>
+                    <td class="gridrow">@Location.District.State.StateName</td>
+                    <td class="gridrow">@Location.District.DistrictName</td>
                     <td class="gridrow "> @Location.LocationName</td>
                     <td class="gridrow "><img src="~/Content/edit.png" alt="Edit" class="LocationEdit pointer" data-url="@Url.Action("_LocationEdit", "Location")" data-identity="@(Location.Identity)" /></td>
                     <td class="gridrow "><img src="~/Content/delete.png" alt="Delete" class="LocationDelete pointer" data-url="@Url.Action("Delete", "Location")" data-identity="@(Location.Identity)" /></td>

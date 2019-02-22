@@ -77,16 +77,36 @@ namespace ERP.Controllers
         }
 
         [HttpPost]
-        public ActionResult Update(Models.RoleMaster RoleMaster)
+        public ActionResult Update(Models.RoleMaster RoleMaster, FormCollection frmFields)
         {
             //IF success resturn grid view
             //IF Failure return json value
+            BusinessModels.RoleMaster mdRoleMaster= AutoMapperConfig.Mapper().Map<BusinessModels.RoleMaster>(RoleMaster);
+
+            var roleTypevalue = frmFields["hdnRoleType"];
+            if (!String.IsNullOrEmpty(roleTypevalue))
+                mdRoleMaster.RoleTypeID = int.Parse(roleTypevalue);
+
+
+            var modulevalue = frmFields["hdnModules"];
+            if (!String.IsNullOrEmpty(modulevalue))
+                mdRoleMaster.ModuleID = int.Parse(modulevalue);
+
+            var regvalue = frmFields["hdnRegion"];
+            if (!String.IsNullOrEmpty(regvalue))
+                mdRoleMaster.RegionID = int.Parse(regvalue);
+
+
             if (RoleMaster.Identity.Equals(-1))
             {
-                _RoleMaster.Insert(AutoMapperConfig.Mapper().Map<BusinessModels.RoleMaster>(RoleMaster));
+                mdRoleMaster.CreatedDate = DateTime.Now;
+                _RoleMaster.Insert(mdRoleMaster);
             }
             else
-                _RoleMaster.Update(AutoMapperConfig.Mapper().Map<BusinessModels.RoleMaster>(RoleMaster));
+            {
+                mdRoleMaster.ModifiedDate = DateTime.Now;
+                _RoleMaster.Update(mdRoleMaster);
+            }
             return RedirectToAction("_RoleMasterAll");
         }
 

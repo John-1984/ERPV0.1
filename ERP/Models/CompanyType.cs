@@ -79,5 +79,36 @@ namespace ERP.Models
             get;
             set;
         }
+        public SelectList RegionList
+        {
+            get;
+            set;
+        }
+        public SelectList CountryList
+        {
+            get;
+            set;
+        }
+        public SelectList StateList
+        {
+            get;
+            set;
+        }
+
+        public SelectList DistrictList
+        {
+            get;
+            set;
+        }
+        public SelectList LocationList
+        {
+            get;
+            set;
+        }
+        public Company Company
+        {
+            get;
+            set;
+        }
     }
 }

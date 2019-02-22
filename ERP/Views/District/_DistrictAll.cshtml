@@ -19,9 +19,9 @@
                 @foreach (var District in Model)
                 {
                 <tr class="gridrow">
-                    <td class="gridrow">@District.RegionName</td>
-                    <td class="gridrow">@District.CountryName</td>
-                    <td class="gridrow">@District.StateName</td>
+                    <td class="gridrow">@District.State.Country.Region.RegionName</td>
+                    <td class="gridrow">@District.State.Country.CountryName</td>
+                    <td class="gridrow">@District.State.StateName</td>
                     <td class="gridrow "> @District.DistrictName</td>
                     <td class="gridrow "><img src="~/Content/edit.png" alt="Edit" class="DistrictEdit pointer" data-url="@Url.Action("_DistrictEdit", "District")" data-identity="@(District.Identity)" /></td>
                     <td class="gridrow "><img src="~/Content/delete.png" alt="Delete" class="DistrictDelete pointer" data-url="@Url.Action("Delete", "District")" data-identity="@(District.Identity)" /></td>

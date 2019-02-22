@@ -25,6 +25,7 @@ namespace BusinessModels
             set;
         }
 
+        [ForeignKey("State")]
         public int StateID
         {
             get;
@@ -77,7 +78,7 @@ namespace BusinessModels
         //    get;
         //    set;
         //}
-        public List<string> ErrorList
+        public State State
         {
             get;
             set;

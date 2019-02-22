@@ -45,16 +45,22 @@ namespace ERP.Controllers
         }
 
         [HttpPost]
-        public ActionResult Update(Models.RoleType RoleType)
+        public ActionResult Update(Models.RoleType RoleType, FormCollection frmFields)
         {
             //IF success resturn grid view
             //IF Failure return json value
+
+            BusinessModels.RoleType mdRoleType = AutoMapperConfig.Mapper().Map<BusinessModels.RoleType>(RoleType);
             if (RoleType.Identity.Equals(-1))
             {
-                _RoleType.Insert(AutoMapperConfig.Mapper().Map<BusinessModels.RoleType>(RoleType));
+                mdRoleType.CreatedDate = DateTime.Now;
+                _RoleType.Insert(mdRoleType);
             }
             else
-                _RoleType.Update(AutoMapperConfig.Mapper().Map<BusinessModels.RoleType>(RoleType));
+            {
+                mdRoleType.ModifiedDate = DateTime.Now;
+                _RoleType.Update(mdRoleType);
+            }
             return RedirectToAction("_RoleTypeAll");
         }
 

@@ -26,11 +26,7 @@ namespace BusinessModels
             set;
         }
 
-        public int VendorName
-        {
-            get;
-            set;
-        }
+        [ForeignKey("Vendor")]
         public int VendorID
         {
             get;
@@ -56,7 +52,8 @@ namespace BusinessModels
             get;
             set;
         }
-        public List<string> ErrorList
+
+        public Vendor Vendor
         {
             get;
             set;

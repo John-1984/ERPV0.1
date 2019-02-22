@@ -15,7 +15,6 @@ namespace DataLayer
         }
 
         public DbSet<BusinessModels.FloorMaster> FloorMaster { get; set; }
-        public DbSet<BusinessModels.Company> Company { get; set; }
         public DbSet<BusinessModels.CompanyType> CompanyType { get; set; }
         //public DbSet<Veri> Address { get; set; }
 

@@ -40,37 +40,25 @@ namespace ERP.Models
             get;
             set;
         }
-        public int BrandID
+        public int? BrandID
         {
             get;
             set;
         }
-        public string BrandName
+        
+        public int? VendorID
         {
             get;
             set;
         }
-        public int VendorID
-        {
-            get;
-            set;
-        }
-        public string VendorName
-        {
-            get;
-            set;
-        }
-        public int UOMID
+        
+        public int? UOMID
         {
             get;
             set;
         }
 
-        public int UOMName
-        {
-            get;
-            set;
-        }
+        
 
         [DefaultValue(0)]
         public decimal  ItemWeight
@@ -101,22 +89,22 @@ namespace ERP.Models
         }
 
 
-        public DateTime CreatedDate
+        public DateTime? CreatedDate
         {
             get;
             set;
         }
-        public DateTime ModifiedDate
+        public DateTime? ModifiedDate
         {
             get;
             set;
         }
-        public int ModifiedBy
+        public int? ModifiedBy
         {
             get;
             set;
         }
-        public int CreatedBy
+        public int? CreatedBy
         {
             get;
             set;
@@ -140,8 +128,26 @@ namespace ERP.Models
             set;
         }
 
+        public SelectList ProductMasterList
+        {
+            get;
+            set;
+        }
+
 
         public List<string> ErrorList
+        {
+            get;
+            set;
+        }
+
+        public Brand Brand
+        {
+            get;
+            set;
+        }
+
+        public UOMMaster UOMMaster
         {
             get;
             set;

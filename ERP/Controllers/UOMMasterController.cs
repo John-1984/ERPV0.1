@@ -23,6 +23,12 @@ namespace ERP.Controllers
         }
 
         [HttpGet]
+        public ActionResult _UOMMasterCancel(int identity)
+        {
+            return RedirectToAction("_UOMMasterAll");
+        }
+
+        [HttpGet]
         public PartialViewResult _UOMMasterEdit(int identity)
         {
             if (identity.Equals(-1))
@@ -49,12 +55,17 @@ namespace ERP.Controllers
         {
             //IF success resturn grid view
             //IF Failure return json value
+            BusinessModels.UOMMaster mdUom = AutoMapperConfig.Mapper().Map<BusinessModels.UOMMaster>(UOMMaster);
             if (UOMMaster.Identity.Equals(-1))
             {
-                _UOMMaster.Insert(AutoMapperConfig.Mapper().Map<BusinessModels.UOMMaster>(UOMMaster));
+                mdUom.CreatedDate = DateTime.Now;
+                _UOMMaster.Insert(mdUom);
             }
             else
-                _UOMMaster.Update(AutoMapperConfig.Mapper().Map<BusinessModels.UOMMaster>(UOMMaster));
+            {
+                mdUom.ModifiedDate = DateTime.Now;
+                _UOMMaster.Update(mdUom);
+            }
             return RedirectToAction("_UOMMasterAll");
         }
 
@@ -78,11 +89,11 @@ namespace ERP.Controllers
 
             var UOMMasters = AutoMapperConfig.Mapper().Map<List<Models.UOMMaster>>(_UOMMaster.GetAll());
             if (!string.IsNullOrEmpty(searchString) && !string.IsNullOrEmpty(createdDate))
-                UOMMasters = AutoMapperConfig.Mapper().Map<List<Models.UOMMaster>>(_UOMMaster.GetAll().ToList().FindAll(p => p.UOMName.ToLower().Contains(searchString.ToLower()) && p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+                UOMMasters = AutoMapperConfig.Mapper().Map<List<Models.UOMMaster>>(_UOMMaster.GetAll().ToList().FindAll(p => p.UOMName.ToLower().Contains(searchString.ToLower()) && ((DateTime)p.CreatedDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
             else if (!string.IsNullOrEmpty(searchString))
                 UOMMasters = AutoMapperConfig.Mapper().Map<List<Models.UOMMaster>>(_UOMMaster.GetAll().ToList().FindAll(p => p.UOMName.ToLower().Contains(searchString.ToLower())));
             else if (!string.IsNullOrEmpty(createdDate))
-                UOMMasters = AutoMapperConfig.Mapper().Map<List<Models.UOMMaster>>(_UOMMaster.GetAll().ToList().FindAll(p => p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+                UOMMasters = AutoMapperConfig.Mapper().Map<List<Models.UOMMaster>>(_UOMMaster.GetAll().ToList().FindAll(p => ((DateTime)p.CreatedDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
 
             switch (sortOrder)
             {

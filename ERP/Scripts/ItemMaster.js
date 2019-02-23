@@ -13,7 +13,97 @@
         }
     };
 
+    $(document).off("click", ".ItemMasterCancel");
+    $(document).on("click", ".ItemMasterCancel", function (event) {
+        var theUrl = $(this).attr("data-url");
+        $('.headermode').html('View Item Info');
+        $.ajax({
+            url: theUrl,
+            type: 'GET',  // http method
+            data: { "identity": $(this).attr("data-identity") },
+            //async: true,
+            success: function (data, status, xhr) {
 
+                $('.ItemMasterSearchDetials').show();
+                $('.ItemMasterAdd').show();
+                $('.resultView').html(data);
+                showMessage(status, "Success");
+            },
+            error: function (jqXhr, textStatus, errorMessage) {
+                showMessage(textStatus, errorMessage);
+            }
+        });
+    });
+
+    $(document).on('change', '#drpItemMasterProductMaster', function () {
+        //alert("Test");
+        // debugger;
+        alert("Test");
+        varproductMasterText = $("#drpItemMasterProductMaster").val();
+        $("#hdnProductMaster").val(varproductMasterText);
+        var drpItemMasterVendor = $("#drpItemMasterVendor");
+        //alert("Test");
+        $.ajax({
+            type: 'POST',
+            url: '/ItemMaster/Vendor',
+            data: JSON.stringify({ identity: $("#drpItemMasterProductMaster").val() }),
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function (response) {
+                drpItemMasterVendor.empty().append('<option selected="selected" value="0">Select Vendor</option>');
+                $.each(response, function () {
+                    drpItemMasterVendor.append($("<option></option>").val(this['Value']).html(this['Text']));
+                });
+            },
+            error: function (response) {
+                showMessage(response.responseText);
+            }
+        });
+    });
+
+    $(document).on('change', '#drpItemMasterVendor', function () {
+        //alert("Test");
+        // debugger;
+       // alert("Test");
+        varVendorText = $("#drpItemMasterVendor").val();
+        $("#hdnVendor").val(varVendorText);
+        var drpItemMasterBrand = $("#drpItemMasterBrand");
+        //alert("Test");
+        $.ajax({
+            type: 'POST',
+            url: '/ItemMaster/Brand',
+            data: JSON.stringify({ identity: $("#drpItemMasterVendor").val() }),
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function (response) {
+                drpItemMasterBrand.empty().append('<option selected="selected" value="0">Select Brand</option>');
+                $.each(response, function () {
+                    drpItemMasterBrand.append($("<option></option>").val(this['Value']).html(this['Text']));
+                });
+            },
+            error: function (response) {
+                showMessage(response.responseText);
+            }
+        });
+    });
+
+    $(document).on('change', '#drpItemMasterBrand', function () {
+        //alert("Test");
+        // debugger;
+        varbrandText = $("#drpItemMasterBrand").val();
+        $("#hdnBrand").val(varbrandText);
+
+        //alert(vardistrictText);
+    });
+
+    $(document).on('change', '#drpItemMasterUOM', function () {
+        //alert("Test");
+        // debugger;
+        varuomText = $("#drpItemMasterUOM").val();
+        $("#hdnUOM").val(varuomText);
+
+        //alert(vardistrictText);
+    });
     $(document).off("click", ".ItemMasterView");
     $(document).on("click", ".ItemMasterView", function (event) {
         var theUrl = $(this).attr("data-url");

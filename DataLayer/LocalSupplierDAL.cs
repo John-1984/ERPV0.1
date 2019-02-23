@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Data.Entity;
 namespace DataLayer
 {
     public class LocalSupplierDAL
@@ -20,8 +20,15 @@ namespace DataLayer
             using (var dbContext = new LocalSupplierDbContext())
             {
                 _LocalSupplier = dbContext.LocalSupplier
-                            .Include("ItemMaster")
-                            .Include("Location")
+                            .Include(K => K.ItemMaster)
+                            .Include(l => l.ItemMaster.Brand)
+                            .Include(o => o.ItemMaster.Brand.Vendor)
+                            .Include(s => s.ItemMaster.Brand.Vendor.ProductMaster)
+                            .Include(y => y.Location)
+                            .Include(r => r.Location.District)
+                            .Include(f => f.Location.District.State)
+                            .Include(j => j.Location.District.State.Country)
+                            .Include(m => m.Location.District.State.Country.Region)
                             .FirstOrDefault(p => p.Identity.Equals(identity));
             }
             return _LocalSupplier;
@@ -35,37 +42,45 @@ namespace DataLayer
             {
                 dbContext.Configuration.LazyLoadingEnabled = false;
                 _LocalSuppliers = dbContext.LocalSupplier
-                             .Include("ItemMaster")
-                            .Include("Location")
+                             .Include(K => K.ItemMaster)
+                            .Include(l => l.ItemMaster.Brand)
+                            .Include(o => o.ItemMaster.Brand.Vendor)
+                            .Include(s => s.ItemMaster.Brand.Vendor.ProductMaster)
+                            .Include(y => y.Location)
+                             .Include(r => r.Location.District)
+                            .Include(f => f.Location.District.State)
+                            .Include(j => j.Location.District.State.Country)
+                            .Include(m => m.Location.District.State.Country.Region)
                             .ToList();
             }
 
             return _LocalSuppliers;
         }
 
-        public IEnumerable<BusinessModels.ItemMaster> GetItemMaster()
+        public IEnumerable<BusinessModels.LocalSupplier> GetAll(int lcdentity)
         {
-            var _ItemMasters = new List<BusinessModels.ItemMaster>();
-            using (var dbContext = new ItemMasterDbContext())
+            //Need to do
+            var _LocalSuppliers = new List<BusinessModels.LocalSupplier>();
+            using (var dbContext = new LocalSupplierDbContext())
             {
                 dbContext.Configuration.LazyLoadingEnabled = false;
-                _ItemMasters = dbContext.ItemMaster
+                _LocalSuppliers = dbContext.LocalSupplier
+                             .Include(K => K.ItemMaster)
+                            .Include(l => l.ItemMaster.Brand)
+                            .Include(o => o.ItemMaster.Brand.Vendor)
+                            .Include(s => s.ItemMaster.Brand.Vendor.ProductMaster)
+                            .Include(y => y.Location)
+                            .Include(r => r.Location.District)
+                            .Include(f => f.Location.District.State)
+                            .Include(j => j.Location.District.State.Country)
+                            .Include(m => m.Location.District.State.Country.Region)
+                            .Where(p => p.ItemMaster.Identity == lcdentity)
                             .ToList();
             }
-            return _ItemMasters;
+
+            return _LocalSuppliers;
         }
 
-        public IEnumerable<BusinessModels.Location> GetLocation()
-        {
-            var _Locatiionss = new List<BusinessModels.Location>();
-            using (var dbContext = new LocationDbContext())
-            {
-                dbContext.Configuration.LazyLoadingEnabled = false;
-                _Locatiionss = dbContext.Location
-                            .ToList();
-            }
-            return _Locatiionss;
-        }
 
         public Boolean Update(BusinessModels.LocalSupplier LocalSupplier)
         {

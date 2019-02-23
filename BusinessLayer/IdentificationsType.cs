@@ -6,78 +6,40 @@ namespace BusinessLayer
 {
     public class IdentificationsType
     {
+        private List<BusinessModels.IdentificationsType> IdentificationsTypes = new List<BusinessModels.IdentificationsType>();
+        private DataLayer.IdentificationsTypeDAL _dataLayer = null;
+
         public IdentificationsType()
         {
-            
+            _dataLayer = new DataLayer.IdentificationsTypeDAL();
         }
-        private static List<BusinessModels.IdentificationsType> IdentificationsTypes = new List<BusinessModels.IdentificationsType>();
 
-       
         public BusinessModels.IdentificationsType GetIdentificationsType(Int32 identity)
         {
-            return IdentificationsTypes.FirstOrDefault(p => p.Identity.Equals(identity));
+            return _dataLayer.GetIdentificationsType(identity);
         }
 
         public IEnumerable<BusinessModels.IdentificationsType> GetAll()
         {
-            return IdentificationsTypes;
+            return _dataLayer.GetAll();
         }
 
         public Boolean Delete(Int32 identity)
         {
-            IdentificationsTypes.Remove(IdentificationsTypes.Find(p => p.Identity.Equals(identity)));
-            return true;
+            return _dataLayer.Delete(identity);
         }
 
         public Boolean Update(BusinessModels.IdentificationsType IdentificationsType)
         {
-            IdentificationsTypes.Remove(IdentificationsTypes.Find(p => p.Identity.Equals(IdentificationsType.Identity)));
-            IdentificationsTypes.Add(IdentificationsType);
-            return true;
+            return _dataLayer.Update(IdentificationsType);
         }
 
         public Boolean Insert(BusinessModels.IdentificationsType IdentificationsType)
         {
-            IdentificationsTypes.Add(IdentificationsType);
-            return true;
+            return _dataLayer.Insert(IdentificationsType);
         }
 
-        public void TestData()
-        {
-            IdentificationsTypes.Add(
-                new BusinessModels.IdentificationsType()
-                {
-                    Identity = 1,
 
-                    IdentificationName = "John",
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-            IdentificationsTypes.Add(
-                new BusinessModels.IdentificationsType()
-                {
-                    Identity = 2,
-
-                    IdentificationName = "John",
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-            IdentificationsTypes.Add(
-                new BusinessModels.IdentificationsType()
-                {
-                    Identity = 2,
-
-                    IdentificationName = "John",
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = 1,
-                    ModifiedDate = DateTime.Now,
-                    ModifiedBy = 1
-                });
-        }
 
     }
 

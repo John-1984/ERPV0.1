@@ -90,11 +90,11 @@ namespace ERP.Controllers
 
             var SalesRoleTypes = AutoMapperConfig.Mapper().Map<List<Models.SalesRoleType>>(_SalesRoleType.GetAll());
             if (!string.IsNullOrEmpty(searchString) && !string.IsNullOrEmpty(createdDate))
-                SalesRoleTypes = AutoMapperConfig.Mapper().Map<List<Models.SalesRoleType>>(_SalesRoleType.GetAll().ToList().FindAll(p => p.TypeName.ToLower().Contains(searchString.ToLower()) && p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+                SalesRoleTypes = AutoMapperConfig.Mapper().Map<List<Models.SalesRoleType>>(_SalesRoleType.GetAll().ToList().FindAll(p => p.TypeName.ToLower().Contains(searchString.ToLower()) && ((DateTime)p.CreatedDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
             else if (!string.IsNullOrEmpty(searchString))
                 SalesRoleTypes = AutoMapperConfig.Mapper().Map<List<Models.SalesRoleType>>(_SalesRoleType.GetAll().ToList().FindAll(p => p.TypeName.ToLower().Contains(searchString.ToLower())));
             else if (!string.IsNullOrEmpty(createdDate))
-                SalesRoleTypes = AutoMapperConfig.Mapper().Map<List<Models.SalesRoleType>>(_SalesRoleType.GetAll().ToList().FindAll(p => p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+                SalesRoleTypes = AutoMapperConfig.Mapper().Map<List<Models.SalesRoleType>>(_SalesRoleType.GetAll().ToList().FindAll(p => ((DateTime)p.CreatedDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
 
             switch (sortOrder)
             {

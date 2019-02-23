@@ -21,27 +21,96 @@ namespace ERP.Controllers
         {
             return PartialView(GetEmployees("", 1, "", ""));
         }
+        [HttpGet]
+        public ActionResult _EmployeeCancel(int identity)
+        {
+            return RedirectToAction("_EmployeeAll");
+        }
 
+        [HttpPost]
+        public JsonResult Country(string identity)
+        {
+            if (identity == "6")
+                return Json(new SelectList(_Employee.GetAllCountry(), "Identity", "CountryName"));
+            else
+                return Json(new SelectList(_Employee.GetAllCountrysOnRegion(identity), "Identity", "CountryName"));
+        }
+
+        [HttpPost]
+        public JsonResult State(string identity)
+        {
+
+            return Json(new SelectList(_Employee.GetAllStatesOnCountry(identity), "Identity", "StateName"));
+        }
+
+        [HttpPost]
+        public JsonResult District(string identity)
+        {
+
+            return Json(new SelectList(_Employee.GetAllDistrictsOnState(identity), "Identity", "DistrictName"));
+        }
+        [HttpPost]
+        public JsonResult Location(string identity)
+        {
+
+            return Json(new SelectList(_Employee.GetAllLocationsOnDistrict(identity), "Identity", "LocationName"));
+        }
+
+        [HttpPost]
+        public JsonResult Company(string identity)
+        {
+
+            return Json(new SelectList(_Employee.GetAllCompaniesonLocation(identity), "Identity", "CompanyName"));
+        }
+
+        [HttpPost]
+        public JsonResult CompanyType(string identity)
+        {
+
+            return Json(new SelectList(_Employee.GetAllCompaniesTypeonCompany(identity), "Identity", "TypeName"));
+        }
+        [HttpPost]
+        public JsonResult FloorMaster(string identity)
+        {
+
+            return Json(new SelectList(_Employee.GetAllFloorOnCompanyType(identity), "Identity", "FloorName"));
+        }
         [HttpGet]
         public PartialViewResult _EmployeeEdit(int identity)
         {
             if (identity.Equals(-1))
             {
                 Models.Employee mdEmployee = new Models.Employee();
-                mdEmployee.CompanyList = null;
-                mdEmployee.CompanyList = new SelectList(_Employee.GetAllCompanies(), "Identity", "CompanyName");
 
-                mdEmployee.ComapnyTypeList = null;
-                mdEmployee.ComapnyTypeList = new SelectList(_Employee.GetAllCompanyType(), "Identity", "TypeName");
+                mdEmployee.RegionList = null;
+                mdEmployee.RegionList = new SelectList(_Employee.GetAllRegions(), "Identity", "RegionName");
 
-                mdEmployee.IdentificationList = null;
-                mdEmployee.IdentificationList = new SelectList(_Employee.GetAllIdentificationTypes(), "Identity", "IdentificationName");
+                mdEmployee.CountryList = null;
+                mdEmployee.CountryList = new SelectList(_Employee.GetAllCountry(), "Identity", "CountryName");
+
+                mdEmployee.StateList = null;
+                mdEmployee.StateList = new SelectList(_Employee.GetAllStates(), "Identity", "StateName");
+
+                mdEmployee.DistrictList = null;
+                mdEmployee.DistrictList = new SelectList(_Employee.GetAllDistrict(), "Identity", "DistrictName");
 
                 mdEmployee.LocationList = null;
                 mdEmployee.LocationList = new SelectList(_Employee.GetAllLocations(), "Identity", "LocationName");
 
+                mdEmployee.CompanyList = null;
+                mdEmployee.CompanyList = new SelectList(_Employee.GetAllCompanies(), "Identity", "CompanyName");
+
+                mdEmployee.CompanyTypeList = null;
+                mdEmployee.CompanyTypeList = new SelectList(_Employee.GetAllCompanyType(), "Identity", "TypeName");
+
+                mdEmployee.IdentificationList = null;
+                mdEmployee.IdentificationList = new SelectList(_Employee.GetAllIdentificationTypes(), "Identity", "IdentificationName");               
+
                 mdEmployee.RoleList = null;
                 mdEmployee.RoleList = new SelectList(_Employee.GetAllRoles(), "Identity", "RoleName");
+
+                mdEmployee.FloorMasterList = null;
+                mdEmployee.FloorMasterList = new SelectList(_Employee.GetAllFloors(), "Identity", "FloorName");
 
                 TempData["PageInfo"] = "Add Employee Info";
                 return PartialView(mdEmployee);
@@ -49,20 +118,37 @@ namespace ERP.Controllers
             else
             {
                 Models.Employee mdEmployee = AutoMapperConfig.Mapper().Map<Models.Employee>(_Employee.GetEmployee(identity));
-                mdEmployee.CompanyList = null;
-                mdEmployee.CompanyList = new SelectList(_Employee.GetAllCompanies(), "Identity", "CompanyName");
 
-                mdEmployee.ComapnyTypeList = null;
-                mdEmployee.ComapnyTypeList = new SelectList(_Employee.GetAllCompanyType(), "Identity", "TypeName");
+               mdEmployee.RegionList = null;
+               mdEmployee.RegionList = new SelectList(_Employee.GetAllRegions(), "Identity", "RegionName",mdEmployee.CompanyType.Company.Location.District.State.Country.Region.Identity);
+
+               mdEmployee.CountryList = null;
+               mdEmployee.CountryList = new SelectList(_Employee.GetAllCountrysOnRegion(mdEmployee.CompanyType.Company.Location.District.State.Country.RegionID.ToString()), "Identity", "CountryName",mdEmployee.CompanyType.Company.Location.District.State.CountryID);
+
+               mdEmployee.StateList = null;
+               mdEmployee.StateList = new SelectList(_Employee.GetAllStatesOnCountry(mdEmployee.CompanyType.Company.Location.District.State.CountryID.ToString()), "Identity", "StateName",mdEmployee.CompanyType.Company.Location.District.StateID);
+
+               mdEmployee.DistrictList = null;
+               mdEmployee.DistrictList = new SelectList(_Employee.GetAllDistrictsOnState(mdEmployee.CompanyType.Company.Location.District.StateID.ToString()), "Identity", "DistrictName",mdEmployee.CompanyType.Company.Location.DistrictID);
+
+               mdEmployee.LocationList = null;
+               mdEmployee.LocationList = new SelectList(_Employee.GetAllLocationsOnDistrict(mdEmployee.CompanyType.Company.Location.DistrictID.ToString()), "Identity", "LocationName",mdEmployee.CompanyType.Company.LocationID);
+
+               mdEmployee.CompanyList = null;
+               mdEmployee.CompanyList = new SelectList(_Employee.GetAllCompaniesonLocation(mdEmployee.CompanyType.Company.LocationID.ToString()), "Identity", "CompanyName",mdEmployee.CompanyType.CompanyID);
+
+
+               mdEmployee.CompanyTypeList = null;
+               mdEmployee.CompanyTypeList = new SelectList(_Employee.GetAllCompaniesTypeonCompany(mdEmployee.CompanyType.CompanyID.ToString()), "Identity", "TypeName",mdEmployee.CompanyTypeID);
+
+                mdEmployee.FloorMasterList = null;
+                mdEmployee.FloorMasterList = new SelectList(_Employee.GetAllFloorOnCompanyType(mdEmployee.CompanyTypeID.ToString()), "Identity", "FloorName", mdEmployee.FloorMasterID);
 
                 mdEmployee.IdentificationList = null;
-                mdEmployee.IdentificationList = new SelectList(_Employee.GetAllIdentificationTypes(), "Identity", "IdentificationName");
-
-                mdEmployee.LocationList = null;
-                mdEmployee.LocationList = new SelectList(_Employee.GetAllLocations(), "Identity", "LocationName");
+                mdEmployee.IdentificationList = new SelectList(_Employee.GetAllIdentificationTypes(), "Identity", "IdentificationName", mdEmployee.IdentificationID);             
 
                 mdEmployee.RoleList = null;
-                mdEmployee.RoleList = new SelectList(_Employee.GetAllRoles(), "Identity", "RoleName");
+                mdEmployee.RoleList = new SelectList(_Employee.GetAllRoles(), "Identity", "RoleName", mdEmployee.RoleMasterID);
 
                 TempData["PageInfo"] = "Edit Employee Info";
                 TempData.Keep();
@@ -84,16 +170,47 @@ namespace ERP.Controllers
         }
 
         [HttpPost]
-        public ActionResult Update(Models.Employee Employee)
+        public ActionResult Update(Models.Employee Employee, FormCollection frmFields)
         {
             //IF success resturn grid view
             //IF Failure return json value
+            BusinessModels.Employee mdemployee = AutoMapperConfig.Mapper().Map<BusinessModels.Employee>(Employee);
+
+            var rolevalue = frmFields["hdnRoleMaster"];
+            if (!String.IsNullOrEmpty(rolevalue))
+                mdemployee.RoleMasterID = int.Parse(rolevalue);
+
+            var locvalue = frmFields["hdnLocation"];
+            if (!String.IsNullOrEmpty(locvalue))
+                mdemployee.LocationID = int.Parse(locvalue);
+
+            var compvalue = frmFields["hdnCompany"];
+            if (!String.IsNullOrEmpty(compvalue))
+                mdemployee.CompanyID = int.Parse(compvalue);
+
+            var companytypevalue = frmFields["hdnCompanyType"];
+            if (!String.IsNullOrEmpty(companytypevalue))
+                mdemployee.CompanyTypeID = int.Parse(companytypevalue);
+
+            var floorvalue = frmFields["hdnFloorMaster"];
+            if (!String.IsNullOrEmpty(floorvalue))
+                mdemployee.FloorMasterID = int.Parse(floorvalue);
+
+            var identificationrvalue = frmFields["hdnidentification"];
+            if (!String.IsNullOrEmpty(identificationrvalue))
+                mdemployee.IdentificationID = int.Parse(identificationrvalue);
+
             if (Employee.Identity.Equals(-1))
             {
-                _Employee.Insert(AutoMapperConfig.Mapper().Map<BusinessModels.Employee>(Employee));
+                mdemployee.CreatedDate = DateTime.Now;
+
+                _Employee.Insert(mdemployee);
             }
             else
-                _Employee.Update(AutoMapperConfig.Mapper().Map<BusinessModels.Employee>(Employee));
+            {
+                mdemployee.ModifiedDate = DateTime.Now;
+                _Employee.Update(mdemployee);
+            }
             return RedirectToAction("_EmployeeAll");
         }
 
@@ -117,11 +234,11 @@ namespace ERP.Controllers
 
             var Employees = AutoMapperConfig.Mapper().Map<List<Models.Employee>>(_Employee.GetAll());
             if (!string.IsNullOrEmpty(searchString) && !string.IsNullOrEmpty(createdDate))
-                Employees = AutoMapperConfig.Mapper().Map<List<Models.Employee>>(_Employee.GetAll().ToList().FindAll(p => p.EmployeeName.ToLower().Contains(searchString.ToLower()) && p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+                Employees = AutoMapperConfig.Mapper().Map<List<Models.Employee>>(_Employee.GetAll().ToList().FindAll(p => p.EmployeeName.ToLower().Contains(searchString.ToLower()) && ((DateTime)p.CreatedDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
             else if (!string.IsNullOrEmpty(searchString))
                 Employees = AutoMapperConfig.Mapper().Map<List<Models.Employee>>(_Employee.GetAll().ToList().FindAll(p => p.EmployeeName.ToLower().Contains(searchString.ToLower())));
             else if (!string.IsNullOrEmpty(createdDate))
-                Employees = AutoMapperConfig.Mapper().Map<List<Models.Employee>>(_Employee.GetAll().ToList().FindAll(p => p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+                Employees = AutoMapperConfig.Mapper().Map<List<Models.Employee>>(_Employee.GetAll().ToList().FindAll(p => ((DateTime)p.CreatedDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
 
             switch (sortOrder)
             {

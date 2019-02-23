@@ -53,7 +53,7 @@
         //alert("Test");
         // debugger;
         varRegionText = $("#drpRoleMasterRegion").val();
-        $("#hdnRegion").val(varvText);
+        $("#hdnRegion").val(varRegionText);
     });
 
     $(document).off("click", ".RoleMasterView");

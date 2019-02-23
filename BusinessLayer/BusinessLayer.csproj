@@ -60,6 +60,7 @@
     <Compile Include="PurchaseRequest.cs" />
     <Compile Include="PurchaseRequestDetails.cs" />
     <Compile Include="PurchaseRequestType.cs" />
+    <Compile Include="Login.cs" />
     <Compile Include="Region.cs" />
     <Compile Include="RoleEscalation.cs" />
     <Compile Include="RoleMaster.cs" />

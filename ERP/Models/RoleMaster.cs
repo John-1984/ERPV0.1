@@ -32,56 +32,43 @@ namespace ERP.Models
             set;
         }
 
-        public int RoleTypeID
+        public int? RoleTypeID
         {
             get;
             set;
         }
 
-        public string RoleTypeName
-        {
-            get;
-            set;
-        }
-        public string RegionName
+       
+
+        public int? ModuleID
         {
             get;
             set;
         }
 
-        public int ModuleID
+        public int? RegionID
         {
             get;
             set;
         }
 
-        public int RegionID
+       
+        public DateTime? CreatedDate
         {
             get;
             set;
         }
-
-        public string ModuleName
+        public DateTime? ModifiedDate
         {
             get;
             set;
         }
-        public DateTime CreatedDate
+        public int? ModifiedBy
         {
             get;
             set;
         }
-        public DateTime ModifiedDate
-        {
-            get;
-            set;
-        }
-        public int ModifiedBy
-        {
-            get;
-            set;
-        }
-        public int CreatedBy
+        public int? CreatedBy
         {
             get;
             set;
@@ -128,5 +115,72 @@ namespace ERP.Models
             get;
             set;
         }
+
+        public string strRegionName = String.Empty;
+        public string RegionName
+        {
+            get
+            {
+                if (this.Region == null)
+                   return  strRegionName;
+                else
+                    return this.Region.RegionName;
+            }
+            set
+            {
+
+                if (this.Region == null)
+                    strRegionName = "";
+                else
+                    strRegionName = this.Region.RegionName;
+            }
+
+        }
+
+        public string strRoleTypeName =String.Empty;
+        public string RoleTypeName
+        {
+            get
+            {
+                if (this.RoleType == null)
+                    return strRoleTypeName ;
+                else
+                    return this.RoleType.RoletypeName;
+
+               }
+            set
+            {
+
+                if (this.RoleType == null)
+                    strRoleTypeName = "";
+                else
+                    strRoleTypeName = this.RoleType.RoletypeName;
+            }
+
+        }
+
+        public string strModulesName = String.Empty;
+        public string ModulesName
+        {
+            get
+            {
+
+                if (this.Modules == null)
+                    return strModulesName;
+                else
+                    return  this.Modules.ModuleName;
+
+            }
+            set
+            {
+
+                if (this.Modules == null)
+                    strModulesName = "";
+                else
+                    strModulesName = this.Modules.ModuleName;
+            }
+
+        }
+
     }
 }

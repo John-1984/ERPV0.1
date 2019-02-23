@@ -21,7 +21,11 @@ namespace ERP.Controllers
         {
             return PartialView(GetTaxs("", 1, "", ""));
         }
-
+        [HttpGet]
+        public ActionResult _TaxCancel(int identity)
+        {
+            return RedirectToAction("_TaxAll");
+        }
         [HttpGet]
         public PartialViewResult _TaxEdit(int identity)
         {
@@ -40,7 +44,7 @@ namespace ERP.Controllers
             {
                 Models.Tax mdTax = AutoMapperConfig.Mapper().Map<Models.Tax>(_Tax.GetTax(identity));
                 mdTax.ItemList = null;
-                mdTax.ItemList = new SelectList(_Tax.GetAllitemMasters(), "Identity", "ItemName");
+                mdTax.ItemList = new SelectList(_Tax.GetAllitemMasters(), "Identity", "ItemName" , mdTax.ItemID);
 
                 TempData["PageInfo"] = "Edit Tax Info";
                 TempData.Keep();
@@ -62,16 +66,27 @@ namespace ERP.Controllers
         }
 
         [HttpPost]
-        public ActionResult Update(Models.Tax Tax)
+        public ActionResult Update(Models.Tax Tax, FormCollection frmFields)
         {
             //IF success resturn grid view
             //IF Failure return json value
+            BusinessModels.Tax mdTax= AutoMapperConfig.Mapper().Map<BusinessModels.Tax>(Tax);
+
+            var itemvalue = frmFields["hdnItemMaster"];
+
+            if (!String.IsNullOrEmpty(itemvalue))
+                mdTax.ItemID = int.Parse(itemvalue);
+
             if (Tax.Identity.Equals(-1))
             {
-                _Tax.Insert(AutoMapperConfig.Mapper().Map<BusinessModels.Tax>(Tax));
+                mdTax.CreatedDate = DateTime.Now;
+                _Tax.Insert(mdTax);
             }
             else
-                _Tax.Update(AutoMapperConfig.Mapper().Map<BusinessModels.Tax>(Tax));
+            {
+                mdTax.ModifiedDate = DateTime.Now;
+                _Tax.Update(mdTax);
+            }
             return RedirectToAction("_TaxAll");
         }
 
@@ -95,16 +110,16 @@ namespace ERP.Controllers
 
             var Taxs = AutoMapperConfig.Mapper().Map<List<Models.Tax>>(_Tax.GetAll());
             if (!string.IsNullOrEmpty(searchString) && !string.IsNullOrEmpty(createdDate))
-                Taxs = AutoMapperConfig.Mapper().Map<List<Models.Tax>>(_Tax.GetAll().ToList().FindAll(p => p.ItemName.ToLower().Contains(searchString.ToLower()) && p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+                Taxs = AutoMapperConfig.Mapper().Map<List<Models.Tax>>(_Tax.GetAll().ToList().FindAll(p => p.ItemMaster.ItemName.ToLower().Contains(searchString.ToLower()) && ((DateTime)p.CreatedDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
             else if (!string.IsNullOrEmpty(searchString))
-                Taxs = AutoMapperConfig.Mapper().Map<List<Models.Tax>>(_Tax.GetAll().ToList().FindAll(p => p.ItemName.ToLower().Contains(searchString.ToLower())));
+                Taxs = AutoMapperConfig.Mapper().Map<List<Models.Tax>>(_Tax.GetAll().ToList().FindAll(p => p.ItemMaster.ItemName.ToLower().Contains(searchString.ToLower())));
             else if (!string.IsNullOrEmpty(createdDate))
-                Taxs = AutoMapperConfig.Mapper().Map<List<Models.Tax>>(_Tax.GetAll().ToList().FindAll(p => p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+                Taxs = AutoMapperConfig.Mapper().Map<List<Models.Tax>>(_Tax.GetAll().ToList().FindAll(p => ((DateTime)p.CreatedDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
 
             switch (sortOrder)
             {
                 case "ItemName":
-                    Taxs = Taxs.OrderByDescending(stu => stu.ItemName).ToList();
+                    Taxs = Taxs.OrderByDescending(stu => stu.ItemMaster.ItemName).ToList();
                     break;
                 case "DateAsc":
                     Taxs = Taxs.OrderBy(stu => stu.CreatedDate).ToList();
@@ -113,7 +128,7 @@ namespace ERP.Controllers
                     Taxs = Taxs.OrderByDescending(stu => stu.CreatedDate).ToList();
                     break;
                 default:
-                    Taxs = Taxs.OrderBy(stu => stu.ItemName).ToList();
+                    Taxs = Taxs.OrderBy(stu => stu.ItemMaster.ItemName).ToList();
                     break;
             }
 

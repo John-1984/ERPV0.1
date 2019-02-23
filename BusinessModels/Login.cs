@@ -3,11 +3,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BusinessModels
 {
-    public class IdentificationsType
+    public class Login
     {
-        public IdentificationsType()
+        public Login()
         {
-            
+           
         }
 
         [System.ComponentModel.DataAnnotations.Key]
@@ -19,36 +19,24 @@ namespace BusinessModels
         }
 
         
-        public string IdentificationName
+        public string UserName
         {
             get;
             set;
         }
 
+        public string UserPassword
+        {
+            get;
+            set;
+        }
+
+
+        public DateTime? LastLoginDate
+        {
+            get;
+            set;
+        }
        
-
-
-        public DateTime? CreatedDate
-        {
-            get;
-            set;
-        }
-        public DateTime? ModifiedDate
-        {
-            get;
-            set;
-        }
-        public int? ModifiedBy
-        {
-            get;
-            set;
-        }
-        public int? CreatedBy
-        {
-            get;
-            set;
-        }
-
-
     }
 }

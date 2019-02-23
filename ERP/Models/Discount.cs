@@ -13,7 +13,7 @@ namespace ERP.Models
         public Discount()
         {
             Identity = -1;
-          //  CountryName = string.Empty;
+            DiscountValue = 0;
         }
 
         [Key]
@@ -32,7 +32,7 @@ namespace ERP.Models
             set;
         }
 
-        public int ItemID
+        public int? ItemID
         {
             get;
             set;
@@ -44,31 +44,35 @@ namespace ERP.Models
             set;
         }
 
-        public DateTime CreatedDate
+        public DateTime? CreatedDate
         {
             get;
             set;
         }
-        public DateTime ModifiedDate
+        public DateTime? ModifiedDate
         {
             get;
             set;
         }
-        public int ModifiedBy
+        public int? ModifiedBy
         {
             get;
             set;
         }
-        public int CreatedBy
+        public int? CreatedBy
+        {
+            get;
+            set;
+        }
+        public SelectList itemList
         {
             get;
             set;
         }
 
-        public SelectList itemList
+        public ItemMaster ItemMaster
         {
-            get;
-            set;
+            get; set;
         }
     }
 }

@@ -20,6 +20,8 @@ namespace DataLayer
         public DbSet<BusinessModels.IdentificationsType> IdentificationType { get; set; }
         public DbSet<BusinessModels.Location> Location { get; set; }
         public DbSet<BusinessModels.RoleMaster> RoleMaster { get; set; }
+        public DbSet<BusinessModels.FloorMaster> FloorMaster { get; set; }
+        public DbSet<BusinessModels.Login> Login { get; set; }
         //public DbSet<Veri> Address { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

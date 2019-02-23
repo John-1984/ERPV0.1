@@ -22,8 +22,8 @@
                 <tr class="gridrow">
                     <td class="gridrow">@LocalSupplier.SupplierName</td>
                     <td class="gridrow">@LocalSupplier.ContactNumber</td>
-                    <td class="gridrow">@LocalSupplier.ItemName</td>
-                    <td class="gridrow">@LocalSupplier.LocationName</td>
+                    <td class="gridrow">@LocalSupplier.ItemMaster.ItemName</td>
+                    <td class="gridrow">@LocalSupplier.Location.LocationName</td>
                     <td class="gridrow "><img src="~/Content/view.gif" alt="View" class="LocalSupplierView pointer" data-url="@Url.Action("_LocalSupplierView", "LocalSupplier")" data-identity="@(LocalSupplier.Identity)" /> </td>
                     <td class="gridrow "><img src="~/Content/edit.png" alt="Edit" class="LocalSupplierEdit pointer" data-url="@Url.Action("_LocalSupplierEdit", "LocalSupplier")" data-identity="@(LocalSupplier.Identity)" /></td>
                     <td class="gridrow "><img src="~/Content/delete.png" alt="Delete" class="LocalSupplierDelete pointer" data-url="@Url.Action("Delete", "LocalSupplier")" data-identity="@(LocalSupplier.Identity)" /></td>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -71,6 +71,8 @@
     <Compile Include="LocalSupplierDbContext.cs" />
     <Compile Include="LocationDAL.cs" />
     <Compile Include="LocationDbContext.cs" />
+    <Compile Include="LoginDAL.cs" />
+    <Compile Include="LoginDbContext.cs" />
     <Compile Include="ModulesDAL.cs" />
     <Compile Include="ModulesDbContext.cs" />
     <Compile Include="ProductMasterDAL.cs" />
@@ -79,7 +81,6 @@
     <Compile Include="CustomerDbContext.cs" />
     <Compile Include="CustomerDAL.cs" />
     <Compile Include="DBConnection.cs" />
-
     <Compile Include="PurchaseRequestTypeDAL.cs" />
     <Compile Include="PurchaseRequestTypeDbContext.cs" />
     <Compile Include="RegionDAL.cs" />
@@ -102,10 +103,8 @@
     <Compile Include="VendorDbContext.cs" />
     <Compile Include="WarrantyDAL.cs" />
     <Compile Include="WarrantyDbContext.cs" />
-
     <Compile Include="UserDAL.cs" />
     <Compile Include="UserDbContext.cs" />
-
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">

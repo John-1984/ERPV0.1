@@ -77,6 +77,150 @@
         }
     });
 
+    $(document).on('change', '#drpLocalSupplierRegion', function () {
+        //alert("Test");
+        // debugger;
+        varLocalSupplierregionText = $("#drpLocalSupplierRegion").val();
+        $("#hdnRegion").val(varLocalSupplierregionText);
+        var drpLocalSupplierCountry = $("#drpLocalSupplierCountry");
+        // alert("Test");
+        $.ajax({
+            type: 'POST',
+            url: '/LocalSupplier/Country',
+            data: JSON.stringify({ identity: $("#drpLocalSupplierRegion").val() }),
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function (response) {
+                drpLocalSupplierCountry.empty().append('<option selected="selected" value="0">Select Country</option>');
+                $.each(response, function () {
+                    drpLocalSupplierCountry.append($("<option></option>").val(this['Value']).html(this['Text']));
+                });
+            },
+            error: function (response) {
+                showMessage(response.responseText);
+            }
+        });
+    });
+
+    $(document).on('change', '#drpLocalSupplierCountry', function () {
+        //alert("Test");
+        // debugger;
+        varLocalSuppliercountryText = $("#drpLocalSupplierCountry").val();
+        $("#hdnCountry").val(varLocalSuppliercountryText);
+        var drpLocalSupplierState = $("#drpLocalSupplierState");
+        //alert("Test");
+        $.ajax({
+            type: 'POST',
+            url: '/LocalSupplier/State',
+            data: JSON.stringify({ identity: $("#drpLocalSupplierCountry").val() }),
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function (response) {
+                drpLocalSupplierState.empty().append('<option selected="selected" value="0">Select State</option>');
+                $.each(response, function () {
+                    drpLocalSupplierState.append($("<option></option>").val(this['Value']).html(this['Text']));
+                });
+            },
+            error: function (response) {
+                showMessage(response.responseText);
+            }
+        });
+    });
+
+    $(document).on('change', '#drpLocalSupplierState', function () {
+        //alert("Test");
+        // debugger;
+        // alert("Test");
+        varLocalSupplierstateText = $("#drpLocalSupplierState").val();
+        $("#hdnState").val(varLocalSupplierstateText);
+        var drpLocalSupplierdistrict = $("#drpLocalSupplierdistrict");
+        //alert("Test");
+        $.ajax({
+            type: 'POST',
+            url: '/LocalSupplier/District',
+            data: JSON.stringify({ identity: $("#drpLocalSupplierState").val() }),
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function (response) {
+                drpLocalSupplierdistrict.empty().append('<option selected="selected" value="0">Select District</option>');
+                $.each(response, function () {
+                    drpLocalSupplierdistrict.append($("<option></option>").val(this['Value']).html(this['Text']));
+                });
+            },
+            error: function (response) {
+                showMessage(response.responseText);
+            }
+        });
+    });
+
+    $(document).on('change', '#drpLocalSupplierdistrict', function () {
+        //alert("Test");
+        // debugger;
+      //  alert("Test");
+        varLocalSupplierdistrictText = $("#drpLocalSupplierdistrict").val();
+        $("#hdnDistrict").val(varLocalSupplierdistrictText);
+        var drpLocalSupplierlocation = $("#drpLocalSupplierlocation");
+        //alert("Test");
+        $.ajax({
+            type: 'POST',
+            url: '/LocalSupplier/Location',
+            data: JSON.stringify({ identity: $("#drpLocalSupplierdistrict").val() }),
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function (response) {
+                drpLocalSupplierlocation.empty().append('<option selected="selected" value="0">Select Location</option>');
+                $.each(response, function () {
+                    drpLocalSupplierlocation.append($("<option></option>").val(this['Value']).html(this['Text']));
+                });
+            },
+            error: function (response) {
+                showMessage(response.responseText);
+            }
+        });
+    });
+
+
+    $(document).on('change', '#drpLocalSupplierlocation', function () {
+        //alert("Test");
+        // debugger;
+        varLocalSupplierlocText = $("#drpLocalSupplierlocation").val();
+        $("#hdnLocation").val(varLocalSupplierlocText);
+
+        // alert(vardistrictText);
+    });
+
+
+    $(document).on('change', '#drpLocalSupplierItemMaster', function () {
+        //alert("Test");
+        // debugger;
+        varLocalSupplieritemText = $("#drpLocalSupplierItemMaster").val();
+        $("#hdnItemMaster").val(varLocalSupplieritemText);
+
+        // alert(vardistrictText);
+    });
+
+    $(document).off("click", ".LocalSupplierCancel");
+    $(document).on("click", ".LocalSupplierCancel", function (event) {
+        var theUrl = $(this).attr("data-url");
+        $('.headermode').html('View Local Supplier Info');
+        $.ajax({
+            url: theUrl,
+            type: 'GET',  // http method
+            data: { "identity": $(this).attr("data-identity") },
+            //async: true,
+            success: function (data, status, xhr) {
+
+                $('.LocalSupplierSearchDetials').show();
+                $('.LocalSupplierAdd').show();
+                $('.resultView').html(data);
+                showMessage(status, "Success");
+            },
+            error: function (jqXhr, textStatus, errorMessage) {
+                showMessage(textStatus, errorMessage);
+            }
+        });
+    });
+
     $(document).off("click", ".LocalSupplierAddEdit");
     $(document).on("click", ".LocalSupplierAddEdit", function (event) {
         var theUrl = $(this).attr("data-url");

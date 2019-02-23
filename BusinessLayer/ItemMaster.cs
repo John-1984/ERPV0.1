@@ -12,19 +12,28 @@ namespace BusinessLayer
         private DataLayer.ItemMasterDAL _dataLayer = null;
         private DataLayer.VendorDAL _venddataLayer = null;
         private DataLayer.BrandDAL _branddataLayer = null;
+        private DataLayer.ProductMasterDAL _proddataLayer = null;
         private DataLayer.UOMMasterDAL _uomdataLayer = null;
+
 
         public ItemMaster()
         {
             _dataLayer = new DataLayer.ItemMasterDAL();
             _venddataLayer = new DataLayer.VendorDAL();
             _branddataLayer = new DataLayer.BrandDAL();
+            _proddataLayer = new DataLayer.ProductMasterDAL();
             _uomdataLayer = new DataLayer.UOMMasterDAL();
+
         }
 
         public BusinessModels.ItemMaster GetItemMaster(Int32 identity)
         {
             return _dataLayer.GetItemMaster(identity);
+        }
+        public IEnumerable<BusinessModels.UOMMaster> GetAllUOMs()
+        {
+            //TestRegionData();
+            return _uomdataLayer.GetAll();
         }
         public IEnumerable<BusinessModels.Vendor> GetAllVendors()
         {
@@ -35,13 +44,26 @@ namespace BusinessLayer
         {
             //TestRegionData();
             return _branddataLayer.GetAll();
-        }
-        public IEnumerable<BusinessModels.UOMMaster> GetAllUOMs()
+        }       
+
+        public IEnumerable<BusinessModels.ProductMaster> GetAllProductMasters()
         {
             //TestRegionData();
-            return _uomdataLayer.GetAll();
+            return _proddataLayer.GetAll();
         }
-       
+
+        public IEnumerable<BusinessModels.Vendor> GetAllVendors(string fldidentity)
+        {
+            //TestRegionData();
+            return _venddataLayer.GetAll(int.Parse(fldidentity));
+        }
+        public IEnumerable<BusinessModels.Brand> GetAllBrands(string fldidentity)
+        {
+            //TestRegionData();
+            return _branddataLayer.GetAll(int.Parse(fldidentity));
+        }
+        
+
         public IEnumerable<BusinessModels.ItemMaster> GetAll()
         {
             return _dataLayer.GetAll();

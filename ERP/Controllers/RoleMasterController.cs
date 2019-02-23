@@ -45,17 +45,16 @@ namespace ERP.Controllers
             else
             {
                 Models.RoleMaster mdRoleMaster = AutoMapperConfig.Mapper().Map<Models.RoleMaster>(_RoleMaster.GetRoleMaster(identity));
-                mdRoleMaster.RegionList = null;
-                mdRoleMaster.RegionList = new SelectList(_RoleMaster.GetAllRegionss(), "Identity", "RegionName");
+               
 
                 mdRoleMaster.RegionList = null;
-                mdRoleMaster.RegionList = new SelectList(_RoleMaster.GetAllRegionss(), "Identity", "RegionName");
+                mdRoleMaster.RegionList = new SelectList(_RoleMaster.GetAllRegionss(), "Identity", "RegionName", mdRoleMaster.RegionID);
 
                 mdRoleMaster.ModuleList = null;
-                mdRoleMaster.ModuleList = new SelectList(_RoleMaster.GetAllModules(), "Identity", "ModuleName");
+                mdRoleMaster.ModuleList = new SelectList(_RoleMaster.GetAllModules(), "Identity", "ModuleName", mdRoleMaster.ModuleID);
 
                 mdRoleMaster.RoleTypeList = null;
-                mdRoleMaster.RoleTypeList = new SelectList(_RoleMaster.GetAllRoleTypes(), "Identity", "RoleTypeName");
+                mdRoleMaster.RoleTypeList = new SelectList(_RoleMaster.GetAllRoleTypes(), "Identity", "RoleTypeName", mdRoleMaster.RoleTypeID);
 
                 TempData["PageInfo"] = "Edit Role Master Info";
                 TempData.Keep();
@@ -67,6 +66,11 @@ namespace ERP.Controllers
         public PartialViewResult _RoleMasterView(int identity)
         {
             return PartialView(AutoMapperConfig.Mapper().Map<Models.RoleMaster>(_RoleMaster.GetRoleMaster(identity)));
+        }
+        [HttpGet]
+        public ActionResult _RoleMasterCancel(int identity)
+        {
+            return RedirectToAction("_RoleMasterAll");
         }
 
         [HttpPost]
@@ -130,11 +134,11 @@ namespace ERP.Controllers
 
             var RoleMasters = AutoMapperConfig.Mapper().Map<List<Models.RoleMaster>>(_RoleMaster.GetAll());
             if (!string.IsNullOrEmpty(searchString) && !string.IsNullOrEmpty(createdDate))
-                RoleMasters = AutoMapperConfig.Mapper().Map<List<Models.RoleMaster>>(_RoleMaster.GetAll().ToList().FindAll(p => p.RoleName.ToLower().Contains(searchString.ToLower()) && p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+                RoleMasters = AutoMapperConfig.Mapper().Map<List<Models.RoleMaster>>(_RoleMaster.GetAll().ToList().FindAll(p => p.RoleName.ToLower().Contains(searchString.ToLower()) && ((DateTime)p.CreatedDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
             else if (!string.IsNullOrEmpty(searchString))
                 RoleMasters = AutoMapperConfig.Mapper().Map<List<Models.RoleMaster>>(_RoleMaster.GetAll().ToList().FindAll(p => p.RoleName.ToLower().Contains(searchString.ToLower())));
             else if (!string.IsNullOrEmpty(createdDate))
-                RoleMasters = AutoMapperConfig.Mapper().Map<List<Models.RoleMaster>>(_RoleMaster.GetAll().ToList().FindAll(p => p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+                RoleMasters = AutoMapperConfig.Mapper().Map<List<Models.RoleMaster>>(_RoleMaster.GetAll().ToList().FindAll(p => ((DateTime)p.CreatedDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
 
             switch (sortOrder)
             {

@@ -36,6 +36,7 @@ namespace ERP
                 cfg.CreateMap<BusinessModels.Warranty, ERP.Models.Warranty>().ReverseMap();
                 cfg.CreateMap<BusinessModels.Employee, ERP.Models.Employee>().ReverseMap();
                 cfg.CreateMap<BusinessModels.FloorMaster, ERP.Models.FloorMaster>().ReverseMap();
+                cfg.CreateMap<BusinessModels.Login, ERP.Models.Login>().ReverseMap();
 
             });
         }

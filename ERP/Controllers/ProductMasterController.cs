@@ -82,12 +82,15 @@ namespace ERP.Controllers
             ViewBag.CurrentSort = string.IsNullOrEmpty(sortOrder) ? "ProductMasterName" : "";
 
             var ProductMasters = AutoMapperConfig.Mapper().Map<List<Models.ProductMaster>>(_ProductMaster.GetAll());
-            if (!string.IsNullOrEmpty(searchString) && !string.IsNullOrEmpty(createdDate))
-                ProductMasters = AutoMapperConfig.Mapper().Map<List<Models.ProductMaster>>(_ProductMaster.GetAll().ToList().FindAll(p => p.ProductName.ToLower().Contains(searchString.ToLower()) && p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
-            else if (!string.IsNullOrEmpty(searchString))
+            if (!string.IsNullOrEmpty(searchString))
                 ProductMasters = AutoMapperConfig.Mapper().Map<List<Models.ProductMaster>>(_ProductMaster.GetAll().ToList().FindAll(p => p.ProductName.ToLower().Contains(searchString.ToLower())));
-            else if (!string.IsNullOrEmpty(createdDate))
-                ProductMasters = AutoMapperConfig.Mapper().Map<List<Models.ProductMaster>>(_ProductMaster.GetAll().ToList().FindAll(p => p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+
+            //if (!string.IsNullOrEmpty(searchString) && !string.IsNullOrEmpty(createdDate))
+               // ProductMasters = AutoMapperConfig.Mapper().Map<List<Models.ProductMaster>>(_ProductMaster.GetAll().ToList().FindAll(p => p.ProductName.ToLower().Contains(searchString.ToLower()) && p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+            //else if (!string.IsNullOrEmpty(searchString))
+                ProductMasters = AutoMapperConfig.Mapper().Map<List<Models.ProductMaster>>(_ProductMaster.GetAll().ToList().FindAll(p => p.ProductName.ToLower().Contains(searchString.ToLower())));
+            //else if (!string.IsNullOrEmpty(createdDate))
+               // ProductMasters = AutoMapperConfig.Mapper().Map<List<Models.ProductMaster>>(_ProductMaster.GetAll().ToList().FindAll(p => p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
 
             switch (sortOrder)
             {

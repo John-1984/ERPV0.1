@@ -7,7 +7,7 @@
         <table class="table EmployeeAll">
             <thead>
                 <tr class="gridheader">
-                    <th>Employee CompanyID</th>
+                    <th>CompanyID</th>
                     <th>Employee Name</th>
                     <th>Contact Number</th>
                     <th>Email</th>
@@ -26,7 +26,7 @@
                     <td class="gridrow">@Employee.EmployeeName</td>
                     <td class="gridrow">@Employee.OfficialContactNo</td>
                     <td class="gridrow">@Employee.OfficialEmail</td>
-                    <td class="gridrow "> @Employee.RoleName</td>
+                    <td class="gridrow "> @Employee.RoleMaster.RoleName</td>
                     <td class="gridrow "></td>
                     <td class="gridrow "><img src="~/Content/view.gif" alt="View" class="EmployeeView pointer" data-url="@Url.Action("_EmployeeView", "Employee")" data-identity="@(Employee.Identity)" /> </td>
                     <td class="gridrow "><img src="~/Content/edit.png" alt="Edit" class="EmployeeEdit pointer" data-url="@Url.Action("_EmployeeEdit", "Employee")" data-identity="@(Employee.Identity)" /></td>

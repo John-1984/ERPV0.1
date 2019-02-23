@@ -133,7 +133,6 @@ namespace ERP.Controllers
         {
             BusinessModels.CompanyType mdCompanyType = AutoMapperConfig.Mapper().Map<BusinessModels.CompanyType>(CompanyType);
             var compvalue = frmFields["hdnCompany"];
-
             if (!String.IsNullOrEmpty(compvalue))
                 mdCompanyType.CompanyID = int.Parse(compvalue);
             //IF success resturn grid view

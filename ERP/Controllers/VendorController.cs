@@ -109,11 +109,11 @@ namespace ERP.Controllers
 
             var Vendors = AutoMapperConfig.Mapper().Map<List<Models.Vendor>>(_Vendor.GetAll());
             if (!string.IsNullOrEmpty(searchString) && !string.IsNullOrEmpty(createdDate))
-                Vendors = AutoMapperConfig.Mapper().Map<List<Models.Vendor>>(_Vendor.GetAll().ToList().FindAll(p => p.VendorName.ToLower().Contains(searchString.ToLower()) && p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+                Vendors = AutoMapperConfig.Mapper().Map<List<Models.Vendor>>(_Vendor.GetAll().ToList().FindAll(p => p.VendorName.ToLower().Contains(searchString.ToLower()) && ((DateTime)p.CreatedDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
             else if (!string.IsNullOrEmpty(searchString))
                 Vendors = AutoMapperConfig.Mapper().Map<List<Models.Vendor>>(_Vendor.GetAll().ToList().FindAll(p => p.VendorName.ToLower().Contains(searchString.ToLower())));
             else if (!string.IsNullOrEmpty(createdDate))
-                Vendors = AutoMapperConfig.Mapper().Map<List<Models.Vendor>>(_Vendor.GetAll().ToList().FindAll(p => p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+                Vendors = AutoMapperConfig.Mapper().Map<List<Models.Vendor>>(_Vendor.GetAll().ToList().FindAll(p => ((DateTime)p.CreatedDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
 
             switch (sortOrder)
             {

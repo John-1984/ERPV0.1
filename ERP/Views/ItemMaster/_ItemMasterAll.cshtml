@@ -7,9 +7,10 @@
         <table class="table ItemMasterAll">
             <thead>
                 <tr class="gridheader">
-                    <th>Item Name</th>
+                    <th>Product Category</th>
                     <th>Vendor</th>
                     <th>Brand</th>
+                    <th>Item Name</th>
                     <th>Item Price</th>
                     <th>Description</th>
                     <th>View</th>
@@ -21,9 +22,10 @@
                 @foreach (var ItemMaster in Model)
                 {
                 <tr class="gridrow">
+                    <td class="gridrow">@ItemMaster.Brand.Vendor.ProductMaster.ProductName</td>
+                    <td class="gridrow">@ItemMaster.Brand.Vendor.VendorName</td>
+                    <td class="gridrow">@ItemMaster.Brand.BrandName</td>
                     <td class="gridrow">@ItemMaster.ItemName</td>
-                    <td class="gridrow">@ItemMaster.VendorName</td>
-                    <td class="gridrow">@ItemMaster.BrandName</td>
                     <td class="gridrow">@ItemMaster.RetailPrice</td>
                     <td class="gridrow">@ItemMaster.Description</td>
                     <td class="gridrow "> <img src="~/Content/view.gif" alt="View" class="ItemMasterView pointer" data-url="@Url.Action("_ItemMasterView", "ItemMaster")" data-identity="@(ItemMaster.Identity)" /> </td>

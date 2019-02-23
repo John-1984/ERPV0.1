@@ -13,11 +13,33 @@
         }
     };
 
+    $(document).off("click", ".UOMMasterCancel");
+    $(document).on("click", ".UOMMasterCancel", function (event) {
+        var theUrl = $(this).attr("data-url");
+        $('.headermode').html('View UOM Info');
+        $.ajax({
+            url: theUrl,
+            type: 'GET',  // http method
+            data: { "identity": $(this).attr("data-identity") },
+            //async: true,
+            success: function (data, status, xhr) {
+
+                $('.UOMMasterSearchDetials').show();
+                $('.UOMMasterAdd').show();
+                $('.resultView').html(data);
+                showMessage(status, "Success");
+            },
+            error: function (jqXhr, textStatus, errorMessage) {
+                showMessage(textStatus, errorMessage);
+            }
+        });
+    });
+
 
     $(document).off("click", ".UOMMasterView");
     $(document).on("click", ".UOMMasterView", function (event) {
         var theUrl = $(this).attr("data-url");
-        $('.headermode').html('View UOM Master Info');
+        $('.headermode').html('View UOM Info');
         $.ajax({
             url: theUrl,
             type: 'GET',  // http method
@@ -37,7 +59,7 @@
     $(document).off("click", ".UOMMasterEdit, .UOMMasterAdd");
     $(document).on("click", ".UOMMasterEdit, .UOMMasterAdd", function (event) {
         var theUrl = $(this).attr("data-url");
-        $('.headermode').html('Manage UOM Master Info');
+        $('.headermode').html('Manage UOM Info');
         $.ajax({
             url: theUrl,
             type: 'GET',  // http method
@@ -80,7 +102,7 @@
     $(document).off("click", ".UOMMasterAddEdit");
     $(document).on("click", ".UOMMasterAddEdit", function (event) {
         var theUrl = $(this).attr("data-url");
-        $('.headermode').html('View UOM Master Info');
+        $('.headermode').html('View UOM Info');
         $.ajax({
             url: theUrl,
             type: 'POST',  // http method
@@ -100,7 +122,7 @@
     $(document).off("click", ".UOMMasterSearch");
     $(document).on("click", ".UOMMasterSearch", function (event) {
         var theUrl = $(this).attr("data-url");
-        $('.headermode').html('View UOM Master Info');
+        $('.headermode').html('View UOM Info');
         $.ajax({
             url: theUrl,
             type: 'POST',  // http method

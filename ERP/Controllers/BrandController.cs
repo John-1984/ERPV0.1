@@ -112,11 +112,11 @@ namespace ERP.Controllers
 
             var Brands = AutoMapperConfig.Mapper().Map<List<Models.Brand>>(_Brand.GetAll());
             if (!string.IsNullOrEmpty(searchString) && !string.IsNullOrEmpty(createdDate))
-                Brands = AutoMapperConfig.Mapper().Map<List<Models.Brand>>(_Brand.GetAll().ToList().FindAll(p => p.BrandName.ToLower().Contains(searchString.ToLower()) && p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+                Brands = AutoMapperConfig.Mapper().Map<List<Models.Brand>>(_Brand.GetAll().ToList().FindAll(p => p.BrandName.ToLower().Contains(searchString.ToLower()) && ((DateTime)p.CreatedDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
             else if (!string.IsNullOrEmpty(searchString))
                 Brands = AutoMapperConfig.Mapper().Map<List<Models.Brand>>(_Brand.GetAll().ToList().FindAll(p => p.BrandName.ToLower().Contains(searchString.ToLower())));
             else if (!string.IsNullOrEmpty(createdDate))
-                Brands = AutoMapperConfig.Mapper().Map<List<Models.Brand>>(_Brand.GetAll().ToList().FindAll(p => p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+                Brands = AutoMapperConfig.Mapper().Map<List<Models.Brand>>(_Brand.GetAll().ToList().FindAll(p => ((DateTime)p.CreatedDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
 
             switch (sortOrder)
             {

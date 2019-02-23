@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Data.Entity;
 namespace DataLayer
 {
     public class EmployeeDAL
@@ -20,11 +20,18 @@ namespace DataLayer
             using (var dbContext = new EmployeeDbContext())
             {
                 _Employee = dbContext.Employee
-                            .Include("Company")
-                            .Include("CompanyType")
-                            .Include("IdentificationType")
-                            .Include("Location")
-                            .Include("RoleMaster")
+                            .Include(K => K.RoleMaster)
+                            .Include(l => l.Location)
+                            .Include(o => o.CompanyType)
+                            .Include(s => s.FloorMaster)
+                            .Include(w => w.IdentificationsType)
+                            .Include(q => q.Company)
+                            .Include(a => a.Login)
+                            .Include(x => x.RoleMaster.RoleType)
+                            .Include(K => K.Location.District)
+                            .Include(f => f.Location.District.State)
+                            .Include(j => j.Location.District.State.Country)
+                            .Include(m => m.Location.District.State.Country.Region)
                             .FirstOrDefault(p => p.Identity.Equals(identity));
             }
             return _Employee;
@@ -38,74 +45,266 @@ namespace DataLayer
             {
                 dbContext.Configuration.LazyLoadingEnabled = false;
                 _Employees = dbContext.Employee
-                             .Include("Company")
-                            .Include("CompanyType")
-                            .Include("IdentificationType")
-                            .Include("Location")
-                            .Include("RoleMaster")
+                             .Include(K => K.RoleMaster)
+                            .Include(l => l.Location)
+                            .Include(o => o.CompanyType)
+                            .Include(s => s.FloorMaster)
+                            .Include(w => w.IdentificationsType)
+                            .Include(q => q.Company)
+                            .Include(a => a.Login)
+                            .Include(x => x.RoleMaster.RoleType)
+                            .Include(K => K.Location.District)
+                            .Include(f => f.Location.District.State)
+                            .Include(j => j.Location.District.State.Country)
+                            .Include(m => m.Location.District.State.Country.Region)
                             .ToList();
             }
 
             return _Employees;
         }
 
-        public IEnumerable<BusinessModels.RoleMaster> GetAllRoles()
+
+        public IEnumerable<BusinessModels.Employee> GetAllEmployeesOnRole(int fldidentity)
         {
-            var _RoleMasters = new List<BusinessModels.RoleMaster>();
-            using (var dbContext = new RoleMasterDbContext())
+            //Need to do
+            var _Employees = new List<BusinessModels.Employee>();
+            using (var dbContext = new EmployeeDbContext())
             {
                 dbContext.Configuration.LazyLoadingEnabled = false;
-                _RoleMasters = dbContext.RoleMaster
+                _Employees = dbContext.Employee
+                             .Include(K => K.RoleMaster)
+                            .Include(l => l.Location)
+                            .Include(o => o.CompanyType)
+                            .Include(s => s.FloorMaster)
+                            .Include(w => w.IdentificationsType)
+                            .Include(q => q.Company)
+                            .Include(a => a.Login)
+                            .Include(x => x.RoleMaster.RoleType)
+                            .Include(K => K.Location.District)
+                            .Include(f => f.Location.District.State)
+                            .Include(j => j.Location.District.State.Country)
+                            .Include(m => m.Location.District.State.Country.Region)
+                             .Where(p => p.RoleMaster.Identity == fldidentity)
                             .ToList();
             }
-            return _RoleMasters;
+
+            return _Employees;
         }
 
-        public IEnumerable<BusinessModels.Location> GetAllLocations()
+        public IEnumerable<BusinessModels.Employee> GetAllEmployeesOnLocation(int fldidentity)
         {
-            var _Locationss = new List<BusinessModels.Location>();
-            using (var dbContext = new LocationDbContext())
+            //Need to do
+            var _Employees = new List<BusinessModels.Employee>();
+            using (var dbContext = new EmployeeDbContext())
             {
                 dbContext.Configuration.LazyLoadingEnabled = false;
-                _Locationss = dbContext.Location
+                _Employees = dbContext.Employee
+                             .Include(K => K.RoleMaster)
+                            .Include(l => l.Location)
+                            .Include(o => o.CompanyType)
+                            .Include(s => s.FloorMaster)
+                            .Include(w => w.IdentificationsType)
+                            .Include(q => q.Company)
+                            .Include(a => a.Login)
+                            .Include(x => x.RoleMaster.RoleType)
+                            .Include(K => K.Location.District)
+                            .Include(f => f.Location.District.State)
+                            .Include(j => j.Location.District.State.Country)
+                            .Include(m => m.Location.District.State.Country.Region)
+                             .Where(p => p.Location.Identity == fldidentity)
                             .ToList();
             }
-            return _Locationss;
+
+            return _Employees;
         }
 
-        public IEnumerable<BusinessModels.IdentificationsType> GetAllIdentificationTypes()
+        public IEnumerable<BusinessModels.Employee> GetAllEmployeesOnCompanyType(int fldidentity)
         {
-            var _IdentificationTypes = new List<BusinessModels.IdentificationsType>();
-            using (var dbContext = new IdentificationsTypeDbContext())
+            //Need to do
+            var _Employees = new List<BusinessModels.Employee>();
+            using (var dbContext = new EmployeeDbContext())
             {
                 dbContext.Configuration.LazyLoadingEnabled = false;
-                _IdentificationTypes = dbContext.IdentificationsType
+                _Employees = dbContext.Employee
+                             .Include(K => K.RoleMaster)
+                            .Include(l => l.Location)
+                            .Include(o => o.CompanyType)
+                            .Include(s => s.FloorMaster)
+                            .Include(w => w.IdentificationsType)
+                            .Include(q => q.Company)
+                            .Include(a => a.Login)
+                            .Include(x => x.RoleMaster.RoleType)
+                            .Include(K => K.Location.District)
+                            .Include(f => f.Location.District.State)
+                            .Include(j => j.Location.District.State.Country)
+                            .Include(m => m.Location.District.State.Country.Region)
+                             .Where(p => p.CompanyType.Identity == fldidentity)
                             .ToList();
             }
-            return _IdentificationTypes;
+
+            return _Employees;
         }
 
-        public IEnumerable<BusinessModels.CompanyType> GetAllCompanyType()
+        public IEnumerable<BusinessModels.Employee> GetAllEmployeesOnFloor(int fldidentity)
         {
-            var _CompanyTypes = new List<BusinessModels.CompanyType>();
-            using (var dbContext = new CompanyTypeDbContext())
+            //Need to do
+            var _Employees = new List<BusinessModels.Employee>();
+            using (var dbContext = new EmployeeDbContext())
             {
                 dbContext.Configuration.LazyLoadingEnabled = false;
-                _CompanyTypes = dbContext.CompanyType
+                _Employees = dbContext.Employee
+                             .Include(K => K.RoleMaster)
+                            .Include(l => l.Location)
+                            .Include(o => o.CompanyType)
+                            .Include(s => s.FloorMaster)
+                            .Include(w => w.IdentificationsType)
+                            .Include(q => q.Company)
+                            .Include(a => a.Login)
+                            .Include(x => x.RoleMaster.RoleType)
+                            .Include(K => K.Location.District)
+                            .Include(f => f.Location.District.State)
+                            .Include(j => j.Location.District.State.Country)
+                            .Include(m => m.Location.District.State.Country.Region)
+                             .Where(p => p.FloorMaster.Identity == fldidentity)
                             .ToList();
             }
-            return _CompanyTypes;
+
+            return _Employees;
         }
-        public IEnumerable<BusinessModels.Company> GetAllCompanies()
+
+        public IEnumerable<BusinessModels.Employee> GetAllEmployeesOnCompany(int fldidentity)
         {
-            var _Companiess = new List<BusinessModels.Company>();
-            using (var dbContext = new CompanyDbContext())
+            //Need to do
+            var _Employees = new List<BusinessModels.Employee>();
+            using (var dbContext = new EmployeeDbContext())
             {
                 dbContext.Configuration.LazyLoadingEnabled = false;
-                _Companiess = dbContext.Company
+                _Employees = dbContext.Employee
+                             .Include(K => K.RoleMaster)
+                            .Include(l => l.Location)
+                            .Include(o => o.CompanyType)
+                            .Include(s => s.FloorMaster)
+                            .Include(w => w.IdentificationsType)
+                            .Include(q => q.Company)
+                            .Include(a => a.Login)
+                            .Include(x => x.RoleMaster.RoleType)
+                            .Include(K => K.Location.District)
+                            .Include(f => f.Location.District.State)
+                            .Include(j => j.Location.District.State.Country)
+                            .Include(m => m.Location.District.State.Country.Region)
+                             .Where(p => p.Company.Identity == fldidentity)
                             .ToList();
             }
-            return _Companiess;
+
+            return _Employees;
+        }
+
+        public IEnumerable<BusinessModels.Employee> GetAllEmployeesOnDistrict(int fldidentity)
+        {
+            //Need to do
+            var _Employees = new List<BusinessModels.Employee>();
+            using (var dbContext = new EmployeeDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _Employees = dbContext.Employee
+                             .Include(K => K.RoleMaster)
+                            .Include(l => l.Location)
+                            .Include(o => o.CompanyType)
+                            .Include(s => s.FloorMaster)
+                            .Include(w => w.IdentificationsType)
+                            .Include(q => q.Company)
+                            .Include(a => a.Login)
+                            .Include(x => x.RoleMaster.RoleType)
+                            .Include(K => K.Location.District)
+                            .Include(f => f.Location.District.State)
+                            .Include(j => j.Location.District.State.Country)
+                            .Include(m => m.Location.District.State.Country.Region)
+                             .Where(p => p.Location.District.Identity == fldidentity)
+                            .ToList();
+            }
+
+            return _Employees;
+        }
+
+        public IEnumerable<BusinessModels.Employee> GetAllEmployeesOnState(int fldidentity)
+        {
+            //Need to do
+            var _Employees = new List<BusinessModels.Employee>();
+            using (var dbContext = new EmployeeDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _Employees = dbContext.Employee
+                             .Include(K => K.RoleMaster)
+                            .Include(l => l.Location)
+                            .Include(o => o.CompanyType)
+                            .Include(s => s.FloorMaster)
+                            .Include(w => w.IdentificationsType)
+                            .Include(q => q.Company)
+                            .Include(a => a.Login)
+                            .Include(x => x.RoleMaster.RoleType)
+                            .Include(K => K.Location.District)
+                            .Include(f => f.Location.District.State)
+                            .Include(j => j.Location.District.State.Country)
+                            .Include(m => m.Location.District.State.Country.Region)
+                             .Where(p => p.Location.District.State.Identity == fldidentity)
+                            .ToList();
+            }
+
+            return _Employees;
+        }
+
+        public IEnumerable<BusinessModels.Employee> GetAllEmployeesOnCountry(int fldidentity)
+        {
+            //Need to do
+            var _Employees = new List<BusinessModels.Employee>();
+            using (var dbContext = new EmployeeDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _Employees = dbContext.Employee
+                             .Include(K => K.RoleMaster)
+                            .Include(l => l.Location)
+                            .Include(o => o.CompanyType)
+                            .Include(s => s.FloorMaster)
+                            .Include(w => w.IdentificationsType)
+                            .Include(q => q.Company)
+                            .Include(a => a.Login)
+                            .Include(x => x.RoleMaster.RoleType)
+                            .Include(K => K.Location.District)
+                            .Include(f => f.Location.District.State)
+                            .Include(j => j.Location.District.State.Country)
+                            .Include(m => m.Location.District.State.Country.Region)
+                             .Where(p => p.Location.District.State.Country.Identity == fldidentity)
+                            .ToList();
+            }
+
+            return _Employees;
+        }
+
+        public IEnumerable<BusinessModels.Employee> GetAllEmployeesOnRegion(int fldidentity)
+        {
+            //Need to do
+            var _Employees = new List<BusinessModels.Employee>();
+            using (var dbContext = new EmployeeDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _Employees = dbContext.Employee
+                             .Include(K => K.RoleMaster)
+                            .Include(l => l.Location)
+                            .Include(o => o.CompanyType)
+                            .Include(s => s.FloorMaster)
+                            .Include(w => w.IdentificationsType)
+                            .Include(q => q.Company)
+                            .Include(a => a.Login)
+                            .Include(x => x.RoleMaster.RoleType)
+                            .Include(K => K.Location.District)
+                            .Include(f => f.Location.District.State)
+                            .Include(j => j.Location.District.State.Country)
+                            .Include(m => m.Location.District.State.Country.Region)
+                             .Where(p => p.Location.District.State.Country.Region.Identity == fldidentity)
+                            .ToList();
+            }
+
+            return _Employees;
         }
 
         public Boolean Update(BusinessModels.Employee Employee)
@@ -137,6 +336,29 @@ namespace DataLayer
             }
 
             return true;
+        }
+
+        public BusinessModels.Employee GetEmployeeLogin(Int32 identity)
+        {
+            var _Employee = new BusinessModels.Employee();
+            using (var dbContext = new EmployeeDbContext())
+            {
+                _Employee = dbContext.Employee
+                            .Include(K => K.RoleMaster)
+                            .Include(l => l.Location)
+                            .Include(o => o.CompanyType)
+                            .Include(s => s.FloorMaster)
+                            .Include(w => w.IdentificationsType)
+                            .Include(q => q.Company)
+                            .Include(a => a.Login)
+                            .Include(x => x.RoleMaster.RoleType)
+                            .Include(K => K.Location.District)
+                            .Include(f => f.Location.District.State)
+                            .Include(j => j.Location.District.State.Country)
+                            .Include(m => m.Location.District.State.Country.Region)
+                            .FirstOrDefault(p => p.Login.Identity.Equals(identity));
+            }
+            return _Employee;
         }
 
     }

@@ -25,38 +25,38 @@ namespace BusinessModels
             set;
         }
 
-        public int ItemID
+        [ForeignKey("ItemMaster")]
+        public int? ItemID
         {
             get;
             set;
         }
-        public string ItemName
+       
+
+        public DateTime? CreatedDate
+        {
+            get;
+            set;
+        }
+        public DateTime? ModifiedDate
+        {
+            get;
+            set;
+        }
+        public int? ModifiedBy
+        {
+            get;
+            set;
+        }
+        public int? CreatedBy
         {
             get;
             set;
         }
 
-        public DateTime CreatedDate
+        public ItemMaster ItemMaster
         {
-            get;
-            set;
+            get;set;
         }
-        public DateTime ModifiedDate
-        {
-            get;
-            set;
-        }
-        public int ModifiedBy
-        {
-            get;
-            set;
-        }
-        public int CreatedBy
-        {
-            get;
-            set;
-        }
-
-
     }
 }

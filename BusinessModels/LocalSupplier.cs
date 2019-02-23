@@ -38,46 +38,58 @@ namespace BusinessModels
             set;
         }
 
-        public int ContactNumber
+        public String ContactNumber
         {
             get;
             set;
         }
 
-        public int LocationID
+        [ForeignKey("Location")]
+        public int? LocationID
         {
             get;
             set;
         }
 
-        public int ItemID
-        {
-            get;
-            set;
-        }
-
-
-        public DateTime CreatedDate
-        {
-            get;
-            set;
-        }
-        public DateTime ModifiedDate
-        {
-            get;
-            set;
-        }
-        public int ModifiedBy
-        {
-            get;
-            set;
-        }
-        public int CreatedBy
+        [ForeignKey("ItemMaster")]
+        public int? ItemID
         {
             get;
             set;
         }
 
 
+        public DateTime? CreatedDate
+        {
+            get;
+            set;
+        }
+        public DateTime? ModifiedDate
+        {
+            get;
+            set;
+        }
+        public int? ModifiedBy
+        {
+            get;
+            set;
+        }
+        public int? CreatedBy
+        {
+            get;
+            set;
+        }
+
+        public Location Location
+        {
+            get;
+            set;
+        }
+
+        public ItemMaster ItemMaster
+        {
+            get;
+            set;
+        }
     }
 }

@@ -21,169 +21,288 @@
         </div>
         <div class="row  col-md-12 col-lg-12">
             <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;">Employee Name :</div></div>
-                <div class="float-right col-md-8 col-lg-8">
-                    <input class="textareastyles" style="width:300px;height:35px;" type="text" name="EmployeeName" value="@(Model.EmployeeName)" placeholder="Enter Employee Name" />
+                <div class="col-md-6 col-lg-6">
+                    <div class="tab" role="tabpanel">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#Section1" aria-controls="home" role="tab" data-toggle="tab">Personal Details</a></li>
 
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content tabs">
+                            <div role="tabpanel" class="tab-pane active" id="Section1">
+
+                                <div class="row col-md-12 col-lg-12">
+                                    <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div><label>Employee Name:</label></div></div>
+                                    <div class="float-right col-md-8 col-lg-8">
+                                        <input class="textareastyles" style="width:300px;height:35px;" type="text" name="EmployeeName" value="@(Model.EmployeeName)" placeholder="Enter Employee Name" />
+
+                                    </div>
+
+                                </div>
+                                <div class="row col-md-12 col-lg-12" style="height:7px">
+                                </div>
+                                <div class="row col-md-12 col-lg-12">
+                                    <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div><label>Personal Contact Number:</label></div></div>
+                                    <div class="float-right col-md-8 col-lg-8">
+                                        <input class="textareastyles" style="width:300px;height:35px;" type="text" name="PersonalContactNo" value="@(Model.PersonalContactNo)" placeholder="Enter Employee Personal Contact Number" />
+
+                                    </div>
+
+                                </div>
+                                <div class="row col-md-12 col-lg-12" style="height:7px">
+                                </div>
+                                <div class="row col-md-12 col-lg-12">
+                                    <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div><label>Alternate Contact Number:</label></div></div>
+                                    <div class="float-right col-md-8 col-lg-8">
+                                        <input class="textareastyles" style="width:300px;height:35px;" type="text" name="AlternateContactNo" value="@(Model.AlternateContactNo)" placeholder="Enter Employee Alternate Contact Number" />
+
+                                    </div>
+
+                                </div>
+                                <div class="row col-md-12 col-lg-12" style="height:7px">
+                                </div>
+                                <div class="row col-md-12 col-lg-12">
+                                    <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div><label>Personal Email:</label></div></div>
+                                    <div class="float-right col-md-8 col-lg-8">
+                                        <input class="textareastyles" style="width:300px;height:35px;" type="text" name="PersonalEmail" value="@(Model.PersonalEmail)" placeholder="Enter Employee Personal Email ID" />
+
+                                    </div>
+
+                                </div>
+                                <div class="row col-md-12 col-lg-12" style="height:7px">
+                                </div>
+                                <div class="row col-md-12 col-lg-12">
+                                    <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div><label>Address:</label></div></div>
+                                    <div class="float-right col-md-8 col-lg-8">
+                                        <textarea name="Address" rows="6" cols="30" class="textareastyles" placeholder="Enter Address ">@(Model.Address)</textarea>
+
+                                    </div>
+
+                                </div>
+                                <div class="row col-md-12 col-lg-12" style="height:7px">
+                                </div>
+                                <div class="row col-md-12 col-lg-12">
+                                    <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div><label>Qualification:</label></div></div>
+                                    <div class="float-right col-md-8 col-lg-8">
+                                        <input class="textareastyles" style="width:300px;height:35px;" type="text" name="Qualification" value="@(Model.Qualification)" placeholder="Enter Employee Qualification" />
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
+            </div>
 
+            <div class="row col-md-12 col-lg-12" style="height:10px">
             </div>
             <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;">Employee CompanyID:</div></div>
-                <div class="float-right col-md-8 col-lg-8">
-                    <input class="textareastyles" style="width:300px;height:35px;" type="text" name="StaffCode" value="@(Model.StaffCode)" placeholder="Enter Employee Name" />
+                <div class="col-md-6 col-lg-6">
+                    <div class="tab" role="tabpanel">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#Section2" aria-controls="home" role="tab" data-toggle="tab">Employee Details</a></li>
 
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content tabs">
+                            <div role="tabpanel" class="tab-pane active" id="Section2">
+
+                                <div class="row col-md-12 col-lg-12">
+                                    <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div><label>Employee CompanyID:</label></div></div>
+                                    <div class="float-right col-md-8 col-lg-8">
+                                        <input class="textareastyles" style="width:300px;height:35px;" type="text" name="StaffCode" value="@(Model.StaffCode)" placeholder="Enter Staff Code" />
+
+                                    </div>
+                                </div>
+                                <div class="row col-md-12 col-lg-12" style="height:7px">
+                                </div>
+                                <div class="row col-md-12 col-lg-12">
+                                    <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div><label>Official Contact Number:</label></div></div>
+                                    <div class="float-right col-md-8 col-lg-8">
+                                        <input class="textareastyles" style="width:300px;height:35px;" type="text" name="OfficialContactNo" value="@(Model.OfficialContactNo)" placeholder="Enter Official Contact Number" />
+
+                                    </div>
+
+                                </div>
+                                <div class="row col-md-12 col-lg-12" style="height:7px">
+                                </div>
+                                <div class="row col-md-12 col-lg-12">
+                                    <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div><label>Official Email:</label></div></div>
+                                    <div class="float-right col-md-8 col-lg-8">
+                                        <input class="textareastyles" style="width:300px;height:35px;" type="text" name="OfficialEmail" value="@(Model.OfficialEmail)" placeholder="Enter Employee Official Email ID" />
+
+                                    </div>
+                                </div>
+                                <div class="row col-md-12 col-lg-12" style="height:7px">
+                                </div>
+                                <div class="row col-md-12 col-lg-12">
+                                    <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div><label>Identification Mode:</label></div></div>
+                                    <div class="float-right col-md-7 col-lg-8">
+                                        @Html.DropDownList("drpEmployeeidentificationType", (IEnumerable<SelectListItem>)Model.IdentificationList, "Select Identification Type", new { @class = "dropdownstyles", name = "drpEmployeeidentificationType" })
+                                        <input type="hidden" name="hdnidentification" id="hdnidentification" value="@Model.IdentificationID" />
+                                    </div>
+                                </div>
+                                <div class="row col-md-12 col-lg-12" style="height:7px">
+                                </div>
+                                <div class="row col-md-12 col-lg-12">
+                                    <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div><label>Identification ID:</label></div></div>
+                                    <div class="float-right col-md-8 col-lg-8">
+                                        <input class="textareastyles" style="width:300px;height:35px;" type="text" name="IdentificationValue" value="@(Model.IdentificationValue)" placeholder="Enter Employee Identification ID" />
+
+                                    </div>
+                                </div>
+                                <div class="row col-md-12 col-lg-12" style="height:7px">
+                                </div>
+                                <div class="row col-md-12 col-lg-12">
+                                    <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div><label>Role:</label></div></div>
+                                    <div class="float-right col-md-7 col-lg-8">
+                                        @Html.DropDownList("drpEmployeeRoleMaster", (IEnumerable<SelectListItem>)Model.RoleList, "Select Role", new { @class = "dropdownstyles", name = "drpEmployeeRoleMaster" })
+                                        <input type="hidden" name="hdnRoleMaster" id="hdnRoleMaster" value="@Model.RoleMasterID" />
+                                    </div>
+                                </div>
+                                <div class="row col-md-12 col-lg-12" style="height:7px">
+                                </div>
+                                <div class="row col-md-12 col-lg-12">
+                                    <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div>Manager ID:</div></div>
+                                    <div class="float-right col-md-7 col-lg-8">
+                                    </div>
+                                </div>
+                                <div class="row col-md-12 col-lg-12" style="height:7px">
+                                </div>
+                                <div class="row col-md-12 col-lg-12">
+                                    <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div>Photo:</div></div>
+                                    <div class="float-right col-md-7 col-lg-8">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-
             </div>
-
-            <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;">Personal Contact Number:</div></div>
-                <div class="float-right col-md-8 col-lg-8">
-                    <input class="textareastyles" style="width:300px;height:35px;" type="text" name="PersonalContactNo" value="@(Model.PersonalContactNo)" placeholder="Enter Employee Name" />
-
-                </div>
-
-            </div>
-
-            <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;">Official Contact Number:</div></div>
-                <div class="float-right col-md-8 col-lg-8">
-                    <input class="textareastyles" style="width:300px;height:35px;" type="text" name="OfficialContactNo" value="@(Model.OfficialContactNo)" placeholder="Enter Employee Name" />
-
-                </div>
-
-            </div>
-
-            <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;">Alternate Contact Number:</div></div>
-                <div class="float-right col-md-8 col-lg-8">
-                    <input class="textareastyles" style="width:300px;height:35px;" type="text" name="AlternateContactNo" value="@(Model.AlternateContactNo)" placeholder="Enter Employee Name" />
-
-                </div>
-
-            </div>
-
-            <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;">Official EmailID:</div></div>
-                <div class="float-right col-md-8 col-lg-8">
-                    <input class="textareastyles" style="width:300px;height:35px;" type="text" name="OfficialEmail" value="@(Model.OfficialEmail)" placeholder="Enter Employee Name" />
-
-                </div>
-
-            </div>
-
-            <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;">Personal Email:</div></div>
-                <div class="float-right col-md-8 col-lg-8">
-                    <input class="textareastyles" style="width:300px;height:35px;" type="text" name="PersonalEmail" value="@(Model.PersonalEmail)" placeholder="Enter Employee Name" />
-
-                </div>
-
-            </div>
-            <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;">Address:</div></div>
-                <div class="float-right col-md-8 col-lg-8">
-                    <textarea name="Address" rows="6" cols="30" class="textareastyles" placeholder="Enter Address ">@(Model.Address)</textarea>
-
-                </div>
-
-            </div>
-            <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;">Qualification</div></div>
-                <div class="float-right col-md-8 col-lg-8">
-                    <input class="textareastyles" style="width:300px;height:35px;" type="text" name="Qualification" value="@(Model.Qualification)" placeholder="Enter Employee Name" />
-
-                </div>
-
-            </div>
-            <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div>Identification Mode :</div></div>
-                <div class="float-right col-md-7 col-lg-8">
-                    @Html.DropDownList("drpidentificationtype", (IEnumerable<SelectListItem>)Model.IdentificationList, "Select Identification Type", new { @class = "dropdownstyles" })
-
-                </div>
-
-
-            </div>
-
-            <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;">Identification ID</div></div>
-                <div class="float-right col-md-8 col-lg-8">
-                    <input class="textareastyles" style="width:300px;height:35px;" type="text" name="IdentificationValue" value="@(Model.IdentificationValue)" placeholder="Enter Employee Name" />
-
-                </div>
-
-            </div>
-            <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div>Role :</div></div>
-                <div class="float-right col-md-7 col-lg-8">
-                    @Html.DropDownList("drprole", (IEnumerable<SelectListItem>)Model.RoleList, "Select Role", new { @class = "dropdownstyles" })
-
-                </div>
-
-
-            </div>
-
-            <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div>Location :</div></div>
-                <div class="float-right col-md-7 col-lg-8">
-                    @Html.DropDownList("drplocation", (IEnumerable<SelectListItem>)Model.LocationList, "Select Location", new { @class = "dropdownstyles" })
-
-                </div>
-
-
+            <div class="row col-md-12 col-lg-12" style="height:10px">
             </div>
             <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div>Company :</div></div>
-                <div class="float-right col-md-7 col-lg-8">
-                    @Html.DropDownList("drpcompany", (IEnumerable<SelectListItem>)Model.CompanyList, "Select Company", new { @class = "dropdownstyles" })
+                <div class="col-md-6 col-lg-6">
+                    <div class="tab" role="tabpanel">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#Section3" aria-controls="home" role="tab" data-toggle="tab">Location Details</a></li>
 
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content tabs">
+                            <div role="tabpanel" class="tab-pane active" id="Section3">
+                                <div class="row col-md-12 col-lg-12">
+                                    <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div><label>Region:</label></div></div>
+                                    <div class="float-right col-md-7 col-lg-8">
+                                        @* @Html.DropDownList("Mobiledropdown1", Model.RegionList)*@
+                                        @Html.DropDownList("drpEmployeeRegion", (IEnumerable<SelectListItem>)Model.RegionList, "Select Region", new { @class = "dropdownstyles", name = "drpEmployeeRegion" })
+                                        @*<span class="input-validation-error" data-valmsg-for="LocationName" data-valmsg-replace="true"></span>*@
+                                        <input type="hidden" name="hdnRegion" id="hdnRegion" />
+                                    </div>
+                                </div>
+                                <div class="row col-md-12 col-lg-12" style="height:7px">
+                                </div>
+                                <div class="row col-md-12 col-lg-12">
+                                    <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div><label>Country:</label></div></div>
+                                    <div class="float-right col-md-7 col-lg-8">
+                                        @* @Html.DropDownList("Mobiledropdown1", Model.RegionList)*@
+                                        @Html.DropDownList("drpEmployeeCountry", (IEnumerable<SelectListItem>)Model.CountryList, "Select Country", new { @class = "dropdownstyles", name = "drpEmployeeCountry" })
+                                        @*<span class="input-validation-error" data-valmsg-for="LocationName" data-valmsg-replace="true"></span>*@
+                                        <input type="hidden" name="hdnCountry" id="hdnCountry" />
+                                    </div>
+                                </div>
+                                <div class="row col-md-12 col-lg-12" style="height:7px">
+                                </div>
+                                <div class="row col-md-12 col-lg-12">
+                                    <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div><label>State:</label></div></div>
+                                    <div class="float-right col-md-7 col-lg-8">
+                                        @* @Html.DropDownList("Mobiledropdown1", Model.RegionList)*@
+                                        @Html.DropDownList("drpEmployeeState", (IEnumerable<SelectListItem>)Model.StateList, "Select State", new { @class = "dropdownstyles", name = "drpEmployeeState" })
+                                        @*<span class="input-validation-error" data-valmsg-for="LocationName" data-valmsg-replace="true"></span>*@
+                                        <input type="hidden" name="hdnState" id="hdnState" />
+                                    </div>
+                                </div>
+                                <div class="row col-md-12 col-lg-12" style="height:7px">
+                                </div>
+                                <div class="row col-md-12 col-lg-12">
+                                    <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div><label>District:</label></div></div>
+                                    <div class="float-right col-md-7 col-lg-8">
+                                        @* @Html.DropDownList("Mobiledropdown1", Model.RegionList)*@
+                                        @Html.DropDownList("drpEmployeedistrict", (IEnumerable<SelectListItem>)Model.DistrictList, "Select District", new { @class = "dropdownstyles", name = "drpEmployeedistrict" })
+                                        @*<span class="input-validation-error" data-valmsg-for="LocationName" data-valmsg-replace="true"></span>*@
+                                        <input type="hidden" name="hdnDistrict" id="hdnDistrict" />
+                                    </div>
+                                </div>
+                                <div class="row col-md-12 col-lg-12" style="height:7px">
+                                </div>
+                                <div class="row col-md-12 col-lg-12">
+                                    <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div><label>Location:</label></div></div>
+                                    <div class="float-right col-md-7 col-lg-8">
+                                        @* @Html.DropDownList("Mobiledropdown1", Model.RegionList)*@
+                                        @Html.DropDownList("drpEmployeelocation", (IEnumerable<SelectListItem>)Model.LocationList, "Select location", new { @class = "dropdownstyles", name = "drpEmployeelocation" })
+                                        @*<span class="input-validation-error" data-valmsg-for="CompanyName" data-valmsg-replace="true"></span>*@
+                                        <input type="hidden" name="hdnLocation" id="hdnLocation" />
+                                    </div>
+                                </div>
+                                <div class="row col-md-12 col-lg-12" style="height:7px">
+                                </div>
+                                <div class="row col-md-12 col-lg-12">
+                                    <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div><label>Company:</label></div></div>
+                                    <div class="float-right col-md-7 col-lg-8">
+                                        @* @Html.DropDownList("Mobiledropdown1", Model.RegionList)*@
+                                        @Html.DropDownList("drpEmployeecompany", (IEnumerable<SelectListItem>)Model.CompanyList, "Select Comapny", new { @class = "dropdownstyles", name = "drpEmployeecompany" })
+                                        @*<span class="input-validation-error" data-valmsg-for="LocationName" data-valmsg-replace="true"></span>*@
+                                        <input type="hidden" name="hdnCompany" id="hdnCompany" />
+                                    </div>
+                                </div>
+                                <div class="row col-md-12 col-lg-12" style="height:7px">
+                                </div>
+                                <div class="row col-md-12 col-lg-12">
+                                    <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div><label>Company Type:</label></div></div>
+                                    <div class="float-right col-md-7 col-lg-8">
+                                        @* @Html.DropDownList("Mobiledropdown1", Model.RegionList)*@
+                                        @Html.DropDownList("drpEmployeecompanyType", (IEnumerable<SelectListItem>)Model.CompanyTypeList, "Select Company Type", new { @class = "dropdownstyles", name = "drpEmployeecompanyType" })
+                                        @*<span class="input-validation-error" data-valmsg-for="FloorMasterName" data-valmsg-replace="true"></span>*@
+                                        <input type="hidden" name="hdnCompanyType" id="hdnCompanyType" value="@Model.CompanyTypeID" />
+                                    </div>
+                                </div>
+                                <div class="row col-md-12 col-lg-12" style="height:7px">
+                                </div>
+                                <div class="row col-md-12 col-lg-12">
+                                    <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div><label>Floor:</label></div></div>
+                                    <div class="float-right col-md-7 col-lg-8">
+                                        @* @Html.DropDownList("Mobiledropdown1", Model.RegionList)*@
+                                        @Html.DropDownList("drpEmployeeFloorMaster", (IEnumerable<SelectListItem>)Model.FloorMasterList, "Select Floor", new { @class = "dropdownstyles", name = "drpEmployeeFloorMaster" })
+                                        @*<span class="input-validation-error" data-valmsg-for="FloorMasterName" data-valmsg-replace="true"></span>*@
+                                        <input type="hidden" name="hdnFloorMaster" id="hdnFloorMaster" value="@Model.FloorMasterID" />
+                                    </div>
+                                </div>
+                                <div class="row col-md-12 col-lg-12" style="height:7px">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-
-
             </div>
-            <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div>Company Type :</div></div>
-                <div class="float-right col-md-7 col-lg-8">
-                    @Html.DropDownList("drpcompanytype", (IEnumerable<SelectListItem>)Model.ComapnyTypeList, "Select Company Type", new { @class = "dropdownstyles" })
-
-                </div>
-
-
-            </div>
-
-            <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div>Manager ID :</div></div>
-                <div class="float-right col-md-7 col-lg-8">
-
-
-                </div>
-
-
-            </div>
-            <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div>Photo :</div></div>
-                <div class="float-right col-md-7 col-lg-8">
-
-
-                </div>
-
-
-            </div>
-
-
-
         </div>
+            <div class="row col-md-12 col-lg-12 commonPadding">
+                <div class="col-md-5 col-lg-5 textright"><input type="button" data-url="@Url.Action("Update", "Employee")" class="formbutton  EmployeeAddEdit" data-identity="@(Model.Identity)" value="Update/Add" /></div>
 
-        <div class="row col-md-12 col-lg-12 commonPadding">
-            <div class="col-md-6 col-lg-6"><input type="button" data-url="@Url.Action("Update", "Employee")" class="formbutton float-right EmployeeAddEdit" data-identity="@(Model.Identity)" value="Update/Add" /></div>
-            <input type="hidden" name="Identity" value="@(Model.Identity)">
+                <div class="col-md-6 col-lg-6 textleft">
+                    <input type="button" value="Cancel" data-url="@Url.Action("_EmployeeCancel", "Employee")" data-identity="-1" class="formbutton EmployeeCancel" />
+                </div>
+
+                <input type="hidden" name="Identity" value="@(Model.Identity)">
+            </div>
         </div>
-
-
-
-    </div>
 }
 
 

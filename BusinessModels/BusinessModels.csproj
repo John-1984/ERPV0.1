@@ -47,6 +47,7 @@
     <Compile Include="ItemMaster.cs" />
     <Compile Include="LocalSupplier.cs" />
     <Compile Include="Location.cs" />
+    <Compile Include="Login.cs" />
     <Compile Include="Modules.cs" />
     <Compile Include="Priority.cs" />
     <Compile Include="ProductEnquiry.cs" />

@@ -4,113 +4,127 @@
 <div class="container ItemMasterView col-md-12 col-lg-12 commonPadding">
     <input type="hidden" value="@Model.Identity">
     <div class="row commonPadding col-md-12 col-lg-12" style="padding-bottom:13px;">
-        <div class="col-md-6 col-lg-6">
-            <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-5 col-lg-5 textright lablestyles">
-                    Name :
-                </div>
-                <div class="float-right col-md-7 col-lg-7 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
-                    @Model.ItemName
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6 col-lg-6 ">
-            <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-4 col-lg-4 textright lablestyles">
-                    Vendor :
-                </div>
-                <div class="float-right col-md-8 col-lg-8 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
-                    @Model.VendorName
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <div class="row commonPadding col-md-12 col-lg-12" style="padding-bottom:13px;">
 
         <div class="col-md-6 col-lg-6 textright">
             <div class="row col-md-12 col-lg-12">
                 <div class="float-left col-md-5 col-lg-5 textright lablestyles">
-                    Brand :
+                    Category :
                 </div>
                 <div class="float-right col-md-7 col-lg-7 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
-                    @Model.BrandName
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6 col-lg-6 textleft">
-            <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-4 col-lg-4 textright lablestyles">
-                    UOM :
-                </div>
-                <div class="float-right col-md-8 col-lg-8 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
-                    @Model.UOMName
+                    @Model.Brand.Vendor.ProductMaster.ProductName
                 </div>
             </div>
         </div>
     </div>
-    <div class="row commonPadding col-md-12 col-lg-12" style="padding-bottom:13px;">
 
-        <div class="col-md-6 col-lg-6">
-            <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-5 col-lg-5 textright lablestyles">
-                    Item Size:
-                </div>
-                <div class="float-right col-md-7 col-lg-7 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
-                    @Model.ItemSize
+        <div class="row commonPadding col-md-12 col-lg-12" style="padding-bottom:13px;">
+            <div class="col-md-6 col-lg-6">
+                <div class="row col-md-12 col-lg-12">
+                    <div class="float-left col-md-5 col-lg-5 textright lablestyles">
+                        Item Name :
+                    </div>
+                    <div class="float-right col-md-7 col-lg-7 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                        @Model.ItemName
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col-md-6 col-lg-6">
-            <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-4 col-lg-4 textright lablestyles">
-                    Item Weight:
-                </div>
-                <div class="float-right col-md-8 col-lg-8 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
-                    @Model.ItemWeight
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row col-md-12 col-lg-12 commonPadding" style="padding-bottom:13px;">
-        <div class="col-md-6 col-lg-6">
-            <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-5 col-lg-5 textright lablestyles">
-                    Retail Price :
-                </div>
-                <div class="float-right col-md-7 col-lg-7 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
-                    @Model.RetailPrice
+            <div class="col-md-6 col-lg-6 ">
+                <div class="row col-md-12 col-lg-12">
+                    <div class="float-left col-md-4 col-lg-4 textright lablestyles">
+                        Vendor :
+                    </div>
+                    <div class="float-right col-md-8 col-lg-8 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                        @Model.Brand.Vendor.VendorName
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col-md-6 col-lg-6">
-            <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-4 col-lg-4 textright lablestyles">
-                    Purchase Price :
-                </div>
-                <div class="float-right col-md-8 col-lg-8 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
-                    @Model.PurchacePrice
-                </div>
-            </div>
         </div>
-    </div>
-    <div class="row col-md-12 col-lg-12 commonPadding" style="padding-bottom:13px;">
-        <div class="col-md-6 col-lg-6">
-            <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-5 col-lg-5 textright lablestyles">
-                    Description :
-                </div>
-                <div class="float-right col-md-7 col-lg-7 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
-                    @Model.Description
-                </div>
-            </div>
-        </div>
+        <div class="row commonPadding col-md-12 col-lg-12" style="padding-bottom:13px;">
 
-    </div>
+            <div class="col-md-6 col-lg-6 textright">
+                <div class="row col-md-12 col-lg-12">
+                    <div class="float-left col-md-5 col-lg-5 textright lablestyles">
+                        Brand :
+                    </div>
+                    <div class="float-right col-md-7 col-lg-7 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                        @Model.Brand.BrandName
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-6 textleft">
+                <div class="row col-md-12 col-lg-12">
+                    <div class="float-left col-md-4 col-lg-4 textright lablestyles">
+                        UOM :
+                    </div>
+                    <div class="float-right col-md-8 col-lg-8 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                        @Model.UOMMaster.UOMName
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row commonPadding col-md-12 col-lg-12" style="padding-bottom:13px;">
+
+            <div class="col-md-6 col-lg-6">
+                <div class="row col-md-12 col-lg-12">
+                    <div class="float-left col-md-5 col-lg-5 textright lablestyles">
+                        Item Size:
+                    </div>
+                    <div class="float-right col-md-7 col-lg-7 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                        @Model.ItemSize
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-6">
+                <div class="row col-md-12 col-lg-12">
+                    <div class="float-left col-md-4 col-lg-4 textright lablestyles">
+                        Item Weight:
+                    </div>
+                    <div class="float-right col-md-8 col-lg-8 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                        @Model.ItemWeight
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row col-md-12 col-lg-12 commonPadding" style="padding-bottom:13px;">
+            <div class="col-md-6 col-lg-6">
+                <div class="row col-md-12 col-lg-12">
+                    <div class="float-left col-md-5 col-lg-5 textright lablestyles">
+                        Retail Price :
+                    </div>
+                    <div class="float-right col-md-7 col-lg-7 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                        @Model.RetailPrice
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-6">
+                <div class="row col-md-12 col-lg-12">
+                    <div class="float-left col-md-4 col-lg-4 textright lablestyles">
+                        Purchase Price :
+                    </div>
+                    <div class="float-right col-md-8 col-lg-8 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                        @Model.PurchacePrice
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row col-md-12 col-lg-12 commonPadding" style="padding-bottom:13px;">
+            <div class="col-md-6 col-lg-6">
+                <div class="row col-md-12 col-lg-12">
+                    <div class="float-left col-md-5 col-lg-5 textright lablestyles">
+                        Description :
+                    </div>
+                    <div class="float-right col-md-7 col-lg-7 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                        @Model.Description
+                    </div>
+                </div>
+            </div>
+
+        </div>
         <div class="row commonPadding">
             <div class="col-md-6 col-lg-5"><input type="button" class="formbutton float-right ItemMasterEdit" data-url="@Url.Action("_ItemMasterEdit", "ItemMaster")" data-identity="@(Model.Identity)" value="Update" /></div>
             <div class="col-md-6 col-lg-6"><input type="button" class="formbutton float-left ItemMasterDelete" data-url="@Url.Action("Delete", "ItemMaster")" data-identity="@(Model.Identity)" value="Delete" /></div>

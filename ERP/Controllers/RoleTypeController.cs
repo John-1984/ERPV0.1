@@ -23,6 +23,12 @@ namespace ERP.Controllers
         }
 
         [HttpGet]
+        public ActionResult _RoleTypeCancel(int identity)
+        {
+            return RedirectToAction("_RoleTypeAll");
+        }
+
+        [HttpGet]
         public PartialViewResult _RoleTypeEdit(int identity)
         {
             if (identity.Equals(-1))
@@ -84,11 +90,11 @@ namespace ERP.Controllers
 
             var RoleTypes = AutoMapperConfig.Mapper().Map<List<Models.RoleType>>(_RoleType.GetAll());
             if (!string.IsNullOrEmpty(searchString) && !string.IsNullOrEmpty(createdDate))
-                RoleTypes = AutoMapperConfig.Mapper().Map<List<Models.RoleType>>(_RoleType.GetAll().ToList().FindAll(p => p.RoletypeName.ToLower().Contains(searchString.ToLower()) && p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+                RoleTypes = AutoMapperConfig.Mapper().Map<List<Models.RoleType>>(_RoleType.GetAll().ToList().FindAll(p => p.RoletypeName.ToLower().Contains(searchString.ToLower()) && ((DateTime)p.CreatedDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
             else if (!string.IsNullOrEmpty(searchString))
                 RoleTypes = AutoMapperConfig.Mapper().Map<List<Models.RoleType>>(_RoleType.GetAll().ToList().FindAll(p => p.RoletypeName.ToLower().Contains(searchString.ToLower())));
             else if (!string.IsNullOrEmpty(createdDate))
-                RoleTypes = AutoMapperConfig.Mapper().Map<List<Models.RoleType>>(_RoleType.GetAll().ToList().FindAll(p => p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+                RoleTypes = AutoMapperConfig.Mapper().Map<List<Models.RoleType>>(_RoleType.GetAll().ToList().FindAll(p => ((DateTime)p.CreatedDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
 
             switch (sortOrder)
             {

@@ -49,51 +49,43 @@ namespace ERP.Models
 
         [DefaultValue("")]
         [Required(ErrorMessage = "Please enter contact number")]
-        public int ContactNumber
+        public string ContactNumber
         {
             get;
             set;
         }
 
-        public int LocationID
+        public int? LocationID
         {
             get;
             set;
         }
 
-        public string LocationName
+       
+
+        public int? ItemID
         {
             get;
             set;
         }
 
-        public int ItemID
-        {
-            get;
-            set;
-        }
 
-        public string ItemName
+        public DateTime? CreatedDate
         {
             get;
             set;
         }
-        public DateTime CreatedDate
+        public DateTime? ModifiedDate
         {
             get;
             set;
         }
-        public DateTime ModifiedDate
+        public int? ModifiedBy
         {
             get;
             set;
         }
-        public int ModifiedBy
-        {
-            get;
-            set;
-        }
-        public int CreatedBy
+        public int? CreatedBy
         {
             get;
             set;
@@ -112,6 +104,43 @@ namespace ERP.Models
         }
 
         public List<string> ErrorList
+        {
+            get;
+            set;
+        }
+
+        public Location Location
+        {
+            get;
+            set;
+        }
+
+        public ItemMaster ItemMaster
+        {
+            get;
+            set;
+        }
+
+       
+        public SelectList RegionList
+        {
+            get;
+            set;
+        }
+
+        public SelectList CountryList
+        {
+            get;
+            set;
+        }
+
+        public SelectList StateList
+        {
+            get;
+            set;
+        }
+
+        public SelectList DistrictList
         {
             get;
             set;

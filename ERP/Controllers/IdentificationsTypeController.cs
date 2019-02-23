@@ -89,11 +89,11 @@ namespace ERP.Controllers
 
             var IdentificationsTypes = AutoMapperConfig.Mapper().Map<List<Models.IdentificationsType>>(_IdentificationsType.GetAll());
             if (!string.IsNullOrEmpty(searchString) && !string.IsNullOrEmpty(createdDate))
-                IdentificationsTypes = AutoMapperConfig.Mapper().Map<List<Models.IdentificationsType>>(_IdentificationsType.GetAll().ToList().FindAll(p => p.IdentificationName.ToLower().Contains(searchString.ToLower()) && p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+                IdentificationsTypes = AutoMapperConfig.Mapper().Map<List<Models.IdentificationsType>>(_IdentificationsType.GetAll().ToList().FindAll(p => p.IdentificationName.ToLower().Contains(searchString.ToLower()) && ((DateTime)p.CreatedDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
             else if (!string.IsNullOrEmpty(searchString))
                 IdentificationsTypes = AutoMapperConfig.Mapper().Map<List<Models.IdentificationsType>>(_IdentificationsType.GetAll().ToList().FindAll(p => p.IdentificationName.ToLower().Contains(searchString.ToLower())));
             else if (!string.IsNullOrEmpty(createdDate))
-                IdentificationsTypes = AutoMapperConfig.Mapper().Map<List<Models.IdentificationsType>>(_IdentificationsType.GetAll().ToList().FindAll(p => p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+                IdentificationsTypes = AutoMapperConfig.Mapper().Map<List<Models.IdentificationsType>>(_IdentificationsType.GetAll().ToList().FindAll(p => ((DateTime)p.CreatedDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
 
             switch (sortOrder)
             {

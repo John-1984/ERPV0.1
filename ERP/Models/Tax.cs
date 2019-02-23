@@ -13,7 +13,7 @@ namespace ERP.Models
         public Tax()
         {
             Identity = -1;
-        //    CountryName = string.Empty;
+            TaxValue = 0;
         }
 
         [Key]
@@ -33,33 +33,29 @@ namespace ERP.Models
 
         
 
-        public int ItemID
+        public int? ItemID
         {
             get;
             set;
         }
 
-        public String ItemName
+
+        public DateTime? CreatedDate
         {
             get;
             set;
         }
-        public DateTime CreatedDate
+        public DateTime? ModifiedDate
         {
             get;
             set;
         }
-        public DateTime ModifiedDate
+        public int? ModifiedBy
         {
             get;
             set;
         }
-        public int ModifiedBy
-        {
-            get;
-            set;
-        }
-        public int CreatedBy
+        public int? CreatedBy
         {
             get;
             set;
@@ -75,6 +71,11 @@ namespace ERP.Models
         {
             get;
             set;
+        }
+
+        public ItemMaster ItemMaster
+        {
+            get; set;
         }
 
     }

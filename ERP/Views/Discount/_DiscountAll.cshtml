@@ -18,7 +18,7 @@
                 @foreach (var Discount in Model)
                 {
                     <tr class="gridrow">
-                        <td class="gridrow">@Discount.ItemName</td>
+                        <td class="gridrow">@Discount.ItemMaster.ItemName</td>
                         <td class="gridrow">@Discount.DiscountValue</td>
                        
                         <td class="gridrow "><img src="~/Content/edit.png" alt="Edit" class="DiscountEdit pointer" data-url="@Url.Action("_DiscountEdit", "Discount")" data-identity="@(Discount.Identity)" /></td>

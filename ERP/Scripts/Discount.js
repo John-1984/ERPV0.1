@@ -13,6 +13,37 @@
         }
     };
 
+    $(document).on('change', '#drpDiscountItemMaster', function () {
+        //alert("Test");
+        // debugger;
+        varDiscountItemText = $("#drpDiscountItemMaster").val();
+        $("#hdnItemMaster").val(varDiscountItemText);
+
+        // alert(vardistrictText);
+    });
+
+
+    $(document).off("click", ".DiscountCancel");
+    $(document).on("click", ".DiscountCancel", function (event) {
+        var theUrl = $(this).attr("data-url");
+        $('.headermode').html('View Discount Info');
+        $.ajax({
+            url: theUrl,
+            type: 'GET',  // http method
+            data: { "identity": $(this).attr("data-identity") },
+            //async: true,
+            success: function (data, status, xhr) {
+
+                $('.DiscountDetials').show();
+                $('.DiscountAdd').show();
+                $('.resultView').html(data);
+                showMessage(status, "Success");
+            },
+            error: function (jqXhr, textStatus, errorMessage) {
+                showMessage(textStatus, errorMessage);
+            }
+        });
+    });
 
     $(document).off("click", ".DiscountView");
     $(document).on("click", ".DiscountView", function (event) {

@@ -16,6 +16,9 @@ namespace DataLayer
 
         public DbSet<BusinessModels.LocalSupplier> LocalSupplier { get; set; }
         public DbSet<BusinessModels.ItemMaster> ItemMaster { get; set; }
+        public DbSet<BusinessModels.Brand> Brand { get; set; }
+        public DbSet<BusinessModels.Vendor> Vendor { get; set; }
+        public DbSet<BusinessModels.ProductMaster> ProductMaster { get; set; }
         public DbSet<BusinessModels.Location> Location { get; set; }
         //public DbSet<Veri> Address { get; set; }
 

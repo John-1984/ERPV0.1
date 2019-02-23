@@ -103,7 +103,7 @@
             contentType: 'application/json',
             dataType: 'json',
             success: function (response) {
-                drpfloorlocation.empty().append('<option selected="selected" value="0">Select District</option>');
+                drpfloorlocation.empty().append('<option selected="selected" value="0">Select Location</option>');
                 $.each(response, function () {
                     drpfloorlocation.append($("<option></option>").val(this['Value']).html(this['Text']));
                 });
@@ -155,7 +155,7 @@
             contentType: 'application/json',
             dataType: 'json',
             success: function (response) {
-                drpfloorcompanyType.empty().append('<option selected="selected" value="0">Select District</option>');
+                drpfloorcompanyType.empty().append('<option selected="selected" value="0">Select Company Type</option>');
                 $.each(response, function () {
                     drpfloorcompanyType.append($("<option></option>").val(this['Value']).html(this['Text']));
                 });

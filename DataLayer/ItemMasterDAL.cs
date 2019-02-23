@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Data.Entity;
 namespace DataLayer
 {
     public class ItemMasterDAL
@@ -20,9 +20,10 @@ namespace DataLayer
             using (var dbContext = new ItemMasterDbContext())
             {
                 _ItemMaster = dbContext.ItemMaster
-                            .Include("Vendor")
-                            .Include("Brand")
-                            .Include("UOMMaster")
+                            .Include(K => K.Brand)
+                            .Include(K => K.UOMMaster)
+                            .Include(K => K.Brand.Vendor)
+                            .Include(K => K.Brand.Vendor.ProductMaster)
                             .FirstOrDefault(p => p.Identity.Equals(identity));
             }
             return _ItemMaster;
@@ -36,51 +37,35 @@ namespace DataLayer
             {
                 dbContext.Configuration.LazyLoadingEnabled = false;
                 _ItemMasters = dbContext.ItemMaster
-                             .Include("Vendor")
-                            .Include("Brand")
-                            .Include("UOMMaster")
+                             .Include(K => K.Brand)
+                            .Include(l => l.UOMMaster)
+                            .Include(o => o.Brand.Vendor)
+                            .Include(s => s.Brand.Vendor.ProductMaster)
                             .ToList();
             }
 
             return _ItemMasters;
         }
 
-        public IEnumerable<BusinessModels.Vendor> GetVendors()
+        public IEnumerable<BusinessModels.ItemMaster> GetAll(int bridentity)
         {
-            var _Vendors = new List<BusinessModels.Vendor>();
-            using (var dbContext = new VendorDbContext())
+            //Need to do
+            var _ItemMasters = new List<BusinessModels.ItemMaster>();
+            using (var dbContext = new ItemMasterDbContext())
             {
                 dbContext.Configuration.LazyLoadingEnabled = false;
-                _Vendors = dbContext.Vendor
+                _ItemMasters = dbContext.ItemMaster
+                             .Include(K => K.Brand)
+                            .Include(l => l.UOMMaster)
+                            .Include(o => o.Brand.Vendor)
+                            .Include(s => s.Brand.Vendor.ProductMaster)
+                            .Where(p => p.Brand.Identity == bridentity)
                             .ToList();
             }
-            return _Vendors;
-        }
 
-        public IEnumerable<BusinessModels.Brand> GetBrands()
-        {
-            var _Brands = new List<BusinessModels.Brand>();
-            using (var dbContext = new BrandDbContext())
-            {
-                dbContext.Configuration.LazyLoadingEnabled = false;
-                _Brands = dbContext.Brand
-                            .ToList();
-            }
-            return _Brands;
+            return _ItemMasters;
         }
-
-        public IEnumerable<BusinessModels.UOMMaster> GetUOMs()
-        {
-            var _UOMs = new List<BusinessModels.UOMMaster>();
-            using (var dbContext = new UOMMasterDbContext())
-            {
-                dbContext.Configuration.LazyLoadingEnabled = false;
-                _UOMs = dbContext.UOMMaster
-                            .ToList();
-            }
-            return _UOMs;
-        }
-
+       
         public Boolean Update(BusinessModels.ItemMaster ItemMaster)
         {
             using (var dbContext = new ItemMasterDbContext())

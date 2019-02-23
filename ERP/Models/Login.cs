@@ -7,12 +7,13 @@ using System.ComponentModel;
 
 namespace ERP.Models
 {
-    public class RoleType
+    public class Login
     {
-        public RoleType()
+        public Login()
         {
             Identity = -1;
-            RoletypeName = string.Empty;
+            UserName = string.Empty;
+            UserPassword = String.Empty;
         }
 
         [Key]
@@ -24,34 +25,26 @@ namespace ERP.Models
         }
 
         [DefaultValue("")]
-        [Required(ErrorMessage ="Please enter role type")]
-        public string RoletypeName
+        public string UserName
         {
             get;
             set;
         }
 
-        public DateTime? CreatedDate
-        {
-            get;
-            set;
-        }
-        public DateTime? ModifiedDate
-        {
-            get;
-            set;
-        }
-        public int? ModifiedBy
-        {
-            get;
-            set;
-        }
-        public int? CreatedBy
+        [DefaultValue("")]
+        public string UserPassword
         {
             get;
             set;
         }
 
+
+        public DateTime? LastLoginDate
+        {
+            get;
+            set;
+        }
+        
 
     }
 }

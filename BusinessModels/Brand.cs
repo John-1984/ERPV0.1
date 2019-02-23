@@ -27,27 +27,27 @@ namespace BusinessModels
         }
 
         [ForeignKey("Vendor")]
-        public int VendorID
+        public int? VendorID
         {
             get;
             set;
         }
-        public DateTime CreatedDate
+        public DateTime? CreatedDate
         {
             get;
             set;
         }
-        public DateTime ModifiedDate
+        public DateTime? ModifiedDate
         {
             get;
             set;
         }
-        public int ModifiedBy
+        public int? ModifiedBy
         {
             get;
             set;
         }
-        public int CreatedBy
+        public int? CreatedBy
         {
             get;
             set;

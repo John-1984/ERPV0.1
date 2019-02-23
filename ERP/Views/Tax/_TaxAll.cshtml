@@ -18,7 +18,7 @@
                 @foreach (var Tax in Model)
                 {
                     <tr class="gridrow">
-                        <td class="gridrow">@Tax.ItemName</td>
+                        <td class="gridrow">@Tax.ItemMaster.ItemName</td>
                         <td class="gridrow">@Tax.TaxValue</td>
                        
                         <td class="gridrow "><img src="~/Content/edit.png" alt="Edit" class="TaxEdit pointer" data-url="@Url.Action("_TaxEdit", "Tax")" data-identity="@(Tax.Identity)" /></td>

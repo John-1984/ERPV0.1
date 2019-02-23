@@ -28,6 +28,7 @@ namespace ERP.Controllers
             if (identity.Equals(-1))
             {
                 Models.Discount mdDiscount = new Models.Discount();
+
                 mdDiscount.itemList = null;
                 mdDiscount.itemList = new SelectList(_Discount.GetAllItemMaster(), "Identity", "ItemName");
 
@@ -40,7 +41,7 @@ namespace ERP.Controllers
             {
                 Models.Discount mdDiscount = AutoMapperConfig.Mapper().Map<Models.Discount>(_Discount.GetDiscount(identity));
                 mdDiscount.itemList = null;
-                mdDiscount.itemList = new SelectList(_Discount.GetAllItemMaster(), "Identity", "ItemName");
+                mdDiscount.itemList = new SelectList(_Discount.GetAllItemMaster(), "Identity", "ItemName" , mdDiscount.ItemID);
 
                 TempData["PageInfo"] = "Edit Discount Info";
                 TempData.Keep();
@@ -54,6 +55,11 @@ namespace ERP.Controllers
             return PartialView(AutoMapperConfig.Mapper().Map<Models.Discount>(_Discount.GetDiscount(identity)));
         }
 
+        [HttpGet]
+        public ActionResult _DiscountCancel(int identity)
+        {
+            return RedirectToAction("_DiscountAll");
+        }
         [HttpPost]
         public ActionResult Delete(int identity)
         {
@@ -62,16 +68,27 @@ namespace ERP.Controllers
         }
 
         [HttpPost]
-        public ActionResult Update(Models.Discount Discount)
+        public ActionResult Update(Models.Discount Discount, FormCollection frmFields)
         {
             //IF success resturn grid view
             //IF Failure return json value
+            BusinessModels.Discount mdDiscount = AutoMapperConfig.Mapper().Map<BusinessModels.Discount>(Discount);
+
+            var itemvalue = frmFields["hdnItemMaster"];
+
+            if (!String.IsNullOrEmpty(itemvalue))
+                mdDiscount.ItemID = int.Parse(itemvalue);
+
             if (Discount.Identity.Equals(-1))
             {
-                _Discount.Insert(AutoMapperConfig.Mapper().Map<BusinessModels.Discount>(Discount));
+                mdDiscount.CreatedDate = DateTime.Now;
+                _Discount.Insert(mdDiscount);
             }
             else
-                _Discount.Update(AutoMapperConfig.Mapper().Map<BusinessModels.Discount>(Discount));
+            {
+                mdDiscount.ModifiedDate = DateTime.Now;
+                _Discount.Update(mdDiscount);
+            }
             return RedirectToAction("_DiscountAll");
         }
 
@@ -95,16 +112,16 @@ namespace ERP.Controllers
 
             var Discounts = AutoMapperConfig.Mapper().Map<List<Models.Discount>>(_Discount.GetAll());
             if (!string.IsNullOrEmpty(searchString) && !string.IsNullOrEmpty(createdDate))
-                Discounts = AutoMapperConfig.Mapper().Map<List<Models.Discount>>(_Discount.GetAll().ToList().FindAll(p => p.ItemName.ToLower().Contains(searchString.ToLower()) && p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+                Discounts = AutoMapperConfig.Mapper().Map<List<Models.Discount>>(_Discount.GetAll().ToList().FindAll(p => p.ItemMaster.ItemName.ToLower().Contains(searchString.ToLower()) && ((DateTime)p.CreatedDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
             else if (!string.IsNullOrEmpty(searchString))
-                Discounts = AutoMapperConfig.Mapper().Map<List<Models.Discount>>(_Discount.GetAll().ToList().FindAll(p => p.ItemName.ToLower().Contains(searchString.ToLower())));
+                Discounts = AutoMapperConfig.Mapper().Map<List<Models.Discount>>(_Discount.GetAll().ToList().FindAll(p => p.ItemMaster.ItemName.ToLower().Contains(searchString.ToLower())));
             else if (!string.IsNullOrEmpty(createdDate))
-                Discounts = AutoMapperConfig.Mapper().Map<List<Models.Discount>>(_Discount.GetAll().ToList().FindAll(p => p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+                Discounts = AutoMapperConfig.Mapper().Map<List<Models.Discount>>(_Discount.GetAll().ToList().FindAll(p => ((DateTime)p.CreatedDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
 
             switch (sortOrder)
             {
                 case "ItemName":
-                    Discounts = Discounts.OrderByDescending(stu => stu.ItemName).ToList();
+                    Discounts = Discounts.OrderByDescending(stu => stu.ItemMaster.ItemName).ToList();
                     break;
                 case "DateAsc":
                     Discounts = Discounts.OrderBy(stu => stu.CreatedDate).ToList();
@@ -113,7 +130,7 @@ namespace ERP.Controllers
                     Discounts = Discounts.OrderByDescending(stu => stu.CreatedDate).ToList();
                     break;
                 default:
-                    Discounts = Discounts.OrderBy(stu => stu.ItemName).ToList();
+                    Discounts = Discounts.OrderBy(stu => stu.ItemMaster.ItemName).ToList();
                     break;
             }
 

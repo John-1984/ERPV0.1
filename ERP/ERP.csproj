@@ -169,6 +169,7 @@
     <Compile Include="Models\ItemMaster.cs" />
     <Compile Include="Models\LocalSupplier.cs" />
     <Compile Include="Models\Location.cs" />
+    <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Modules.cs" />
     <Compile Include="Models\Priority.cs" />
     <Compile Include="Models\ProductEnquiry.cs" />
@@ -374,10 +375,10 @@
     <Content Include="Views\Header\_HeaderSearch.cshtml" />
     <Content Include="Views\Header\_HeaderEdit.cshtml" />
     <Content Include="Views\Header\_HeaderAll.cshtml" />
-    <Content Include="Views\IdentificationsType\_IdentificationTypeView.cshtml" />
-    <Content Include="Views\IdentificationsType\_IdentificationTypeSearch.cshtml" />
-    <Content Include="Views\IdentificationsType\_IdentificationTypeEdit.cshtml" />
-    <Content Include="Views\IdentificationsType\_IdentificationTypeAll.cshtml" />
+    <Content Include="Views\IdentificationsType\_IdentificationsTypeView.cshtml" />
+    <Content Include="Views\IdentificationsType\_IdentificationsTypeSearch.cshtml" />
+    <Content Include="Views\IdentificationsType\_IdentificationsTypeEdit.cshtml" />
+    <Content Include="Views\IdentificationsType\_IdentificationsTypeAll.cshtml" />
     <Content Include="Views\ItemMaster\_ItemMasterView.cshtml" />
     <Content Include="Views\ItemMaster\_ItemMasterSearch.cshtml" />
     <Content Include="Views\ItemMaster\_ItemMasterEdit.cshtml" />
@@ -416,7 +417,7 @@
     <Content Include="Views\PurchaseRequestType\_PurchaseRequestTypeAll.cshtml" />
     <Content Include="Views\RoleMaster\_RoleMasterViewtml.cshtml" />
     <Content Include="Views\RoleMaster\_RoleMasterSearch.cshtml" />
-    <Content Include="Views\RoleMaster\_RoleMasterMasterEdit.cshtml" />
+    <Content Include="Views\RoleMaster\_RoleMasterEdit.cshtml" />
     <Content Include="Views\RoleMaster\_RoleMasterAll.cshtml" />
     <Content Include="Views\SalesPendingApprovals\_SalesPendingApprovalsView.cshtml" />
     <Content Include="Views\SalesPendingApprovals\_SalesPendingApprovalsSearch.cshtml" />
@@ -463,9 +464,9 @@
     <Content Include="Views\SupplierQuotation\_SupplierQuotationEdit.cshtml" />
     <Content Include="Views\SupplierQuotation\_SupplierQuotationAll.cshtml" />
     <Content Include="Views\Tax\_TaxView.cshtml" />
-    <Content Include="Views\Tax\_Tax.Search.cshtml" />
-    <Content Include="Views\Tax\_Tax.Edit.cshtml" />
-    <Content Include="Views\Tax\_Tax.All.cshtml" />
+    <Content Include="Views\Tax\_TaxSearch.cshtml" />
+    <Content Include="Views\Tax\_TaxEdit.cshtml" />
+    <Content Include="Views\Tax\_TaxAll.cshtml" />
     <Content Include="Views\UOMMaster\_UOMMasterView.cshtml" />
     <Content Include="Views\UOMMaster\_UOMMasterSearch.cshtml" />
     <Content Include="Views\UOMMaster\_UOMMasterEdit.cshtml" />
@@ -487,9 +488,9 @@
     <Content Include="Views\CompanyType\_CompanyTypeEdit.cshtml" />
     <Content Include="Views\CompanyType\_CompanyTypeAll.cshtml" />
     <Content Include="Views\RoleType\_RoleTypeAll.cshtml" />
-    <Content Include="Views\RoleType\_RoleTypEdit.cshtml" />
-    <Content Include="Views\RoleType\_RoleTypSearch.cshtml" />
-    <Content Include="Views\RoleType\_RoleTypView.cshtml" />
+    <Content Include="Views\RoleType\_RoleTypeEdit.cshtml" />
+    <Content Include="Views\RoleType\_RoleTypeSearch.cshtml" />
+    <Content Include="Views\RoleType\_RoleTypeView.cshtml" />
     <Content Include="Views\RoleType\Index.cshtml" />
     <Content Include="Views\FloorMaster\_FloorMasterAll.cshtml" />
     <Content Include="Views\FloorMaster\_FloorMasterEdit.cshtml" />

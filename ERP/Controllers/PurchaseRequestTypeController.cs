@@ -92,11 +92,11 @@ namespace ERP.Controllers
 
             var PurchaseRequestTypes = AutoMapperConfig.Mapper().Map<List<Models.PurchaseRequestType>>(_PurchaseRequestType.GetAll());
             if (!string.IsNullOrEmpty(searchString) && !string.IsNullOrEmpty(createdDate))
-                PurchaseRequestTypes = AutoMapperConfig.Mapper().Map<List<Models.PurchaseRequestType>>(_PurchaseRequestType.GetAll().ToList().FindAll(p => p.Name.ToLower().Contains(searchString.ToLower()) && p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+                PurchaseRequestTypes = AutoMapperConfig.Mapper().Map<List<Models.PurchaseRequestType>>(_PurchaseRequestType.GetAll().ToList().FindAll(p => p.Name.ToLower().Contains(searchString.ToLower()) && ((DateTime)p.CreatedDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
             else if (!string.IsNullOrEmpty(searchString))
                 PurchaseRequestTypes = AutoMapperConfig.Mapper().Map<List<Models.PurchaseRequestType>>(_PurchaseRequestType.GetAll().ToList().FindAll(p => p.Name.ToLower().Contains(searchString.ToLower())));
             else if (!string.IsNullOrEmpty(createdDate))
-                PurchaseRequestTypes = AutoMapperConfig.Mapper().Map<List<Models.PurchaseRequestType>>(_PurchaseRequestType.GetAll().ToList().FindAll(p => p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+                PurchaseRequestTypes = AutoMapperConfig.Mapper().Map<List<Models.PurchaseRequestType>>(_PurchaseRequestType.GetAll().ToList().FindAll(p => ((DateTime)p.CreatedDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
 
             switch (sortOrder)
             {

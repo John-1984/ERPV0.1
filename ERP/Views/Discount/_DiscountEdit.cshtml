@@ -22,12 +22,12 @@
         <div class="row  col-md-12 col-lg-12">
 
             <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div>Select Item :</div></div>
+                <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div><label>Select Item :</label> </div></div>
                 <div class="float-right col-md-7 col-lg-8">
                     @* @Html.DropDownList("Mobiledropdown1", Model.RegionList)*@
-                    @Html.DropDownList("drpitem", (IEnumerable<SelectListItem>)Model.itemList, "Select Item", new { @class = "dropdownstyles" })
+                    @Html.DropDownList("drpDiscountItemMaster", (IEnumerable<SelectListItem>)Model.itemList, "Select Item", new { @class = "dropdownstyles",name = "drpDiscountItemMaster" })
                     @*<span class="input-validation-error" data-valmsg-for="DiscountName" data-valmsg-replace="true"></span>*@
-
+                    <input type="hidden" name="hdnItemMaster" id="hdnItemMaster" value="@Model.ItemID" />
                 </div>
 
 
@@ -35,7 +35,7 @@
            
 
             <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;">Discount Value :</div></div>
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;"><label>Discount Value :</label> </div></div>
                 <div class="float-right col-md-8 col-lg-8">
                     <input class="textareastyles" style="width:300px;height:35px;" type="text" name="DiscountValue" value="@(Model.DiscountValue)" placeholder="Enter Discount Value" />
                     @*<span class="input-validation-error" data-valmsg-for="DiscountName" data-valmsg-replace="true"></span>*@
@@ -49,6 +49,10 @@
 
         <div class="row col-md-12 col-lg-12 commonPadding">
             <div class="col-md-6 col-lg-6"><input type="button" data-url="@Url.Action("Update", "Discount")" class="formbutton float-right DiscountAddEdit" data-identity="@(Model.Identity)" value="Update/Add" /></div>
+            <div class="col-md-6 col-lg-6">
+                <input type="button" value="Cancel" data-url="@Url.Action("_DiscountCancel", "Discount")" data-identity="-1" class="formbutton DiscountCancel" />
+            </div>
+
             <input type="hidden" name="Identity" value="@(Model.Identity)">
         </div>
 

@@ -33,32 +33,28 @@ namespace ERP.Models
         }
 
         
-        public int VendorID
+        public int? VendorID
         {
             get;
             set;
         }
-        public int VendorName
+        
+        public DateTime? CreatedDate
         {
             get;
             set;
         }
-        public DateTime CreatedDate
+        public DateTime? ModifiedDate
         {
             get;
             set;
         }
-        public DateTime ModifiedDate
+        public int? ModifiedBy
         {
             get;
             set;
         }
-        public int ModifiedBy
-        {
-            get;
-            set;
-        }
-        public int CreatedBy
+        public int? CreatedBy
         {
             get;
             set;

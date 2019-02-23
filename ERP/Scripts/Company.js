@@ -104,7 +104,7 @@
             contentType: 'application/json',
             dataType: 'json',
             success: function (response) {
-                drpComplocation.empty().append('<option selected="selected" value="0">Select District</option>');
+                drpComplocation.empty().append('<option selected="selected" value="0">Select Location</option>');
                 $.each(response, function () {
                     drpComplocation.append($("<option></option>").val(this['Value']).html(this['Text']));
                 });

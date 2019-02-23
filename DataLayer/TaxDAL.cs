@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Data.Entity;
 namespace DataLayer
 {
     public class TaxDAL
@@ -20,7 +20,10 @@ namespace DataLayer
             using (var dbContext = new TaxDbContext())
             {
                 _Tax = dbContext.Tax
-                            .Include("ItemMaster")
+                             .Include(K => K.ItemMaster)
+                            .Include(l => l.ItemMaster.Brand)
+                            .Include(o => o.ItemMaster.Brand.Vendor)
+                            .Include(s => s.ItemMaster.Brand.Vendor.ProductMaster)
                             .FirstOrDefault(p => p.Identity.Equals(identity));
             }
             return _Tax;
@@ -34,7 +37,87 @@ namespace DataLayer
             {
                 dbContext.Configuration.LazyLoadingEnabled = false;
                 _Taxs = dbContext.Tax
-                             .Include("ItemMaster")
+                              .Include(K => K.ItemMaster)
+                            .Include(l => l.ItemMaster.Brand)
+                            .Include(o => o.ItemMaster.Brand.Vendor)
+                            .Include(s => s.ItemMaster.Brand.Vendor.ProductMaster)
+                            .ToList();
+            }
+
+            return _Taxs;
+        }
+
+
+        public IEnumerable<BusinessModels.Tax> GetAll(int lcdentity)
+        {
+            //Need to do
+            var _Taxs = new List<BusinessModels.Tax>();
+            using (var dbContext = new TaxDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _Taxs = dbContext.Tax
+                              .Include(K => K.ItemMaster)
+                            .Include(l => l.ItemMaster.Brand)
+                            .Include(o => o.ItemMaster.Brand.Vendor)
+                            .Include(s => s.ItemMaster.Brand.Vendor.ProductMaster)
+                            .Where(p => p.ItemMaster.Identity == lcdentity)
+                            .ToList();
+            }
+
+            return _Taxs;
+        }
+
+        public IEnumerable<BusinessModels.Tax> GetAllTaxOnBrand(int lcdentity)
+        {
+            //Need to do
+            var _Taxs = new List<BusinessModels.Tax>();
+            using (var dbContext = new TaxDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _Taxs = dbContext.Tax
+                              .Include(K => K.ItemMaster)
+                            .Include(l => l.ItemMaster.Brand)
+                            .Include(o => o.ItemMaster.Brand.Vendor)
+                            .Include(s => s.ItemMaster.Brand.Vendor.ProductMaster)
+                            .Where(p => p.ItemMaster.Brand.Identity == lcdentity)
+                            .ToList();
+            }
+
+            return _Taxs;
+        }
+
+        public IEnumerable<BusinessModels.Tax> GetAllTaxOnVendor(int lcdentity)
+        {
+            //Need to do
+            var _Taxs = new List<BusinessModels.Tax>();
+            using (var dbContext = new TaxDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _Taxs = dbContext.Tax
+                              .Include(K => K.ItemMaster)
+                            .Include(l => l.ItemMaster.Brand)
+                            .Include(o => o.ItemMaster.Brand.Vendor)
+                            .Include(s => s.ItemMaster.Brand.Vendor.ProductMaster)
+                            .Where(p => p.ItemMaster.Brand.Vendor.Identity == lcdentity)
+                            .ToList();
+            }
+
+            return _Taxs;
+        }
+
+        public IEnumerable<BusinessModels.Tax> GetAllTaxOnProductCategory(int lcdentity)
+        {
+            //Need to do
+            var _Taxs = new List<BusinessModels.Tax>();
+            using (var dbContext = new TaxDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _Taxs = dbContext.Tax
+                              .Include(K => K.ItemMaster)
+                            .Include(l => l.ItemMaster.Brand)
+                            .Include(o => o.ItemMaster.Brand.Vendor)
+                            .Include(s => s.ItemMaster.Brand.Vendor.ProductMaster)
+                            .Where(p => p.ItemMaster.Brand.Vendor.ProductMaster.Identity == lcdentity)
                             .ToList();
             }
 

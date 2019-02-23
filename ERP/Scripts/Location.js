@@ -96,7 +96,7 @@
         vardistrictText = $("#drpdistrict").val();
         $("#hdnDistrict").val(vardistrictText);
 
-        alert(vardistrictText);
+       // alert(vardistrictText);
     });
 
     $(document).off("click", ".LocationCancel");

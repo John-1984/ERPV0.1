@@ -49,8 +49,8 @@ namespace BusinessModels
         public string Qualification
         { get; set; }
 
-
-        public int IdentificationID
+        [ForeignKey("IdentificationsType")]
+        public int? IdentificationID
         { get; set; }
 
         public string IdentificationValue
@@ -59,60 +59,79 @@ namespace BusinessModels
         public string Photo
         { get; set; }
 
-        public string CompanyID
+        [ForeignKey("Company")]
+        public int? CompanyID
         { get; set; }
 
-        public int ManagerID
+        public int? ManagerID
         { get; set; }
 
         public string StaffCode
         { get; set; }
 
-        public int RoleMasterID
+        [ForeignKey("RoleMaster")]
+        public int? RoleMasterID
+        { get; set; }
+
+        [ForeignKey("Location")]
+        public int? LocationID
+        { get; set; }
+
+        [ForeignKey("CompanyType")]
+        public int? CompanyTypeID
+        { get; set; }
+
+        [ForeignKey("FloorMaster")]
+        public int? FloorMasterID
+        { get; set; }
+
+        [ForeignKey("Login")]
+        public int? LoginID
         { get; set; }
 
 
-        public int LocationID
-        { get; set; }
-
-        public int CompanyTypeID
-        { get; set; }
-
-        public string RoleName
-        { get; set; }
-
-        public string LocationName
-        { get; set; }
-
-        public string TypeName
-        { get; set; }
-
-        public string IdentificationName
-        { get; set; }
-
-        public string CompanyName
-        { get; set; }
-
-
-        public DateTime CreatedDate
+        public DateTime? CreatedDate
         {
             get;
             set;
         }
-        public DateTime ModifiedDate
+        public DateTime? ModifiedDate
         {
             get;
             set;
         }
-        public int ModifiedBy
+        public int? ModifiedBy
         {
             get;
             set;
         }
-        public int CreatedBy
+        public int? CreatedBy
         {
             get;
             set;
         }
+
+        public RoleMaster RoleMaster
+        { get; set; }
+
+        public Location Location
+        { get; set; }
+
+        public CompanyType CompanyType
+        { get; set; }
+
+        public FloorMaster FloorMaster
+        { get; set; }
+
+        public IdentificationsType IdentificationsType
+        { get; set; }
+
+        public Company Company
+        { get; set; }
+
+        public Login Login
+        { get; set; }
+
+
     }
 }

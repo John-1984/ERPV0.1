@@ -21,7 +21,7 @@
                 <tr class="gridrow">
 
                     <td class="gridrow "> @Brand.BrandName</td>
-                    <td class="gridrow">@Brand.VendorName</td>
+                    <td class="gridrow">@Brand.Vendor.VendorName</td>
                     <td class="gridrow">@Brand.Vendor.ProductMaster.ProductName</td>
                     <td class="gridrow "><img src="~/Content/edit.png" alt="Edit" class="BrandEdit pointer" data-url="@Url.Action("_BrandEdit", "Brand")" data-identity="@(Brand.Identity)" /></td>
                     <td class="gridrow "><img src="~/Content/delete.png" alt="Delete" class="BrandDelete pointer" data-url="@Url.Action("Delete", "Brand")" data-identity="@(Brand.Identity)" /></td>

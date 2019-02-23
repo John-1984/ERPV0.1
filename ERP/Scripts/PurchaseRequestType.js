@@ -38,7 +38,7 @@
     $(document).off("click", ".PurchaseRequestTypeView");
     $(document).on("click", ".PurchaseRequestTypeView", function (event) {
         var theUrl = $(this).attr("data-url");
-        $('.headermode').html('View PurchaseRequestType Info');
+        $('.headermode').html('View Purchase Request Type Info');
         $.ajax({
             url: theUrl,
             type: 'GET',  // http method
@@ -58,7 +58,7 @@
     $(document).off("click", ".PurchaseRequestTypeEdit, .PurchaseRequestTypeAdd");
     $(document).on("click", ".PurchaseRequestTypeEdit, .PurchaseRequestTypeAdd", function (event) {
         var theUrl = $(this).attr("data-url");
-        $('.headermode').html('Manage PurchaseRequestType Info');
+        $('.headermode').html('Manage Purchase Request Type Info');
         $.ajax({
             url: theUrl,
             type: 'GET',  // http method
@@ -101,7 +101,7 @@
     $(document).off("click", ".PurchaseRequestTypeAddEdit");
     $(document).on("click", ".PurchaseRequestTypeAddEdit", function (event) {
         var theUrl = $(this).attr("data-url");
-        $('.headermode').html('View PurchaseRequestType Info');
+        $('.headermode').html('View Purchase Request Type Info');
         $.ajax({
             url: theUrl,
             type: 'POST',  // http method
@@ -121,7 +121,7 @@
     $(document).off("click", ".PurchaseRequestTypeSearch");
     $(document).on("click", ".PurchaseRequestTypeSearch", function (event) {
         var theUrl = $(this).attr("data-url");
-        $('.headermode').html('View PurchaseRequestType Info');
+        $('.headermode').html('View Purchase Request Type Info');
         $.ajax({
             url: theUrl,
             type: 'POST',  // http method

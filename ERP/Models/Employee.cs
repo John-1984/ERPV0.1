@@ -13,6 +13,16 @@ namespace ERP.Models
     {
         public Employee()
         {
+            Identity = -1;
+            EmployeeName = string.Empty;
+            OfficialEmail = string.Empty;
+            PersonalEmail = string.Empty;
+            Address = string.Empty;
+            PersonalContactNo = string.Empty;
+            OfficialContactNo = string.Empty;
+            AlternateContactNo = string.Empty;
+            Qualification = string.Empty;
+            
         }
 
         [Required(ErrorMessage ="Please enter name")]
@@ -64,7 +74,7 @@ namespace ERP.Models
         { get; set; }
 
 
-        public int IdentificationID
+        public int? IdentificationID
         { get; set; }
 
         public string IdentificationValue
@@ -73,39 +83,39 @@ namespace ERP.Models
         public string Photo
         { get; set; }
 
-        public int CompanyID
+        public int? CompanyID
         { get; set; }
 
-        public int ManagerID
+        public int? ManagerID
         { get; set; }
 
         public string StaffCode
         { get; set; }
 
-        public int RoleMasterID
+        public int? RoleMasterID
         { get; set; }
 
 
-        public int LocationID
+        public int? LocationID
         { get; set; }
 
-        public int CompanyTypeID
+        public int? CompanyTypeID
         { get; set; }
 
-        public string RoleName
-        { get; set; }
+        //public string RoleName
+        //{ get; set; }
 
-        public string LocationName
-        { get; set; }
+        //public string LocationName
+        //{ get; set; }
 
-        public string TypeName
-        { get; set; }
+        //public string TypeName
+        //{ get; set; }
 
-        public string IdentificationName
-        { get; set; }
+        //public string IdentificationName
+        //{ get; set; }
 
-        public string CompanyName
-        { get; set; }
+        //public string CompanyName
+        //{ get; set; }
 
         public SelectList RoleList
         {
@@ -148,25 +158,85 @@ namespace ERP.Models
         }
 
 
-        public DateTime CreatedDate
+        public DateTime? CreatedDate
         {
             get;
             set;
         }
-        public DateTime ModifiedDate
+        public DateTime? ModifiedDate
         {
             get;
             set;
         }
-        public int ModifiedBy
+        public int? ModifiedBy
         {
             get;
             set;
         }
-        public int CreatedBy
+        public int? CreatedBy
         {
             get;
             set;
         }
+        public int? LoginID
+        { get; set; }
+
+        public int? FloorMasterID
+        { get; set; }
+        public RoleMaster RoleMaster
+        { get; set; }
+
+        public Location Location
+        { get; set; }
+
+        public CompanyType CompanyType
+        { get; set; }
+
+        public FloorMaster FloorMaster
+        { get; set; }
+
+        public IdentificationsType IdentificationsType
+        { get; set; }
+
+        public Company Company
+        { get; set; }
+
+        public Login Login
+        { get; set; }
+
+
+        public SelectList RegionList
+        {
+            get;
+            set;
+        }
+        public SelectList CountryList
+        {
+            get;
+            set;
+        }
+        public SelectList StateList
+        {
+            get;
+            set;
+        }
+
+        public SelectList DistrictList
+        {
+            get;
+            set;
+        }
+        public SelectList CompanyTypeList
+        {
+            get;
+            set;
+        }
+
+        public SelectList FloorMasterList
+        {
+            get;
+            set;
+        }
+
     }
 }

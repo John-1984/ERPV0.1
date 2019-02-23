@@ -110,10 +110,15 @@ namespace ERP.Controllers
 
             if (District.Identity.Equals(-1))
             {
+
+                mdDistrict.CreatedDate = DateTime.Now;
                 _District.Insert(mdDistrict);
             }
             else
+            {
+                mdDistrict.ModifiedDate = DateTime.Now;
                 _District.Update(mdDistrict);
+            }
 
 
             return RedirectToAction("_DistrictAll");

@@ -13,7 +13,37 @@
         }
     };
 
+    $(document).on('change', '#drpTaxItemMaster', function () {
+        //alert("Test");
+        // debugger;
+        varTaxItemText = $("#drpTaxItemMaster").val();
+        $("#hdnItemMaster").val(varTaxItemText);
 
+        // alert(vardistrictText);
+    });
+
+
+    $(document).off("click", ".TaxCancel");
+    $(document).on("click", ".TaxCancel", function (event) {
+        var theUrl = $(this).attr("data-url");
+        $('.headermode').html('View Tax Info');
+        $.ajax({
+            url: theUrl,
+            type: 'GET',  // http method
+            data: { "identity": $(this).attr("data-identity") },
+            //async: true,
+            success: function (data, status, xhr) {
+
+                $('.TaxDetials').show();
+                $('.TaxAdd').show();
+                $('.resultView').html(data);
+                showMessage(status, "Success");
+            },
+            error: function (jqXhr, textStatus, errorMessage) {
+                showMessage(textStatus, errorMessage);
+            }
+        });
+    });
     $(document).off("click", ".TaxView");
     $(document).on("click", ".TaxView", function (event) {
         var theUrl = $(this).attr("data-url");

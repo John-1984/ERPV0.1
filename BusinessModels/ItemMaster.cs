@@ -29,37 +29,23 @@ namespace BusinessModels
             get;
             set;
         }
+
+        [ForeignKey("Brand")]
         public int BrandID
         {
             get;
             set;
         }
-        public string BrandName
-        {
-            get;
-            set;
-        }
-        public int VendorID
-        {
-            get;
-            set;
-        }
-        public string VendorName
-        {
-            get;
-            set;
-        }
+        
+
+        [ForeignKey("UOMMaster")]
         public int UOMID
         {
             get;
             set;
         }
 
-        public int UOMName
-        {
-            get;
-            set;
-        }
+       
 
         public decimal ItemWeight
         {
@@ -86,27 +72,37 @@ namespace BusinessModels
         }
 
 
-        public DateTime CreatedDate
+        public DateTime? CreatedDate
         {
             get;
             set;
         }
-        public DateTime ModifiedDate
+        public DateTime? ModifiedDate
         {
             get;
             set;
         }
-        public int ModifiedBy
+        public int? ModifiedBy
         {
             get;
             set;
         }
-        public int CreatedBy
+        public int? CreatedBy
         {
             get;
             set;
         }
 
+        public Brand Brand
+        {
+            get;
+            set;
+        }
 
+        public UOMMaster UOMMaster
+        {
+            get;
+            set;
+        }
     }
 }

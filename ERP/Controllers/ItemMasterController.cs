@@ -23,11 +23,33 @@ namespace ERP.Controllers
         }
 
         [HttpGet]
+        public ActionResult _ItemMasterCancel(int identity)
+        {
+            return RedirectToAction("_ItemMasterAll");
+        }
+        [HttpPost]
+        public JsonResult Brand(string identity)
+        {           
+          return Json(new SelectList(_ItemMaster.GetAllBrands(identity), "Identity", "BrandName"));
+        }
+
+        [HttpPost]
+        public JsonResult Vendor(string identity)
+        {
+            return Json(new SelectList(_ItemMaster.GetAllVendors(identity), "Identity", "VendorName"));
+        }
+
+
+        [HttpGet]
         public PartialViewResult _ItemMasterEdit(int identity)
         {
             if (identity.Equals(-1))
             {
                 Models.ItemMaster mdItemMaster = new Models.ItemMaster();
+
+                mdItemMaster.ProductMasterList = null;
+                mdItemMaster.ProductMasterList = new SelectList(_ItemMaster.GetAllProductMasters(), "Identity", "ProductName");
+
                 mdItemMaster.VendorList = null;
                 mdItemMaster.VendorList = new SelectList(_ItemMaster.GetAllVendors(), "Identity", "VendorName");
 
@@ -43,14 +65,18 @@ namespace ERP.Controllers
             else
             {
                 Models.ItemMaster mdItemMaster = AutoMapperConfig.Mapper().Map<Models.ItemMaster>(_ItemMaster.GetItemMaster(identity));
+
+                mdItemMaster.ProductMasterList = null;
+                mdItemMaster.ProductMasterList = new SelectList(_ItemMaster.GetAllProductMasters(), "Identity", "ProductName", mdItemMaster.Brand.Vendor.ProductMasterID);
+
                 mdItemMaster.VendorList = null;
-                mdItemMaster.VendorList = new SelectList(_ItemMaster.GetAllVendors(), "Identity", "VendorName");
+                mdItemMaster.VendorList = new SelectList(_ItemMaster.GetAllVendors(mdItemMaster.Brand.Vendor.ProductMaster.Identity.ToString()), "Identity", "VendorName",mdItemMaster.Brand.VendorID);
 
                 mdItemMaster.BrandList = null;
-                mdItemMaster.BrandList = new SelectList(_ItemMaster.GetAllBrands(), "Identity", "BrandName");
+                mdItemMaster.BrandList = new SelectList(_ItemMaster.GetAllBrands(mdItemMaster.Brand.VendorID.ToString()), "Identity", "BrandName", mdItemMaster.BrandID);
 
                 mdItemMaster.UOMList = null;
-                mdItemMaster.UOMList = new SelectList(_ItemMaster.GetAllUOMs(), "Identity", "UOMName");
+                mdItemMaster.UOMList = new SelectList(_ItemMaster.GetAllUOMs(), "Identity", "UOMName", mdItemMaster.UOMID);
 
                 TempData["PageInfo"] = "Edit ItemMaster Info";
                 TempData.Keep();
@@ -72,16 +98,30 @@ namespace ERP.Controllers
         }
 
         [HttpPost]
-        public ActionResult Update(Models.ItemMaster ItemMaster)
+        public ActionResult Update(Models.ItemMaster ItemMaster, FormCollection frmFields)
         {
             //IF success resturn grid view
             //IF Failure return json value
+            BusinessModels.ItemMaster mdItem = AutoMapperConfig.Mapper().Map<BusinessModels.ItemMaster>(ItemMaster);
+            var brndvalue = frmFields["hdnBrand"];
+            var uomvalue = frmFields["hdnUOM"];
+
+            if (!String.IsNullOrEmpty(brndvalue))
+                mdItem.BrandID= int.Parse(brndvalue);
+
+            if (!String.IsNullOrEmpty(uomvalue))
+                mdItem.UOMID = int.Parse(uomvalue);
+
             if (ItemMaster.Identity.Equals(-1))
             {
-                _ItemMaster.Insert(AutoMapperConfig.Mapper().Map<BusinessModels.ItemMaster>(ItemMaster));
+                mdItem.CreatedDate = DateTime.Now;
+                _ItemMaster.Insert(mdItem);
             }
             else
-                _ItemMaster.Update(AutoMapperConfig.Mapper().Map<BusinessModels.ItemMaster>(ItemMaster));
+            {
+                mdItem.ModifiedDate = DateTime.Now;
+                _ItemMaster.Update(mdItem);
+            }
             return RedirectToAction("_ItemMasterAll");
         }
 
@@ -105,11 +145,11 @@ namespace ERP.Controllers
 
             var ItemMasters = AutoMapperConfig.Mapper().Map<List<Models.ItemMaster>>(_ItemMaster.GetAll());
             if (!string.IsNullOrEmpty(searchString) && !string.IsNullOrEmpty(createdDate))
-                ItemMasters = AutoMapperConfig.Mapper().Map<List<Models.ItemMaster>>(_ItemMaster.GetAll().ToList().FindAll(p => p.ItemName.ToLower().Contains(searchString.ToLower()) && p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+                ItemMasters = AutoMapperConfig.Mapper().Map<List<Models.ItemMaster>>(_ItemMaster.GetAll().ToList().FindAll(p => p.ItemName.ToLower().Contains(searchString.ToLower()) && ((DateTime)p.CreatedDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
             else if (!string.IsNullOrEmpty(searchString))
                 ItemMasters = AutoMapperConfig.Mapper().Map<List<Models.ItemMaster>>(_ItemMaster.GetAll().ToList().FindAll(p => p.ItemName.ToLower().Contains(searchString.ToLower())));
             else if (!string.IsNullOrEmpty(createdDate))
-                ItemMasters = AutoMapperConfig.Mapper().Map<List<Models.ItemMaster>>(_ItemMaster.GetAll().ToList().FindAll(p => p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+                ItemMasters = AutoMapperConfig.Mapper().Map<List<Models.ItemMaster>>(_ItemMaster.GetAll().ToList().FindAll(p => ((DateTime)p.CreatedDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
 
             switch (sortOrder)
             {

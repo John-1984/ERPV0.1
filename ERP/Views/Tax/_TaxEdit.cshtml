@@ -22,12 +22,12 @@
         <div class="row  col-md-12 col-lg-12">
 
             <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div>Select Item :</div></div>
+                <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div><label>Select Item :</label> </div></div>
                 <div class="float-right col-md-7 col-lg-8">
                     @* @Html.DropDownList("Mobiledropdown1", Model.RegionList)*@
-                    @Html.DropDownList("drpItem", (IEnumerable<SelectListItem>)Model.ItemList, "Select Item", new { @class = "dropdownstyles" })
+                    @Html.DropDownList("drpTaxItemMaster", (IEnumerable<SelectListItem>)Model.ItemList, "Select Item", new { @class = "dropdownstyles", name = "drpTaxItemMaster" })
                     @*<span class="input-validation-error" data-valmsg-for="TaxName" data-valmsg-replace="true"></span>*@
-
+                    <input type="hidden" name="hdnItemMaster" id="hdnItemMaster" value="@Model.ItemID" />
                 </div>
 
 
@@ -35,7 +35,7 @@
           
 
             <div class="row col-md-12 col-lg-12">
-                <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;">Tax Value :</div></div>
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;"><label>Tax Value :</label> </div></div>
                 <div class="float-right col-md-8 col-lg-8">
                     <input class="textareastyles" style="width:300px;height:35px;" type="text" name="TaxValue" value="@(Model.TaxValue)" placeholder="Enter Tax Value" />
                     @*<span class="input-validation-error" data-valmsg-for="TaxName" data-valmsg-replace="true"></span>*@
@@ -49,6 +49,10 @@
 
         <div class="row col-md-12 col-lg-12 commonPadding">
             <div class="col-md-6 col-lg-6"><input type="button" data-url="@Url.Action("Update", "Tax")" class="formbutton float-right TaxAddEdit" data-identity="@(Model.Identity)" value="Update/Add" /></div>
+
+            <div class="col-md-6 col-lg-6">
+                <input type="button" value="Cancel" data-url="@Url.Action("_TaxCancel", "Tax")" data-identity="-1" class="formbutton TaxCancel" />
+            </div>
             <input type="hidden" name="Identity" value="@(Model.Identity)">
         </div>
 

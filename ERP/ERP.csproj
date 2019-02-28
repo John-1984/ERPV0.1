@@ -100,6 +100,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\DB\" />
+    <Folder Include="Views\WorkflowManager\" />
+    <Folder Include="Views\WorkflowDashboard\" />
+    <Folder Include="Models\Workflow\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\BrandController.cs" />
@@ -207,6 +210,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="CustomeFilters\ExceptionFilter.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\WorkflowManagerController.cs" />
+    <Compile Include="Models\Workflow\Workflow.cs" />
+    <Compile Include="Models\Workflow\Step.cs" />
+    <Compile Include="Controllers\WorkflowDashboardController.cs" />
+    <Compile Include="Models\Workflow\WorkflowStepMapping.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\AddNew.png" />
@@ -293,6 +301,17 @@
     <Content Include="Content\PagedList.css" />
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\WorkflowManager\ManageWorkflows.cshtml" />
+    <Content Include="Views\WorkflowManager\ManageSteps.cshtml" />
+    <Content Include="Views\WorkflowManager\AssociateWorkflowAndSteps.cshtml" />
+    <Content Include="Views\WorkflowManager\_WorkflowsAll.cshtml" />
+    <Content Include="Views\WorkflowManager\_StepsAll.cshtml" />
+    <Content Include="Views\WorkflowManager\_WorkflowAdd.cshtml" />
+    <Content Include="Views\WorkflowManager\_StepAddViewEdit.cshtml" />
+    <Content Include="Views\WorkflowDashboard\Inbox.cshtml" />
+    <Content Include="Views\WorkflowDashboard\WorkflowAction.cshtml" />
+    <Content Include="Scripts\workflow.management.js" />
+    <Content Include="Views\WorkflowManager\_WorkflowSteps.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessModels\BusinessModels.csproj">
@@ -314,6 +333,10 @@
     <ProjectReference Include="..\LoggingModule\LoggingModule.csproj">
       <Project>{6AB77425-2932-49C0-8EDC-53B725DC56DE}</Project>
       <Name>LoggingModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WorkflowManager\WorkflowManager.csproj">
+      <Project>{969D9F8D-6FC2-4B4F-9CF9-D97CB848F38C}</Project>
+      <Name>WorkflowManager</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

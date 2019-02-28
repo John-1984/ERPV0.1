@@ -1,0 +1,47 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="height-100 width-100">
+    <div class=" BodyWelcomeText centered">
+        Associate Workflows & Steps
+    </div>
+
+    <div class="commonPadding height-20">
+        <div class="container-fluid col-md-12 col-lg-12 width-100 " style="display:block">
+            <div class="container float-left nopadding ">
+                <div class="col-md-12 col-lg-12 WorkflowSearch">
+                    <div class="col-md-6 col-lg-6 commonPadding">
+                        <input type="text" placeholder="Search By Workflow Name" id="WorkflowName" name="WorkflowName" class="textboxstyles searchText" style="width:300px;height:27px;" />
+                        <input type="hidden" name="WorkflowID" id="WorkflowID" />
+                    </div>
+                    <div class="col-md-6 col-lg-6 float-right">
+                        <label id="WorkflowDescription"></label>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-12 commonPadding">
+                    <input type="button" value="Select Workflow" data-url="@Url.Action("_WorkflowSteps", "WorkflowManager")" class="formbutton associateWorkflow" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="commonPadding height-20">
+        <div class="container-fluid col-md-12 col-lg-12 width-100 " style="display:block">
+            <div class="container float-left nopadding ">
+                <div class="col-md-12 col-lg-12 StepSearch">
+                    <div class="col-md-6 col-lg-6 commonPadding">
+                        <input type="text" placeholder="Search By Step Name" id="StepName" name="StepName" class="textboxstyles searchText" style="width:300px;height:27px;" />
+                        <input type="hidden" name="StepID" id="StepID" />
+                    </div>
+                    <div class="col-md-6 col-lg-6 float-left">
+                        <input type="button" value="Add Step" data-url="@Url.Action("AssociateWorkflowStep", "WorkflowManager")" class="formbutton associateStep" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="resultView height-60" id="resultView">
+        @{Html.RenderAction("_WorkflowSteps", "WorkflowManager", new { workflowID = -1 });}
+    </div>
+</div>
+

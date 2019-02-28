@@ -1,0 +1,15 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="height-100 width-100">
+    <div class=" BodyWelcomeText centered">
+        Manage Workflows
+    </div>
+
+    <div class="commonPadding height-20">
+        @{Html.RenderPartial("_StepAddViewEdit");}
+    </div>
+    <div class="resultView height-80" id="resultView">
+        @{Html.RenderAction("_StepsAll", "WorkflowManager");}
+    </div>
+</div>

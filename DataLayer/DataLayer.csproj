@@ -127,6 +127,8 @@
     <Compile Include="WarrantyDbContext.cs" />
     <Compile Include="UserDAL.cs" />
     <Compile Include="UserDbContext.cs" />
+    <Compile Include="Workflow\WorkflowDbContext.cs" />
+    <Compile Include="Workflow\WorkflowDAL.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
@@ -139,6 +141,9 @@
       <Project>{CAC5FD58-E0F1-423C-B1FF-F65E151CF844}</Project>
       <Name>BusinessModels</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Workflow\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

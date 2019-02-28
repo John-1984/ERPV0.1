@@ -14,12 +14,12 @@
     };
 
     $(document).on('change', '#drpDiscountItemMaster', function () {
-        //alert("Test");
+        
         // debugger;
         varDiscountItemText = $("#drpDiscountItemMaster").val();
         $("#hdnItemMaster").val(varDiscountItemText);
 
-        // alert(vardistrictText);
+        
     });
 
 

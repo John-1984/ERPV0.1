@@ -30,7 +30,8 @@ namespace ERP.Models
             get;
             set;
         }
-
+        public int RoleAccessID
+        { get; set; }
         public DateTime? CreatedDate
         {
             get;
@@ -52,6 +53,7 @@ namespace ERP.Models
             set;
         }
 
-
+        public RoleAccess RoleAccess
+        { get; set; }
     }
 }

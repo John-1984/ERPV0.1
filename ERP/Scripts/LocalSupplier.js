@@ -78,12 +78,12 @@
     });
 
     $(document).on('change', '#drpLocalSupplierRegion', function () {
-        //alert("Test");
+        
         // debugger;
         varLocalSupplierregionText = $("#drpLocalSupplierRegion").val();
         $("#hdnRegion").val(varLocalSupplierregionText);
         var drpLocalSupplierCountry = $("#drpLocalSupplierCountry");
-        // alert("Test");
+        
         $.ajax({
             type: 'POST',
             url: '/LocalSupplier/Country',
@@ -103,12 +103,12 @@
     });
 
     $(document).on('change', '#drpLocalSupplierCountry', function () {
-        //alert("Test");
+        
         // debugger;
         varLocalSuppliercountryText = $("#drpLocalSupplierCountry").val();
         $("#hdnCountry").val(varLocalSuppliercountryText);
         var drpLocalSupplierState = $("#drpLocalSupplierState");
-        //alert("Test");
+        
         $.ajax({
             type: 'POST',
             url: '/LocalSupplier/State',
@@ -128,13 +128,13 @@
     });
 
     $(document).on('change', '#drpLocalSupplierState', function () {
-        //alert("Test");
+        
         // debugger;
-        // alert("Test");
+        
         varLocalSupplierstateText = $("#drpLocalSupplierState").val();
         $("#hdnState").val(varLocalSupplierstateText);
         var drpLocalSupplierdistrict = $("#drpLocalSupplierdistrict");
-        //alert("Test");
+        
         $.ajax({
             type: 'POST',
             url: '/LocalSupplier/District',
@@ -154,13 +154,13 @@
     });
 
     $(document).on('change', '#drpLocalSupplierdistrict', function () {
-        //alert("Test");
+        
         // debugger;
-      //  alert("Test");
+      
         varLocalSupplierdistrictText = $("#drpLocalSupplierdistrict").val();
         $("#hdnDistrict").val(varLocalSupplierdistrictText);
         var drpLocalSupplierlocation = $("#drpLocalSupplierlocation");
-        //alert("Test");
+        
         $.ajax({
             type: 'POST',
             url: '/LocalSupplier/Location',
@@ -181,22 +181,22 @@
 
 
     $(document).on('change', '#drpLocalSupplierlocation', function () {
-        //alert("Test");
+        
         // debugger;
         varLocalSupplierlocText = $("#drpLocalSupplierlocation").val();
         $("#hdnLocation").val(varLocalSupplierlocText);
 
-        // alert(vardistrictText);
+       
     });
 
 
     $(document).on('change', '#drpLocalSupplierItemMaster', function () {
-        //alert("Test");
+        
         // debugger;
         varLocalSupplieritemText = $("#drpLocalSupplierItemMaster").val();
         $("#hdnItemMaster").val(varLocalSupplieritemText);
 
-        // alert(vardistrictText);
+       
     });
 
     $(document).off("click", ".LocalSupplierCancel");

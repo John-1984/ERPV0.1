@@ -15,7 +15,7 @@ namespace BusinessLayer
             return _dataLayer.GetUser(userName, password);
         }
 
-        public BusinessModels.User ValidateUser(string userName, string password)
+        public BusinessModels.Login ValidateUser(string userName, string password)
         {
             return _dataLayer.ValidateUser(userName, password);
         }

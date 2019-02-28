@@ -95,7 +95,7 @@
                 <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div><label>Company Type :</label></div></div>
                 <div class="float-right col-md-7 col-lg-8">
                     @* @Html.DropDownList("Mobiledropdown1", Model.RegionList)*@
-                    @Html.DropDownList("drpfloorcompanytype", (IEnumerable<SelectListItem>)Model.CompanyTypeList, "Select Company Type", new { @class = "dropdownstyles" , name= "drpfloorcompanytype"})
+                    @Html.DropDownList("drpfloorMastercompanytype", (IEnumerable<SelectListItem>)Model.CompanyTypeList, "Select Company Type", new { @class = "dropdownstyles" , name= "drpfloorMastercompanytype" })
                     @*<span class="input-validation-error" data-valmsg-for="FloorMasterName" data-valmsg-replace="true"></span>*@
                     <input type="hidden" name="hdnCompanyType" id="hdnCompanyType" value="@Model.CompanyTypeID" />
                 </div>

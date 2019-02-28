@@ -14,12 +14,12 @@
     };
 
     $(document).on('change', '#drpTaxItemMaster', function () {
-        //alert("Test");
+        
         // debugger;
         varTaxItemText = $("#drpTaxItemMaster").val();
         $("#hdnItemMaster").val(varTaxItemText);
 
-        // alert(vardistrictText);
+       
     });
 
 

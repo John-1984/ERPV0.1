@@ -1,0 +1,142 @@
+@model ERP.Models.Customer 
+
+
+<div class="container PendingCustomerInfoDetails col-md-12 col-lg-12 commonPadding">
+
+    <div class="row  col-md-12 col-lg-12">
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-3 col-lg-3 lablestyles textright">Name :</div>
+                <div class="float-right col-md-5 col-lg-5"><input class="textareastyles" style="width:220px;height:27px;" type="text" name="CustomerName" value="@(Model.CustomerName)" placeholder="Enter Name" /></div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">Profession :</div>
+                <div class="float-right col-md-6 col-lg-6"><input type="text" class="textareastyles" style="width:220px;height:27px;" name="Profession" value="@(Model.Profession)" placeholder="Enter Profession" /></div>
+            </div>
+        </div>
+    </div>
+    <div class="row  col-md-12 col-lg-12 commonPadding">
+
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-3 col-lg-3 lablestyles textright">Address :</div>
+                <div class="float-right col-md-5 col-lg-5">
+                    <textarea name="Address" rows="6" cols="30" class="textareastyles" placeholder="Enter Address">@(Model.Address)</textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">Contact Number :</div>
+                <div class="float-right col-md-6 col-lg-6"><input type="text" class="textareastyles" style="width:220px;height:27px;" name="ContactNumber" value="@(Model.ContactNumber)" placeholder="Enter Contact Number" /></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row col-md-12 col-lg-12 commonPadding">
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-3 col-lg-3 lablestyles textright">Email ID :</div>
+                <div class="float-right col-md-5 col-lg-5"><input class="textareastyles" style="width:220px;height:27px;" type="text" name="EmailID" value="@(Model.EmailID)" placeholder="Enter Email" /></div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">Quantity (sqft) :</div>
+                <div class="float-right col-md-6 col-lg-6">
+                    <input type="text" name="Quantity" class="textareastyles" style="width:220px;height:27px;" value="@(Model.Quantity)" placeholder="Enter Quantity" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row col-md-12 col-lg-12 commonPadding">
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-3 col-lg-3 lablestyles textright">Purpose :</div>
+                <div class="float-right col-md-5 col-lg-5">
+                    @Html.DropDownList("drpcustomerpurpose", (IEnumerable<SelectListItem>)Model.PurposeList, "Select Purpose", new { @class = "dropdownstyles", name = "drpcustomerpurpose" })
+                    @*<span class="input-validation-error" data-valmsg-for="BrandName" data-valmsg-replace="true"></span>*@
+                    <input type="hidden" name="hdncuspupose" id="hdncuspupose" value="@(Model.PurposeID)" />
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">Assign To :</div>
+                <div class="float-right col-md-5 col-lg-5">
+                    @Html.DropDownList("drpcustomerEmp", (IEnumerable<SelectListItem>)Model.EmployeeList, "Select Employee", new { @class = "dropdownstyles", name = "drpcustomerEmp" })
+                    @*<span class="input-validation-error" data-valmsg-for="BrandName" data-valmsg-replace="true"></span>*@
+                    <input type="hidden" name="hdnemployee" id="hdnemployee" value="@(Model.AssignedTo)" />
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row col-md-12 col-lg-12 commonPadding">
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">Status :</div>
+                <div class="float-right col-md-5 col-lg-5">
+                    @Html.DropDownList("drpcustomerEnquirylvl", (IEnumerable<SelectListItem>)Model.EnquiryLevelList, "Select Enquiry Level", new { @class = "dropdownstyles", name = "drpcustomerEnquirylvl" })
+                    @*<span class="input-validation-error" data-valmsg-for="BrandName" data-valmsg-replace="true"></span>*@
+                    <input type="hidden" name="hdncustenquirylevel" id="hdncustenquirylevel" value="@(Model.EnquiryLevelID)" />
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">Status :</div>
+                <div class="float-right col-md-5 col-lg-5">
+                    @Html.DropDownList("drpcustomerstatus", (IEnumerable<SelectListItem>)Model.StatusList, "Select Status", new { @class = "dropdownstyles", name = "drpcustomerstatus" })
+                    @*<span class="input-validation-error" data-valmsg-for="BrandName" data-valmsg-replace="true"></span>*@
+                    <input type="hidden" name="hdncuststatus" id="hdncuststatus" value="@(Model.StatusID)" />
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row col-md-12 col-lg-12 commonPadding">
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-3 col-lg-3 lablestyles textright">Comments :</div>
+                <div class="float-right col-md-5 col-lg-5">
+                    <textarea name="Comments" rows="8" cols="50" class="textareastyles" disabled placeholder="Enter comments (if any)">@(Model.Comments)</textarea>
+
+                </div>
+            </div>
+        </div>
+       
+
+    </div>
+
+    <div class="row col-md-12 col-lg-12 commonPadding">
+        <div class="col-md-6 col-lg-6"><input type="button" data-url="@Url.Action("Update", "PendingCustomerInfo")" class="formbutton float-right PendingCustomerInfoAddEdit" data-identity="@(Model.Identity)" value="Update/Add" /></div>
+
+        <div class="col-md-6 col-lg-6">
+            <input type="button" value="Cancel" data-url="@Url.Action("_PendingCustomerInfoCancel", "PendingCustomerInfo")" data-identity="-1" class="formbutton PendingCustomerInfoCancel" />
+        </div>
+        <input type="hidden" name="Identity" value="@(Model.Identity)">
+
+        <input type="hidden" name="CreatedDate" value="@(Model.CreatedDate)">
+        <input type="hidden" name="CreatedBy" value="@(Model.CreatedBy)">
+        <input type="hidden" name="ModifiedBy" value="@(Model.ModifiedBy)">
+        <input type="hidden" name="ModifiedDate" value="@(Model.ModifiedDate)">
+        <input type="hidden" name="IsActive" value="@(Model.IsActive)">
+
+    </div>
+
+
+
+</div>

@@ -14,12 +14,12 @@
     };
 
     $(document).on('change', '#drpRegion', function () {
-        //alert("Test");
+        
         // debugger;
         varregionText = $("#drpRegion").val();
         $("#hdnRegion").val(varregionText);
         var drpCountry = $("#drpCountry");
-       // alert("Test");
+       
         $.ajax({
             type: 'POST',
             url: '/District/Country',
@@ -39,12 +39,12 @@
     });
 
     $(document).on('change', '#drpCountry', function () {
-        //alert("Test");
+        
         // debugger;
         varcountryText = $("#drpCountry").val();
         $("#hdnCountry").val(varcountryText);
         var drpState = $("#drpState");
-        //alert("Test");
+        
         $.ajax({
             type: 'POST',
             url: '/District/State',
@@ -65,7 +65,7 @@
 
     
     $(document).on('change', '#drpState', function () {
-        //alert("Test");
+        
         // debugger;
         varregionText = $("#drpState").val();
         $("#hdnState").val(varregionText);

@@ -13,12 +13,12 @@
         }
     };
     $(document).on('change', '#drpFloorRegion', function () {
-        //alert("Test");
+        
         // debugger;
         varregionText = $("#drpFloorRegion").val();
         $("#hdnRegion").val(varregionText);
         var drpFloorCountry = $("#drpFloorCountry");
-        // alert("Test");
+        
         $.ajax({
             type: 'POST',
             url: '/FloorMaster/Country',
@@ -38,12 +38,12 @@
     });
 
     $(document).on('change', '#drpFloorCountry', function () {
-        //alert("Test");
+        
         // debugger;
         varcountryText = $("#drpFloorCountry").val();
         $("#hdnCountry").val(varcountryText);
         var drpFloorState = $("#drpFloorState");
-        //alert("Test");
+        
         $.ajax({
             type: 'POST',
             url: '/FloorMaster/State',
@@ -63,13 +63,13 @@
     });
 
     $(document).on('change', '#drpFloorState', function () {
-        //alert("Test");
+        
         // debugger;
-        alert("Test");
+       
         varstateText = $("#drpFloorState").val();
         $("#hdnState").val(varstateText);
         var drpFloordistrict = $("#drpFloordistrict");
-        //alert("Test");
+        
         $.ajax({
             type: 'POST',
             url: '/FloorMaster/District',
@@ -89,13 +89,13 @@
     });
 
     $(document).on('change', '#drpFloordistrict', function () {
-        //alert("Test");
+        
         // debugger;
-        //alert("Test");
+        
         vardistrictText = $("#drpFloordistrict").val();
         $("#hdnDistrict").val(vardistrictText);
         var drpfloorlocation = $("#drpfloorlocation");
-        //alert("Test");
+        
         $.ajax({
             type: 'POST',
             url: '/FloorMaster/Location',
@@ -115,13 +115,13 @@
     });
 
     $(document).on('change', '#drpfloorlocation', function () {
-        //alert("Test");
+        
         // debugger;
-        alert("Test");
-        varlocationText = $("#drpfloorlocation").val();
-        $("#hdnLocation").val(varlocationText);
+        
+        var locationText = $("#drpfloorlocation").val();
+        $("#hdnLocation").val(locationText);
         var drpfloorcompany = $("#drpfloorcompany");
-        //alert("Test");
+        
         $.ajax({
             type: 'POST',
             url: '/FloorMaster/Company',
@@ -141,13 +141,13 @@
     });
 
     $(document).on('change', '#drpfloorcompany', function () {
-        //alert("Test");
+        
         // debugger;
-        alert("Test");
+       
         varcompText = $("#drpfloorcompany").val();
         $("#hdnCompany").val(varcompText);
-        var drpfloorcompanyType = $("#drpfloorcompanyType");
-        //alert("Test");
+        var drpfloorMastercompanytype = $("#drpfloorMastercompanytype");
+        
         $.ajax({
             type: 'POST',
             url: '/FloorMaster/CompanyType',
@@ -155,9 +155,9 @@
             contentType: 'application/json',
             dataType: 'json',
             success: function (response) {
-                drpfloorcompanyType.empty().append('<option selected="selected" value="0">Select Company Type</option>');
+                drpfloorMastercompanytype.empty().append('<option selected="selected" value="0">Select Company Type</option>');
                 $.each(response, function () {
-                    drpfloorcompanyType.append($("<option></option>").val(this['Value']).html(this['Text']));
+                    drpfloorMastercompanytype.append($("<option></option>").val(this['Value']).html(this['Text']));
                 });
             },
             error: function (response) {
@@ -165,13 +165,13 @@
             }
         });
     });
-    $(document).on('change', '#drpfloorcompanytype', function () {
-        //alert("Test");
+    $(document).on('change', '#drpfloorMastercompanytype', function () {
+        
         // debugger;
-        varcompanyTypeText = $("#drpfloorcompanytype").val();
-        $("#hdnCompanyType").val(varcompanyTypeText);
+        var companyTypeText = $("#drpfloorMastercompanytype").val();
+        $("#hdnCompanyType").val(companyTypeText);
 
-       // alert(vardistrictText);
+       
     });
 
     $(document).off("click", ".FloorMasterCancel");
@@ -219,7 +219,7 @@
     $(document).off("click", ".FloorMasterEdit, .FloorMasterAdd");
     $(document).on("click", ".FloorMasterEdit, .FloorMasterAdd", function (event) {
         var theUrl = $(this).attr("data-url");
-        $('.headermode').html('Manage Floo rMaster Info');
+        $('.headermode').html('Manage Floor Master Info');
         $.ajax({
             url: theUrl,
             type: 'GET',  // http method

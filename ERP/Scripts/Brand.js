@@ -38,7 +38,7 @@
    
 
     $(document).on('change', '#drpBrandVendor', function () {
-        //alert("Test");
+        
         // debugger;
         varvendorText = $("#drpBrandVendor").val();
         $("#hdnVendor").val(varvendorText);

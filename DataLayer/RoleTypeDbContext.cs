@@ -15,6 +15,7 @@ namespace DataLayer
         }
 
         public DbSet<BusinessModels.RoleType> RoleType { get; set; }
+        public DbSet<BusinessModels.RoleAccess> RoleAccess { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

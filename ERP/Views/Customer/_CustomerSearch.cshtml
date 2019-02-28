@@ -1,28 +1,25 @@
-
-<div class="container-fluid col-md-12 col-lg-12 width-100 " style="display:block">
-    <div class="container float-left nopadding ">
-        <div class="col-md-12 col-lg-12 commonPadding customerSearchDetials">
-            <div class="col-md-6 col-lg-6">
-                <span class="BodyWelcomeText">Search Options</span>
-            </div>
-        </div>
-
-        <div class="col-md-12 col-lg-12 customerSearchDetials">
-            <div class="col-md-6 col-lg-6 commonPadding">
-                <input type="text" placeholder="Search By Customer Name" id="customerName" name="CustomerName" class="textboxstyles searchText" style="width:300px;height:27px;" />
-                <input type="hidden" name="customerID" id="customerID"/>
-            </div>
-            <div class="col-md-6 col-lg-6">
-                <input id="datepicker"  placeholder="Search By Date" class="textboxstyles" style="max-width:265px;height:27px;" />
-            </div>
-        </div>
-        <div class="col-md-12 col-lg-12 commonPadding customerSearchDetials">
-            <div class="col-md-6 col-lg-6 float-left">
-                <input type="button" value="Search" data-url="@Url.Action("CustomerSearch", "Customer")" class="formbutton customerSearch" />
-            </div>
-            <div class="col-md-6 col-lg-6 float-right" style="text-align:right">
-                <input type="button" value="Add Customer" data-url="@Url.Action("_CustomerEdit", "Customer")" data-identity="-1" class="formbutton customerAdd" />
-            </div>
+<div class="container col-md-12 col-lg-12 width-100">
+    <div class="col-md-12 col-lg-12">
+        <div class="col-md-6 col-lg-6 commonPadding">
+            <span class="BodyWelcomeText">Search Options</span>
         </div>
     </div>
+    <div class="col-md-12 col-lg-12">
+
+        <div class="col-md-6 col-lg-6 commonPadding">
+            <input type="text" placeholder="Search By Customer Name" id="customerName" name="CustomerName" class="textboxstyles searchText" style="width:300px;height:27px;" />
+            <input type="hidden" name="customerID" id="customerID" />
+
+        </div>
+    </div>
+    <div class="col-md-12 col-lg-12">
+        <div class="col-md-4 col-lg-4 commonPadding textleft">
+            <input type="button" value="Search" data-url="@Url.Action("CustomerSearch", "Customer")" class="formbutton CustomerSearch" />
+        </div>
+    </div>
+    <div class="col-md-12 col-lg-12 commonPadding" style="text-align:right">
+        <input type="button" value="Add Customer" data-url="@Url.Action("_CustomerEdit", "Customer")" data-identity="-1" class="formbutton CustomerAdd" />
+    </div>
+
 </div>
+

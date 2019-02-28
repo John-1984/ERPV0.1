@@ -132,6 +132,7 @@ namespace BusinessModels
         public Login Login
         { get; set; }
 
-
+        public Boolean IsActive
+        { get; set; }
     }
 }

@@ -38,7 +38,7 @@
    
 
     $(document).on('change', '#drpVendorProductMaster', function () {
-        //alert("Test");
+        
         // debugger;
         varprodmastText = $("#drpVendorProductMaster").val();
         $("#hdnProductMaster").val(varprodmastText);

@@ -18,7 +18,21 @@ namespace BusinessModels
             set;
         }
 
+       
+
         public string CustomerName
+        {
+            get;
+            set;
+        }
+
+        public string Comments
+        {
+            get;
+            set;
+        }
+
+        public string ContactNumber
         {
             get;
             set;
@@ -30,13 +44,28 @@ namespace BusinessModels
             set;
         }
 
-        public string Location
+        [ForeignKey("Location")]
+        public int? LocationID
         {
             get;
             set;
         }
 
-        public Address Address
+        [ForeignKey("Status")]
+        public int? StatusID
+        {
+            get;
+            set;
+        }
+
+        [ForeignKey("Employee")]
+        public int? AssignedTo
+        {
+            get;
+            set;
+        }
+
+        public string Address
         {
             get;
             set;
@@ -48,7 +77,8 @@ namespace BusinessModels
             set;
         }
 
-        public string Purpose
+        [ForeignKey("Purpose")]
+        public int? PurposeID
         {
             get;
             set;
@@ -61,17 +91,61 @@ namespace BusinessModels
         }
 
 
-        public string Comments
-          {
-            get;
-            set;
-        }
 
-        public DateTime CreatedDate
+        public DateTime? CreatedDate
         {
             get;
             set;
         }
+        public DateTime? ModifiedDate
+        {
+            get;
+            set;
+        }
+        public int? ModifiedBy
+        {
+            get;
+            set;
+        }
+        public int? CreatedBy
+        {
+            get;
+            set;
+        }
+
+        [ForeignKey("EnquiryLevel")]
+        public int? EnquiryLevelID
+        { get; set; }
+
+        public EnquiryLevel EnquiryLevel
+        { get; set; }
+
+        public Location Location
+        {
+            get;
+            set;
+        }
+
+        public Status Status
+        {
+            get;
+            set;
+        }
+
+        public Purpose Purpose
+        {
+            get;
+            set;
+        }
+
+        public Employee Employee
+        {
+            get;
+            set;
+        }
+
+        public Boolean IsActive
+        { get; set; }
 
     }
 }

@@ -1,17 +1,25 @@
-﻿@{
-Layout = "~/Views/Shared/_Layout.cshtml";
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="container">
+    <div class="col-md-12 col-lg-12 width-100">
+        <div class="col-md-12 col-lg-12 BodyWelcomeText textleft headermode" style="border-bottom:1px dashed #8A7B69; padding-top:5px;">
+            View Customer Info
+        </div>
 
-<div class="height-100 width-100">
-    <div class=" BodyWelcomeText centered">
-        Customer Info
+        <div class="col-md-12 col-lg-12 commonPadding CustomerSearchDetials">
+            @{Html.RenderPartial("_CustomerSearch");}
+
+        </div>
+        <div class="col-md-12 col-lg-12 height-10">
+            @ViewData["ActionUpdate"]
+        </div>
+        <div class="col-md-12 col-lg-12 resultView commonPadding">
+            @{Html.RenderAction("_CustomerAll", "Customer");}
+        </div>
+
     </div>
 
-    <div class="commonPadding height-20">
-        @{Html.RenderPartial("_CustomerSearch");}
-    </div>
-    <div class="resultView height-80" id="resultView">
-        @{Html.RenderAction("_CustomerAll", "Customer");}
-    </div>
 </div>
-

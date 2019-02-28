@@ -15,6 +15,7 @@ namespace DataLayer
         }
 
         public DbSet<BusinessModels.Login> Login { get; set; }
+        public DbSet<BusinessModels.Location> Location { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

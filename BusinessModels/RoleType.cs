@@ -7,7 +7,7 @@ namespace BusinessModels
     {
         public RoleType()
         {
-           
+
         }
 
         [System.ComponentModel.DataAnnotations.Key]
@@ -18,7 +18,10 @@ namespace BusinessModels
             set;
         }
 
-        
+        [ForeignKey("RoleAccess")]
+        public int RoleAccessID
+        { get; set; }
+    
         public string RoletypeName
         {
             get;
@@ -45,6 +48,9 @@ namespace BusinessModels
             get;
             set;
         }
+
+        public RoleAccess RoleAccess
+        { get; set; }
 
 
     }

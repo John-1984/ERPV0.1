@@ -32,7 +32,57 @@ namespace DataLayer
                             .Include(f => f.Location.District.State)
                             .Include(j => j.Location.District.State.Country)
                             .Include(m => m.Location.District.State.Country.Region)
+                            .Where(p => p.IsActive == true)
                             .FirstOrDefault(p => p.Identity.Equals(identity));
+            }
+            return _Employee;
+        }
+
+        public BusinessModels.Employee GetStoreRoomManagerOnCompanyType(Int32 locidentity, int companyID, int companytype)
+        {
+            //coded
+            var _Employee = new BusinessModels.Employee();
+            using (var dbContext = new EmployeeDbContext())
+            {
+                _Employee = dbContext.Employee
+                            .Include(K => K.RoleMaster)
+                            .Include(l => l.Location)
+                            .Include(o => o.CompanyType)
+                            .Include(s => s.FloorMaster)
+                            .Include(w => w.IdentificationsType)
+                            .Include(q => q.Company)
+                            .Include(a => a.Login)
+                            .Include(x => x.RoleMaster.RoleType)
+                            .Include(K => K.Location.District)
+                            .Include(f => f.Location.District.State)
+                            .Include(j => j.Location.District.State.Country)
+                            .Include(m => m.Location.District.State.Country.Region)
+                            .Where(p => p.IsActive == true  && p.CompanyID==companyID && p.CompanyTypeID==companytype && p.RoleMaster.RoleTypeID ==4 && p.RoleMaster.RoleName.Contains("Store Room Manager"))
+                            .FirstOrDefault(p => p.LocationID==locidentity);
+            }
+            return _Employee;
+        }
+
+        public BusinessModels.Employee GetEmployeeLoginDetails(Int32 identity)
+        {
+            var _Employee = new BusinessModels.Employee();
+            using (var dbContext = new EmployeeDbContext())
+            {
+                _Employee = dbContext.Employee
+                            .Include(K => K.RoleMaster)
+                            .Include(l => l.Location)
+                            .Include(o => o.CompanyType)
+                            .Include(s => s.FloorMaster)
+                            .Include(w => w.IdentificationsType)
+                            .Include(q => q.Company)
+                            .Include(a => a.Login)
+                            .Include(x => x.RoleMaster.RoleType)
+                            .Include(K => K.Location.District)
+                            .Include(f => f.Location.District.State)
+                            .Include(j => j.Location.District.State.Country)
+                            .Include(m => m.Location.District.State.Country.Region)
+                            .Where(p=>p.IsActive == true)
+                            .FirstOrDefault(p => p.Login.Identity.Equals(identity));
             }
             return _Employee;
         }
@@ -57,6 +107,8 @@ namespace DataLayer
                             .Include(f => f.Location.District.State)
                             .Include(j => j.Location.District.State.Country)
                             .Include(m => m.Location.District.State.Country.Region)
+                            .Where(p=>p.IsActive == true
+                            )
                             .ToList();
             }
 
@@ -84,7 +136,7 @@ namespace DataLayer
                             .Include(f => f.Location.District.State)
                             .Include(j => j.Location.District.State.Country)
                             .Include(m => m.Location.District.State.Country.Region)
-                             .Where(p => p.RoleMaster.Identity == fldidentity)
+                             .Where(p => p.RoleMaster.Identity == fldidentity && p.IsActive == true)
                             .ToList();
             }
 
@@ -111,7 +163,61 @@ namespace DataLayer
                             .Include(f => f.Location.District.State)
                             .Include(j => j.Location.District.State.Country)
                             .Include(m => m.Location.District.State.Country.Region)
-                             .Where(p => p.Location.Identity == fldidentity)
+                             .Where(p => p.Location.Identity == fldidentity && p.IsActive == true)
+                            .ToList();
+            }
+
+            return _Employees;
+        }
+
+        public IEnumerable<BusinessModels.Employee> GetAllFloorInchargeOnCompanyType(int? companytypeid,int fldidentity)
+        {
+            //Need to do
+            var _Employees = new List<BusinessModels.Employee>();
+            using (var dbContext = new EmployeeDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _Employees = dbContext.Employee
+                             .Include(K => K.RoleMaster)
+                            .Include(l => l.Location)
+                            .Include(o => o.CompanyType)
+                            .Include(s => s.FloorMaster)
+                            .Include(w => w.IdentificationsType)
+                            .Include(q => q.Company)
+                            .Include(a => a.Login)
+                            .Include(x => x.RoleMaster.RoleType)
+                            .Include(K => K.Location.District)
+                            .Include(f => f.Location.District.State)
+                            .Include(j => j.Location.District.State.Country)
+                            .Include(m => m.Location.District.State.Country.Region)
+                             .Where(p => p.CompanyTypeID== companytypeid && p.RoleMaster.RoleTypeID==5 && p.LocationID==fldidentity && p.IsActive == true)
+                            .ToList();
+            }
+
+            return _Employees;
+        }
+
+        public IEnumerable<BusinessModels.Employee> GetAllFloorExecutivesOnFloor(int? floorid, int fldidentity, int? companytypeid)
+        {
+            //Need to do
+            var _Employees = new List<BusinessModels.Employee>();
+            using (var dbContext = new EmployeeDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _Employees = dbContext.Employee
+                             .Include(K => K.RoleMaster)
+                            .Include(l => l.Location)
+                            .Include(o => o.CompanyType)
+                            .Include(s => s.FloorMaster)
+                            .Include(w => w.IdentificationsType)
+                            .Include(q => q.Company)
+                            .Include(a => a.Login)
+                            .Include(x => x.RoleMaster.RoleType)
+                            .Include(K => K.Location.District)
+                            .Include(f => f.Location.District.State)
+                            .Include(j => j.Location.District.State.Country)
+                            .Include(m => m.Location.District.State.Country.Region)
+                             .Where(p => p.FloorMaster.Identity == floorid && p.IsActive == true && p.CompanyTypeID == companytypeid && p.RoleMaster.RoleTypeID == 6 && p.LocationID == fldidentity)
                             .ToList();
             }
 
@@ -138,7 +244,7 @@ namespace DataLayer
                             .Include(f => f.Location.District.State)
                             .Include(j => j.Location.District.State.Country)
                             .Include(m => m.Location.District.State.Country.Region)
-                             .Where(p => p.CompanyType.Identity == fldidentity)
+                             .Where(p => p.CompanyType.Identity == fldidentity && p.IsActive == true)
                             .ToList();
             }
 
@@ -165,7 +271,7 @@ namespace DataLayer
                             .Include(f => f.Location.District.State)
                             .Include(j => j.Location.District.State.Country)
                             .Include(m => m.Location.District.State.Country.Region)
-                             .Where(p => p.FloorMaster.Identity == fldidentity)
+                             .Where(p => p.FloorMaster.Identity == fldidentity && p.IsActive == true)
                             .ToList();
             }
 
@@ -192,7 +298,7 @@ namespace DataLayer
                             .Include(f => f.Location.District.State)
                             .Include(j => j.Location.District.State.Country)
                             .Include(m => m.Location.District.State.Country.Region)
-                             .Where(p => p.Company.Identity == fldidentity)
+                             .Where(p => p.Company.Identity == fldidentity && p.IsActive == true)
                             .ToList();
             }
 
@@ -219,7 +325,7 @@ namespace DataLayer
                             .Include(f => f.Location.District.State)
                             .Include(j => j.Location.District.State.Country)
                             .Include(m => m.Location.District.State.Country.Region)
-                             .Where(p => p.Location.District.Identity == fldidentity)
+                             .Where(p => p.Location.District.Identity == fldidentity && p.IsActive == true)
                             .ToList();
             }
 
@@ -246,7 +352,7 @@ namespace DataLayer
                             .Include(f => f.Location.District.State)
                             .Include(j => j.Location.District.State.Country)
                             .Include(m => m.Location.District.State.Country.Region)
-                             .Where(p => p.Location.District.State.Identity == fldidentity)
+                             .Where(p => p.Location.District.State.Identity == fldidentity && p.IsActive == true)
                             .ToList();
             }
 
@@ -273,7 +379,7 @@ namespace DataLayer
                             .Include(f => f.Location.District.State)
                             .Include(j => j.Location.District.State.Country)
                             .Include(m => m.Location.District.State.Country.Region)
-                             .Where(p => p.Location.District.State.Country.Identity == fldidentity)
+                             .Where(p => p.Location.District.State.Country.Identity == fldidentity && p.IsActive == true)
                             .ToList();
             }
 
@@ -300,7 +406,7 @@ namespace DataLayer
                             .Include(f => f.Location.District.State)
                             .Include(j => j.Location.District.State.Country)
                             .Include(m => m.Location.District.State.Country.Region)
-                             .Where(p => p.Location.District.State.Country.Region.Identity == fldidentity)
+                             .Where(p => p.Location.District.State.Country.Region.Identity == fldidentity && p.IsActive == true)
                             .ToList();
             }
 

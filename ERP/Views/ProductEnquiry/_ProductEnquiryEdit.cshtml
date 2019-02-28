@@ -1,17 +1,143 @@
-﻿@{
-    Layout = null;
+﻿@model ERP.Models.ProductEnquiry
+
+@using (Html.BeginForm("Update", "ProductEnquiry", FormMethod.Post, new { @id = "registerFormId" }))
+{
+
+<div class="container ProductEnquiryDetails col-md-12 col-lg-12 commonPadding">
+    <div class="row  col-md-12 col-lg-12ccommonPadding">
+        @*@{
+                var categories = Model.ErrorList; // Cast the list
+            }
+
+            @if(Model.ErrorList != null && Model.ErrorList.Count > 0)
+            {
+            @foreach (var c in @categories) // Print the list
+            {
+                @Html.Label(categories.ToString());
+            }
+            }*@
+
+        &nbsp;
+    </div>
+    <div class="row col-md-12 col-lg-12 commonPadding">
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">Product Category :</div>
+                <div class="float-right col-md-5 col-lg-5">
+                    @Html.DropDownList("drpProductEnquiryDetProductMaster", (IEnumerable<SelectListItem>)Model.ProductMasterList, "Select Category", new { @class = "dropdownstyles", name = "drpProductEnquiryDetProductMaster" })
+                    @*<span class="input-validation-error" data-valmsg-for="ProductEnquiryDetName" data-valmsg-replace="true"></span>*@
+                    <input type="hidden" name="hdnProductMaster" id="hdnProductMaster" />
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">Vendor :</div>
+                <div class="float-right col-md-5 col-lg-5">
+                    @Html.DropDownList("drpProductEnquiryDetVendor", (IEnumerable<SelectListItem>)Model.VendorList, "Select Vendor", new { @class = "dropdownstyles", name = "drpProductEnquiryDetVendor" })
+                    @*<span class="input-validation-error" data-valmsg-for="ProductEnquiryDetName" data-valmsg-replace="true"></span>*@
+                    <input type="hidden" name="hdnVendor" id="hdnVendor" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row col-md-12 col-lg-12 commonPadding">
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">Brand :</div>
+                <div class="float-right col-md-5 col-lg-5">
+                    @Html.DropDownList("drpProductEnquiryDetBrand", (IEnumerable<SelectListItem>)Model.BrandList, "Select Brand", new { @class = "dropdownstyles", name = "drpProductEnquiryDetBrand" })
+                    @*<span class="input-validation-error" data-valmsg-for="ProductEnquiryDetName" data-valmsg-replace="true"></span>*@
+                    <input type="hidden" name="hdnBrand" id="hdnBrand" />
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">Item :</div>
+                <div class="float-right col-md-5 col-lg-5">
+                    @Html.DropDownList("drpProductEnquiryDetItem", (IEnumerable<SelectListItem>)Model.ItemList, "Select Item", new { @class = "dropdownstyles", name = "drpProductEnquiryDetItem" })
+                    @*<span class="input-validation-error" data-valmsg-for="ProductEnquiryDetName" data-valmsg-replace="true"></span>*@
+                    <input type="hidden" name="hdnItem" id="hdnItem" value="@Model.ItemID" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row col-md-12 col-lg-12 commonPadding">
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">Item Price:</div>
+                <div class="float-right col-md-5 col-lg-5">
+
+                    <input class="textareastyles" style="width:300px;height:35px;" type="text" name="ItemPrice" id="ItemPrice" value="@(Model.ItemPrice)" readonly />
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">Quantity :</div>
+                <div class="float-right col-md-5 col-lg-5">
+                    <input class="textareastyles" style="width:300px;height:35px;" type="text" id="Quantity" name="Quantity" value="@(Model.Quantity)" placeholder="Enter Quantity Required" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row col-md-12 col-lg-12 commonPadding">
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">Size Required :</div>
+                <div class="float-right col-md-5 col-lg-5">
+                    <input class="textareastyles" style="width:300px;height:35px;" type="text" id="Size" name="Size" value="@(Model.Size)" placeholder="Enter size" />
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright"></div>
+                <div class="float-right col-md-5 col-lg-5">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+
+    <div class="row col-md-12 col-lg-12 commonPadding">
+        <div class="col-md-6 col-lg-6"><input type="button" data-url="@Url.Action("Update", "ProductEnquiry")" class="formbutton float-right ProductEnquiryAddEdit" data-identity="@(Model.Identity)" value="Update/Add" /></div>
+
+        <div class="col-md-6 col-lg-6">
+            <input type="button" value="Cancel" data-url="@Url.Action("_ProductEnquiryCancel", "ProductEnquiry")" data-identity="-1" class="formbutton ProductEnquiryCancel" />
+        </div>
+
+        <input type="hidden" name="Identity" value="@(Model.Identity)">
+        @*<input type="hidden" name="ProductEnquiryId" value="@(Model.ProductEnquiryID)">*@
+    </div>
+
+
+
+</div>
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
-    
-    </div>
-</body>
-</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

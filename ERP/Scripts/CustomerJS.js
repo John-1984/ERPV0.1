@@ -17,9 +17,10 @@ $('#datepicker').datepicker({
     uiLibrary: 'bootstrap4'
 });
 
-$(document).off("click", ".customerView");
-$(document).on("click", ".customerView", function(event){
-event.stopImmediatePropagation();
+$(document).off("click", ".CustomerView");
+$(document).on("click", ".CustomerView", function(event){
+    event.stopImmediatePropagation();
+    $('.headermode').html('View Customer Info');
 var theUrl = $(this).attr("data-url");
 $.ajax({
     url:theUrl,
@@ -27,7 +28,7 @@ $.ajax({
     data: { "identity": $(this).attr("data-identity") }, 
     success: function (data, status, xhr) {
 
-        $('.customerSearchDetials').hide();
+        $('.CustomerSearchDetials').hide();
       
         $('.resultView').html(data);
         showMessage(status, "Success");
@@ -38,17 +39,19 @@ $.ajax({
 });
 });
 
-$(document).off("click", ".customerEdit, .customerAdd");
-$(document).on("click", ".customerEdit, .customerAdd", function(event){
+$(document).off("click", ".CustomerEdit, .CustomerAdd");
+$(document).on("click", ".CustomerEdit, .CustomerAdd", function(event){
 event.stopImmediatePropagation();
+   
     var theUrl = $(this).attr("data-url");
+    $('.headermode').html('Manage Customer Info');
     $.ajax({
         url:theUrl,
         type: 'GET',  // http method
         data: { "identity": $(this).attr("data-identity") }, 
         success: function (data, status, xhr) {
-            $('.customerSearchDetials').hide();
-            //$('.customerAdd').hide();
+            $('.CustomerSearchDetials').hide();
+            //$('.CustomerAdd').hide();
             
             $('.resultView').html(data);
             showMessage(status, "Success");
@@ -59,8 +62,8 @@ event.stopImmediatePropagation();
     });
 });
 
-$(document).off("click", ".customerDelete");
-$(document).on("click", ".customerDelete", function(event){
+$(document).off("click", ".CustomerDelete");
+$(document).on("click", ".CustomerDelete", function(event){
 event.stopImmediatePropagation();
     if (!confirm("Do you want to delete")){
           return false;
@@ -81,17 +84,48 @@ event.stopImmediatePropagation();
     }
 });
 
-$(document).off("click", ".customerAddEdit");
-$(document).on("click", ".customerAddEdit", function(event){
+    $(document).on('change', '#drpcustomerEmp', function () {
+        
+        // debugger;
+        var empText = $("#drpcustomerEmp").val();
+        $("#hdnemployee").val(empText);
+    });
+
+    $(document).on('change', '#drpcustomerEnquirylvl', function () {
+
+        // debugger;
+        var eqText = $("#drpcustomerEnquirylvl").val();
+        $("#hdncustenquirylevel").val(eqText);
+    });
+
+
+    $(document).on('change', '#drpcustomerpurpose', function () {
+        
+        // debugger;
+        var emp1Text = $("#drpcustomerpurpose").val();
+        $("#hdncuspupose").val(emp1Text);
+    });
+
+
+    $(document).on('change', '#drpcustomerstatus', function () {
+        
+        // debugger;
+        var emp3Text = $("#drpcustomerstatus").val();
+        $("#hdncuststatus").val(emp3Text);
+    });
+
+$(document).off("click", ".CustomerAddEdit");
+$(document).on("click", ".CustomerAddEdit", function(event){
 event.stopImmediatePropagation();
-var theUrl = $(this).attr("data-url");
+    var theUrl = $(this).attr("data-url");
+    $('.headermode').html('View Customer Info');
 $.ajax({
     url:theUrl,
     type: 'POST',  // http method
-    data: $(".customerDetails").find("input, textarea").serialize(), 
+    data: $(".CustomerDetails").find("input, textarea").serialize(), 
     success: function (data, status, xhr) {
 
-        $('.customerSearchDetials').show();
+        $('.CustomerSearchDetials').show();
     
         $('.resultView').html(data);
         showMessage(status, "Success");
@@ -102,9 +136,10 @@ $.ajax({
 });
 });
 
-$(document).off("click", ".customerSearch");
-$(document).on("click", ".customerSearch", function(event){
-event.stopImmediatePropagation();
+$(document).off("click", ".CustomerSearch");
+$(document).on("click", ".CustomerSearch", function(event){
+    event.stopImmediatePropagation();
+    $('.headermode').html('View Customer Info');
 var theUrl = $(this).attr("data-url");
 $.ajax({
     url:theUrl,
@@ -119,7 +154,27 @@ $.ajax({
     }
 });
 });
+    $(document).off("click", ".CustomerCancel");
+    $(document).on("click", ".CustomerCancel", function (event) {
+        var theUrl = $(this).attr("data-url");
+        $('.headermode').html('View Customer Info');
+        $.ajax({
+            url: theUrl,
+            type: 'GET',  // http method
+            data: { "identity": $(this).attr("data-identity") },
+            //async: true,
+            success: function (data, status, xhr) {
 
+                $('.CustomerSearchDetials').show();
+                $('.CustomerAdd').show();
+                $('.resultView').html(data);
+                showMessage(status, "Success");
+            },
+            error: function (jqXhr, textStatus, errorMessage) {
+                showMessage(textStatus, errorMessage);
+            }
+        });
+    });
 $("#customerName").autocomplete({
             source: function (request, response) {
                 $.ajax({

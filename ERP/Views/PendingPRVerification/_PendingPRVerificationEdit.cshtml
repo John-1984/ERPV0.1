@@ -3,7 +3,7 @@
 @using (Html.BeginForm("Update", "PurchaseRequest", FormMethod.Post, new { @id = "registerFormId" }))
 {
 
-    <div class="container PurchaseRequestDetails col-md-12 col-lg-12 commonPadding">
+    <div class="container PendingPRVerificationDetails col-md-12 col-lg-12 commonPadding">
         <div class="row  col-md-12 col-lg-12ccommonPadding">
             @*@{
                     var categories = Model.ErrorList; // Cast the list
@@ -24,8 +24,8 @@
                 <div class="row col-md-12 col-lg-12">
                     <div class="float-left col-md-4 col-lg-4 lablestyles textright">Product Category :</div>
                     <div class="float-right col-md-5 col-lg-5">
-                        @Html.DropDownList("drpPurchaseRequestDetProductMaster", (IEnumerable<SelectListItem>)Model.ProductMasterList, "Select Category", new { @class = "dropdownstyles", name = "drpPurchaseRequestDetProductMaster" })
-                        @*<span class="input-validation-error" data-valmsg-for="PurchaseRequestDetName" data-valmsg-replace="true"></span>*@
+                        @Html.DropDownList("drpPendingPRVerificationDetProductMaster", (IEnumerable<SelectListItem>)Model.ProductMasterList, "Select Category", new { @class = "dropdownstyles", name = "drpPendingPRVerificationDetProductMaster" })
+                        @*<span class="input-validation-error" data-valmsg-for="PendingPRVerificationDetName" data-valmsg-replace="true"></span>*@
                         <input type="hidden" name="hdnProductMaster" id="hdnProductMaster" />
                     </div>
                 </div>
@@ -35,8 +35,8 @@
                 <div class="row col-md-12 col-lg-12">
                     <div class="float-left col-md-4 col-lg-4 lablestyles textright">Vendor :</div>
                     <div class="float-right col-md-5 col-lg-5">
-                        @Html.DropDownList("drpPurchaseRequestDetVendor", (IEnumerable<SelectListItem>)Model.VendorList, "Select Vendor", new { @class = "dropdownstyles", name = "drpPurchaseRequestDetVendor" })
-                        @*<span class="input-validation-error" data-valmsg-for="PurchaseRequestDetName" data-valmsg-replace="true"></span>*@
+                        @Html.DropDownList("drpPendingPRVerificationDetVendor", (IEnumerable<SelectListItem>)Model.VendorList, "Select Vendor", new { @class = "dropdownstyles", name = "drpPendingPRVerificationDetVendor" })
+                        @*<span class="input-validation-error" data-valmsg-for="PendingPRVerificationDetName" data-valmsg-replace="true"></span>*@
                         <input type="hidden" name="hdnVendor" id="hdnVendor" />
                     </div>
                 </div>
@@ -48,8 +48,8 @@
                 <div class="row col-md-12 col-lg-12">
                     <div class="float-left col-md-4 col-lg-4 lablestyles textright">Brand :</div>
                     <div class="float-right col-md-5 col-lg-5">
-                        @Html.DropDownList("drpPurchaseRequestDetBrand", (IEnumerable<SelectListItem>)Model.BrandList, "Select Brand", new { @class = "dropdownstyles", name = "drpPurchaseRequestDetBrand" })
-                        @*<span class="input-validation-error" data-valmsg-for="PurchaseRequestDetName" data-valmsg-replace="true"></span>*@
+                        @Html.DropDownList("drpPendingPRVerificationDetBrand", (IEnumerable<SelectListItem>)Model.BrandList, "Select Brand", new { @class = "dropdownstyles", name = "drpPendingPRVerificationDetBrand" })
+                        @*<span class="input-validation-error" data-valmsg-for="PendingPRVerificationDetName" data-valmsg-replace="true"></span>*@
                         <input type="hidden" name="hdnBrand" id="hdnBrand" />
 
                     </div>
@@ -60,8 +60,8 @@
                 <div class="row col-md-12 col-lg-12">
                     <div class="float-left col-md-4 col-lg-4 lablestyles textright">Item :</div>
                     <div class="float-right col-md-5 col-lg-5">
-                        @Html.DropDownList("drpPurchaseRequestDetItem", (IEnumerable<SelectListItem>)Model.ItemList, "Select Item", new { @class = "dropdownstyles", name = "drpPurchaseRequestDetItem" })
-                        @*<span class="input-validation-error" data-valmsg-for="PurchaseRequestDetName" data-valmsg-replace="true"></span>*@
+                        @Html.DropDownList("drpPendingPRVerificationDetItem", (IEnumerable<SelectListItem>)Model.ItemList, "Select Item", new { @class = "dropdownstyles", name = "drpPendingPRVerificationDetItem" })
+                        @*<span class="input-validation-error" data-valmsg-for="PendingPRVerificationDetName" data-valmsg-replace="true"></span>*@
                         <input type="hidden" name="hdnItem" id="hdnItem"  />
                     </div>
                 </div>
@@ -88,10 +88,10 @@
             </div>
         </div>
         <div class="row col-md-12 col-lg-12 commonPadding">
-            <div class="col-md-6 col-lg-6 textright"><input type="button" data-url="@Url.Action("Update", "PurchaseRequest")" class="formbutton PurchaseRequestAddEdit" data-identity="@(Model.Identity)" value="Update/Add" /></div>
+            <div class="col-md-6 col-lg-6 textright"><input type="button" data-url="@Url.Action("Update", "PendingPRVerification")" class="formbutton PendingPRVerificationAddEdit" data-identity="@(Model.Identity)" value="Update/Add" /></div>
 
             <div class="col-md-6 col-lg-6 textleft">
-                <input type="button" value="Cancel" data-url="@Url.Action("_PurchaseRequestCancel", "PurchaseRequest")" data-identity="-1" class="formbutton PurchaseRequestCancel" />
+                <input type="button" value="Cancel" data-url="@Url.Action("_PendingPRVerificationCancel", "PendingPRVerification")" data-identity="-1" class="formbutton PendingPRVerificationCancel" />
             </div>
 
             <input type="hidden" name="Identity" value="@(Model.Identity)">

@@ -38,6 +38,7 @@ namespace DataLayer
             return _Employee;
         }
 
+        //coded
         public BusinessModels.Employee GetStoreRoomManagerOnCompanyType(Int32 locidentity, int companyID, int companytype)
         {
             //coded
@@ -59,6 +60,31 @@ namespace DataLayer
                             .Include(m => m.Location.District.State.Country.Region)
                             .Where(p => p.IsActive == true  && p.CompanyID==companyID && p.CompanyTypeID==companytype && p.RoleMaster.RoleTypeID ==4 && p.RoleMaster.RoleName.Contains("Store Room Manager"))
                             .FirstOrDefault(p => p.LocationID==locidentity);
+            }
+            return _Employee;
+        }
+
+        public BusinessModels.Employee GetSupervisorOnWareHouseCompanyType(Int32 locidentity, int companyID, int companytype)
+        {
+            //coded
+            var _Employee = new BusinessModels.Employee();
+            using (var dbContext = new EmployeeDbContext())
+            {
+                _Employee = dbContext.Employee
+                            .Include(K => K.RoleMaster)
+                            .Include(l => l.Location)
+                            .Include(o => o.CompanyType)
+                            .Include(s => s.FloorMaster)
+                            .Include(w => w.IdentificationsType)
+                            .Include(q => q.Company)
+                            .Include(a => a.Login)
+                            .Include(x => x.RoleMaster.RoleType)
+                            .Include(K => K.Location.District)
+                            .Include(f => f.Location.District.State)
+                            .Include(j => j.Location.District.State.Country)
+                            .Include(m => m.Location.District.State.Country.Region)
+                            .Where(p => p.IsActive == true && p.CompanyID == companyID && p.CompanyTypeID == companytype && p.RoleMaster.RoleTypeID == 12 && p.RoleMaster.RoleName.Contains("Warehouse Supervisor"))
+                            .FirstOrDefault(p => p.LocationID == locidentity);
             }
             return _Employee;
         }

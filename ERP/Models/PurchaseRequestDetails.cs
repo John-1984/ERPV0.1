@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using System.Web.Mvc;
 
 namespace ERP.Models
 {
@@ -12,7 +13,6 @@ namespace ERP.Models
         public PurchaseRequestDetails()
         {
             Identity = -1;
-            ItemSize = string.Empty;
         }
 
         [Key]
@@ -23,12 +23,6 @@ namespace ERP.Models
             set;
         }
 
-        [DefaultValue("")]
-        public string ItemSize
-        {
-            get;
-            set;
-        }
 
         public int PurchaseRequestID
         {
@@ -48,34 +42,35 @@ namespace ERP.Models
             set;
         }
 
-        [DefaultValue(0)]
-        public decimal ItemPrice
+
+        public string Purpose
         {
             get;
             set;
         }
 
-        public DateTime CreatedDate
-        {
-            get;
-            set;
-        }
-        public DateTime ModifiedDate
-        {
-            get;
-            set;
-        }
-        public int ModifiedBy
-        {
-            get;
-            set;
-        }
-        public int CreatedBy
-        {
-            get;
-            set;
-        }
+        public PurchaseRequest PurchaseRequest
+        { get; set; }
 
+        public ItemMaster ItemMaster
+        { get; set; }       
 
+        public SelectList ProductMasterList
+        { get; set; }
+
+        public SelectList VendorList
+        { get; set; }
+
+        public SelectList BrandList
+        { get; set; }
+
+        public SelectList ItemList
+        { get; set; }
+
+        public string Size
+        {
+            get;
+            set;
+        }
     }
 }

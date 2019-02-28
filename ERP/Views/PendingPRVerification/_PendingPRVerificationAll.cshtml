@@ -4,7 +4,7 @@
 
 <div class="container">
     <div class="col-md-12 col-lg-12 commonPadding">
-        <table class="table PurchaseRequestAll">
+        <table class="table PendingPRVerificationAll">
             <thead>
                 <tr class="gridheader">
                     <th>Case No</th>
@@ -28,11 +28,11 @@
                     <td class="gridrow "> @PurchaseRequest.PurchaseRequestType.Name</td>
                     <td class="gridrow "> @PurchaseRequest.EnquiryLevel.EnquiryLevelName</td>
                     <td class="gridrow">@PurchaseRequest.Status.StatusName</td>
-                    <td class="gridrow "><img src="~/Content/view.gif" alt="View" class="PurchaseRequestView pointer" data-url="@Url.Action("_PurchaseRequestView", "PurchaseRequest")" data-identity="@(PurchaseRequest.Identity)" /> </td>
-                    <td class="gridrow "><img src="~/Content/edit.png" alt="Edit" class="PurchaseRequestCommentsEdit pointer" data-url="@Url.Action("_PurchaseRequestAdd", "PurchaseRequest")" data-identity="@(PurchaseRequest.Identity)" /></td>
-                    <td class="gridrow "><img src="~/Content/AddNew.png" alt="Edit" class="PurchaseRequestDetEdit pointer" data-url="@Url.Action("_PurchaseRequestEdit", "PurchaseRequest")" data-identity="@(PurchaseRequest.Identity)" /></td>
-                    <td class="gridrow "><img src="~/Content/process.png" alt="Edit" class="PurchaseRequestVerification pointer" data-url="@Url.Action("_PurchaseRequestProcessVerification", "PurchaseRequest")" data-identity="@(PurchaseRequest.Identity)" /></td>
-                    <td class="gridrow "><img src="~/Content/delete.png" alt="Delete" class="PurchaseRequestDelete pointer" data-url="@Url.Action("Delete", "PurchaseRequest")" data-identity="@(PurchaseRequest.Identity)" /></td>
+                    <td class="gridrow "><img src="~/Content/view.gif" alt="View" class="PendingPRVerificationView pointer" data-url="@Url.Action("_PendingPRVerificationView", "PendingPRVerification")" data-identity="@(PurchaseRequest.Identity)" /> </td>
+                    @*<td class="gridrow "><img src="~/Content/edit.png" alt="Edit" class="PendingPRVerificationCommentsEdit pointer" data-url="@Url.Action("_PendingPRVerificationAdd", "PendingPRVerification")" data-identity="@(PurchaseRequest.Identity)" /></td>
+                    <td class="gridrow "><img src="~/Content/AddNew.png" alt="Edit" class="PendingPRVerificationDetEdit pointer" data-url="@Url.Action("_PendingPRVerificationEdit", "PendingPRVerification")" data-identity="@(PurchaseRequest.Identity)" /></td>
+                    <td class="gridrow "><img src="~/Content/process.png" alt="Edit" class="PendingPRVerificationVerification pointer" data-url="@Url.Action("_PendingPRVerificationProcessVerification", "PendingPRVerification")" data-identity="@(PurchaseRequest.Identity)" /></td>
+                    <td class="gridrow "><img src="~/Content/delete.png" alt="Delete" class="PendingPRVerificationDelete pointer" data-url="@Url.Action("Delete", "PendingPRVerification")" data-identity="@(PurchaseRequest.Identity)" /></td>*@
                 </tr>
                 }
             </tbody>

@@ -16,21 +16,17 @@ namespace BusinessModels
         {
             get;
             set;
-        }
-
+        }       
         
-        public string ItemSize
-        {
-            get;
-            set;
-        }
 
+        [ForeignKey("PurchaseRequest")]
         public int PurchaseRequestID
         {
             get;
             set;
         }
 
+        [ForeignKey("ItemMaster")]
         public int ItemID
         {
             get;
@@ -44,32 +40,23 @@ namespace BusinessModels
         }
 
         
-        public decimal ItemPrice
+        public string Purpose
         {
             get;
             set;
         }
 
-        public DateTime CreatedDate
+        public string Size
         {
             get;
             set;
         }
-        public DateTime ModifiedDate
-        {
-            get;
-            set;
-        }
-        public int ModifiedBy
-        {
-            get;
-            set;
-        }
-        public int CreatedBy
-        {
-            get;
-            set;
-        }
+
+        public PurchaseRequest PurchaseRequest
+        { get; set; }
+
+        public ItemMaster ItemMaster
+        { get; set; }
 
 
     }

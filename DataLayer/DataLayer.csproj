@@ -51,6 +51,10 @@
     <Compile Include="PendingCustomerInfoDbContext.cs" />
     <Compile Include="ProductEnquiryDetailsDAL.cs" />
     <Compile Include="ProductEnquiryDetailsDbContext.cs" />
+    <Compile Include="PuchaseRequestDetailsDAL.cs" />
+    <Compile Include="PurchaseRequestDbContext.cs" />
+    <Compile Include="PurchaseRequestDAL.cs" />
+    <Compile Include="PurchaseRequestDetailsDbContext.cs" />
     <Compile Include="PurposeDAL.cs" />
     <Compile Include="PurposeDbContext.cs" />
     <Compile Include="RoleAccessDAL.cs" />

@@ -9,24 +9,23 @@ using System.Globalization;
 
 namespace ERP.Controllers
 {
-    public class PurchaseRequestController : Controller
+    public class PendingPRVerificationController : Controller
     {
-        private BusinessLayer.PurchaseRequest _PurchaseRequest = new BusinessLayer.PurchaseRequest();
+        private BusinessLayer.PendingPRVerification _PurchaseRequest = new BusinessLayer.PendingPRVerification();
         private BusinessLayer.PurchaseRequestDetails _PurchaseRequestDetails = new BusinessLayer.PurchaseRequestDetails();
         private BusinessLayer.Employee _Employeee = new BusinessLayer.Employee();
-        private BusinessLayer.Status _status = new BusinessLayer.Status();
         public ActionResult Index()
         {
             return View();
         }
 
-        public PartialViewResult _PurchaseRequestAll()
+        public PartialViewResult _PendingPRVerificationAll()
         {
             return PartialView(GetPurchaseRequests("", 1, "", ""));
         }
 
         [HttpGet]
-        public PartialViewResult _PurchaseRequestEdit(int identity)
+        public PartialViewResult _PendingPRVerificationEdit(int identity)
         {
             if (identity.Equals(-1))
             {
@@ -71,36 +70,36 @@ namespace ERP.Controllers
         }
 
         [HttpGet]
-        public PartialViewResult _PurchaseRequestAdd(int identity)
+        public PartialViewResult _PendingPRVerificationAdd(int identity)
         {
-           
+
 
             if (identity.Equals(-1))
             {
                 Models.PurchaseRequest mdPurchaseRequest = new Models.PurchaseRequest();
-                mdPurchaseRequest.PurchaseRequestTypeList= null;
+                mdPurchaseRequest.PurchaseRequestTypeList = null;
                 mdPurchaseRequest.PurchaseRequestTypeList = new SelectList(_PurchaseRequest.GetAllPurchaseRequestType(), "Identity", "Name");
 
                 mdPurchaseRequest.EnquiryLevelList = null;
-                mdPurchaseRequest.EnquiryLevelList= new SelectList(_PurchaseRequest.GetAllEnquiryLevels(), "Identity", "EnquiryLevelName");
+                mdPurchaseRequest.EnquiryLevelList = new SelectList(_PurchaseRequest.GetAllEnquiryLevels(), "Identity", "EnquiryLevelName");
 
                 return PartialView(mdPurchaseRequest);
             }
             else
             {
-               Models.PurchaseRequest mdPurchaseRequest = AutoMapperConfig.Mapper().Map<Models.PurchaseRequest>(_PurchaseRequest.GetPurchaseRequest(identity));
+                Models.PurchaseRequest mdPurchaseRequest = AutoMapperConfig.Mapper().Map<Models.PurchaseRequest>(_PurchaseRequest.GetPurchaseRequest(identity));
 
                 mdPurchaseRequest.PurchaseRequestTypeList = null;
                 mdPurchaseRequest.PurchaseRequestTypeList = new SelectList(_PurchaseRequest.GetAllPurchaseRequestType(), "Identity", "Name", mdPurchaseRequest.PurchaseRequestTypeID);
 
                 mdPurchaseRequest.EnquiryLevelList = null;
-                mdPurchaseRequest.EnquiryLevelList = new SelectList(_PurchaseRequest.GetAllEnquiryLevels(), "Identity", "EnquiryLevelName",mdPurchaseRequest.EnquiryLevelID);
+                mdPurchaseRequest.EnquiryLevelList = new SelectList(_PurchaseRequest.GetAllEnquiryLevels(), "Identity", "EnquiryLevelName", mdPurchaseRequest.EnquiryLevelID);
 
                 return PartialView(mdPurchaseRequest);
             }
 
-               
-           
+
+
         }
         [HttpPost]
         public JsonResult Brand(string identity)
@@ -120,7 +119,7 @@ namespace ERP.Controllers
             return Json(_PurchaseRequest.GetItemDetails(identity));
         }
         [HttpGet]
-        public PartialViewResult _PurchaseRequestDetailsAdd(int identity)
+        public PartialViewResult _PendingPRVerificationDetailsAdd(int identity)
         {
             if (identity.Equals(-1))
             {
@@ -145,20 +144,7 @@ namespace ERP.Controllers
             else
             {
                 Models.PurchaseRequest mdPurchaseRequestDetails = new Models.PurchaseRequest();
-
-                //Models.PurchaseRequestDetails mdPurchaseRequestDetails = AutoMapperConfig.Mapper().Map<Models.PurchaseRequestDetails>(_PurchaseRequest.GetPurchaseRequestDetails(identity));
-
-                //mdPurchaseRequestDetails.ProductMasterList = null;
-                //mdPurchaseRequestDetails.ProductMasterList = new SelectList(_PurchaseRequest.GetAllProductMasters(), "Identity", "ProductName", mdPurchaseRequestDetails.ItemMaster.Brand.Vendor.ProductMasterID);
-
-                //mdPurchaseRequestDetails.VendorList = null;
-                //mdPurchaseRequestDetails.VendorList = new SelectList(_PurchaseRequest.GetAllVendors(Convert.ToString(mdPurchaseRequestDetails.ItemMaster.Brand.Vendor.ProductMasterID)), "Identity", "VendorName", mdPurchaseRequestDetails.ItemMaster.Brand.VendorID) ;
-
-                //mdPurchaseRequestDetails.BrandList = null;
-                //mdPurchaseRequestDetails.BrandList = new SelectList(_PurchaseRequest.GetAllBrands(Convert.ToString(mdPurchaseRequestDetails.ItemMaster.Brand.VendorID)), "Identity", "BrandName", mdPurchaseRequestDetails.ItemMaster.BrandID);
-
-                //mdPurchaseRequestDetails.ItemList = null;
-                //mdPurchaseRequestDetails.ItemList = new SelectList(_PurchaseRequest.GetItemMasters(Convert.ToString(mdPurchaseRequestDetails.ItemMaster.BrandID)), "Identity", "ItemName",mdPurchaseRequestDetails.ItemID);
+                           
 
                 mdPurchaseRequestDetails.ProductMasterList = null;
                 mdPurchaseRequestDetails.ProductMasterList = new SelectList(_PurchaseRequest.GetAllProductMasters(), "Identity", "ProductName");
@@ -181,18 +167,16 @@ namespace ERP.Controllers
         }
 
         [HttpGet]
-        public ActionResult _PurchaseRequestCancel(int identity)
+        public ActionResult _PendingPRVerificationCancel(int identity)
         {
-            return RedirectToAction("_PurchaseRequestAll");
+            return RedirectToAction("_PendingPRVerificationAll");
         }
         [HttpGet]
-        public PartialViewResult _PurchaseRequestView(int identity)
+        public PartialViewResult _PendingPRVerificationView(int identity)
         {
-           BusinessModels.PurchaseRequest bsPurchaseRequest = _PurchaseRequest.GetPurchaseRequest(identity);
+            BusinessModels.PurchaseRequest bsPurchaseRequest = _PurchaseRequest.GetPurchaseRequest(identity);
             Models.PurchaseRequest mdPurchaseRequest = AutoMapperConfig.Mapper().Map<Models.PurchaseRequest>(bsPurchaseRequest);
-            // mdPurchaseRequest.PurchaseRequestDetails = bsPurchaseRequest.PurchaseRequestDetails;
-            // BusinessModels.PurchaseRequest.PurchaseRequestDetails mdDet = new BusinessModels.PurchaseRequest.PurchaseRequestDetails();
-
+           
             List<Models.PurchaseRequestDetails> lstpurchaseRequestDetails = new List<Models.PurchaseRequestDetails>();
             foreach (BusinessModels.PurchaseRequestDetails item in bsPurchaseRequest.PurchaseRequestDetails)
             {
@@ -211,23 +195,23 @@ namespace ERP.Controllers
         [HttpPost]
         public ActionResult Delete(int identity)
         {
-            BusinessModels.PurchaseRequest mdRequest= _PurchaseRequest.GetPurchaseRequest(identity);
+            BusinessModels.PurchaseRequest mdRequest = _PurchaseRequest.GetPurchaseRequest(identity);
             mdRequest.IsActive = false;
             _PurchaseRequest.Update(mdRequest);
-            return RedirectToAction("_PurchaseRequestAll");
+            return RedirectToAction("_PendingPRVerificationAll");
         }
 
         [HttpPost]
         public ActionResult DeleteItem(int identity)
         {
-           
+
             _PurchaseRequestDetails.Delete(identity);
-            return RedirectToAction("_PurchaseRequestAll");
+            return RedirectToAction("_PendingPRVerificationAll");
         }
 
 
         [HttpPost]
-        public ActionResult _PurchaseRequestProcessVerification(int identity)
+        public ActionResult _PendingPRVerificationProcessVerification(int identity)
         {
             BusinessModels.PurchaseRequest mdProductenq = _PurchaseRequest.GetPurchaseRequest(identity);
 
@@ -235,17 +219,11 @@ namespace ERP.Controllers
             if (mdemployee != null)
             {
                 mdProductenq.AssignedTo = mdemployee.Identity;
-                mdProductenq.Employee = mdemployee;
                 //coded
                 mdProductenq.POStatus = 15;
-
-                BusinessModels.Status mdstatus = _status.GetStatus(15);
-                mdProductenq.Status = mdstatus;
             }
-
-            _PurchaseRequest.UpdatePurchaseRequestAssignedandStatus(mdemployee.Identity,15, identity);
             //_PurchaseRequest.Delete(identity);
-            return RedirectToAction("_PurchaseRequestAll");
+            return RedirectToAction("_PendingPRVerificationAll");
         }
 
         [HttpPost]
@@ -267,22 +245,12 @@ namespace ERP.Controllers
             mdPurchaseRequestdetails.Purpose = Convert.ToString(purpose);
 
             _PurchaseRequestDetails.Insert(mdPurchaseRequestdetails);
-            //if (mdPurchaseRequestdetails.Identity.Equals(-1))
-            //{
-
-            //   // mdPurchaseRequestdetails.ItemID = Convert.ToInt32(itemvalue);
-
-            //}
-            //else
-            //{
-
-            //  //  _PurchaseRequestDetails.Update(mdPurchaseRequestdetails);
-            //}
-            return RedirectToAction("_PurchaseRequestAll");
+           
+            return RedirectToAction("_PendingPRVerificationAll");
         }
 
         [HttpPost]
-        public ActionResult ManagePurchaseRequest(Models.PurchaseRequest PurchaseRequest, FormCollection frmFields)
+        public ActionResult ManagePendingPRVerification(Models.PurchaseRequest PurchaseRequest, FormCollection frmFields)
         {
             //Code for purchase request edit
             BusinessModels.PurchaseRequest mdPurchaseRequest = AutoMapperConfig.Mapper().Map<BusinessModels.PurchaseRequest>(PurchaseRequest);
@@ -290,7 +258,7 @@ namespace ERP.Controllers
             //coded
             mdPurchaseRequest.LocationID = Convert.ToInt32(Convert.ToString(Session["LocationID"]));
             mdPurchaseRequest.CompanyTypeID = Convert.ToInt32(Convert.ToString(Session["EmployeeCompanyTypeID"]));
-            mdPurchaseRequest.POStatus= 1;
+            mdPurchaseRequest.POStatus = 1;
             mdPurchaseRequest.IsActive = true;
             mdPurchaseRequest.IsVerified = false;
 
@@ -318,18 +286,18 @@ namespace ERP.Controllers
                 mdPurchaseRequest.ModifiedDate = DateTime.Now;
                 _PurchaseRequest.Update(mdPurchaseRequest);
             }
-            return RedirectToAction("_PurchaseRequestAll");
+            return RedirectToAction("_PendingPRVerificationAll");
         }
 
         [HttpPost]
-        public PartialViewResult PurchaseRequestSearch(string searchString, string createdDate = "")
+        public PartialViewResult PendingPRVerificationSearch(string searchString, string createdDate = "")
         {
-            return PartialView("_PurchaseRequestAll", GetPurchaseRequests("", 1, createdDate, searchString));
+            return PartialView("_PendingPRVerificationAll", GetPurchaseRequests("", 1, createdDate, searchString));
         }
 
         public PartialViewResult Sorting(int? page, string sortOrder = "", string createdDate = "", string searchString = "")
         {
-            return PartialView("_PurchaseRequestAll", GetPurchaseRequests(sortOrder, page, createdDate, searchString));
+            return PartialView("_PendingPRVerificationAll", GetPurchaseRequests(sortOrder, page, createdDate, searchString));
         }
 
         private IPagedList<Models.PurchaseRequest> GetPurchaseRequests(string sortOrder, int? page, string createdDate = "", string searchString = "")
@@ -341,20 +309,21 @@ namespace ERP.Controllers
 
             var PurchaseRequests = new List<Models.PurchaseRequest>();
 
+            //coded
             if (Convert.ToString(Session["RoleAccess"]) == "1")
-                PurchaseRequests = AutoMapperConfig.Mapper().Map<List<Models.PurchaseRequest>>(_PurchaseRequest.GetAll());
+                PurchaseRequests = AutoMapperConfig.Mapper().Map<List<Models.PurchaseRequest>>(_PurchaseRequest.GetAllPendingVerificationPR());
             else if (Convert.ToString(Session["RoleAccess"]) == "2")
-                PurchaseRequests = AutoMapperConfig.Mapper().Map<List<Models.PurchaseRequest>>(_PurchaseRequest.GetAll(Convert.ToInt32(Convert.ToString(Session["LocationID"]))));
+                PurchaseRequests = AutoMapperConfig.Mapper().Map<List<Models.PurchaseRequest>>(_PurchaseRequest.GetAllPendingVerificationPR(Convert.ToInt32(Convert.ToString(Session["LocationID"]))));
             else if (Convert.ToString(Session["RoleAccess"]) == "3")
-                PurchaseRequests = AutoMapperConfig.Mapper().Map<List<Models.PurchaseRequest>>(_PurchaseRequest.GetAll(Convert.ToInt32(Convert.ToString(Session["LocationID"])), Convert.ToInt32(Convert.ToString(Session["EmployeeID"]))));
+                PurchaseRequests = AutoMapperConfig.Mapper().Map<List<Models.PurchaseRequest>>(_PurchaseRequest.GetAllPendingVerificationPR(Convert.ToInt32(Convert.ToString(Session["LocationID"])), Convert.ToInt32(Convert.ToString(Session["EmployeeID"]))));
 
 
             if (!string.IsNullOrEmpty(searchString) && !string.IsNullOrEmpty(createdDate))
-                PurchaseRequests = AutoMapperConfig.Mapper().Map<List<Models.PurchaseRequest>>(_PurchaseRequest.GetAll().ToList().FindAll(p => p.POCode.ToLower().Contains(searchString.ToLower()) && ((DateTime)p.CreatedDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+                PurchaseRequests = AutoMapperConfig.Mapper().Map<List<Models.PurchaseRequest>>(_PurchaseRequest.GetAllPendingVerificationPR().ToList().FindAll(p => p.POCode.ToLower().Contains(searchString.ToLower()) && ((DateTime)p.CreatedDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
             else if (!string.IsNullOrEmpty(searchString))
-                PurchaseRequests = AutoMapperConfig.Mapper().Map<List<Models.PurchaseRequest>>(_PurchaseRequest.GetAll().ToList().FindAll(p => p.POCode.ToLower().Contains(searchString.ToLower())));
+                PurchaseRequests = AutoMapperConfig.Mapper().Map<List<Models.PurchaseRequest>>(_PurchaseRequest.GetAllPendingVerificationPR().ToList().FindAll(p => p.POCode.ToLower().Contains(searchString.ToLower())));
             else if (!string.IsNullOrEmpty(createdDate))
-                PurchaseRequests = AutoMapperConfig.Mapper().Map<List<Models.PurchaseRequest>>(_PurchaseRequest.GetAll().ToList().FindAll(p => ((DateTime)p.CreatedDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+                PurchaseRequests = AutoMapperConfig.Mapper().Map<List<Models.PurchaseRequest>>(_PurchaseRequest.GetAllPendingVerificationPR().ToList().FindAll(p => ((DateTime)p.CreatedDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
 
             switch (sortOrder)
             {

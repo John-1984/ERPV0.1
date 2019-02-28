@@ -9,15 +9,15 @@
             View Purchase Request Info
         </div>
 
-        <div class="col-md-12 col-lg-12 commonPadding PurchaseRequestSearchDetials">
-            @{Html.RenderPartial("_PurchaseRequestSearch");}
+        <div class="col-md-12 col-lg-12 commonPadding PendingPRVerificationSearchDetials">
+            @{Html.RenderPartial("_PendingPRVerificationSearch");}
 
         </div>
         <div class="col-md-12 col-lg-12 height-10">
             @ViewData["ActionUpdate"]
         </div>
         <div class="col-md-12 col-lg-12 resultView commonPadding">
-            @{Html.RenderAction("_PurchaseRequestAll", "PurchaseRequest");}
+            @{Html.RenderAction("_PendingPRVerificationAll", "PendingPRVerification");}
         </div>
 
     </div>

@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 
 namespace BusinessLayer
 {
-    public class PurchaseRequest
+    public class PendingPRVerification
     {
 
         private List<BusinessModels.PurchaseRequest> PurchaseRequests = new List<BusinessModels.PurchaseRequest>();
@@ -21,7 +21,7 @@ namespace BusinessLayer
         private DataLayer.EnquiryLevelDAL _enqlvldataLayer = null;
 
         private DataLayer.PurchaseRequestDetailsDAL _enqDetailsdataLayer = null;
-        public PurchaseRequest()
+        public PendingPRVerification()
         {
             _dataLayer = new DataLayer.PurchaseRequestDAL();
             _locddataLayer = new DataLayer.LocationDAL();
@@ -45,6 +45,20 @@ namespace BusinessLayer
         {
             return _dataLayer.GetAll();
         }
+       
+        public IEnumerable<BusinessModels.PurchaseRequest> GetAllPendingVerificationPR()
+        {
+            return _dataLayer.GetAllPendingVerificationPR();
+        }
+        public IEnumerable<BusinessModels.PurchaseRequest> GetAllPendingVerificationPR(int locID)
+        {
+            return _dataLayer.GetAllPendingVerificationPR(locID);
+        }
+        public IEnumerable<BusinessModels.PurchaseRequest> GetAllPendingVerificationPR(int locID, int empID)
+        {
+            return _dataLayer.GetAllPendingVerificationPR(locID, empID);
+        }
+
         public IEnumerable<BusinessModels.PurchaseRequestType> GetAllPurchaseRequestType()
         {
             return _purtypedataLayer.GetAll();
@@ -63,17 +77,14 @@ namespace BusinessLayer
             return _dataLayer.GetAll(locID, empID);
         }
 
-        public bool UpdatePurchaseRequestAssignedandStatus(int assignedid, int statusid, int identity)
-        {
-            return _dataLayer.UpdatePurchaseRequestAssignedandStatus(assignedid,statusid,identity);
-        }
+      
 
-            //public IEnumerable<BusinessModels.ProductMaster> GetAllProductMasters()
-            //{
-            //    return _prodddataLayer.GetAll();
-            //}
+        //public IEnumerable<BusinessModels.ProductMaster> GetAllProductMasters()
+        //{
+        //    return _prodddataLayer.GetAll();
+        //}
 
-            public IEnumerable<BusinessModels.Status> GetAllStatus()
+        public IEnumerable<BusinessModels.Status> GetAllStatus()
         {
             return _statsddataLayer.GetAll();
         }

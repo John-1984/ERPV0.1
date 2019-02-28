@@ -1,7 +1,7 @@
 ﻿@model ERP.Models.PurchaseRequest
 
 
-<div class="container PurchaseRequestView col-md-12 col-lg-12 commonPadding">
+<div class="container PendingPRVerificationView col-md-12 col-lg-12 commonPadding">
     <input type="hidden" value="@Model.Identity">
     <div class="row commonPadding col-md-12 col-lg-12" style="padding-bottom:13px;">
         <div class="col-md-6 col-lg-6">
@@ -63,10 +63,36 @@
                     @Model.Comments
                 </div>
             </div>
-        </div>       
+        </div>
 
     </div>
+    <div class="row commonPadding col-md-12 col-lg-12" style="padding-bottom:13px;">
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-5 col-lg-5 textright lablestyles">
+                    Select Status :
+                </div>
+                <div class="float-right col-md-7 col-lg-7 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                    @Html.DropDownList("drpPendingPRVerificationStatus", (IEnumerable<SelectListItem>)Model.Status, "Select Enquiry Level", new { @class = "dropdownstyles", name = "drpPendingPRVerificationStatus" })
+                    @*<span class="input-validation-error" data-valmsg-for="PurchaseRequestDetName" data-valmsg-replace="true"></span>*@
+                    <input type="hidden" name="hdnPendingPRVerStatus" id="hdnPendingPRVerStatus" />
+                </div>
+            </div>
+        </div>
 
+        <div class="col-md-6 col-lg-6 ">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 textright lablestyles">
+                   
+                </div>
+                <div class="float-right col-md-8 col-lg-8 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                    
+                </div>
+            </div>
+        </div>
+
+    </div>
+   
     <div class="row commonPadding col-md-12 col-lg-12" style="padding-bottom:13px;">
         <div class="row col-md-12 col-lg-12">
             <table class="table customerAll">
@@ -100,7 +126,7 @@
                                 <td class="gridrow">@det.ItemMaster.ItemName</td>
                                 <td class="gridrow">@det.Quantity</td>
                                 <td class="gridrow">@det.Size</td>
-                                <td class="gridrow "><img src="~/Content/delete.png" alt="Delete" class="PurchaseRequestItemDelete pointer" data-url="@Url.Action("DeleteItem", "PurchaseRequest")" data-identity="@(det.Identity)" /></td>
+                                <td class="gridrow "><img src="~/Content/delete.png" alt="Delete" class="PendingPRVerificationItemDelete pointer" data-url="@Url.Action("DeleteItem", "PurchaseRequest")" data-identity="@(det.Identity)" /></td>
 
 
                             </tr>
@@ -117,10 +143,10 @@
 
     <div class="row commonPadding">
         <div class="col-md-6 col-lg-5">
-            <input type="button" value="Cancel" data-url="@Url.Action("_PurchaseRequestCancel", "PurchaseRequest")" data-identity="-1" class="formbutton PurchaseRequestCancel" />@*<input type="button" class="formbutton float-right PurchaseRequestEdit" data-url="@Url.Action("_PurchaseRequestEdit", "PurchaseRequest")" data-identity="@(Model.Identity)" value="Add" />*@
+            <input type="button" class="formbutton float-right PendingPRVerificationEdit" data-url="@Url.Action("_PendingPRVerificationEdit", "PendingPRVerification")" data-identity="@(Model.Identity)" value="Update" />
         </div>
         <div class="col-md-6 col-lg-6">
-            @*<input type="button" value="Cancel" data-url="@Url.Action("_PurchaseRequestCancel", "PurchaseRequest")" data-identity="-1" class="formbutton PurchaseRequestCancel" />*@
+            <input type="button" value="Cancel" data-url="@Url.Action("_PendingPRVerificationCancel", "PendingPRVerification")" data-identity="-1" class="formbutton PendingPRVerificationCancel" />
         </div>
 
     </div>

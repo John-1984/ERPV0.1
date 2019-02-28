@@ -1,0 +1,81 @@
+﻿@model ERP.Models.PurchaseRequest
+
+
+<div class="container PurchaseRequestDetails col-md-12 col-lg-12 commonPadding">
+
+   
+
+    <div class="row col-md-12 col-lg-12 commonPadding">
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12 commonPadding">
+                <div class="float-left col-md-5 col-lg-5 lablestyles textright">Purchase Request Type :</div>
+                <div class="float-right col-md-5 col-lg-5">
+                    @Html.DropDownList("drpurchaserequesttype", (IEnumerable<SelectListItem>)Model.PurchaseRequestTypeList, "Select Purchase Request Type", new { @class = "dropdownstyles", name = "drpurchaserequesttype" })
+                    @*<span class="input-validation-error" data-valmsg-for="BrandName" data-valmsg-replace="true"></span>*@
+                    <input type="hidden" name="hdnpurReqType" id="hdnpurReqType" value="@(Model.PurchaseRequestTypeID)" />
+
+                </div>
+            </div>
+            <div class="row col-md-12 col-lg-12 commonPadding">
+                <div class="float-left col-md-5 col-lg-5 lablestyles textright">Enquiry level :</div>
+                <div class="float-right col-md-5 col-lg-5">
+                    @Html.DropDownList("drpPurchaseRequestDetenquirylevel", (IEnumerable<SelectListItem>)Model.EnquiryLevelList, "Select Enquiry Level", new { @class = "dropdownstyles", name = "drpPurchaseRequestDetenquirylevel" })
+                    @*<span class="input-validation-error" data-valmsg-for="PurchaseRequestDetName" data-valmsg-replace="true"></span>*@
+                    <input type="hidden" name="hdnporequestenqlvel" id="hdnporequestenqlvel" />
+                </div>
+            </div>
+            <div class="row col-md-12 col-lg-12 commonPadding">
+                <div class="float-left col-md-5 col-lg-5 lablestyles textright">Comments :</div>
+                <div class="float-right col-md-5 col-lg-5">
+                    <textarea name="Comments" rows="9" cols="60" class="textareastyles" placeholder="Enter comments (if any)">@(Model.Comments)</textarea>
+
+
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+    <div class="row col-md-12 col-lg-12 commonPadding">
+        <div class="col-md-5 col-lg-5">
+            <input type="button" data-url="@Url.Action("ManagePurchaseRequest", "PurchaseRequest")" class="formbutton float-right PurchaseRequestAddEdit" data-identity="@(Model.Identity)" value="Update/Add" />
+        </div>
+        <div class="col-md-5 col-lg-5">
+            <input type="button" value="Cancel" data-url="@Url.Action("_PurchaseRequestCancel", "PurchaseRequest")" data-identity="-1" class="formbutton PurchaseRequestCancel" />
+        </div>
+
+
+        <input type="hidden" name="Identity" value="@(Model.Identity)">
+
+
+        <input type="hidden" name="POCode" value="@(Model.POCode)">
+        <input type="hidden" name="POStatus" value="@(Model.POStatus)">
+        <input type="hidden" name="SQCode" value="@(Model.SQCode)">
+        <input type="hidden" name="CaseNo" value="@(Model.CaseNo)">
+
+        <input type="hidden" name="CompanyTypeID" value="@(Model.CompanyTypeID)">
+        <input type="hidden" name="LocationID" value="@(Model.LocationID)">
+        <input type="hidden" name="PurchaseRequestTypeID" value="@(Model.PurchaseRequestTypeID)">
+
+        <input type="hidden" name="AssignedTo" value="@(Model.AssignedTo)">
+        <input type="hidden" name="OriginatorID" value="@(Model.OriginatorID)">
+
+        <input type="hidden" name="CreatedDate" value="@(Model.CreatedDate)">
+        <input type="hidden" name="CreatedBy" value="@(Model.CreatedBy)">
+        <input type="hidden" name="ModifiedBy" value="@(Model.ModifiedBy)">
+        <input type="hidden" name="ModifiedDate" value="@(Model.ModifiedDate)">
+        <input type="hidden" name="VerifiedBy" value="@(Model.VerifiedBy)">
+        <input type="hidden" name="ApprovedBy" value="@(Model.ApprovedBy)">
+
+        <input type="hidden" name="IsActive" value="@(Model.IsActive)">
+        <input type="hidden" name="IsVerified" value="@(Model.IsVerified)">
+        <input type="hidden" name="IsApproved" value="@(Model.IsApproved)">
+
+    </div>
+
+
+
+</div>

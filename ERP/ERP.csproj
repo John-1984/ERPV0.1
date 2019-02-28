@@ -119,6 +119,7 @@
     <Compile Include="Controllers\LocalSupplierController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\PendingCustomerInfoController.cs" />
+    <Compile Include="Controllers\PendingPRVerificationController.cs" />
     <Compile Include="Controllers\ProductEnquiryController.cs" />
     <Compile Include="Controllers\ProductMasterController.cs" />
     <Compile Include="Controllers\PurchaseOrderController.cs" />
@@ -206,6 +207,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\AddNew.png" />
     <Content Include="Content\bodybglogin.jfif" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\date.png" />
@@ -223,6 +225,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\PendingCustomerInfoJS.js" />
     <Content Include="Scripts\ItemMaster - Copy.js" />
+    <Content Include="Scripts\PendingPRVerification.js" />
     <Content Include="Scripts\ProductEnquiry.js" />
     <Content Include="Scripts\Brand.js" />
     <Content Include="Scripts\Company.js" />
@@ -244,6 +247,7 @@
     <Content Include="Scripts\Location.js" />
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\ProductMaster.js" />
+    <Content Include="Scripts\PurchaseRequest.js" />
     <Content Include="Scripts\PurchaseRequestType.js" />
     <Content Include="Scripts\RegionJS.js" />
     <Content Include="Scripts\RoleMaster.js" />
@@ -512,6 +516,13 @@
     <Content Include="Views\PendingCustomerInfo\_PendingCustomerInfoEdit.cshtml" />
     <Content Include="Views\PendingCustomerInfo\_PendingCustomerInfoSearch.cshtml" />
     <Content Include="Views\PendingCustomerInfo\_PendingCustomerInfoView.cshtml" />
+    <Content Include="Views\PurchaseRequest\_PurchaseRequestAdd.cshtml" />
+    <Content Include="Views\PendingPRVerification\_PendingPRVerificationAdd.cshtml" />
+    <Content Include="Views\PendingPRVerification\_PendingPRVerificationAll.cshtml" />
+    <Content Include="Views\PendingPRVerification\_PendingPRVerificationEdit.cshtml" />
+    <Content Include="Views\PendingPRVerification\_PendingPRVerificationSearch.cshtml" />
+    <Content Include="Views\PendingPRVerification\_PendingPRVerificationView.cshtml" />
+    <Content Include="Views\PendingPRVerification\Index.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

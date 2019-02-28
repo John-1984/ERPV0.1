@@ -59,6 +59,7 @@
     <Compile Include="ProductMaster.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PurchaseOrder.cs" />
+    <Compile Include="PendingPRVerification.cs" />
     <Compile Include="PurchaseRequest.cs" />
     <Compile Include="PurchaseRequestDetails.cs" />
     <Compile Include="PurchaseRequestType.cs" />

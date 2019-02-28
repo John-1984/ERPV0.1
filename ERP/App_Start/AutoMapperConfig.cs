@@ -1,5 +1,6 @@
 using System;
 using AutoMapper;
+//using AutoMapper.;
 
 namespace ERP
 {
@@ -10,6 +11,7 @@ namespace ERP
         {
             _mapperConfiguration = new MapperConfiguration(cfg =>
             {
+               // cfg.AddProfile<CollectionProfile>();
                 cfg.CreateMap<BusinessModels.Customer, ERP.Models.Customer>().ReverseMap();
                 cfg.CreateMap<BusinessModels.Address, ERP.Models.Address>().ReverseMap();
                 cfg.CreateMap<BusinessModels.Region, ERP.Models.Region>().ReverseMap();
@@ -43,6 +45,9 @@ namespace ERP
                 cfg.CreateMap<BusinessModels.ReportMenu, ERP.Models.ReportMenu>().ReverseMap();
                 cfg.CreateMap<BusinessModels.Purpose, ERP.Models.Purpose>().ReverseMap();
                 cfg.CreateMap<BusinessModels.RoleAccess, ERP.Models.RoleAccess>().ReverseMap();
+                cfg.CreateMap<BusinessModels.PurchaseRequestDetails, ERP.Models.PurchaseRequestDetails>().ReverseMap();
+
+                cfg.CreateMap<BusinessModels.PurchaseRequest, ERP.Models.PurchaseRequest>().ForMember(d => d.PurchaseRequestDetails, o => o.Ignore());
 
             });
         }

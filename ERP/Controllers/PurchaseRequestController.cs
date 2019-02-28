@@ -238,7 +238,6 @@ namespace ERP.Controllers
                 mdProductenq.Employee = mdemployee;
                 //coded
                 mdProductenq.POStatus = 15;
-
                 BusinessModels.Status mdstatus = _status.GetStatus(15);
                 mdProductenq.Status = mdstatus;
             }

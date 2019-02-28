@@ -144,7 +144,7 @@
                                     <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div><label>Identification Mode:</label></div></div>
                                     <div class="float-right col-md-7 col-lg-8">
                                         @Html.DropDownList("drpEmployeeidentificationType", (IEnumerable<SelectListItem>)Model.IdentificationList, "Select Identification Type", new { @class = "dropdownstyles", name = "drpEmployeeidentificationType" })
-                                        <input type="hidden" name="hdnidentification" id="hdnidentification" value="@Model.IdentificationID" />
+                                        <input type="hidden" name="hdnempidentification" id="hdnempidentification" value="@Model.IdentificationID" />
                                     </div>
                                 </div>
                                 <div class="row col-md-12 col-lg-12" style="height:7px">
@@ -257,7 +257,7 @@
                                     <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div><label>Company:</label></div></div>
                                     <div class="float-right col-md-7 col-lg-8">
                                         @* @Html.DropDownList("Mobiledropdown1", Model.RegionList)*@
-                                        @Html.DropDownList("drpEmployeecompany", (IEnumerable<SelectListItem>)Model.CompanyList, "Select Comapny", new { @class = "dropdownstyles", name = "drpEmployeecompany" })
+                                        @Html.DropDownList("drpEmployeecompany", (IEnumerable<SelectListItem>)Model.CompanyList, "Select Company", new { @class = "dropdownstyles", name = "drpEmployeecompany" })
                                         @*<span class="input-validation-error" data-valmsg-for="LocationName" data-valmsg-replace="true"></span>*@
                                         <input type="hidden" name="hdnCompany" id="hdnCompany" value="@Model.CompanyID" />
                                     </div>

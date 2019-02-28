@@ -21,9 +21,9 @@ namespace DataLayer
             {
                 _ItemMaster = dbContext.ItemMaster
                             .Include(K => K.Brand)
-                            .Include(K => K.UOMMaster)
-                            .Include(K => K.Brand.Vendor)
-                            .Include(K => K.Brand.Vendor.ProductMaster)
+                            .Include(w => w.UOMMaster)
+                            .Include(e => e.Brand.Vendor)
+                            .Include(r => r.Brand.Vendor.ProductMaster)
                             .FirstOrDefault(p => p.Identity.Equals(identity));
             }
             return _ItemMaster;

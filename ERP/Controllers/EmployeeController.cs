@@ -221,10 +221,10 @@ namespace ERP.Controllers
                     mdemployee.FloorMasterID = null;
             }
 
-            var identificationrvalue = frmFields["hdnidentification"];
+            var identificationrvalue = frmFields["hdnempidentification"];
             if (!String.IsNullOrEmpty(identificationrvalue))
             {
-                if (identificationrvalue == "0")
+                if (identificationrvalue != "0")
                     mdemployee.IdentificationID = int.Parse(identificationrvalue);
                 else
                     mdemployee.IdentificationID = null;

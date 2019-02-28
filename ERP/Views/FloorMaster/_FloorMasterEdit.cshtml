@@ -82,7 +82,7 @@
                 <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div><label>Company :</label></div></div>
                 <div class="float-right col-md-7 col-lg-8">
                     @* @Html.DropDownList("Mobiledropdown1", Model.RegionList)*@
-                    @Html.DropDownList("drpfloorcompany", (IEnumerable<SelectListItem>)Model.CompanyList, "Select Comapny", new { @class = "dropdownstyles",name= "drpfloorcompany" })
+                    @Html.DropDownList("drpfloorcompany", (IEnumerable<SelectListItem>)Model.CompanyList, "Select Company", new { @class = "dropdownstyles",name= "drpfloorcompany" })
                     @*<span class="input-validation-error" data-valmsg-for="LocationName" data-valmsg-replace="true"></span>*@
                     <input type="hidden" name="hdnCompany" id="hdnCompany" />
                 </div>

@@ -136,6 +136,7 @@
     <Compile Include="Controllers\StockInController.cs" />
     <Compile Include="Controllers\StockOutController.cs" />
     <Compile Include="Controllers\StockReturnController.cs" />
+    <Compile Include="Controllers\StocksController.cs" />
     <Compile Include="Controllers\StockShortageController.cs" />
     <Compile Include="Controllers\StockTransferController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
@@ -194,6 +195,7 @@
     <Compile Include="Models\State.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\Stocks.cs" />
     <Compile Include="Models\SubModules.cs" />
     <Compile Include="Models\SupplierQuotation.cs" />
     <Compile Include="Models\Tax.cs" />
@@ -226,6 +228,7 @@
     <Content Include="Scripts\PendingCustomerInfoJS.js" />
     <Content Include="Scripts\ItemMaster - Copy.js" />
     <Content Include="Scripts\PendingPRVerification.js" />
+    <Content Include="Scripts\Stocks.js" />
     <Content Include="Scripts\ProductEnquiry.js" />
     <Content Include="Scripts\Brand.js" />
     <Content Include="Scripts\Company.js" />
@@ -523,6 +526,11 @@
     <Content Include="Views\PendingPRVerification\_PendingPRVerificationSearch.cshtml" />
     <Content Include="Views\PendingPRVerification\_PendingPRVerificationView.cshtml" />
     <Content Include="Views\PendingPRVerification\Index.cshtml" />
+    <Content Include="Views\Stocks\_StocksAll.cshtml" />
+    <Content Include="Views\Stocks\_StocksEdit.cshtml" />
+    <Content Include="Views\Stocks\_StocksSearch.cshtml" />
+    <Content Include="Views\Stocks\_StocksView.cshtml" />
+    <Content Include="Views\Stocks\Index.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

@@ -1,0 +1,25 @@
+﻿
+<div class="container col-md-12 col-lg-12 width-100">
+    <div class="col-md-12 col-lg-12">
+        <div class="col-md-6 col-lg-6 commonPadding">
+            <span class="BodyWelcomeText">Search Options</span>
+        </div>
+    </div>
+    <div class="col-md-12 col-lg-12">
+
+        <div class="col-md-6 col-lg-6 commonPadding">
+            <input type="text" placeholder="Search By Item" class="textboxstyles" style="width:300px;height:27px;" />
+
+
+        </div>
+    </div>
+    <div class="col-md-12 col-lg-12">
+        <div class="col-md-4 col-lg-4 commonPadding textleft">
+            <input type="button" value="Search" data-url="@Url.Action("StocksSearch", "Stocks")" class="formbutton StocksSearch" />
+        </div>
+    </div>
+
+    <div class="col-md-12 col-lg-12 commonPadding" style="text-align:right">
+        <input type="button" value="Add Stock" data-url="@Url.Action("_StocksEdit", "Stocks")" data-identity="-1" class="formbutton StocksAdd" />
+    </div>
+</div>

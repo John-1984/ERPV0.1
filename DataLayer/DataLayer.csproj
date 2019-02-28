@@ -49,6 +49,8 @@
   <ItemGroup>
     <Compile Include="PendingCustomerInfoDAL.cs" />
     <Compile Include="PendingCustomerInfoDbContext.cs" />
+    <Compile Include="StocksDAL.cs" />
+    <Compile Include="StocksDbContext.cs" />
     <Compile Include="ProductEnquiryDetailsDAL.cs" />
     <Compile Include="ProductEnquiryDetailsDbContext.cs" />
     <Compile Include="PuchaseRequestDetailsDAL.cs" />

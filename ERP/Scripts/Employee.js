@@ -14,12 +14,12 @@ $(document).ready(function () {
     };
 
     $(document).on('change', '#drpEmployeeRegion', function () {
-        //alert("Test");
+        
         // debugger;
         varregionText = $("#drpEmployeeRegion").val();
         $("#hdnRegion").val(varregionText);
         var drpEmployeeCountry = $("#drpEmployeeCountry");
-        // alert("Test");
+        
         $.ajax({
             type: 'POST',
             url: '/Employee/Country',
@@ -39,12 +39,12 @@ $(document).ready(function () {
     });
 
     $(document).on('change', '#drpEmployeeCountry', function () {
-        //alert("Test");
+        
         // debugger;
         varcountryText = $("#drpEmployeeCountry").val();
         $("#hdnCountry").val(varcountryText);
         var drpEmployeeState = $("#drpEmployeeState");
-        //alert("Test");
+        
         $.ajax({
             type: 'POST',
             url: '/Employee/State',
@@ -64,13 +64,13 @@ $(document).ready(function () {
     });
 
     $(document).on('change', '#drpEmployeeState', function () {
-        //alert("Test");
+        
         // debugger;
-        alert("Test");
+       
         varstateText = $("#drpEmployeeState").val();
         $("#hdnState").val(varstateText);
         var drpEmployeedistrict = $("#drpEmployeedistrict");
-        //alert("Test");
+        
         $.ajax({
             type: 'POST',
             url: '/Employee/District',
@@ -90,13 +90,13 @@ $(document).ready(function () {
     });
 
     $(document).on('change', '#drpEmployeedistrict', function () {
-        //alert("Test");
+        
         // debugger;
-        //alert("Test");
+        
         vardistrictText = $("#drpEmployeedistrict").val();
         $("#hdnDistrict").val(vardistrictText);
         var drpEmployeelocation = $("#drpEmployeelocation");
-        //alert("Test");
+        
         $.ajax({
             type: 'POST',
             url: '/Employee/Location',
@@ -116,13 +116,13 @@ $(document).ready(function () {
     });
 
     $(document).on('change', '#drpEmployeelocation', function () {
-        //alert("Test");
+        
         // debugger;
-        alert("Test");
-        varlocationText = $("#drpEmployeelocation").val();
-        $("#hdnLocation").val(varlocationText);
+       
+        var locationText = $("#drpEmployeelocation").val();
+        $("#hdnLocation").val(locationText);
         var drpEmployeecompany = $("#drpEmployeecompany");
-        //alert("Test");
+        
         $.ajax({
             type: 'POST',
             url: '/Employee/Company',
@@ -142,13 +142,13 @@ $(document).ready(function () {
     });
 
     $(document).on('change', '#drpEmployeecompany', function () {
-        //alert("Test");
+        
         // debugger;
-        //alert("Test");
+        
         varcompText = $("#drpEmployeecompany").val();
         $("#hdnCompany").val(varcompText);
         var drpEmployeecompanyType = $("#drpEmployeecompanyType");
-        //alert("Test");
+        
         $.ajax({
             type: 'POST',
             url: '/Employee/CompanyType',
@@ -168,13 +168,13 @@ $(document).ready(function () {
     });
 
     $(document).on('change', '#drpEmployeecompanyType', function () {
-        //alert("Test");
+        
         // debugger;
-        //alert("Test");
+        
         varcomptypeText = $("#drpEmployeecompanyType").val();
         $("#hdnCompanyType").val(varcomptypeText);
         var drpEmployeeFloorMaster = $("#drpEmployeeFloorMaster");
-        //alert("Test");
+        
         $.ajax({
             type: 'POST',
             url: '/Employee/FloorMaster',
@@ -194,30 +194,30 @@ $(document).ready(function () {
     });
 
     $(document).on('change', '#drpEmployeeFloorMaster', function () {
-        //alert("Test");
+        
         // debugger;
-        varFloorMasterText = $("#drpEmployeeFloorMaster").val();
-        $("#hdnFloorMaster").val(varFloorMasterText);
+        var FloorMasterText = $("#drpEmployeeFloorMaster").val();
+        $("#hdnFloorMaster").val(FloorMasterText);
 
-        // alert(vardistrictText);
+       
     });
 
     $(document).on('change', '#drpEmployeeRoleMaster', function () {
-        //alert("Test");
+        
         // debugger;
         varEmployeeRoleMasterText = $("#drpEmployeeRoleMaster").val();
         $("#hdnRoleMaster").val(varEmployeeRoleMasterText);
 
-        // alert(vardistrictText);
+        
     });
 
     $(document).on('change', '#drpEmployeeidentificationType', function () {
-        //alert("Test");
+        
         // debugger;
         varEmployeeidentificationTypeText = $("#drpEmployeeidentificationType").val();
         $("#hdnidentification").val(varEmployeeidentificationTypeText);
 
-        // alert(vardistrictText);
+        
     });
 
     $(document).off("click", ".EmployeeCancel");

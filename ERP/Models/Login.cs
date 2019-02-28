@@ -38,7 +38,13 @@ namespace ERP.Models
             set;
         }
 
+        public int? LocationID
+        {
+            get;set;
+        }
 
+        public Location Location
+        { get; set; }
         public DateTime? LastLoginDate
         {
             get;

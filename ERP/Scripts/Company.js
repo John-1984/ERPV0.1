@@ -14,12 +14,12 @@
     };
 
     $(document).on('change', '#drpCompRegion', function () {
-        //alert("Test");
+        
         // debugger;
         varregionText = $("#drpCompRegion").val();
         $("#hdnRegion").val(varregionText);
         var drpCompCountry = $("#drpCompCountry");
-        // alert("Test");
+        
         $.ajax({
             type: 'POST',
             url: '/Company/Country',
@@ -39,12 +39,12 @@
     });
 
     $(document).on('change', '#drpCompCountry', function () {
-        //alert("Test");
+        
         // debugger;
         varcountryText = $("#drpCompCountry").val();
         $("#hdnCountry").val(varcountryText);
         var drpCompState = $("#drpCompState");
-        //alert("Test");
+        
         $.ajax({
             type: 'POST',
             url: '/Company/State',
@@ -64,13 +64,13 @@
     });
 
     $(document).on('change', '#drpCompState', function () {
-        //alert("Test");
+        
         // debugger;
-       // alert("Test");
+       
         varstateText = $("#drpCompState").val();
         $("#hdnState").val(varstateText);
         var drpcompdistrict = $("#drpcompdistrict");
-        //alert("Test");
+        
         $.ajax({
             type: 'POST',
             url: '/Company/District',
@@ -90,13 +90,13 @@
     });
 
     $(document).on('change', '#drpcompdistrict', function () {
-        //alert("Test");
+        
         // debugger;
-        alert("Test");
+       
         vardistrictText = $("#drpcompdistrict").val();
         $("#hdnDistrict").val(vardistrictText);
         var drpComplocation = $("#drpComplocation");
-        //alert("Test");
+        
         $.ajax({
             type: 'POST',
             url: '/Company/Location',
@@ -117,12 +117,12 @@
 
 
     $(document).on('change', '#drpComplocation', function () {
-        //alert("Test");
+        
         // debugger;
         vardistrictText = $("#drpComplocation").val();
         $("#hdnLocation").val(vardistrictText);
 
-       // alert(vardistrictText);
+       
     });
 
     $(document).off("click", ".CompanyCancel");

@@ -42,13 +42,15 @@ namespace BusinessLayer
             return strUsername;
         }
 
-        public BusinessModels.Login Insert(BusinessModels.Login Login, string empName)
+        public BusinessModels.Login Insert(BusinessModels.Login Login, BusinessModels.Employee empData)
         {
-            Login.UserName = GetUserName(empName);
-            Login.UserPassword = HashSHA(GetRandomAlphanumericStringForuserPassword());
+            Login.UserName = GetUserName(empData.EmployeeName);
+            //  Login.UserPassword = HashSHA(GetRandomAlphanumericStringForuserPassword());
+            Login.UserPassword = GetRandomAlphanumericStringForuserPassword();
+            Login.LocationID = empData.LocationID;
             return _dataLayer.Insert(Login);
         }
-
+        
         private static string GetRandomAlphanumericStringForusername()
         {
             const string alphanumericCharacters =

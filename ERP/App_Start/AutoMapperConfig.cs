@@ -37,6 +37,12 @@ namespace ERP
                 cfg.CreateMap<BusinessModels.Employee, ERP.Models.Employee>().ReverseMap();
                 cfg.CreateMap<BusinessModels.FloorMaster, ERP.Models.FloorMaster>().ReverseMap();
                 cfg.CreateMap<BusinessModels.Login, ERP.Models.Login>().ReverseMap();
+                cfg.CreateMap<BusinessModels.EnquiryLevel, ERP.Models.EnquiryLevel>().ReverseMap();
+                cfg.CreateMap<BusinessModels.ProductEnquiry, ERP.Models.ProductEnquiry>().ReverseMap();
+                cfg.CreateMap<BusinessModels.SubModules, ERP.Models.SubModules>().ReverseMap();
+                cfg.CreateMap<BusinessModels.ReportMenu, ERP.Models.ReportMenu>().ReverseMap();
+                cfg.CreateMap<BusinessModels.Purpose, ERP.Models.Purpose>().ReverseMap();
+                cfg.CreateMap<BusinessModels.RoleAccess, ERP.Models.RoleAccess>().ReverseMap();
 
             });
         }

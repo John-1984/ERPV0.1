@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Data.Entity;
 namespace DataLayer
 {
     public class LoginDAL
@@ -22,13 +22,13 @@ namespace DataLayer
         {
         }
 
-        public BusinessModels.Login GetLogin(Int32 identity)
+        public BusinessModels.Login GetLogin(int? identity)
         {
             var _Login = new BusinessModels.Login();
             using (var dbContext = new LoginDbContext())
             {
                 _Login = dbContext.Login
-                            .FirstOrDefault(p => p.Identity.Equals(identity));
+                            .FirstOrDefault(p => p.Identity == identity);
             }
             return _Login;
         }
@@ -39,7 +39,7 @@ namespace DataLayer
             using (var dbContext = new LoginDbContext())
             {
                 dbContext.Configuration.LazyLoadingEnabled = false;
-                _Logins = dbContext.Login.ToList();
+                _Logins = dbContext.Login.Include(s => s.Location).ToList();
             }
 
             return _Logins;

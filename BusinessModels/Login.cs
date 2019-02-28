@@ -18,7 +18,14 @@ namespace BusinessModels
             set;
         }
 
-        
+        [ForeignKey("Location")]
+        public int? LocationID
+        {
+            get; set;
+        }
+
+        public Location Location
+        { get; set; }
         public string UserName
         {
             get;

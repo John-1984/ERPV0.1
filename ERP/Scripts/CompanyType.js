@@ -14,12 +14,12 @@
     };
 
     $(document).on('change', '#drpCompTypeRegion', function () {
-        //alert("Test");
+        
         // debugger;
         varregionText = $("#drpCompTypeRegion").val();
         $("#hdnRegion").val(varregionText);
         var drpCompTypeCountry = $("#drpCompTypeCountry");
-        // alert("Test");
+        
         $.ajax({
             type: 'POST',
             url: '/CompanyType/Country',
@@ -39,12 +39,12 @@
     });
 
     $(document).on('change', '#drpCompTypeCountry', function () {
-        //alert("Test");
+        
         // debugger;
         varcountryText = $("#drpCompTypeCountry").val();
         $("#hdnCountry").val(varcountryText);
         var drpCompTypeState = $("#drpCompTypeState");
-        //alert("Test");
+        
         $.ajax({
             type: 'POST',
             url: '/CompanyType/State',
@@ -64,13 +64,13 @@
     });
 
     $(document).on('change', '#drpCompTypeState', function () {
-        //alert("Test");
+        
         // debugger;
-       // alert("Test");
+       
         varstateText = $("#drpCompTypeState").val();
         $("#hdnState").val(varstateText);
         var drpCompTypedistrict = $("#drpCompTypedistrict");
-        //alert("Test");
+        
         $.ajax({
             type: 'POST',
             url: '/CompanyType/District',
@@ -90,13 +90,13 @@
     });
 
     $(document).on('change', '#drpCompTypedistrict', function () {
-        //alert("Test");
+        
         // debugger;
-        //alert("Test");
+        
         varstateText = $("#drpCompTypedistrict").val();
         $("#hdnDistrict").val(varstateText);
         var drpCompTypelocation = $("#drpCompTypelocation");
-        //alert("Test");
+        
         $.ajax({
             type: 'POST',
             url: '/CompanyType/Location',
@@ -116,13 +116,13 @@
     });
 
     $(document).on('change', '#drpCompTypelocation', function () {
-        //alert("Test");
+        
         // debugger;
-        alert("Test");
+        
         varlocationText = $("#drpCompTypelocation").val();
         $("#hdnLocation").val(varlocationText);
         var drpCompTypecompany = $("#drpCompTypecompany");
-        //alert("Test");
+        
         $.ajax({
             type: 'POST',
             url: '/CompanyType/Company',
@@ -142,12 +142,12 @@
     });
 
     $(document).on('change', '#drpCompTypecompany', function () {
-        //alert("Test");
+        
         // debugger;
         varcompanyText = $("#drpCompTypecompany").val();
         $("#hdnCompany").val(varcompanyText);
 
-      //  alert(vardistrictText);
+      
     });
 
     $(document).off("click", ".CompanyTypeCancel");

@@ -118,6 +118,7 @@
     <Compile Include="Controllers\ItemMasterController.cs" />
     <Compile Include="Controllers\LocalSupplierController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
+    <Compile Include="Controllers\PendingCustomerInfoController.cs" />
     <Compile Include="Controllers\ProductEnquiryController.cs" />
     <Compile Include="Controllers\ProductMasterController.cs" />
     <Compile Include="Controllers\PurchaseOrderController.cs" />
@@ -173,13 +174,17 @@
     <Compile Include="Models\Modules.cs" />
     <Compile Include="Models\Priority.cs" />
     <Compile Include="Models\ProductEnquiry.cs" />
+    <Compile Include="Models\ProductEnquiryComments.cs" />
     <Compile Include="Models\ProductEnquiryDetails.cs" />
     <Compile Include="Models\ProductMaster.cs" />
     <Compile Include="Models\PurchaseOrder.cs" />
     <Compile Include="Models\PurchaseRequest.cs" />
     <Compile Include="Models\PurchaseRequestDetails.cs" />
     <Compile Include="Models\PurchaseRequestType.cs" />
+    <Compile Include="Models\Purpose.cs" />
     <Compile Include="Models\Region.cs" />
+    <Compile Include="Models\ReportMenu.cs" />
+    <Compile Include="Models\RoleAccess.cs" />
     <Compile Include="Models\RoleEscalation.cs" />
     <Compile Include="Models\RoleMaster.cs" />
     <Compile Include="Models\RoleType.cs" />
@@ -188,6 +193,7 @@
     <Compile Include="Models\State.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\SubModules.cs" />
     <Compile Include="Models\SupplierQuotation.cs" />
     <Compile Include="Models\Tax.cs" />
     <Compile Include="Models\UOMMaster.cs" />
@@ -211,9 +217,13 @@
     <Content Include="Content\green.gif" />
     <Content Include="Content\GridClose.png" />
     <Content Include="Content\Home-icon.png" />
+    <Content Include="Content\process.png" />
     <Content Include="Content\red.gif" />
     <Content Include="Content\view.gif" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\PendingCustomerInfoJS.js" />
+    <Content Include="Scripts\ItemMaster - Copy.js" />
+    <Content Include="Scripts\ProductEnquiry.js" />
     <Content Include="Scripts\Brand.js" />
     <Content Include="Scripts\Company.js" />
     <Content Include="Scripts\CompanyType.js" />
@@ -497,6 +507,11 @@
     <Content Include="Views\FloorMaster\_FloorMasterSearch.cshtml" />
     <Content Include="Views\FloorMaster\_FloorMasterView.cshtml" />
     <Content Include="Views\FloorMaster\Index.cshtml" />
+    <Content Include="Views\PendingCustomerInfo\Index.cshtml" />
+    <Content Include="Views\PendingCustomerInfo\_PendingCustomerInfoAll.cshtml" />
+    <Content Include="Views\PendingCustomerInfo\_PendingCustomerInfoEdit.cshtml" />
+    <Content Include="Views\PendingCustomerInfo\_PendingCustomerInfoSearch.cshtml" />
+    <Content Include="Views\PendingCustomerInfo\_PendingCustomerInfoView.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

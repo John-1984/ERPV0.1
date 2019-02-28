@@ -17,17 +17,21 @@ namespace BusinessModels
             get;
             set;
         }
+
+        
         public int ProductEnquiryID
         {
             get;
             set;
         }
-        public int itemID
+
+        [ForeignKey("ItemMaster")]
+        public int ItemID
         {
             get;
             set;
         }
-        public int Quantitiy
+        public int Quantity
         {
             get;
             set;
@@ -38,7 +42,6 @@ namespace BusinessModels
             get;
             set;
         }
-
         
         public decimal ItemPrice
         {
@@ -46,10 +49,8 @@ namespace BusinessModels
             set;
         }
 
-
-
-
-
+        public ItemMaster ItemMaster
+        { get; set; }
 
     }
 }

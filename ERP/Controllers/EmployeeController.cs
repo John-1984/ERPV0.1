@@ -165,7 +165,9 @@ namespace ERP.Controllers
         [HttpPost]
         public ActionResult Delete(int identity)
         {
-            _Employee.Delete(identity);
+            BusinessModels.Employee mdEmployee = _Employee.GetEmployee(identity);
+            mdEmployee.IsActive = false;
+            _Employee.Update(mdEmployee);
             return RedirectToAction("_EmployeeAll");
         }
 
@@ -182,33 +184,63 @@ namespace ERP.Controllers
 
             var locvalue = frmFields["hdnLocation"];
             if (!String.IsNullOrEmpty(locvalue))
+            {
+                if(locvalue!="0")
                 mdemployee.LocationID = int.Parse(locvalue);
+                else
+                mdemployee.LocationID = null;
+            }
 
             var compvalue = frmFields["hdnCompany"];
             if (!String.IsNullOrEmpty(compvalue))
+            {
                 mdemployee.CompanyID = int.Parse(compvalue);
+
+                if (compvalue != "0")
+                    mdemployee.CompanyID = int.Parse(compvalue);
+                else
+                    mdemployee.CompanyID = null;
+            }
 
             var companytypevalue = frmFields["hdnCompanyType"];
             if (!String.IsNullOrEmpty(companytypevalue))
-                mdemployee.CompanyTypeID = int.Parse(companytypevalue);
+            {
+                if (companytypevalue != "0")
+                    mdemployee.CompanyTypeID = int.Parse(companytypevalue);
+                else
+                    mdemployee.CompanyTypeID = null;
+
+            }
 
             var floorvalue = frmFields["hdnFloorMaster"];
             if (!String.IsNullOrEmpty(floorvalue))
-                mdemployee.FloorMasterID = int.Parse(floorvalue);
+            {
+                if (floorvalue != "0")
+                    mdemployee.FloorMasterID = int.Parse(floorvalue);
+                else
+                    mdemployee.FloorMasterID = null;
+            }
 
             var identificationrvalue = frmFields["hdnidentification"];
             if (!String.IsNullOrEmpty(identificationrvalue))
-                mdemployee.IdentificationID = int.Parse(identificationrvalue);
-
+            {
+                if (identificationrvalue == "0")
+                    mdemployee.IdentificationID = int.Parse(identificationrvalue);
+                else
+                    mdemployee.IdentificationID = null;
+            }
+            mdemployee.IsActive = true;
             if (Employee.Identity.Equals(-1))
             {
+                mdemployee.CreatedBy = Convert.ToInt32(Convert.ToString(Session["EmployeeID"]));
                 mdemployee.CreatedDate = DateTime.Now;
-
+              
                 _Employee.Insert(mdemployee);
             }
             else
             {
                 mdemployee.ModifiedDate = DateTime.Now;
+                mdemployee.ModifiedBy = Convert.ToInt32(Convert.ToString(Session["EmployeeID"]));
                 _Employee.Update(mdemployee);
             }
             return RedirectToAction("_EmployeeAll");

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Data.Entity;
 namespace DataLayer
 {
     public class RoleTypeDAL
@@ -28,6 +28,7 @@ namespace DataLayer
             using (var dbContext = new RoleTypeDbContext())
             {
                 _RoleType = dbContext.RoleType
+                    .Include(K => K.RoleAccess)
                             .FirstOrDefault(p => p.Identity.Equals(identity));
             }
             return _RoleType;
@@ -39,7 +40,9 @@ namespace DataLayer
             using (var dbContext = new RoleTypeDbContext())
             {
                 dbContext.Configuration.LazyLoadingEnabled = false;
-                _RoleTypes = dbContext.RoleType.ToList();
+                _RoleTypes = dbContext.RoleType
+                    .Include(K => K.RoleAccess)
+                    .ToList();
             }
 
             return _RoleTypes;

@@ -47,7 +47,21 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PendingCustomerInfoDAL.cs" />
+    <Compile Include="PendingCustomerInfoDbContext.cs" />
+    <Compile Include="ProductEnquiryDetailsDAL.cs" />
+    <Compile Include="ProductEnquiryDetailsDbContext.cs" />
+    <Compile Include="PurposeDAL.cs" />
+    <Compile Include="PurposeDbContext.cs" />
+    <Compile Include="RoleAccessDAL.cs" />
+    <Compile Include="RoleAccessDbContext.cs" />
+    <Compile Include="ReportMenuDAL.cs" />
+    <Compile Include="SubModulesDAL.cs" />
+    <Compile Include="ReportMenuDbContext.cs" />
+    <Compile Include="SubModulesDbContext.cs" />
+    <Compile Include="ProductEnquiryDAL.cs" />
     <Compile Include="BrandDAL.cs" />
+    <Compile Include="ProductEnquiryDbContext.cs" />
     <Compile Include="BrandDbContext.cs" />
     <Compile Include="CompanyDAL.cs" />
     <Compile Include="CompanyDbContext.cs" />
@@ -83,7 +97,9 @@
     <Compile Include="DBConnection.cs" />
     <Compile Include="PurchaseRequestTypeDAL.cs" />
     <Compile Include="PurchaseRequestTypeDbContext.cs" />
+    <Compile Include="EnquiryLevelDAL.cs" />
     <Compile Include="RegionDAL.cs" />
+    <Compile Include="EnquiryLevelDbContext.cs" />
     <Compile Include="RegionDbContext.cs" />
     <Compile Include="RoleMasterDAL.cs" />
     <Compile Include="RoleMasterDbContext.cs" />

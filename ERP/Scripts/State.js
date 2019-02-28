@@ -14,12 +14,12 @@
     };
 
     $(document).on('change', '#drpRegion', function () {
-        //alert("Test");
+        
         // debugger;
         varregionText = $("#drpRegion").val();
         $("#hdnRegion").val(varregionText);
         var drpCountry = $("#drpCountry");
-      //  alert("Test");
+      
         $.ajax({            
             type: 'POST',
             url: '/State/Country',
@@ -39,7 +39,7 @@
     });
 
     $(document).on('change', '#drpCountry', function () {
-        //alert("Test");
+        
         // debugger;
         varregionText = $("#drpCountry").val();
         $("#hdnCountry").val(varregionText);

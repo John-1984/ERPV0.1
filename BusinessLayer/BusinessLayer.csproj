@@ -37,8 +37,10 @@
     <Compile Include="Brand.cs" />
     <Compile Include="CallCenter.cs" />
     <Compile Include="CallCenterDetails.cs" />
+    <Compile Include="CommonFunctions.cs" />
     <Compile Include="CompanyType.cs" />
     <Compile Include="Country.cs" />
+    <Compile Include="PendingCustomerInfo.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="Discount.cs" />
     <Compile Include="District.cs" />

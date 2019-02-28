@@ -48,6 +48,51 @@ namespace BusinessLayer
         {
             return _dataLayer.GetEmployeeLogin(identity);
         }
+        public IEnumerable<BusinessModels.Employee> GetAllEmployeesOnRole(int fldidentity)
+        {
+            return _dataLayer.GetAllEmployeesOnRole(fldidentity);
+        }
+
+        public IEnumerable<BusinessModels.Employee> GetAllEmployeesOnLocation(int fldidentity)
+        {
+            return _dataLayer.GetAllEmployeesOnLocation(fldidentity);
+        }
+
+        public IEnumerable<BusinessModels.Employee> GetAllEmployeesOnCompanyType(int fldidentity)
+        {
+            return _dataLayer.GetAllEmployeesOnCompanyType(fldidentity);
+        }
+
+        public IEnumerable<BusinessModels.Employee> GetAllEmployeesOnFloor(int fldidentity)
+        {
+            return _dataLayer.GetAllEmployeesOnFloor(fldidentity);
+        }
+
+        public IEnumerable<BusinessModels.Employee> GetAllEmployeesOnCompany(int fldidentity)
+        {
+            return _dataLayer.GetAllEmployeesOnCompany(fldidentity);
+        }
+
+        public IEnumerable<BusinessModels.Employee> GetAllEmployeesOnDistrict(int fldidentity)
+        {
+            return _dataLayer.GetAllEmployeesOnDistrict(fldidentity);
+        }
+
+        public IEnumerable<BusinessModels.Employee> GetAllEmployeesOnState(int fldidentity)
+        {
+            return _dataLayer.GetAllEmployeesOnState(fldidentity);
+        }
+
+        public IEnumerable<BusinessModels.Employee> GetAllEmployeesOnCountry(int fldidentity)
+        {
+            //Need to do
+            return _dataLayer.GetAllEmployeesOnCountry(fldidentity);
+        }
+
+        public IEnumerable<BusinessModels.Employee> GetAllEmployeesOnRegion(int fldidentity)
+        {
+            return _dataLayer.GetAllEmployeesOnRegion(fldidentity);
+        }
         public IEnumerable<BusinessModels.IdentificationsType> GetAllIdentificationTypes()
         {
             //TestRegionData();
@@ -93,7 +138,11 @@ namespace BusinessLayer
             //TestRegionData();
             return _floordataLayer.GetAll(int.Parse(identity));
         }
-        public IEnumerable<BusinessModels.Region> GetAllRegions()
+        public BusinessModels.Employee GetStoreRoomManagerOnCompanyType(Int32 locidentity, int companyID, int companytype)
+        {
+           return _dataLayer.GetStoreRoomManagerOnCompanyType(locidentity, companyID, companytype);
+        }
+         public IEnumerable<BusinessModels.Region> GetAllRegions()
         {
             //TestRegionData();
             return _regdataLayer.GetAll();
@@ -143,26 +192,35 @@ namespace BusinessLayer
         }
         public Boolean Update(BusinessModels.Employee Employee)
         {
+            // BusinessLayer.Login bslogin = new BusinessLayer.Login();
+            BusinessModels.Login mdLogin = _logdataLayer.GetLogin(Employee.LoginID);
+            mdLogin.LocationID = Employee.LocationID;
+            _logdataLayer.Update(mdLogin);
+            //Employee.Login = mdLogin;
             return _dataLayer.Update(Employee);
         }
         public BusinessModels.Employee Insert(BusinessModels.Employee Employee)
         {
+            //Insert Login Details
             BusinessLayer.Login bslogin = new BusinessLayer.Login();
             BusinessModels.Login mdLogin = new BusinessModels.Login();           
-            mdLogin = bslogin.Insert(mdLogin, Employee.EmployeeName);
+            mdLogin = bslogin.Insert(mdLogin, Employee);
+
+            //Insert Employee details
             Employee.LoginID = mdLogin.Identity;
-            Employee.Login = mdLogin;
+            //Employee.Login = mdLogin;
             _dataLayer.Insert(Employee);
+
             return Employee;                
         }
-        public BusinessModels.Login InsertLoginDetials(BusinessModels.Login empLoginDet)
-        {
-            return _logdataLayer.Insert(empLoginDet);
-        }
-        public Boolean UpdateLoginDetials(BusinessModels.Login empLoginDet)
-        {
-            return _logdataLayer.Update(empLoginDet);
-        }
+        //public BusinessModels.Login InsertLoginDetials(BusinessModels.Login empLoginDet)
+        //{
+        //    return _logdataLayer.Insert(empLoginDet);
+        //}
+        //public Boolean UpdateLoginDetials(BusinessModels.Login empLoginDet)
+        //{
+        //    return _logdataLayer.Update(empLoginDet);
+        //}
 
 
     }

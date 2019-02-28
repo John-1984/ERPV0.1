@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using System.Web.Mvc;
+
 namespace ERP.Models
 {
     public class ProductEnquiryDetails
@@ -21,37 +23,49 @@ namespace ERP.Models
             get;
             set;
         }
+
         public int ProductEnquiryID
         {
             get;
             set;
         }
-        public int itemID
+        public int ItemID
         {
             get;
             set;
         }
-        public int Quantitiy
+        public int Quantity
         {
             get;
             set;
         }
-        [DefaultValue("")]
+
         public string Size
         {
             get;
             set;
         }
 
-        [DefaultValue(0)]
         public decimal ItemPrice
         {
             get;
             set;
         }
 
+        public SelectList ProductMasterList
+        { get; set; }
 
+        public SelectList VendorList
+        { get; set; }
 
+        public SelectList BrandList
+        { get; set; }
+
+        public SelectList ItemList
+        { get; set; }
+
+        public ItemMaster ItemMaster
+        { get; set; }
 
 
 

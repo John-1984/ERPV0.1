@@ -22,11 +22,11 @@ namespace DataLayer
             return _user;
         }
 
-        public BusinessModels.User ValidateUser(string userName, string password)
+        public BusinessModels.Login ValidateUser(string userName, string password)
         {
-            var _user = new BusinessModels.User();
+            var _user = new BusinessModels.Login();
             try             {                 using (var dbContext = new UserDbContext())                 {
-                    _user = dbContext.Database.SqlQuery<BusinessModels.User>("CALL VerifyUsernameAndPassword(@_userName, @_password)", new MySqlParameter("@_userName", userName), new MySqlParameter("@_password", password)).FirstOrDefault();                 }             }             catch (Exception ex)             {                 var test = ex.Message;             }
+                    _user = dbContext.Database.SqlQuery<BusinessModels.Login>("CALL VerifyUsernameAndPassword(@_userName, @_password)", new MySqlParameter("@_userName", userName), new MySqlParameter("@_password", password)).FirstOrDefault();                 }             }             catch (Exception ex)             {                 var test = ex.Message;             }
             return _user;
         }
     }

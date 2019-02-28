@@ -13,7 +13,7 @@ namespace LoginModule
             _userBL = new BusinessLayer.User();
         }
 
-        public bool AuthenticateUser(string userName, string password)
+        public BusinessModels.Login AuthenticateUser(string userName, string password)
         {
             FormsAuthentication.SetAuthCookie(userName, true);
             return ValidateLogin(userName,password);
@@ -25,15 +25,17 @@ namespace LoginModule
         /// <returns><c>true</c>, if login was validated, <c>false</c> otherwise.</returns>
         /// <param name="userName">User name.</param>
         /// <param name="password">Password.</param>
-        public bool ValidateLogin(string userName, string password)
+        public BusinessModels.Login ValidateLogin(string userName, string password)
         {
             //bool check = false;
-            //string strPassword = Encrypt.HashSHA(password);
-            //var _user = _userBL.ValidateUser(userName, password);
+           // string strPassword = Encrypt.HashSHA(password);
+            var _user = _userBL.ValidateUser(userName, password);
             //if (_user == null || _user.UserName.Equals(string.Empty))
             //    return false;
             //else
-                return true;
+           // Session["EmployeeID"] = "2";
+               return _user;
+             
         }
 
     }

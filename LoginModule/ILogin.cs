@@ -3,6 +3,6 @@ namespace LoginModule
 {
     public interface ILogin
     {
-        Boolean AuthenticateUser(string userName, string password);
+        BusinessModels.Login AuthenticateUser(string userName, string password);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Data.Entity;
 namespace DataLayer
 {
     public class CustomerDAL
@@ -28,8 +28,13 @@ namespace DataLayer
             using (var dbContext = new CustomerDbContext())
             {
                 _customer = dbContext.Customer
-                            .Include("Address")
-                            .FirstOrDefault(p => p.Identity.Equals(identity));
+                             .Include(K => K.Location)
+                             .Include(d => d.Employee)
+                             .Include(f => f.Status)
+                             .Include(g => g.Purpose)
+                             .Include(h => h.EnquiryLevel)
+                              .Where(p => p.IsActive == true)
+                             .FirstOrDefault(p => p.Identity==identity);
             }
             return _customer;
         }
@@ -41,7 +46,50 @@ namespace DataLayer
             {
                 dbContext.Configuration.LazyLoadingEnabled = false;
                 _customers = dbContext.Customer
-                            .Include("Address")
+                            .Include(K => K.Location)
+                             .Include(d => d.Employee)
+                             .Include(f => f.Status)
+                             .Include(g => g.Purpose)
+                              .Include(h => h.EnquiryLevel)
+                              .Where(p => p.IsActive ==true)
+                            .ToList();
+            }
+
+            return _customers;
+        }
+
+        public IEnumerable<BusinessModels.Customer> GetAll(int locID)
+        {
+            var _customers = new List<BusinessModels.Customer>();
+            using (var dbContext = new CustomerDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _customers = dbContext.Customer
+                            .Include(K => K.Location)
+                             .Include(d => d.Employee)
+                             .Include(f => f.Status)
+                             .Include(g => g.Purpose)
+                              .Include(h => h.EnquiryLevel)
+                             .Where(p => p.LocationID == locID && p.IsActive==true)
+                            .ToList();
+            }
+
+            return _customers;
+        }
+
+        public IEnumerable<BusinessModels.Customer> GetAll(int locID, int empID)
+        {
+            var _customers = new List<BusinessModels.Customer>();
+            using (var dbContext = new CustomerDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _customers = dbContext.Customer
+                            .Include(K => K.Location)
+                             .Include(d => d.Employee)
+                             .Include(f => f.Status)
+                             .Include(g => g.Purpose)
+                              .Include(h => h.EnquiryLevel)
+                             .Where(p => p.LocationID == locID && p.CreatedBy== empID && p.IsActive == true)
                             .ToList();
             }
 
@@ -57,8 +105,13 @@ namespace DataLayer
                 {
                     dbContext.Configuration.LazyLoadingEnabled = false;
                     _customers = dbContext.Customer
+                        .Include(K => K.Location)
+                             .Include(d => d.Employee)
+                             .Include(f => f.Status)
+                             .Include(g => g.Purpose)
+                              .Include(h => h.EnquiryLevel)
                                 .ToList()
-                                .Where(p => (p != null && !string.IsNullOrEmpty(p.CustomerName) && p.CustomerName.Contains(prefix)))
+                                .Where(p => (p != null && !string.IsNullOrEmpty(p.CustomerName) && p.CustomerName.Contains(prefix) && p.IsActive == true))
                                 .ToList();
                 }
                 catch (Exception ex)
@@ -88,7 +141,7 @@ namespace DataLayer
             return true;
         }
 
-        public Boolean Insert(BusinessModels.Customer customer)
+        public BusinessModels.Customer Insert(BusinessModels.Customer customer)
         {
             using (var dbContext = new CustomerDbContext())
             {
@@ -96,7 +149,7 @@ namespace DataLayer
                 dbContext.SaveChanges();
             }
 
-            return true;
+            return customer;
         }
 
     }

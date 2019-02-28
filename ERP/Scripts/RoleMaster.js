@@ -36,21 +36,21 @@
     });
 
     $(document).on('change', '#drpRoleMasterRoleType', function () {
-        //alert("Test");
+        
         // debugger;
         varRoleTypeText = $("#drpRoleMasterRoleType").val();
         $("#hdnRoleType").val(varRoleTypeText);
     });
 
     $(document).on('change', '#drpRoleMasterModules', function () {
-        //alert("Test");
+        
         // debugger;
         varModulesText = $("#drpRoleMasterModules").val();
         $("#hdnModules").val(varModulesText);
     });
 
     $(document).on('change', '#drpRoleMasterRegion', function () {
-        //alert("Test");
+        
         // debugger;
         varRegionText = $("#drpRoleMasterRegion").val();
         $("#hdnRegion").val(varRegionText);

@@ -54,6 +54,7 @@
     <Compile Include="Location.cs" />
     <Compile Include="Modules.cs" />
     <Compile Include="Priority.cs" />
+    <Compile Include="Stocks.cs" />
     <Compile Include="ProductEnquiry.cs" />
     <Compile Include="ProductEnquiryDetails.cs" />
     <Compile Include="ProductMaster.cs" />

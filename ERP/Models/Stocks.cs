@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,15 +8,16 @@ using System.Web.Mvc;
 
 namespace ERP.Models
 {
-    public class ProductEnquiry
+    public class Stocks
     {
-        public ProductEnquiry()
+        public Stocks()
         {
             Identity = -1;
+            Size = "";
+            Quantity = 0;
         }
 
         [Key]
-        [DefaultValue(-1)]
         public Int32 Identity
         {
             get;
@@ -24,23 +25,13 @@ namespace ERP.Models
         }
 
 
-        public int? CustomerID
+        public int ItemID
         {
             get;
             set;
         }
 
-        public int? EnquiryLevelID
-        {
-            get;
-            set;
-        }
 
-        public int? StatusID
-        {
-            get;
-            set;
-        }
 
         public int? LocationId
         {
@@ -48,23 +39,28 @@ namespace ERP.Models
             set;
         }
 
-        public int? AssignedTo
+
+
+        public string Size
         {
             get;
             set;
         }
 
-        public int? VerifiedBy
+        public decimal Quantity
         {
             get;
             set;
         }
 
-        public int? ApprovedBy
+        public int CompanyTypeID
         {
             get;
             set;
         }
+
+
+
         public DateTime? CreatedDate
         {
             get;
@@ -75,13 +71,7 @@ namespace ERP.Models
             get;
             set;
         }
-
         public int? ModifiedBy
-        {
-            get;
-            set;
-        }
-        public int? OriginatorID
         {
             get;
             set;
@@ -92,29 +82,21 @@ namespace ERP.Models
             set;
         }
 
-       
+        
 
         public Location Location
-        { get; set; }
-
-        public Customer Customer
-        { get; set; }
-
-        public Status Status
-        { get; set; }
-
-        public EnquiryLevel EnquiryLevel
-        { get; set; }
-
-        public Employee Employee
-        { get; set; }
-
-        public int ItemID
         {
             get;
             set;
         }
-        public int Quantity
+
+        public ItemMaster ItemMaster
+        {
+            get;
+            set;
+        }
+
+        public CompanyType CompanyType
         {
             get;
             set;
@@ -122,24 +104,6 @@ namespace ERP.Models
 
         public Boolean IsActive
         { get; set; }
-
-        public string Size
-        {
-            get;
-            set;
-        }
-
-        public Boolean IsVerified
-        { get; set; }
-
-        public decimal ItemPrice
-        {
-            get;
-            set;
-        }
-
-        public ICollection<ProductEnquiryDetails> ProductEnquiryDetails { get; set; }
-        
 
         public SelectList ProductMasterList
         { get; set; }
@@ -154,5 +118,6 @@ namespace ERP.Models
         { get; set; }
 
         
+
     }
 }

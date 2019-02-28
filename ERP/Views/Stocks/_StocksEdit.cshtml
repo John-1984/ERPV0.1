@@ -1,0 +1,125 @@
+﻿@model ERP.Models.Stocks
+
+@using (Html.BeginForm("Update", "Stocks", FormMethod.Post, new { @id = "registerFormId" }))
+{
+
+<div class="container StocksDetails col-md-12 col-lg-12 commonPadding">
+    <div class="row  col-md-12 col-lg-12ccommonPadding">
+        @*@{
+                var categories = Model.ErrorList; // Cast the list
+            }
+
+            @if(Model.ErrorList != null && Model.ErrorList.Count > 0)
+            {
+            @foreach (var c in @categories) // Print the list
+            {
+                @Html.Label(categories.ToString());
+            }
+            }*@
+
+        &nbsp;
+    </div>
+    <div class="row col-md-12 col-lg-12 commonPadding">
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">Product Category :</div>
+                <div class="float-right col-md-5 col-lg-5">
+                    @Html.DropDownList("drpStocksDetProductMaster", (IEnumerable<SelectListItem>)Model.ProductMasterList, "Select Category", new { @class = "dropdownstyles", name = "drpStocksDetProductMaster" })
+                    @*<span class="input-validation-error" data-valmsg-for="StocksDetName" data-valmsg-replace="true"></span>*@
+                    <input type="hidden" name="hdnProductMaster" id="hdnProductMaster" />
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">Vendor :</div>
+                <div class="float-right col-md-5 col-lg-5">
+                    @Html.DropDownList("drpStocksDetVendor", (IEnumerable<SelectListItem>)Model.VendorList, "Select Vendor", new { @class = "dropdownstyles", name = "drpStocksDetVendor" })
+                    @*<span class="input-validation-error" data-valmsg-for="StocksDetName" data-valmsg-replace="true"></span>*@
+                    <input type="hidden" name="hdnVendor" id="hdnVendor" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row col-md-12 col-lg-12 commonPadding">
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">Brand :</div>
+                <div class="float-right col-md-5 col-lg-5">
+                    @Html.DropDownList("drpStocksDetBrand", (IEnumerable<SelectListItem>)Model.BrandList, "Select Brand", new { @class = "dropdownstyles", name = "drpStocksDetBrand" })
+                    @*<span class="input-validation-error" data-valmsg-for="StocksDetName" data-valmsg-replace="true"></span>*@
+                    <input type="hidden" name="hdnBrand" id="hdnBrand" />
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">Item :</div>
+                <div class="float-right col-md-5 col-lg-5">
+                    @Html.DropDownList("drpStocksDetItem", (IEnumerable<SelectListItem>)Model.ItemList, "Select Item", new { @class = "dropdownstyles", name = "drpStocksDetItem" })
+                    @*<span class="input-validation-error" data-valmsg-for="StocksDetName" data-valmsg-replace="true"></span>*@
+                    <input type="hidden" name="hdnItem" id="hdnItem" value="@Model.ItemID" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row col-md-12 col-lg-12 commonPadding">
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">Size :</div>
+                <div class="float-right col-md-5 col-lg-5">
+                    <input class="textareastyles" style="width:300px;height:35px;" type="text" id="Size" name="Size" value="@(Model.Size)" placeholder="Enter size" />
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">Quantity :</div>
+                <div class="float-right col-md-5 col-lg-5">
+                    <input class="textareastyles" style="width:300px;height:35px;" type="text" id="Quantity" name="Quantity" value="@(Model.Quantity)" placeholder="Enter Quantity Required" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row col-md-12 col-lg-12 commonPadding">
+        <div class="col-md-6 col-lg-6"><input type="button" data-url="@Url.Action("Update", "Stocks")" class="formbutton float-right StocksAddEdit" data-identity="@(Model.Identity)" value="Update/Add" /></div>
+
+        <div class="col-md-6 col-lg-6">
+            <input type="button" value="Cancel" data-url="@Url.Action("_StocksCancel", "Stocks")" data-identity="-1" class="formbutton StocksCancel" />
+        </div>
+
+        <input type="hidden" name="Identity" value="@(Model.Identity)">
+        <input type="hidden" name="LocationId" value="@(Model.LocationId)">
+        <input type="hidden" name="CompanyTypeID" value="@(Model.CompanyTypeID)">
+        <input type="hidden" name="CreatedDate" value="@(Model.CreatedDate)">
+        <input type="hidden" name="CreatedBy" value="@(Model.CreatedBy)">
+        <input type="hidden" name="ModifiedBy" value="@(Model.ModifiedBy)">
+        <input type="hidden" name="ModifiedDate" value="@(Model.ModifiedDate)">
+        <input type="hidden" name="IsActive" value="@(Model.IsActive)">
+    </div>
+
+
+
+</div>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

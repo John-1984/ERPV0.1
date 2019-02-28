@@ -3,83 +3,94 @@
 @using (Html.BeginForm("Update", "Company", FormMethod.Post, new { @id = "registerFormId" }))
 {
 
-    <div class="container CompanyDetails col-md-12 col-lg-12 commonPadding">
-        <div class="row  col-md-12 col-lg-12ccommonPadding">
-            @*@{
-                    var categories = Model.ErrorList; // Cast the list
-                }
+<div class="container CompanyDetails col-md-12 col-lg-12 commonPadding">
+    <div class="row  col-md-12 col-lg-12ccommonPadding">
+        @*@{
+                var categories = Model.ErrorList; // Cast the list
+            }
 
-                @if(Model.ErrorList != null && Model.ErrorList.Count > 0)
-                {
-                @foreach (var c in @categories) // Print the list
-                {
-                    @Html.Label(categories.ToString());
-                }
-                }*@
+            @if(Model.ErrorList != null && Model.ErrorList.Count > 0)
+            {
+            @foreach (var c in @categories) // Print the list
+            {
+                @Html.Label(categories.ToString());
+            }
+            }*@
 
-            &nbsp;
-        </div>
-        <div class="row  col-md-12 col-lg-12">
+        &nbsp;
+    </div>
+    <div class="row col-md-12 col-lg-12 ">
+
+        <div class="row col-md-12 col-lg-12">
             <div class="col-md-6 col-lg-6">
+
                 <div class="row col-md-12 col-lg-12">
-                    <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div><label>Region :</label></div></div>
-                    <div class="float-right col-md-7 col-lg-8">
+                    <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div><label>Region:</label></div></div>
+                    <div class="float-right col-md-8 col-lg-8">
                         @* @Html.DropDownList("Mobiledropdown1", Model.RegionList)*@
-                        @Html.DropDownList("drpCompRegion", (IEnumerable<SelectListItem>)Model.RegionList, "Select Region", new { @class = "dropdownstyles", name="drpCompRegion" })
+                        @Html.DropDownList("drpCompRegion", (IEnumerable<SelectListItem>)Model.RegionList, "Select Region", new { @class = "dropdownstyles", name = "drpCompRegion" })
                         @*<span class="input-validation-error" data-valmsg-for="CompanyName" data-valmsg-replace="true"></span>*@
                         <input type="hidden" name="hdnRegion" id="hdnRegion" />
+
                     </div>
 
                 </div>
+                <div class="row col-md-12 col-lg-12" style="height:7px">
+                </div>
                 <div class="row col-md-12 col-lg-12">
-                    <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div><label>Country :</label></div></div>
-                    <div class="float-right col-md-7 col-lg-8">
+                    <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div><label>Country:</label></div></div>
+                    <div class="float-right col-md-8 col-lg-8">
                         @* @Html.DropDownList("Mobiledropdown1", Model.RegionList)*@
                         @Html.DropDownList("drpCompCountry", (IEnumerable<SelectListItem>)Model.CountryList, "Select Country", new { @class = "dropdownstyles", name = "drpCompCountry" })
                         @*<span class="input-validation-error" data-valmsg-for="CompanyName" data-valmsg-replace="true"></span>*@
                         <input type="hidden" name="hdnCountry" id="hdnCountry" />
+
                     </div>
 
                 </div>
-
+                <div class="row col-md-12 col-lg-12" style="height:7px">
+                </div>
                 <div class="row col-md-12 col-lg-12">
-                    <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div><label>State :</label></div></div>
-                    <div class="float-right col-md-7 col-lg-8">
+                    <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div><label>State:</label></div></div>
+                    <div class="float-right col-md-8 col-lg-8">
                         @* @Html.DropDownList("Mobiledropdown1", Model.RegionList)*@
                         @Html.DropDownList("drpCompState", (IEnumerable<SelectListItem>)Model.StateList, "Select State", new { @class = "dropdownstyles", name = "drpCompState" })
                         @*<span class="input-validation-error" data-valmsg-for="CompanyName" data-valmsg-replace="true"></span>*@
                         <input type="hidden" name="hdnState" id="hdnState" />
+
                     </div>
 
                 </div>
-
+                <div class="row col-md-12 col-lg-12" style="height:7px">
+                </div>
                 <div class="row col-md-12 col-lg-12">
-                    <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div><label>District :</label></div></div>
-                    <div class="float-right col-md-7 col-lg-8">
+                    <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div><label>District:</label></div></div>
+                    <div class="float-right col-md-8 col-lg-8">
                         @* @Html.DropDownList("Mobiledropdown1", Model.RegionList)*@
                         @Html.DropDownList("drpcompdistrict", (IEnumerable<SelectListItem>)Model.DistrictList, "Select District", new { @class = "dropdownstyles", name = "drpcompdistrict" })
                         @*<span class="input-validation-error" data-valmsg-for="CompanyName" data-valmsg-replace="true"></span>*@
                         <input type="hidden" name="hdnDistrict" id="hdnDistrict" />
+
                     </div>
 
                 </div>
-
+                <div class="row col-md-12 col-lg-12" style="height:7px">
+                </div>
                 <div class="row col-md-12 col-lg-12">
-                    <div class="float-left col-md-5 col-lg-4 lablestyles textright height-13"><div><label>Location :</label></div></div>
-                    <div class="float-right col-md-7 col-lg-8">
+                    <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div><label>Location:</label></div></div>
+                    <div class="float-right col-md-8 col-lg-8">
                         @* @Html.DropDownList("Mobiledropdown1", Model.RegionList)*@
                         @Html.DropDownList("drpComplocation", (IEnumerable<SelectListItem>)Model.LocationList, "Select location", new { @class = "dropdownstyles", name = "drpComplocation" })
                         @*<span class="input-validation-error" data-valmsg-for="CompanyName" data-valmsg-replace="true"></span>*@
                         <input type="hidden" name="hdnLocation" id="hdnLocation" value="@Model.LocationID" />
+
                     </div>
 
                 </div>
-
-
-            </div>
-            <div class="col-md-6 col-lg-6">
+                <div class="row col-md-12 col-lg-12" style="height:7px">
+                </div>
                 <div class="row col-md-12 col-lg-12">
-                    <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div style="padding-top:14px;"><label>Company Name :</label></div></div>
+                    <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div><label>Company Name:</label></div></div>
                     <div class="float-right col-md-8 col-lg-8">
                         <input class="textareastyles" style="width:300px;height:35px;" type="text" name="CompanyName" value="@(Model.CompanyName)" placeholder="Enter Company Name" />
                         @*<span class="input-validation-error" data-valmsg-for="CompanyName" data-valmsg-replace="true"></span>*@
@@ -87,24 +98,26 @@
                     </div>
 
                 </div>
+                <div class="row col-md-12 col-lg-12" style="height:7px">
+                </div>
 
             </div>
-
         </div>
-
-        <div class="row col-md-12 col-lg-12 commonPadding">
-            <div class="col-md-6 col-lg-6"><input type="button" data-url="@Url.Action("Update", "Company")" class="formbutton float-right CompanyAddEdit" data-identity="@(Model.Identity)" value="Update/Add" /></div>
-           
-            <div class="col-md-6 col-lg-6">
-                <input type="button" value="Cancel" data-url="@Url.Action("_CompanyCancel", "Company")" data-identity="-1" class="formbutton CompanyCancel" />
-            </div>
-            
-            <input type="hidden" name="Identity" value="@(Model.Identity)">
-        </div>
-
-
-
     </div>
+    
+    <div class="row col-md-12 col-lg-12 commonPadding">
+        <div class="col-md-3 col-lg-3 textright"><input type="button" data-url="@Url.Action("Update", "Company")" class="formbutton CompanyAddEdit" data-identity="@(Model.Identity)" value="Update/Add" /></div>
+
+        <div class="col-md-6 col-lg-6">
+            <input type="button" value="Cancel" data-url="@Url.Action("_CompanyCancel", "Company")" data-identity="-1" class="formbutton CompanyCancel" />
+        </div>
+
+        <input type="hidden" name="Identity" value="@(Model.Identity)">
+    </div>
+
+
+
+</div>
 }
 
 

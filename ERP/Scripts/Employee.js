@@ -205,8 +205,8 @@ $(document).ready(function () {
     $(document).on('change', '#drpEmployeeRoleMaster', function () {
         
         // debugger;
-        varEmployeeRoleMasterText = $("#drpEmployeeRoleMaster").val();
-        $("#hdnRoleMaster").val(varEmployeeRoleMasterText);
+        var EmployeeRoleMasterText = $("#drpEmployeeRoleMaster").val();
+        $("#hdnRoleMaster").val(EmployeeRoleMasterText);
 
         
     });
@@ -214,8 +214,8 @@ $(document).ready(function () {
     $(document).on('change', '#drpEmployeeidentificationType', function () {
         
         // debugger;
-        varEmployeeidentificationTypeText = $("#drpEmployeeidentificationType").val();
-        $("#hdnidentification").val(varEmployeeidentificationTypeText);
+        var EmployeeidentificationTypeText = $("#drpEmployeeidentificationType").val();
+        $("#hdnempidentification").val(EmployeeidentificationTypeText);
 
         
     });

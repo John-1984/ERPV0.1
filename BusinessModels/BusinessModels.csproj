@@ -85,6 +85,8 @@
     <Compile Include="Workflow\Workflow.cs" />
     <Compile Include="Workflow\Step.cs" />
     <Compile Include="Workflow\WorkflowStepMapping.cs" />
+    <Compile Include="Workflow\ActiveWorkflow.cs" />
+    <Compile Include="Workflow\ActiveStep.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

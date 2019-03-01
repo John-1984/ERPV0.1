@@ -8,10 +8,14 @@ namespace DataLayer.Workflow
 {
     public class WorkflowDAL
     {
+        private const string messageFormatShort = "WorkflowDAL:: Method: {0} - DateTime: {1} - Exception: {2}";
+        private readonly LoggingModule.Logging _logger;
         public WorkflowDAL()
         {
+            _logger = new LoggingModule.Logging();
         }
 
+        #region "Workflow Management"
         public List<BusinessModels.Workflow.Workflow> GetAllWorkflows()
         {
             var _workflows = new List<BusinessModels.Workflow.Workflow>();
@@ -58,7 +62,8 @@ namespace DataLayer.Workflow
             }
             catch (Exception ex)
             {
-
+                var message = "OnException:: ";
+                message = message + string.Format(messageFormatShort, "GetWorkflowSteps", DateTime.Now.ToString(), ex.Message);
             }
 
             return _steps;
@@ -142,7 +147,8 @@ namespace DataLayer.Workflow
             }
             catch (Exception ex)
             {
-
+                var message = "OnException:: ";
+                message = message + string.Format(messageFormatShort, "DeleteWorkflowStep", DateTime.Now.ToString(), ex.Message);
             }
 
             return true;
@@ -174,7 +180,8 @@ namespace DataLayer.Workflow
                 }
                 catch (Exception ex)
                 {
-                    var et = ex.Message;
+                    var message = "OnException:: ";
+                    message = message + string.Format(messageFormatShort, "GetMatchingWorkflows", DateTime.Now.ToString(), ex.Message);
                 }
             }
 
@@ -196,11 +203,75 @@ namespace DataLayer.Workflow
                 }
                 catch (Exception ex)
                 {
-                    var et = ex.Message;
+                    var message = "OnException:: ";
+                    message = message + string.Format(messageFormatShort, "GetMatchingSteps", DateTime.Now.ToString(), ex.Message);
                 }
             }
 
             return _steps;
         }
+        #endregion
+
+        #region "Workflow Initialization"
+        /// <summary>
+        /// Activates the workflow.
+        /// </summary>
+        /// <returns><c>true</c>, if workflow was activated, <c>false</c> otherwise.</returns>
+        /// <param name="WorkflowID">Workflow identifier.</param>
+        /// <param name="userID">User identifier.</param>
+        /// <param name="workItemID">Work item identifier.</param>
+        /// <param name="workItemType">Work item type.</param>
+        public Boolean ActivateWorkflow(int WorkflowID, int userID, int workItemID, string workItemType)
+        {
+            //Get all Workflow Steps
+            var _workflowSteps = GetWorkflowSteps(WorkflowID);
+            var _activeSteps = new List<BusinessModels.Workflow.ActiveStep>();
+
+            //Generate the Active Steps
+            _workflowSteps.ForEach(p => {
+                _activeSteps.Add(new BusinessModels.Workflow.ActiveStep() { 
+                    Comments = string.Empty,
+                    HasNotificationSend = "No",
+                    Status = _workflowSteps.IndexOf(p) == 0? "Active": string.Empty, //Set first item as Active
+                    StepID = p.Identity,
+                    UpdatedDate = DateTime.Now.ToString()
+                });
+            });
+            
+            //Generate the complete Active Workflow and Active Steps Model for insertion
+            var _activeWorkflows = new BusinessModels.Workflow.ActiveWorkflow()
+            {
+                WorkflowID = WorkflowID,
+                Status = "InProgress",
+                PurchaseID = workItemID,
+                CreatedBy = userID.ToString(),
+                CreatedDate = DateTime.Now.ToString(),
+                CurrentStepID = _workflowSteps.First().Identity,
+                PreviousStepID =  _workflowSteps.First().Identity,
+                ActiveStep = _activeSteps
+            };
+
+            using (var dbContext = new WorkflowDbContext())
+            {
+                try
+                {
+                    dbContext.Entry(_activeWorkflows).State = EntityState.Added;
+                    dbContext.SaveChanges();
+
+                    //Test if ID is returned back.
+                    var test = _activeWorkflows.ActiveID;
+                }
+                catch (Exception ex)
+                {
+                    var message = "OnException:: ";
+                    message = message + string.Format(messageFormatShort, "ActivateWorkflow", DateTime.Now.ToString(), ex.Message);
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        #endregion
     }
 }

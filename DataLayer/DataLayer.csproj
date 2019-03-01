@@ -141,6 +141,10 @@
       <Project>{CAC5FD58-E0F1-423C-B1FF-F65E151CF844}</Project>
       <Name>BusinessModels</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LoggingModule\LoggingModule.csproj">
+      <Project>{6AB77425-2932-49C0-8EDC-53B725DC56DE}</Project>
+      <Name>LoggingModule</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Workflow\" />

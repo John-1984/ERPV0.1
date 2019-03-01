@@ -14,6 +14,8 @@ namespace DataLayer.Workflow
         public DbSet<BusinessModels.Workflow.Workflow> Workflow { get; set; }
         public DbSet<BusinessModels.Workflow.Step> Step { get; set; }
         public DbSet<BusinessModels.Workflow.WorkflowStepMapping> WorkflowStepMapping { get; set; }
+        public DbSet<BusinessModels.Workflow.ActiveWorkflow> ActiveWorkflow { get; set; }
+        public DbSet<BusinessModels.Workflow.ActiveStep> ActiveStep { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

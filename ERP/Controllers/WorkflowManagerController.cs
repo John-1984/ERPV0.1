@@ -252,5 +252,12 @@ namespace ERP.Controllers
 
             return Json(steps);
         }
+
+        public ActionResult InitiateWorkflow()
+        {
+            var _workflowInitializer = new WorkflowManager.WorkflowInitializer();
+            _workflowInitializer.InitializeWorkflow(3, 1, 1, "Sales");
+            return new EmptyResult();
+        }
     }
 }

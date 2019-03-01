@@ -6,6 +6,11 @@
     <div class=" BodyWelcomeText centered">
         Manage Workflows
     </div>
+    <div>
+        <form action="/WorkflowManager/InitiateWorkflow" method="get">
+            <input type="submit" value="Initiate Workflow" name="Submit" id="initiateWorkflow" />
+        </form>
+    </div>
 
     <div class="commonPadding height-20">
         @{Html.RenderPartial("_WorkflowAdd");}

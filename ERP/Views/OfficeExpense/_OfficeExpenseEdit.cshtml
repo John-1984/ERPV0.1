@@ -1,0 +1,93 @@
+@model ERP.Models.OfficeExpense 
+
+
+<div class="container CountryDetails col-md-12 col-lg-12 commonPadding">
+    <div class="row  col-md-12 col-lg-12ccommonPadding">
+        @*@{
+                var categories = Model.ErrorList; // Cast the list
+            }
+
+            @if(Model.ErrorList != null && Model.ErrorList.Count > 0)
+            {
+            @foreach (var c in @categories) // Print the list
+            {
+                @Html.Label(categories.ToString());
+            }
+            }*@
+
+        &nbsp;
+    </div>
+
+    <div class="row col-md-12 col-lg-12 ">
+
+        <div class="row col-md-12 col-lg-12">
+            <div class="col-md-6 col-lg-6">
+
+                <div class="row col-md-12 col-lg-12">
+                    <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div><label>Expense Type:</label></div></div>
+                    <div class="float-right col-md-8 col-lg-8">
+                        @Html.DropDownList("drpOfficeExpenseTpe", (IEnumerable<SelectListItem>)Model.ExpenseTypeList, "Select Expense Type", new { @class = "dropdownstyles", name = "drpOfficeExpenseTpe" })
+                        <input type="hidden" name="hdnOfficeexpensetype" id="hdnOfficeexpensetype" value="@(Model.ExpenseID)" />
+
+                    </div>
+
+                </div>
+                <div class="row col-md-12 col-lg-12" style="height:7px">
+                </div>
+
+                <div class="row col-md-12 col-lg-12">
+                    <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div><label>Amount:</label></div></div>
+                    <div class="float-right col-md-8 col-lg-8">
+                        <input class="textareastyles" style="width:300px;height:35px;" type="text" name="Amount" value="@(Model.Amount)" placeholder="Enter Amount" />
+
+                    </div>
+
+                </div>
+                <div class="row col-md-12 col-lg-12" style="height:7px">
+                </div>
+
+                <div class="row col-md-12 col-lg-12">
+                    <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div><label>Comments:</label></div></div>
+                    <div class="float-right col-md-8 col-lg-8">
+                        <textarea name="Comments" rows="8" cols="50" class="textareastyles" placeholder="Enter comments (if any)">@(Model.Comments)</textarea>
+
+                    </div>
+
+                </div>
+                <div class="row col-md-12 col-lg-12" style="height:7px">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="row col-md-12 col-lg-12 commonPadding">
+        <div class="col-md-3 col-lg-3 textright">
+            <input type="button" data-url="@Url.Action("Update", "Country")" class="formbutton CountryAddEdit" data-identity="@(Model.Identity)" value="Update/Add" />
+        </div>
+
+        <div class="col-md-6 col-lg-6">
+            <input type="button" value="Cancel" data-url="@Url.Action("_CountryCancel", "Country")" data-identity="-1" class="formbutton CountryCancel" />
+        </div>
+        <input type="hidden" name="Identity" value="@(Model.Identity)">
+
+        <input type="hidden" name="CreatedDate" value="@(Model.CreatedDate)">
+        <input type="hidden" name="CreatedBy" value="@(Model.CreatedBy)">
+        <input type="hidden" name="ModifiedBy" value="@(Model.ModifiedBy)">
+        <input type="hidden" name="ModifiedDate" value="@(Model.ModifiedDate)">
+        <input type="hidden" name="VerifiedBy" value="@(Model.VerifiedBy)">
+        <input type="hidden" name="ApprovedBy" value="@(Model.ApprovedBy)">
+        <input type="hidden" name="StatusID" value="@(Model.StatusID)">
+        <input type="hidden" name="LocationID" value="@(Model.LocationID)">
+        <input type="hidden" name="CompanyTypeID" value="@(Model.CompanyTypeID)">
+        <input type="hidden" name="OriginatorID" value="@(Model.OriginatorID)">
+        <input type="hidden" name="AssignedTo" value="@(Model.AssignedTo)">
+
+        <input type="hidden" name="IsActive" value="@(Model.IsActive)">
+    </div>
+
+
+
+</div>

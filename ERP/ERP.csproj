@@ -114,6 +114,7 @@
     <Compile Include="Controllers\DistrictController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\ErrorLoggerAttribute.cs" />
+    <Compile Include="Controllers\ExpenseTypeController.cs" />
     <Compile Include="Controllers\FloorMasterController.cs" />
     <Compile Include="Controllers\HeaderController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -121,6 +122,7 @@
     <Compile Include="Controllers\ItemMasterController.cs" />
     <Compile Include="Controllers\LocalSupplierController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
+    <Compile Include="Controllers\OfficeExpenseController.cs" />
     <Compile Include="Controllers\PendingCustomerInfoController.cs" />
     <Compile Include="Controllers\PendingPRVerificationController.cs" />
     <Compile Include="Controllers\ProductEnquiryController.cs" />
@@ -140,7 +142,7 @@
     <Compile Include="Controllers\StockOutController.cs" />
     <Compile Include="Controllers\StockReturnController.cs" />
     <Compile Include="Controllers\StocksController.cs" />
-    <Compile Include="Controllers\StockShortageController.cs" />
+    <Compile Include="Controllers\StocksShortageController.cs" />
     <Compile Include="Controllers\StockTransferController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\SupplierQuotationController.cs" />
@@ -177,6 +179,7 @@
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Modules.cs" />
+    <Compile Include="Models\OfficeExpense.cs" />
     <Compile Include="Models\Priority.cs" />
     <Compile Include="Models\ProductEnquiry.cs" />
     <Compile Include="Models\ProductEnquiryComments.cs" />
@@ -187,6 +190,7 @@
     <Compile Include="Models\PurchaseRequestDetails.cs" />
     <Compile Include="Models\PurchaseRequestType.cs" />
     <Compile Include="Models\Purpose.cs" />
+    <Compile Include="Models\ExpenseType.cs" />
     <Compile Include="Models\Region.cs" />
     <Compile Include="Models\ReportMenu.cs" />
     <Compile Include="Models\RoleAccess.cs" />
@@ -236,6 +240,8 @@
     <Content Include="Scripts\PendingCustomerInfoJS.js" />
     <Content Include="Scripts\ItemMaster - Copy.js" />
     <Content Include="Scripts\PendingPRVerification.js" />
+    <Content Include="Scripts\ExpenseType.js" />
+    <Content Include="Scripts\OfficeExpense.js" />
     <Content Include="Scripts\Stocks.js" />
     <Content Include="Scripts\ProductEnquiry.js" />
     <Content Include="Scripts\Brand.js" />
@@ -265,6 +271,8 @@
     <Content Include="Scripts\RoleType.js" />
     <Content Include="Scripts\SalesRoleType.js" />
     <Content Include="Scripts\State.js" />
+    <Content Include="Scripts\DeadStock.js" />
+    <Content Include="Scripts\StocksShortage.js" />
     <Content Include="Scripts\Tax.js" />
     <Content Include="Scripts\UOMMaster.js" />
     <Content Include="Scripts\Vendor.js" />
@@ -377,8 +385,6 @@
     <Content Include="Views\StockOut\Index.cshtml" />
     <Content Include="Views\StockReturn\Index.cshtml" />
     <Content Include="Views\StockTransfer\Index.cshtml" />
-    <Content Include="Views\DeadStock\Index.cshtml" />
-    <Content Include="Views\StockShortage\Index.cshtml" />
     <Content Include="Views\Region\_RegionView.cshtml" />
     <Content Include="Views\Region\_RegionSearch.cshtml" />
     <Content Include="Views\Region\_RegionEdit.cshtml" />
@@ -395,10 +401,6 @@
     <Content Include="Views\Country\_CountrySearch.cshtml" />
     <Content Include="Views\Country\_CountryEdit.cshtml" />
     <Content Include="Views\Country\_CountryAll.cshtml" />
-    <Content Include="Views\DeadStock\_DeadStockView.cshtml" />
-    <Content Include="Views\DeadStock\_DeadStockSearch.cshtml" />
-    <Content Include="Views\DeadStock\_DeadStockEdit.cshtml" />
-    <Content Include="Views\DeadStock\_DeadStockAll.cshtml" />
     <Content Include="Views\Discount\_DiscountView.cshtml" />
     <Content Include="Views\Discount\_DiscountSearch.cshtml" />
     <Content Include="Views\Discount\_DiscountEdit.cshtml" />
@@ -487,10 +489,6 @@
     <Content Include="Views\StockReturn\_StockReturnSearch.cshtml" />
     <Content Include="Views\StockReturn\_StockReturnEdit.cshtml" />
     <Content Include="Views\StockReturn\_StockReturnAll.cshtml" />
-    <Content Include="Views\StockShortage\_StockShortageView.cshtml" />
-    <Content Include="Views\StockShortage\_StockShortageSearch.cshtml" />
-    <Content Include="Views\StockShortage\_StockShortageEdit.cshtml" />
-    <Content Include="Views\StockShortage\_StockShortageAll.cshtml" />
     <Content Include="Views\StockTransfer\_StockTransferView.cshtml" />
     <Content Include="Views\StockTransfer\_StockTransferSearch.cshtml" />
     <Content Include="Views\StockTransfer\_StockTransferEdit.cshtml" />
@@ -554,6 +552,22 @@
     <Content Include="Views\Stocks\_StocksSearch.cshtml" />
     <Content Include="Views\Stocks\_StocksView.cshtml" />
     <Content Include="Views\Stocks\Index.cshtml" />
+    <Content Include="Views\StocksShortage\Index.cshtml" />
+    <Content Include="Views\StocksShortage\_StocksShortageSearch.cshtml" />
+    <Content Include="Views\StocksShortage\_StocksShortageAll.cshtml" />
+    <Content Include="Views\ExpenseType\Index.cshtml" />
+    <Content Include="Views\ExpenseType\_ExpenseTypeAll.cshtml" />
+    <Content Include="Views\ExpenseType\_ExpenseTypeEdit.cshtml" />
+    <Content Include="Views\ExpenseType\_ExpenseTypeSearch.cshtml" />
+    <Content Include="Views\ExpenseType\_ExpenseTypeView.cshtml" />
+    <Content Include="Views\OfficeExpense\_OfficeExpenseAll.cshtml" />
+    <Content Include="Views\OfficeExpense\_OfficeExpenseEdit.cshtml" />
+    <Content Include="Views\OfficeExpense\_OfficeExpenseSearch.cshtml" />
+    <Content Include="Views\OfficeExpense\_OfficeExpenseView.cshtml" />
+    <Content Include="Views\OfficeExpense\Index.cshtml" />
+    <Content Include="Views\DeadStock\_DeadStockAll.cshtml" />
+    <Content Include="Views\DeadStock\_DeadStockSearch.cshtml" />
+    <Content Include="Views\DeadStock\Index.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

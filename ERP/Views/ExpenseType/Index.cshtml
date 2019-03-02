@@ -6,20 +6,20 @@
 <div class="container">
     <div class="col-md-12 col-lg-12 width-100">
         <div class="col-md-12 col-lg-12 BodyWelcomeText textleft headermode" style="border-bottom:1px dashed #8A7B69; padding-top:5px;">
-            View Dead Stock Info
+            View Expense Type Info
         </div>
-
-        <div class="col-md-12 col-lg-12 commonPadding DeadStockSearchDetials">
-            @{Html.RenderPartial("_DeadStockSearch");}
+       
+        <div class="col-md-12 col-lg-12 commonPadding ExpenseTypeSearchDetials">
+            @{Html.RenderPartial("_ExpenseTypeSearch");}           
 
         </div>
         <div class="col-md-12 col-lg-12 height-10">
             @ViewData["ActionUpdate"]
         </div>
         <div class="col-md-12 col-lg-12 resultView commonPadding">
-            @{Html.RenderAction("_DeadStockAll", "DeadStock");}
+            @{Html.RenderAction("_ExpenseTypeAll", "ExpenseType");}
         </div>
 
     </div>
 
-</div>
+    </div>

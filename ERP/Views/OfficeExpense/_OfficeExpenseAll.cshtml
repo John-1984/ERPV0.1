@@ -1,0 +1,56 @@
+@using X.PagedList;
+@using X.PagedList.Mvc;
+@model IPagedList<ERP.Models.OfficeExpense>
+<div class="container">
+    <div class="col-md-12 col-lg-12 commonPadding">
+        <table class="table OfficeExpenseAll">
+            <thead>
+                <tr class="gridheader">
+                    <th>Expense Type</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    @*<th>View</th>*@
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Count() == 0)
+                {
+                    <tr class="col-md-12 col-lg-12 gridrow">
+                        <td>No Data Found</td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var OfficeExpense in Model)
+                    {
+
+                    <tr class="gridrow">
+                        <td class="gridrow">@OfficeExpense.ExpenseType.TypeName</td>
+                        <td class="gridrow">@OfficeExpense.Amount</td>
+                        <td class="gridrow">@OfficeExpense.Status.StatusName</td>
+                        @*<td class="gridrow "><img src="~/Content/view.gif" alt="View" class="OfficeExpenseView pointer" data-url="@Url.Action("_OfficeExpenseView", "OfficeExpense")" data-identity="@(OfficeExpense.Identity)" /> </td>*@
+                        <td class="gridrow "><img src="~/Content/edit.png" alt="View" class="OfficeExpenseEdit pointer" data-url="@Url.Action("_OfficeExpenseEdit", "OfficeExpense")" data-identity="@(OfficeExpense.Identity)" /></td>
+                        <td class="gridrow "><img src="~/Content/delete.png" alt="View" class="OfficeExpenseDelete pointer" data-url="@Url.Action("Delete", "OfficeExpense")" data-identity="@(OfficeExpense.Identity)" /></td>
+
+                    </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-12 col-lg-12 nopadding textright">
+        <div class="col-md-6 col-lg-6">
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+
+        </div>
+        <div class="col-md-6 col-lg-6">
+            @Html.PagedListPager(Model, page => Url.Action("Sorting", new { page, sortOrder = ViewBag.CurrentSort, createdDate = ViewBag.CreatedDate, searchString = ViewBag.SearchString }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { InsertionMode = InsertionMode.Replace, HttpMethod = "GET", UpdateTargetId = "resultView" }))
+
+        </div> 
+    </div>
+</div>
+

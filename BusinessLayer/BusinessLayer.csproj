@@ -40,6 +40,7 @@
     <Compile Include="CommonFunctions.cs" />
     <Compile Include="CompanyType.cs" />
     <Compile Include="Country.cs" />
+    <Compile Include="OfficeExpense.cs" />
     <Compile Include="PendingCustomerInfo.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="Discount.cs" />
@@ -54,6 +55,9 @@
     <Compile Include="Location.cs" />
     <Compile Include="Modules.cs" />
     <Compile Include="Priority.cs" />
+    <Compile Include="ExpenseType.cs" />
+    <Compile Include="DeadStock.cs" />
+    <Compile Include="StocksShortage.cs" />
     <Compile Include="Stocks.cs" />
     <Compile Include="ProductEnquiry.cs" />
     <Compile Include="ProductEnquiryDetails.cs" />

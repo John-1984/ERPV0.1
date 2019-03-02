@@ -77,9 +77,7 @@ namespace DataLayer
             }
 
             return _Stockss;
-        }
-
-     
+        }     
 
         public IEnumerable<BusinessModels.Stocks> GetAll(int locID)
         {
@@ -117,6 +115,140 @@ namespace DataLayer
                              .Include(e => e.ItemMaster.Brand.Vendor)
                             .Include(r => r.ItemMaster.Brand.Vendor.ProductMaster)
                              .Where(p => p.Location.Identity == locID && p.CreatedBy == empID && p.IsActive == true)
+                            .ToList();
+            }
+
+            return _Stockss;
+        }
+
+        public IEnumerable<BusinessModels.Stocks> GetAllStocksShortage()
+        {
+            //Need to do
+            var _Stockss = new List<BusinessModels.Stocks>();
+            using (var dbContext = new StocksDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _Stockss = dbContext.Stocks
+                             .Include(K => K.Location)
+                             .Include(l => l.CompanyType)
+                             .Include(l => l.ItemMaster)
+                             .Include(e => e.ItemMaster.Brand)
+                             .Include(e => e.ItemMaster.Brand.Vendor)
+                            .Include(r => r.ItemMaster.Brand.Vendor.ProductMaster)
+                            .Where(p => p.IsActive == true && p.Quantity<100)
+                            .ToList();
+            }
+
+            return _Stockss;
+        }
+
+        public IEnumerable<BusinessModels.Stocks> GetAllStockShortage(int locID)
+        {
+            //Need to do
+            var _Stockss = new List<BusinessModels.Stocks>();
+            using (var dbContext = new StocksDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _Stockss = dbContext.Stocks
+                             .Include(K => K.Location)
+                             .Include(l => l.CompanyType)
+                             .Include(l => l.ItemMaster)
+                             .Include(e => e.ItemMaster.Brand)
+                             .Include(e => e.ItemMaster.Brand.Vendor)
+                            .Include(r => r.ItemMaster.Brand.Vendor.ProductMaster)
+                             .Where(p => p.Location.Identity == locID && p.IsActive == true && p.Quantity < 100)
+                            .ToList();
+            }
+
+            return _Stockss;
+        }
+
+        public IEnumerable<BusinessModels.Stocks> GetAllStocksShortage(int locID, int empID)
+        {
+            //Need to do
+            var _Stockss = new List<BusinessModels.Stocks>();
+            using (var dbContext = new StocksDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _Stockss = dbContext.Stocks
+                              .Include(K => K.Location)
+                             .Include(l => l.CompanyType)
+                             .Include(l => l.ItemMaster)
+                             .Include(e => e.ItemMaster.Brand)
+                             .Include(e => e.ItemMaster.Brand.Vendor)
+                            .Include(r => r.ItemMaster.Brand.Vendor.ProductMaster)
+                             .Where(p => p.Location.Identity == locID && p.CreatedBy == empID && p.IsActive == true && p.Quantity < 100)
+                            .ToList();
+            }
+
+            return _Stockss;
+        }
+
+
+        public IEnumerable<BusinessModels.Stocks> GetAllDeadStock()
+        {
+            //Need to do
+            DateTime dtNow = DateTime.Now;
+            DateTime dtDead = DateTime.Now.AddDays(-100);
+
+            var _Stockss = new List<BusinessModels.Stocks>();
+            using (var dbContext = new StocksDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _Stockss = dbContext.Stocks
+                             .Include(K => K.Location)
+                             .Include(l => l.CompanyType)
+                             .Include(l => l.ItemMaster)
+                             .Include(e => e.ItemMaster.Brand)
+                             .Include(e => e.ItemMaster.Brand.Vendor)
+                            .Include(r => r.ItemMaster.Brand.Vendor.ProductMaster)
+                            .Where(p => p.IsActive == true && p.Quantity < 100 && p.ModifiedDate < dtDead)
+                            .ToList();
+            }
+
+            return _Stockss;
+        }
+
+        public IEnumerable<BusinessModels.Stocks> GetAllDeadStock(int locID)
+        {
+            DateTime dtNow = DateTime.Now;
+            DateTime dtDead = DateTime.Now.AddDays(-100);
+            //Need to do
+            var _Stockss = new List<BusinessModels.Stocks>();
+            using (var dbContext = new StocksDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _Stockss = dbContext.Stocks
+                             .Include(K => K.Location)
+                             .Include(l => l.CompanyType)
+                             .Include(l => l.ItemMaster)
+                             .Include(e => e.ItemMaster.Brand)
+                             .Include(e => e.ItemMaster.Brand.Vendor)
+                            .Include(r => r.ItemMaster.Brand.Vendor.ProductMaster)
+                             .Where(p => p.Location.Identity == locID && p.IsActive == true && p.Quantity < 100 && p.ModifiedDate < dtDead)
+                            .ToList();
+            }
+
+            return _Stockss;
+        }
+
+        public IEnumerable<BusinessModels.Stocks> GetAllDeadStock(int locID, int empID)
+        {
+            DateTime dtNow = DateTime.Now;
+            DateTime dtDead = DateTime.Now.AddDays(-100);
+            //Need to do
+            var _Stockss = new List<BusinessModels.Stocks>();
+            using (var dbContext = new StocksDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _Stockss = dbContext.Stocks
+                              .Include(K => K.Location)
+                             .Include(l => l.CompanyType)
+                             .Include(l => l.ItemMaster)
+                             .Include(e => e.ItemMaster.Brand)
+                             .Include(e => e.ItemMaster.Brand.Vendor)
+                            .Include(r => r.ItemMaster.Brand.Vendor.ProductMaster)
+                             .Where(p => p.Location.Identity == locID && p.CreatedBy == empID && p.IsActive == true && p.Quantity < 100 && p.ModifiedDate < dtDead)
                             .ToList();
             }
 

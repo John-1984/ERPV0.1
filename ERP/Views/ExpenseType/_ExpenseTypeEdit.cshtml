@@ -1,0 +1,54 @@
+﻿@model ERP.Models.ExpenseType
+
+@using (Html.BeginForm("Update", "ExpenseType", FormMethod.Post, new { @id = "registerFormId" }))
+{
+
+<div class="container ExpenseTypeDetails col-md-12 col-lg-12 commonPadding">
+    <div class="row  col-md-12 col-lg-12ccommonPadding" >
+        @*@{
+            var categories = Model.ErrorList; // Cast the list
+        }
+
+        @if(Model.ErrorList != null && Model.ErrorList.Count > 0)
+        {
+        @foreach (var c in @categories) // Print the list
+        {
+            @Html.Label(categories.ToString());
+        }
+        }*@
+
+        &nbsp;
+    </div>
+    <div class="row col-md-12 col-lg-12 ">
+
+        <div class="row col-md-12 col-lg-12">
+            <div class="col-md-6 col-lg-6">
+
+                <div class="row col-md-12 col-lg-12">
+                    <div class="float-left col-md-4 col-lg-4 lablestyles textright height-13"><div><label>ExpenseType Name:</label></div></div>
+                    <div class="float-right col-md-8 col-lg-8">
+                        <input class="textareastyles" style="width:300px;height:35px;" type="text" name="ExpenseTypeName" value="@(Model.TypeName)" placeholder="Enter ExpenseType Name" />
+
+                    </div>
+
+                </div>
+                <div class="row col-md-12 col-lg-12" style="height:7px">
+                </div>             
+
+            </div>
+        </div>
+    </div>
+
+            <div class="row col-md-12 col-lg-12 commonPadding">
+                <div class="col-md-3 col-lg-3 textright"><input type="button" data-url="@Url.Action("Update", "ExpenseType")" class="formbutton ExpenseTypeAddEdit" data-identity="@(Model.Identity)" value="Update/Add" /></div>
+
+                <div class="col-md-6 col-lg-6">
+                    <input type="button" value="Cancel" data-url="@Url.Action("_ExpenseTypeCancel", "ExpenseType")" data-identity="-1" class="formbutton ExpenseTypeCancel" />
+                </div>
+                <input type="hidden" name="Identity" value="@(Model.Identity)">
+            </div>
+
+
+
+        </div>
+        }

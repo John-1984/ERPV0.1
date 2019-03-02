@@ -47,6 +47,8 @@ namespace ERP
                 cfg.CreateMap<BusinessModels.RoleAccess, ERP.Models.RoleAccess>().ReverseMap();
                 cfg.CreateMap<BusinessModels.PurchaseRequestDetails, ERP.Models.PurchaseRequestDetails>().ReverseMap();
                 cfg.CreateMap<BusinessModels.Stocks, ERP.Models.Stocks>().ReverseMap();
+                cfg.CreateMap<BusinessModels.ExpenseType, ERP.Models.ExpenseType>().ReverseMap();
+                cfg.CreateMap<BusinessModels.OfficeExpense, ERP.Models.OfficeExpense>().ReverseMap();
 
                 cfg.CreateMap<BusinessModels.PurchaseRequest, ERP.Models.PurchaseRequest>().ForMember(d => d.PurchaseRequestDetails, o => o.Ignore());
                 cfg.CreateMap<BusinessModels.Workflow.Workflow, ERP.Models.Workflow.Workflow>().ReverseMap();

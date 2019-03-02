@@ -32,6 +32,8 @@
     <Reference Include="System.Data.Entity" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OfficeExpense.cs" />
+    <Compile Include="ExpenseType.cs" />
     <Compile Include="Stocks.cs" />
     <Compile Include="ProductEnquiryComments.cs" />
     <Compile Include="Purpose.cs" />

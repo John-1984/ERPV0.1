@@ -164,7 +164,6 @@ $.ajax({
             data: { "identity": $(this).attr("data-identity") },
             //async: true,
             success: function (data, status, xhr) {
-
                 $('.CustomerSearchDetials').show();
                 $('.CustomerAdd').show();
                 $('.resultView').html(data);
@@ -175,7 +174,8 @@ $.ajax({
             }
         });
     });
-$("#customerName").autocomplete({
+
+$(document).find("#customerName").autocomplete({
             source: function (request, response) {
                 $.ajax({
                     url: '/Customer/AutoComplete/',

@@ -3,6 +3,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using ERP.Controllers;
+using LoggingModule;
 
 namespace ERP
 {
@@ -19,10 +20,15 @@ namespace ERP
 
         protected void Application_Error(object sender, EventArgs e)
         {
+            Logging _logger = new Logging();
+            var message = "Application_Error:: ";
+            string messageFormatShort = "IP: {0} - DateTime: {1}";
+
             HttpContext httpContext = HttpContext.Current;
+            RequestContext requestContext;
             if (httpContext != null)
             {
-                RequestContext requestContext = ((MvcHandler)httpContext.CurrentHandler).RequestContext;
+                   requestContext = ((MvcHandler)httpContext.CurrentHandler).RequestContext;
             }
             //var httpContext = ((MvcApplication)sender).Context;
             var currentController = " ";
@@ -60,6 +66,12 @@ namespace ERP
                         // others if any
                 }
             }
+
+            //Log the Error Message
+            message = message + string.Format(messageFormatShort, httpContext.Request.UserHostAddress, httpContext.Timestamp);
+            message = message + " - URL: " + httpContext.Request.Url;
+            message = message + " - Exception: " + ex.Message;
+            _logger.Log(message, Logging.LoggingMode.Error);
 
             httpContext.ClearError();
             httpContext.Response.Clear();

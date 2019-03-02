@@ -1,0 +1,49 @@
+﻿@using X.PagedList;
+@using X.PagedList.Mvc;
+@model IPagedList<ERP.Models.Workflow.Workflow>
+    <div class="container">
+        <div class="col-md-12 col-lg-12 commonPadding">
+            <table class="table">
+                <thead>
+                    <tr class="gridheader">
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Count() == 0)
+                    {
+                        <tr class="col-md-12 col-lg-12">
+                            <td>No Data Found</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        foreach (var workflow in Model)
+                        {
+                            <tr class="gridrow">
+                                <td class="gridrow">@(workflow.Name)</td>
+                                <td class="gridrow">@(workflow.Description)</td>
+                                <td class="gridrow "><img src="~/Content/delete.png" alt="View" class="pointer deleteWorkflow" data-url="@Url.Action("DeleteWorkflow", "WorkflowManager")" data-identity="@(workflow.Identity)" /></td>
+
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-12 col-lg-12 nopadding textright">
+            <div class="col-md-6 col-lg-6">
+                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+
+            </div>
+            <div class="col-md-6 col-lg-6">
+                @Html.PagedListPager(Model, page => Url.Action("WorkflowPaging", new { page, sortOrder = ViewBag.CurrentSort, createdDate = ViewBag.CreatedDate, searchString = ViewBag.SearchString }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { InsertionMode = InsertionMode.Replace, HttpMethod = "GET", UpdateTargetId = "resultView" }))
+
+            </div>
+        </div>
+    </div>
+

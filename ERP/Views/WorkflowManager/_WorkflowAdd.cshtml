@@ -1,0 +1,32 @@
+﻿@model ERP.Models.Workflow.Workflow
+
+
+<div class="container col-md-12 col-lg-12 workflowDetails commonPadding">
+    <div class="row commonPadding col-md-12 col-lg-12" style="padding-bottom:13px;">
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-5 col-lg-5 textright lablestyles">
+                    Name :
+                </div>
+                <div class="float-right col-md-7 col-lg-7 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                    <input type="text" name="Name" class="textareastyles" style="width:220px;height:27px;" placeholder="Enter Name" />
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-6 textright">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-5 col-lg-5 textright lablestyles">
+                    Description :
+                </div>
+                <div class="float-right col-md-7 col-lg-7 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                    <input type="text" class="textareastyles" style="width:220px;height:27px;" name="Description" placeholder="Enter Descritption" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row commonPadding">
+        <div class="col-md-6 col-lg-5"><input type="button" class="formbutton float-right addWorkflow" data-url="@Url.Action("AddWorkflow", "WorkflowManager")" data-identity="-1" value="Add" /></div>
+    </div>
+</div>

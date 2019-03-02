@@ -29,6 +29,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data.Entity" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="OfficeExpense.cs" />
@@ -83,9 +84,17 @@
     <Compile Include="WarehouseMaster.cs" />
     <Compile Include="Warranty.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="Workflow\Workflow.cs" />
+    <Compile Include="Workflow\Step.cs" />
+    <Compile Include="Workflow\WorkflowStepMapping.cs" />
+    <Compile Include="Workflow\ActiveWorkflow.cs" />
+    <Compile Include="Workflow\ActiveStep.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Workflow\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

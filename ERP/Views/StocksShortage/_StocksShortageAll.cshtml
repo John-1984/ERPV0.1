@@ -4,7 +4,7 @@
 
 <div class="container">
     <div class="col-md-12 col-lg-12 commonPadding">
-        <table class="table DeadStockAll">
+        <table class="table StocksShortageAll">
             <thead>
                 <tr class="gridheader">
                     <th>Product Category</th>
@@ -13,7 +13,7 @@
                     <th>Item Name</th>
                     <th>Quantity</th>
                     <th>Size</th>
-                    @*<th>View</th>*@
+                    <th>Create Purchase Request</th>
                     @*<th>Edit</th>*@
                     @*<th>Delete</th>*@
                 </tr>
@@ -28,8 +28,9 @@
                     <td class="gridrow "> @Stocks.ItemMaster.ItemName</td>
                     <td class="gridrow "> @Stocks.Quantity</td>
                     <td class="gridrow">@Stocks.Size</td>
-                    @*<td class="gridrow "><img src="~/Content/view.gif" alt="View" class="DeadStockView pointer" data-url="@Url.Action("_DeadStockView", "DeadStock")" data-identity="@(DeadStock.Identity)" /> </td>*@
-                    @*<td class="gridrow "><img src="~/Content/edit.png" alt="Edit" class="DeadStockAdd pointer" data-url="@Url.Action("_DeadStockEdit", "DeadStock")" data-identity="@(Stocks.Identity)" /></td>*@
+                    <td class="gridrow "><img src="~/Content/process.png" alt="Edit" class="StocksShortageCreateRequest pointer" data-url="@Url.Action("_StocksShortageCreateRequest", "StocksShortage")" data-identity="@(Stocks.Identity)" /></td>
+                    @*<td class="gridrow "><img src="~/Content/view.gif" alt="View" class="StocksShortageView pointer" data-url="@Url.Action("_StocksShortageView", "StocksShortage")" data-identity="@(StocksShortage.Identity)" /> </td>*@
+                    @*<td class="gridrow "><img src="~/Content/edit.png" alt="Edit" class="StocksShortageAdd pointer" data-url="@Url.Action("_StocksShortageEdit", "StocksShortage")" data-identity="@(Stocks.Identity)" /></td>*@
 
                 </tr>
 

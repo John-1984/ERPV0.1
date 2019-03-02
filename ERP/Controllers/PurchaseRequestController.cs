@@ -291,7 +291,6 @@ namespace ERP.Controllers
             mdPurchaseRequest.CompanyTypeID = Convert.ToInt32(Convert.ToString(Session["EmployeeCompanyTypeID"]));
             mdPurchaseRequest.POStatus= 1;
             mdPurchaseRequest.IsActive = true;
-            mdPurchaseRequest.IsVerified = false;
 
             var hdnPurchaseType = frmFields["hdnpurReqType"];
             if (!String.IsNullOrEmpty(hdnPurchaseType))

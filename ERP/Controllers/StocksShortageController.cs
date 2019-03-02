@@ -9,21 +9,23 @@ using System.Globalization;
 
 namespace ERP.Controllers
 {
-    public class DeadStockController : Controller
+    public class StocksShortageController : Controller
     {
-        private BusinessLayer.DeadStock _Stocks = new BusinessLayer.DeadStock();
+        private BusinessLayer.StocksShortage _Stocks = new BusinessLayer.StocksShortage();
+        private BusinessLayer.PurchaseRequest _PurchaseRequest = new BusinessLayer.PurchaseRequest();
+        private BusinessLayer.PurchaseRequestDetails _PurchaseRequestDetails = new BusinessLayer.PurchaseRequestDetails();
         public ActionResult Index()
         {
             return View();
         }
 
-        public PartialViewResult _DeadStockAll()
+        public PartialViewResult _StocksShortageAll()
         {
             return PartialView(GetStockss("", 1, "", ""));
         }
 
         [HttpGet]
-        public PartialViewResult _DeadStockEdit(int identity)
+        public PartialViewResult _StocksShortageEdit(int identity)
         {
             if (identity.Equals(-1))
             {
@@ -84,12 +86,12 @@ namespace ERP.Controllers
         }
 
         [HttpGet]
-        public ActionResult _DeadStockCancel(int identity)
+        public ActionResult _StocksShortageCancel(int identity)
         {
-            return RedirectToAction("_DeadStockAll");
+            return RedirectToAction("_StocksShortageAll");
         }
         [HttpGet]
-        public PartialViewResult _DeadStockView(int identity)
+        public PartialViewResult _StocksShortageView(int identity)
         {
             return PartialView(AutoMapperConfig.Mapper().Map<Models.Stocks>(_Stocks.GetStocks(identity)));
         }
@@ -98,7 +100,7 @@ namespace ERP.Controllers
         public ActionResult Delete(int identity)
         {
             _Stocks.Delete(identity);
-            return RedirectToAction("_DeadStockAll");
+            return RedirectToAction("_StocksShortageAll");
         }
 
         [HttpPost]
@@ -131,18 +133,43 @@ namespace ERP.Controllers
                 mdStocks.ModifiedDate = DateTime.Now;
                 _Stocks.Update(mdStocks);
             }
-            return RedirectToAction("_DeadStockAll");
+            return RedirectToAction("_StocksShortageAll");
         }
+        [HttpPost]
+        public ActionResult _StocksShortageCreateRequest(int identity)
+        {
+            //Create purchase request
+            BusinessModels.PurchaseRequest mdPurchaseRequest = new BusinessModels.PurchaseRequest();
+            mdPurchaseRequest.LocationID = Convert.ToInt32(Convert.ToString(Session["LocationID"]));
+            mdPurchaseRequest.CompanyTypeID = Convert.ToInt32(Convert.ToString(Session["EmployeeCompanyTypeID"]));
+            mdPurchaseRequest.POStatus = 1;
+            mdPurchaseRequest.IsActive = true;
+            mdPurchaseRequest.IsVerified = false;
+            mdPurchaseRequest.IsApproved = false;
+            mdPurchaseRequest.CreatedDate = DateTime.Now;
+            mdPurchaseRequest.CreatedBy = Convert.ToInt32(Convert.ToString(Session["EmployeeID"]));
+            mdPurchaseRequest.OriginatorID = Convert.ToInt32(Convert.ToString(Session["EmployeeID"]));
+            BusinessModels.PurchaseRequest result=_PurchaseRequest.Insert(mdPurchaseRequest);
 
+            //Insert Item Details
+            BusinessModels.Stocks mdstrock = _Stocks.GetStocks(identity);
+            BusinessModels.PurchaseRequestDetails mdPurchaseRequestdetails = new BusinessModels.PurchaseRequestDetails();
+            mdPurchaseRequestdetails.PurchaseRequestID = result.Identity;
+            mdPurchaseRequestdetails.Quantity = Convert.ToInt32(0);
+            mdPurchaseRequestdetails.Purpose = String.Empty;
+            _PurchaseRequestDetails.Insert(mdPurchaseRequestdetails);
+            //_PurchaseRequest.Delete(identity);
+            return RedirectToAction("_PurchaseRequestAll");
+        }
         [HttpPost]
         public PartialViewResult StocksSearch(string searchString, string createdDate = "")
         {
-            return PartialView("_DeadStockAll", GetStockss("", 1, createdDate, searchString));
+            return PartialView("_StocksShortageAll", GetStockss("", 1, createdDate, searchString));
         }
 
         public PartialViewResult Sorting(int? page, string sortOrder = "", string createdDate = "", string searchString = "")
         {
-            return PartialView("_DeadStockAll", GetStockss(sortOrder, page, createdDate, searchString));
+            return PartialView("_StocksShortageAll", GetStockss(sortOrder, page, createdDate, searchString));
         }
 
         private IPagedList<Models.Stocks> GetStockss(string sortOrder, int? page, string createdDate = "", string searchString = "")
@@ -155,23 +182,23 @@ namespace ERP.Controllers
             var Stockss = new List<Models.Stocks>();
 
             if (Convert.ToString(Session["RoleAccess"]) == "1")
-                Stockss = AutoMapperConfig.Mapper().Map<List<Models.Stocks>>(_Stocks.GetAllDeadStock());
+                Stockss = AutoMapperConfig.Mapper().Map<List<Models.Stocks>>(_Stocks.GetAllStockShortage());
             else if (Convert.ToString(Session["RoleAccess"]) == "2")
-                Stockss = AutoMapperConfig.Mapper().Map<List<Models.Stocks>>(_Stocks.GetAllDeadStock(Convert.ToInt32(Convert.ToString(Session["LocationID"]))));
+                Stockss = AutoMapperConfig.Mapper().Map<List<Models.Stocks>>(_Stocks.GetAllStockShortage(Convert.ToInt32(Convert.ToString(Session["LocationID"]))));
             else if (Convert.ToString(Session["RoleAccess"]) == "3")
-                Stockss = AutoMapperConfig.Mapper().Map<List<Models.Stocks>>(_Stocks.GetAllDeadStock(Convert.ToInt32(Convert.ToString(Session["LocationID"])), Convert.ToInt32(Convert.ToString(Session["EmployeeID"]))));
+                Stockss = AutoMapperConfig.Mapper().Map<List<Models.Stocks>>(_Stocks.GetAllStockShortage(Convert.ToInt32(Convert.ToString(Session["LocationID"])), Convert.ToInt32(Convert.ToString(Session["EmployeeID"]))));
 
 
             if (!string.IsNullOrEmpty(searchString) && !string.IsNullOrEmpty(createdDate))
-                Stockss = AutoMapperConfig.Mapper().Map<List<Models.Stocks>>(_Stocks.GetAllDeadStock().ToList().FindAll(p => p.ItemMaster.ItemName.ToLower().Contains(searchString.ToLower()) && ((DateTime)p.CreatedDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+                Stockss = AutoMapperConfig.Mapper().Map<List<Models.Stocks>>(_Stocks.GetAllStockShortage().ToList().FindAll(p => p.ItemMaster.ItemName.ToLower().Contains(searchString.ToLower()) && ((DateTime)p.CreatedDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
             else if (!string.IsNullOrEmpty(searchString))
-                Stockss = AutoMapperConfig.Mapper().Map<List<Models.Stocks>>(_Stocks.GetAllDeadStock().ToList().FindAll(p => p.ItemMaster.ItemName.ToLower().Contains(searchString.ToLower())));
+                Stockss = AutoMapperConfig.Mapper().Map<List<Models.Stocks>>(_Stocks.GetAllStockShortage().ToList().FindAll(p => p.ItemMaster.ItemName.ToLower().Contains(searchString.ToLower())));
             else if (!string.IsNullOrEmpty(createdDate))
-                Stockss = AutoMapperConfig.Mapper().Map<List<Models.Stocks>>(_Stocks.GetAllDeadStock().ToList().FindAll(p => ((DateTime)p.CreatedDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+                Stockss = AutoMapperConfig.Mapper().Map<List<Models.Stocks>>(_Stocks.GetAllStockShortage().ToList().FindAll(p => ((DateTime)p.CreatedDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
 
             switch (sortOrder)
             {
-                case "CustomerName":
+                case "ItemName":
                     Stockss = Stockss.OrderByDescending(stu => stu.ItemMaster.ItemName).ToList();
                     break;
                 case "DateAsc":

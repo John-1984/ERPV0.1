@@ -47,8 +47,12 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OfficeExpenseDAL.cs" />
+    <Compile Include="OfficeExpenseDbContext.cs" />
     <Compile Include="PendingCustomerInfoDAL.cs" />
     <Compile Include="PendingCustomerInfoDbContext.cs" />
+    <Compile Include="ExpenseTypeDAL.cs" />
+    <Compile Include="ExpenseTypeDbContext.cs" />
     <Compile Include="StocksDAL.cs" />
     <Compile Include="StocksDbContext.cs" />
     <Compile Include="ProductEnquiryDetailsDAL.cs" />

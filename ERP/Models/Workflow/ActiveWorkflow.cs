@@ -1,17 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BusinessModels.Workflow
+namespace ERP.Models.Workflow
 {
     public class ActiveWorkflow
     {
         public ActiveWorkflow()
         {
+            ActiveID = -1;
+            WorkflowID = -1;
+            CreatedBy = string.Empty;
+            CreatedDate = string.Empty;
+            Status = string.Empty;
+            CurrentStepID = -1;
+            PreviousStepID = -1;
+            PurchaseID = -1;
+            ActiveStep = new List<ActiveStep>();
+            Workflow = new Workflow();
+            CompletedDate = string.Empty;
         }
-
-        [System.ComponentModel.DataAnnotations.Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ActiveID { get; set; }
         public int WorkflowID { get; set; }
         public string CreatedDate { get; set; }
@@ -22,8 +29,7 @@ namespace BusinessModels.Workflow
         public int PurchaseID { get; set; }
         public string CompletedDate { get; set; }
 
-        public virtual ICollection<ActiveStep> ActiveStep { get; set; }
-        [ForeignKey("WorkflowID")]
-        public virtual Workflow Workflow { get; set; }
+        public ICollection<ActiveStep> ActiveStep { get; set; }
+        public Workflow Workflow { get; set; }
     }
 }

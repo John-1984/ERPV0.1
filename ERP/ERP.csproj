@@ -219,6 +219,8 @@
     <Compile Include="Models\Workflow\Step.cs" />
     <Compile Include="Controllers\WorkflowDashboardController.cs" />
     <Compile Include="Models\Workflow\WorkflowStepMapping.cs" />
+    <Compile Include="Models\Workflow\ActiveWorkflow.cs" />
+    <Compile Include="Models\Workflow\ActiveStep.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\AddNew.png" />
@@ -573,7 +575,7 @@
   <ProjectExtensions>
     <MonoDevelop>
       <Properties>
-        <XspParameters Port="8082" Address="127.0.0.1" SslMode="None" SslProtocol="Default" KeyType="None" CertFile="" KeyFile="" PasswordOptions="None" Password="" Verbose="True" />
+        <XspParameters Port="8083" Address="127.0.0.1" SslMode="None" SslProtocol="Default" KeyType="None" CertFile="" KeyFile="" PasswordOptions="None" Password="" Verbose="True" />
       </Properties>
     </MonoDevelop>
     <VisualStudio>

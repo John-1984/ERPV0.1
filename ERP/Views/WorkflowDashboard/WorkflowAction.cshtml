@@ -1,3 +1,58 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@using (Html.BeginForm("WorkflowActionHandler", "WorkflowDashboard", FormMethod.Post))
+{
+    <div class="container">
+        <div class="col-md-12 col-lg-12 commonPadding">
+            <table class="table">
+                <thead>
+                    <tr class="gridheader">
+                        <th>Item Name</th>
+                        <th>Item Description</th>
+                        <th>Quantity</th>
+                        <th>Unit Amount</th>
+                        <th>Total Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="gridrow">
+                        <td class="gridrow">Soap</td>
+                        <td class="gridrow">Soap</td>
+                        <td class="gridrow">12</td>
+                        <td class="gridrow">20</td>
+                        <td class="gridrow">240</td>
+                    </tr>
+                    <tr class="gridrow">
+                        <td class="gridrow">Iron Bar</td>
+                        <td class="gridrow">Iron Bar</td>
+                        <td class="gridrow">30 Bars</td>
+                        <td class="gridrow">200</td>
+                        <td class="gridrow">6000</td>
+                    </tr>
+                    <tr class="gridrow">
+                        <td class="gridrow">Watch</td>
+                        <td class="gridrow">Tisson</td>
+                        <td class="gridrow">1</td>
+                        <td class="gridrow">30000</td>
+                        <td class="gridrow">30000</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row commonPadding">
+            <div class="col-md-6 col-lg-5">
+                <input type="submit" class="formbutton float-left" name="Action" value="Approve" />
+            </div>
+            <div class="col-md-6 col-lg-5">
+                <input type="submit" class="formbutton float-right" name="Action" value="Reject" />
+            </div>
+            <div class="col-md-12 col-lg-12 commonPadding">
+                <textarea name="Comments" rows="6" cols="80" class="textareastyles" placeholder="Enter Comments"></textarea>
+            </div>
+            <input type="hidden" name="PurchaseID" value="@ViewBag.PurchaseID"/>
+            <input type="hidden" name="ActiveStepID" value="@ViewBag.ActiveStepID" />
+            <input type="hidden" name="ActiveWorkflowID" value="@ViewBag.ActiveWorkflowID" />
+        </div>
+    </div>
+}

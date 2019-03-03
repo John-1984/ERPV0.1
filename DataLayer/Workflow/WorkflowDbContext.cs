@@ -9,6 +9,7 @@ namespace DataLayer.Workflow
     {
         public WorkflowDbContext() : base("LocalMySqlServer")
         {
+            //this.Configuration.LazyLoadingEnabled = false;
         }
 
         public DbSet<BusinessModels.Workflow.Workflow> Workflow { get; set; }

@@ -54,6 +54,8 @@ namespace ERP
                 cfg.CreateMap<BusinessModels.Workflow.Workflow, ERP.Models.Workflow.Workflow>().ReverseMap();
                 cfg.CreateMap<BusinessModels.Workflow.Step, ERP.Models.Workflow.Step>().ReverseMap();
                 cfg.CreateMap<BusinessModels.Workflow.WorkflowStepMapping, ERP.Models.Workflow.WorkflowStepMapping>().ReverseMap();
+                cfg.CreateMap<BusinessModels.Workflow.ActiveStep, ERP.Models.Workflow.ActiveStep>().ReverseMap();
+                cfg.CreateMap<BusinessModels.Workflow.ActiveWorkflow, ERP.Models.Workflow.ActiveWorkflow>().ReverseMap();
 
             });
         }

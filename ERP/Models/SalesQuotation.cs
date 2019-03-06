@@ -12,9 +12,7 @@ namespace ERP.Models
         public SalesQuotation()
         {
             Identity = -1;
-            SOCode = string.Empty;
-            InvoiceNo = String.Empty;
-            Comments = String.Empty;
+            SQCode = string.Empty;           
         }
 
         [Key]
@@ -25,41 +23,27 @@ namespace ERP.Models
             set;
         }
 
-        [DefaultValue("")]
-        public string SOCode
-        {
-            get;
-            set;
-        }
-        public int WarehouseId
-        {
-            get;
-            set;
-        }
-        public int Status
-        {
-            get;
-            set;
-        }
-        public int priority
-        {
-            get;
-            set;
-        }
-        [DefaultValue("")]
-        public string Comments
-        {
-            get;
-            set;
-        }
-        [DefaultValue("")]
-        public string InvoiceNo
+        public int CompanyTypeID
+        { get; set; }
+        public string SQCode
         {
             get;
             set;
         }
 
-        public int CustomerID
+        public int AssignedTo
+        {
+            get;
+            set;
+        }
+
+        public int priority
+        {
+            get;
+            set;
+        }
+
+        public int ProductEnquiryID
         {
             get;
             set;
@@ -70,11 +54,16 @@ namespace ERP.Models
             get;
             set;
         }
-        public int AssignedTo
+
+        public int StatusID
         {
             get;
             set;
         }
+
+
+
+
         public int VerifiedBy
         {
             get;
@@ -106,6 +95,40 @@ namespace ERP.Models
             set;
         }
 
+        public int OriginatorID
+        {
+            get;
+            set;
+        }
+
+        public bool IsActive
+        {
+            get;
+            set;
+        }
+
+        public bool IsApproved
+        {
+            get;
+            set;
+        }
+
+        public Employee Employee
+        { get; set; }
+
+        public EnquiryLevel EnquiryLevel
+        { get; set; }
+
+        public ProductEnquiry ProductEnquiry
+        { get; set; }
+
+        public Location Location
+        { get; set; }
+
+        public Status Status
+        { get; set; }
+        public CompanyType CompanyType
+        { get; set; }
 
     }
 }

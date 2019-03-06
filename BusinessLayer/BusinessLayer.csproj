@@ -57,6 +57,7 @@
     <Compile Include="Priority.cs" />
     <Compile Include="ExpenseType.cs" />
     <Compile Include="DeadStock.cs" />
+    <Compile Include="SalesQuotationDetails.cs" />
     <Compile Include="StocksShortage.cs" />
     <Compile Include="Stocks.cs" />
     <Compile Include="ProductEnquiry.cs" />

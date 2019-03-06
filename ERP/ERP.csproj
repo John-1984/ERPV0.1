@@ -100,9 +100,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\DB\" />
-    <Folder Include="Views\WorkflowManager\" />
-    <Folder Include="Views\WorkflowDashboard\" />
-    <Folder Include="Models\Workflow\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\BrandController.cs" />
@@ -178,6 +175,7 @@
     <Compile Include="Models\LocalSupplier.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Login.cs" />
+    <Compile Include="Models\Menu.cs" />
     <Compile Include="Models\Modules.cs" />
     <Compile Include="Models\OfficeExpense.cs" />
     <Compile Include="Models\Priority.cs" />
@@ -198,6 +196,7 @@
     <Compile Include="Models\RoleMaster.cs" />
     <Compile Include="Models\RoleType.cs" />
     <Compile Include="Models\SalesQuotation.cs" />
+    <Compile Include="Models\SalesQuotationDetails.cs" />
     <Compile Include="Models\SalesRoleType.cs" />
     <Compile Include="Models\State.cs" />
     <Compile Include="Models\Status.cs" />

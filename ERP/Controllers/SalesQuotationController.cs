@@ -57,7 +57,7 @@ namespace ERP.Controllers
         [HttpPost]
         public PartialViewResult SalesQuotationSearch(string searchString)
         {
-            return PartialView("_SalesQuotationAll", AutoMapperConfig.Mapper().Map<List<Models.SalesQuotation>>(_SalesQuotation.GetAll().ToList().FindAll(p => p.SOCode.ToLower().Contains(searchString.ToLower()))));
+            return PartialView("_SalesQuotationAll", AutoMapperConfig.Mapper().Map<List<Models.SalesQuotation>>(_SalesQuotation.GetAll().ToList().FindAll(p => p.SQCode.ToLower().Contains(searchString.ToLower()))));
         }
 
         //Function to get random number

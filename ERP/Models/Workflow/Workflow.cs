@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime;
 using System.Web.Mvc;
 
@@ -12,20 +13,23 @@ namespace ERP.Models.Workflow
             Description = string.Empty;
             Name = string.Empty;
             CreatedDate = string.Empty;
-            CreatedBy = string.Empty;
+           // CreatedBy = string.Empty;
         }
 
         public int Identity { get; set; }
         public string Description { get; set; }
         public string Name { get; set; }
         public string CreatedDate { get; set; }
-        public string CreatedBy { get; set; }
+        public int CreatedBy { get; set; }
         public int LocationID { get; set; }
         public int CompanyTypeID { get; set; }
         public int CompanyID { get; set; }
         public int ItemType { get; set; }
 
-       
+        public Employee Employee
+        { get; set; }
+
+
         public Location Location
         { get; set; }
 
@@ -91,6 +95,11 @@ namespace ERP.Models.Workflow
             get;
             set;
         }
+
+        public ICollection<ProductEnquiryDetails> ProductEnquiryDetails { get; set; }
+
+        public string ItemTypeName { get; set; }
+        public Decimal TotalCost { get; set; }
 
     }
 }

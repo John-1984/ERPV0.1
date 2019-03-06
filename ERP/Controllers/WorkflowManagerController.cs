@@ -13,14 +13,28 @@ namespace ERP.Controllers
     public class WorkflowManagerController : Controller
     {
         private readonly WorkflowManager.WorkflowSetup _workflowSetup = new WorkflowManager.WorkflowSetup();
+        private BusinessLayer.Menu _menu = new BusinessLayer.Menu();
+        private BusinessLayer.Location _location = new BusinessLayer.Location();
+        private BusinessLayer.Employee _employee = new BusinessLayer.Employee();
         public ActionResult ManageWorkflows()
         {
-            return View();
+            Models.Workflow.Workflow mdWorkFlow = new Models.Workflow.Workflow();
+            mdWorkFlow.MenuList = null;
+            mdWorkFlow.MenuList = new SelectList(_menu.GetAllApprovalNeededItems(), "Identity", "Name");
+            mdWorkFlow.LocationList = null;
+            mdWorkFlow.LocationList = new SelectList(_location.GetAll(), "Identity", "LocationName");
+            return View(mdWorkFlow);
         }
 
         public ActionResult ManageSteps()
         {
-            return View();
+            Models.Workflow.Step mdStep = new Models.Workflow.Step();
+            mdStep.LocationList = null;
+            mdStep.LocationList= new SelectList(_location.GetAll(), "Identity", "LocationName");
+
+            mdStep.EmployeeList = null;
+            mdStep.EmployeeList = new SelectList(_employee.GetAll(), "Identity", "EmployeeName");
+            return View(mdStep);
         }
 
         public ActionResult AssociateWorkflowAndSteps()
@@ -45,18 +59,37 @@ namespace ERP.Controllers
 
         public PartialViewResult _StepAddViewEdit()
         {
-            return PartialView("_StepAddViewEdit", new Models.Workflow.Step());
+            Models.Workflow.Step mdStep = new Models.Workflow.Step();
+            mdStep.LocationList = null;
+            mdStep.LocationList = new SelectList(_location.GetAll(), "Identity", "LocationName");
+            mdStep.EmployeeList = null;
+            mdStep.EmployeeList= new SelectList(_employee.GetAll(), "Identity", "EmployeeName");
+            return PartialView("_StepAddViewEdit", mdStep);
         }
 
         public ActionResult _StepViewEdit(int identity)
         {
             return PartialView("_StepAddViewEdit", AutoMapperConfig.Mapper().Map<Models.Workflow.Step>(_workflowSetup.GetStep(identity)));
         }
-
         [HttpPost]
-        public ActionResult AddWorkflow(Models.Workflow.Workflow workflow)
+        public JsonResult Employee(string identity)
         {
-            workflow.CreatedBy = HttpContext.User.Identity.Name;
+
+            return Json(new SelectList(_employee.GetAllCompaniesonLocation(identity), "Identity", "EmployeeName"));
+        }
+        [HttpPost]
+        public ActionResult AddWorkflow(Models.Workflow.Workflow workflow, FormCollection frmFields)
+        {
+            var value = frmFields["hdnWorkFlowItemType"];
+
+            if (!String.IsNullOrEmpty(value))
+                workflow.ItemType = int.Parse(value);
+
+            var locvalue = frmFields["hdnWorkFlowLocation"];
+            if (!String.IsNullOrEmpty(locvalue))
+                workflow.LocationID = Convert.ToInt32(locvalue);
+
+            workflow.CreatedBy = Convert.ToInt32(Session["EmployeeID"].ToString());
             workflow.CreatedDate = DateTime.Now.ToString();
 
             _workflowSetup.AddWorkflow(AutoMapperConfig.Mapper().Map<BusinessModels.Workflow.Workflow>(workflow));
@@ -65,11 +98,17 @@ namespace ERP.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddEditStep(Models.Workflow.Step step)
+        public ActionResult AddEditStep(Models.Workflow.Step step, FormCollection frmFields)
         {
+            var empvalue = frmFields["hdnWorkFlowStepEmployee"];
+            if (!String.IsNullOrEmpty(empvalue))
+                step.StepOwner = empvalue;
+
             if (step.Identity == -1)
             {
-                step.CreatedBy = HttpContext.User.Identity.Name;
+                
+
+                step.CreatedBy = Session["EmployeeID"].ToString();
                 step.CreatedDate = DateTime.Now.ToString();
                 _workflowSetup.AddStep(AutoMapperConfig.Mapper().Map<BusinessModels.Workflow.Step>(step));
             }

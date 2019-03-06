@@ -57,6 +57,7 @@
     <Compile Include="Priority.cs" />
     <Compile Include="ExpenseType.cs" />
     <Compile Include="DeadStock.cs" />
+    <Compile Include="Menu.cs" />
     <Compile Include="SalesQuotationDetails.cs" />
     <Compile Include="StocksShortage.cs" />
     <Compile Include="Stocks.cs" />
@@ -96,6 +97,10 @@
     <ProjectReference Include="..\DataLayer\DataLayer.csproj">
       <Project>{280BE003-9755-4E6D-B222-14FD45DD93D7}</Project>
       <Name>DataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WorkflowManager\WorkflowManager.csproj">
+      <Project>{969d9f8d-6fc2-4b4f-9cf9-d97cb848f38c}</Project>
+      <Name>WorkflowManager</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

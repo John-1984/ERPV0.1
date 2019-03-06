@@ -19,6 +19,7 @@ namespace BusinessLayer
         private DataLayer.CompanyTypeDAL _comptypedataLayer = null;
         
         private DataLayer.EnquiryLevelDAL _enqlvldataLayer = null;
+        private DataLayer.MenuDAL _menudataLayer = null;
 
         private DataLayer.SalesQuotationDetailsDAL _sqDetailsdataLayer = null;
         public SalesQuotation()
@@ -33,6 +34,7 @@ namespace BusinessLayer
             _itemdataLayer = new DataLayer.ItemMasterDAL();
             _comptypedataLayer = new DataLayer.CompanyTypeDAL();           
             _enqlvldataLayer = new DataLayer.EnquiryLevelDAL();
+            _menudataLayer = new DataLayer.MenuDAL();
 
         }
 
@@ -40,7 +42,12 @@ namespace BusinessLayer
         {
             return _dataLayer.GetSalesQuotation(identity);
         }
-        public IEnumerable<BusinessModels.SalesQuotation> GetAll()
+
+        public BusinessModels.SalesQuotation GetSalesQuotationDetails(Int32 identity)
+        {
+            return _dataLayer.GetSalesQuotationDetails(identity);
+        }
+            public IEnumerable<BusinessModels.SalesQuotation> GetAll()
         {
             return _dataLayer.GetAll();
         }
@@ -59,7 +66,7 @@ namespace BusinessLayer
             return _dataLayer.GetAll(locID, empID);
         }
 
-        public bool UpdateSalesQuotationAssignedandStatus(int assignedid, int statusid, int identity)
+        public BusinessModels.SalesQuotation UpdateSalesQuotationAssignedandStatus(int assignedid, int statusid, int identity)
         {
             return _dataLayer.UpdateSalesQuotationAssignedandStatus(assignedid, statusid, identity);
         }
@@ -84,18 +91,42 @@ namespace BusinessLayer
             return _dataLayer.Delete(identity);
         }
 
+        
+
         public Boolean Update(BusinessModels.SalesQuotation SalesQuotation)
         {
             return _dataLayer.Update(SalesQuotation);
         }
 
-        public BusinessModels.SalesQuotation Insert(BusinessModels.SalesQuotation SalesQuotation)
+        public BusinessModels.SalesQuotation Insert(BusinessModels.ProductEnquiry prEnq, int companyType,string empID)
         {
-            BusinessModels.CompanyType mdcomp = _comptypedataLayer.GetCompanyType(SalesQuotation.CompanyTypeID);
-            string companyName = mdcomp.Company.CompanyName;
-            SalesQuotation.SQCode = "SQ#" + GetRandomAlphanumericString();           
-            return _dataLayer.Insert(SalesQuotation);
+            BusinessModels.SalesQuotation mdSalesQuote = new BusinessModels.SalesQuotation();
+            mdSalesQuote.LocationID = prEnq.LocationId;
+            mdSalesQuote.OriginatorID = prEnq.OriginatorID;
+            mdSalesQuote.EnquiryLevelID = prEnq.EnquiryLevelID;
+            mdSalesQuote.ProductEnquiryID = prEnq.Identity;
+            mdSalesQuote.IsActive = true;
+            mdSalesQuote.IsApproved = false;
+            mdSalesQuote.CreatedBy = prEnq.OriginatorID;
+            mdSalesQuote.CreatedDate = DateTime.Now;
+            mdSalesQuote.CompanyTypeID = companyType;
+            mdSalesQuote.StatusID = 1;
+            mdSalesQuote.AssignedTo = prEnq.AssignedTo;
+
+            mdSalesQuote.SQCode = "SQ#" + GetRandomAlphanumericString();
+            _dataLayer.Insert(mdSalesQuote);
+            WorkflowManager.WorkflowInitializer _workflowInitializer = new WorkflowManager.WorkflowInitializer();
+            //coded
+            BusinessModels.Menu mnID = _menudataLayer.GetMenuByName("Sales Quotation");
+            BusinessModels.Workflow.Workflow wrkFlow = _workflowInitializer.GetWorkFLowIDForLocationAndItemType(prEnq.LocationId,mnID.Identity);
+
+            _workflowInitializer.InitializeWorkflow(wrkFlow.Identity, Convert.ToInt32(empID), mdSalesQuote.Identity, mnID.Identity.ToString());
+
+            return mdSalesQuote;
         }
+
+       
+
         private static string GetRandomAlphanumericString()
         {
             const string alphanumericCharacters =

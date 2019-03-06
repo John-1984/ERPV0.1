@@ -20,7 +20,7 @@ namespace DataLayer
         public DbSet<BusinessModels.Status> Status { get; set; }
         public DbSet<BusinessModels.EnquiryLevel> EnquiryLevel { get; set; }
         public DbSet<BusinessModels.Employee> Employee { get; set; }
-      //  public DbSet<BusinessModels.ProductEnquiryDetails> ProductEnquiryDetails { get; set; }
+        public DbSet<BusinessModels.ProductEnquiryDetails> ProductEnquiryDetails { get; set; }
         //public DbSet<Veri> Address { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

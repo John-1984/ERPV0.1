@@ -13,8 +13,8 @@
                     <th>Created Date</th>
                     <th>Status</th>
                     <th>View</th>
-                    <th>Add Item</th>
-                    <th>Submit For Verfication</th>
+                    <th>Add Item</th>                   
+                    <th>Submit Quotation</th>
                     @*<th>Delete</th>*@
                 </tr>
             </thead>
@@ -28,8 +28,14 @@
                     <td class="gridrow">@ProductEnquiry.Customer.CreatedDate</td>
                     <td class="gridrow">@ProductEnquiry.Status.StatusName</td>
                     <td class="gridrow "><img src="~/Content/view.gif" alt="View" class="ProductEnquiryView pointer" data-url="@Url.Action("_ProductEnquiryView", "ProductEnquiry")" data-identity="@(ProductEnquiry.Identity)" /> </td>
-                    <td class="gridrow "><img src="~/Content/edit.png" alt="Edit" class="ProductEnquiryAdd pointer" data-url="@Url.Action("_ProductEnquiryEdit", "ProductEnquiry")" data-identity="@(ProductEnquiry.Identity)" /></td>
-                    <td class="gridrow "><img src="~/Content/process.png" alt="Edit" class="ProductEnquiryVerification pointer" data-url="@Url.Action("_ProductEnquiryProcessVerification", "ProductEnquiry")" data-identity="@(ProductEnquiry.Identity)" /></td>
+                    <td class="gridrow "><img src="~/Content/AddNew.png" alt="Edit" class="ProductEnquiryAdd pointer" data-url="@Url.Action("_ProductEnquiryEdit", "ProductEnquiry")" data-identity="@(ProductEnquiry.Identity)" /></td>
+                    <td class="gridrow ">
+                        @if(ProductEnquiry.Status.StatusName.Contains("Pending"))
+                        {
+                    <img src="~/Content/process.png" alt="Process Quoutation" class="ProductEnquiryVerification pointer" data-url="@Url.Action("_ProductEnquirySubmitQuotation", "ProductEnquiry")" data-identity="@(ProductEnquiry.Identity)" />
+                        }
+                    
+                    </td>
                     @*<td class="gridrow "><img src="~/Content/delete.png" alt="Delete" class="ProductEnquiryDelete pointer" data-url="@Url.Action("Delete", "ProductEnquiry")" data-identity="@(ProductEnquiry.Identity)" /></td>*@
                 </tr>
 

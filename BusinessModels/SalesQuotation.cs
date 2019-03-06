@@ -26,35 +26,35 @@ namespace BusinessModels
         }
 
         [ForeignKey("Employee")]
-        public int AssignedTo
+        public int? AssignedTo
         {
             get;
             set;
         }
 
         [ForeignKey("EnquiryLevel")]
-        public int priority
+        public int? EnquiryLevelID
         {
             get;
             set;
         }
 
         [ForeignKey("ProductEnquiry")]
-        public int ProductEnquiryID
+        public int? ProductEnquiryID
         {
             get;
             set;
         }
 
         [ForeignKey("Location")]
-        public int LocationID
+        public int? LocationID
         {
             get;
             set;
         }
 
         [ForeignKey("Status")]
-        public int StatusID
+        public int? StatusID
         {
             get;
             set;
@@ -63,38 +63,38 @@ namespace BusinessModels
 
        
         
-        public int VerifiedBy
+        public int? VerifiedBy
         {
             get;
             set;
         }
-        public int ApprovedBy
+        public int? ApprovedBy
         {
             get;
             set;
         }
-        public DateTime CreatedDate
+        public DateTime? CreatedDate
         {
             get;
             set;
         }
-        public DateTime ModifiedDate
+        public DateTime? ModifiedDate
         {
             get;
             set;
         }
-        public int ModifiedBy
+        public int? ModifiedBy
         {
             get;
             set;
         }
-        public int CreatedBy
+        public int? CreatedBy
         {
             get;
             set;
         }
 
-        public int OriginatorID
+        public int? OriginatorID
         {
             get;
             set;
@@ -113,7 +113,7 @@ namespace BusinessModels
         }
 
         [ForeignKey("CompanyType")]
-        public int CompanyTypeID
+        public int? CompanyTypeID
         { get; set; }
         public Employee Employee
         { get; set; }

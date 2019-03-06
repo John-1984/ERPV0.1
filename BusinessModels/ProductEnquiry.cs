@@ -118,7 +118,7 @@ namespace BusinessModels
         public Boolean IsVerified
         { get; set; }
 
-        public ICollection<ProductEnquiryDetails> ProductEnquiryDetails { get; set; }
+        public virtual ICollection<ProductEnquiryDetails> ProductEnquiryDetails { get; set; }
 
     }
 }

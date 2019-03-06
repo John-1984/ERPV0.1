@@ -23,7 +23,7 @@ namespace ERP.Models
             set;
         }
 
-        public int CompanyTypeID
+        public int? CompanyTypeID
         { get; set; }
         public string SQCode
         {
@@ -31,31 +31,31 @@ namespace ERP.Models
             set;
         }
 
-        public int AssignedTo
+        public int? AssignedTo
         {
             get;
             set;
         }
 
-        public int priority
+        public int? EnquiryLevelID
         {
             get;
             set;
         }
 
-        public int ProductEnquiryID
+        public int? ProductEnquiryID
         {
             get;
             set;
         }
 
-        public int LocationID
+        public int? LocationID
         {
             get;
             set;
         }
 
-        public int StatusID
+        public int? StatusID
         {
             get;
             set;
@@ -64,38 +64,38 @@ namespace ERP.Models
 
 
 
-        public int VerifiedBy
+        public int? VerifiedBy
         {
             get;
             set;
         }
-        public int ApprovedBy
+        public int? ApprovedBy
         {
             get;
             set;
         }
-        public DateTime CreatedDate
+        public DateTime? CreatedDate
         {
             get;
             set;
         }
-        public DateTime ModifiedDate
+        public DateTime? ModifiedDate
         {
             get;
             set;
         }
-        public int ModifiedBy
+        public int? ModifiedBy
         {
             get;
             set;
         }
-        public int CreatedBy
+        public int? CreatedBy
         {
             get;
             set;
         }
 
-        public int OriginatorID
+        public int? OriginatorID
         {
             get;
             set;

@@ -14,6 +14,50 @@ var showMessage = function(status, message){
     }
 };
 
+    $(document).on('change', '#drpWorkFlowItemType', function () {
+
+        // debugger;
+        var itemTypeText = $("#drpWorkFlowItemType").val();
+        $("#hdnWorkFlowItemType").val(itemTypeText);
+    });
+
+    $(document).on('change', '#drpWorkFlowLocation', function () {
+
+        // debugger;
+        var workdlocypeText = $("#drpWorkFlowLocation").val();
+        $("#hdnWorkFlowLocation").val(workdlocypeText);
+    });
+
+    $(document).on('change', '#drpWorkFlowStepEmployee', function () {
+        // debugger;
+        var itemTypeText = $("#drpWorkFlowStepEmployee").val();
+        $("#hdnWorkFlowStepEmployee").val(itemTypeText);
+    });
+
+    $(document).on('change', '#drpWorkFlowStepLocation', function () {
+
+        // debugger;
+        var locTypeText = $("#drpWorkFlowStepLocation").val();
+        $("#hdnWorkFlowStepLocation").val(locTypeText);
+        var drpWorkFlowStepEmployee = $("#drpWorkFlowStepEmployee");
+        $.ajax({
+            type: 'POST',
+            url: '/WorkflowManager/Employee',
+            data: JSON.stringify({ identity: $("#drpWorkFlowStepLocation").val() }),
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function (response) {
+                drpWorkFlowStepEmployee.empty().append('<option selected="selected" value="0">Select Employee</option>');
+                $.each(response, function () {
+                    drpWorkFlowStepEmployee.append($("<option></option>").val(this['Value']).html(this['Text']));
+                });
+            },
+            error: function (response) {
+                showMessage(response.responseText);
+            }
+        });
+    });
+
 $(document).off("click", ".addWorkflow");
 $(document).on("click", ".addWorkflow", function(event){
 event.stopImmediatePropagation();

@@ -1,17 +1,115 @@
-﻿@{
-    Layout = null;
-}
+﻿@model ERP.Models.ProductEnquiry
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
-    
+<div class="container ProductEnquiryView col-md-12 col-lg-12 commonPadding">
+    <input type="hidden" value="@Model.Identity">
+    <div class="row commonPadding col-md-12 col-lg-12" style="padding-bottom:13px;">
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-5 col-lg-5 textright lablestyles">
+                    Customer Name:
+                </div>
+                <div class="float-right col-md-5 col-lg-5 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                    @Model.Customer.CustomerName
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-6 ">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-6 col-lg-6 textright lablestyles">
+                    Customer Contact Number :
+                </div>
+                <div class="float-right col-md-5 col-lg-5 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                    @Model.Customer.ContactNumber
+                </div>
+            </div>
+        </div>
+
     </div>
-</body>
-</html>
+
+    <div class="row commonPadding col-md-12 col-lg-12" style="padding-bottom:13px;">
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-5 col-lg-5 textright lablestyles">
+                    Enquiry Level:
+                </div>
+                <div class="float-right col-md-5 col-lg-5 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                    @Model.EnquiryLevel.EnquiryLevelName
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-6 ">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-6 col-lg-6 textright lablestyles">
+                    Created Date :
+                </div>
+                <div class="float-right col-md-5 col-lg-5 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                    @Model.CreatedDate
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <div class="row commonPadding col-md-12 col-lg-12" style="padding-bottom:13px;">
+        <div class="row col-md-12 col-lg-12">
+            <table class="table customerAll">
+                <thead>
+                    <tr class="gridheader">
+                        <th>Product Master</th>
+                        <th>Vendor</th>
+                        <th>Brand</th>
+                        <th>Item Name</th>
+                        <th>Quantity</th>
+                        <th>Size</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.ProductEnquiryDetails.Count() == 0)
+                    {
+                        <tr class="col-md-12 col-lg-12 gridrow">
+                            <td>No Data Found</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        foreach (var det in Model.ProductEnquiryDetails)
+                        {
+
+                            <tr class="gridrow">
+                                <td class="gridrow">@det.ItemMaster.Brand.Vendor.ProductMaster.ProductName</td>
+                                <td class="gridrow">@det.ItemMaster.Brand.Vendor.VendorName</td>
+                                <td class="gridrow">@det.ItemMaster.Brand.BrandName</td>
+                                <td class="gridrow">@det.ItemMaster.ItemName</td>
+                                <td class="gridrow">@det.Quantity</td>
+                                <td class="gridrow">@det.Size</td>
+                                <td class="gridrow "><img src="~/Content/delete.png" alt="Delete" class="ProductEnquiryItemDelete pointer" data-url="@Url.Action("DeleteItem", "ProductEnquiry")" data-identity="@(det.Identity)" /></td>
+
+
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+
+
+
+    <div class="row commonPadding">
+        <div class="col-md-6 col-lg-5">
+            <input type="button" value="Cancel" data-url="@Url.Action("_ProductEnquiryCancel", "ProductEnquiry")" data-identity="-1" class="formbutton ProductEnquiryCancel" />@*<input type="button" class="formbutton float-right ProductEnquiryEdit" data-url="@Url.Action("_ProductEnquiryEdit", "ProductEnquiry")" data-identity="@(Model.Identity)" value="Add" />*@
+        </div>
+        <div class="col-md-6 col-lg-6">
+            @*<input type="button" value="Cancel" data-url="@Url.Action("_ProductEnquiryCancel", "ProductEnquiry")" data-identity="-1" class="formbutton ProductEnquiryCancel" />*@
+        </div>
+
+    </div>
+</div>

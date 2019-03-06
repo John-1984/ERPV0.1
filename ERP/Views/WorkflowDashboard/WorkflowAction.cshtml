@@ -1,58 +1,94 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@model ERP.Models.Workflow.Workflow
+
+
 @using (Html.BeginForm("WorkflowActionHandler", "WorkflowDashboard", FormMethod.Post))
 {
     <div class="container">
         <div class="col-md-12 col-lg-12 commonPadding">
-            <table class="table">
-                <thead>
-                    <tr class="gridheader">
-                        <th>Item Name</th>
-                        <th>Item Description</th>
-                        <th>Quantity</th>
-                        <th>Unit Amount</th>
-                        <th>Total Amount</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="gridrow">
-                        <td class="gridrow">Soap</td>
-                        <td class="gridrow">Soap</td>
-                        <td class="gridrow">12</td>
-                        <td class="gridrow">20</td>
-                        <td class="gridrow">240</td>
-                    </tr>
-                    <tr class="gridrow">
-                        <td class="gridrow">Iron Bar</td>
-                        <td class="gridrow">Iron Bar</td>
-                        <td class="gridrow">30 Bars</td>
-                        <td class="gridrow">200</td>
-                        <td class="gridrow">6000</td>
-                    </tr>
-                    <tr class="gridrow">
-                        <td class="gridrow">Watch</td>
-                        <td class="gridrow">Tisson</td>
-                        <td class="gridrow">1</td>
-                        <td class="gridrow">30000</td>
-                        <td class="gridrow">30000</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="row commonPadding">
-            <div class="col-md-6 col-lg-5">
-                <input type="submit" class="formbutton float-left" name="Action" value="Approve" />
-            </div>
-            <div class="col-md-6 col-lg-5">
-                <input type="submit" class="formbutton float-right" name="Action" value="Reject" />
-            </div>
+
+            @if (Model.ItemTypeName.Contains("Sales Quotation"))
+            {
+                <div class="col-md-12 col-lg-12 commonPadding" style="height:7px;">
+
+                </div>
+                <div class="col-md-12 col-lg-12 BodyWelcomeText commonPadding" style="height:10px;">
+                    Sales Quotation Details
+                </div>
+                <div class="col-md-12 col-lg-12 commonPadding" style="height:7px;border-bottom:1px dashed #8A7B69;">
+
+                </div>
+                <div class="col-md-12 col-lg-12 commonPadding">
+                    <table class="table customerAll">
+                        <thead>
+                            <tr class="gridheader">
+                                <th>Product Master</th>
+                                <th>Vendor</th>
+                                <th>Brand</th>
+                                <th>Item Name</th>
+                                <th>Quantity</th>
+                                <th>Size</th>
+                                <th>Item Price</th>
+                                @*<th>Delete</th>*@
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.ProductEnquiryDetails.Count() == 0)
+                            {
+                                <tr class="col-md-12 col-lg-12 gridrow">
+                                    <td>No Data Found</td>
+                                </tr>
+                            }
+                            else
+                            {
+                                foreach (var det in Model.ProductEnquiryDetails)
+                                {
+
+                                    <tr class="gridrow">
+                                        <td class="gridrow">@det.ItemMaster.Brand.Vendor.ProductMaster.ProductName</td>
+                                        <td class="gridrow">@det.ItemMaster.Brand.Vendor.VendorName</td>
+                                        <td class="gridrow">@det.ItemMaster.Brand.BrandName</td>
+                                        <td class="gridrow">@det.ItemMaster.ItemName</td>
+                                        <td class="gridrow">@det.Quantity</td>
+                                        <td class="gridrow">@det.Size</td>
+                                        <td class="gridrow">@det.ItemMaster.RetailPrice</td>
+                                        @*<td class="gridrow "><img src="~/Content/delete.png" alt="Delete" class="ProductEnquiryItemDelete pointer" data-url="@Url.Action("DeleteItem", "ProductEnquiry")" data-identity="@(det.Identity)" /></td>*@
+
+
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12 col-lg-12 commonPadding textright" style="font-size:12px; color:black;font-weight:bold">
+                    <div style="padding-right:15px">Total Cost : @Model.TotalCost</div>
+                </div>
+                    }
+
+                </div>
+        <div class="row col-md-12 col-lg-12 commonPadding">
+
             <div class="col-md-12 col-lg-12 commonPadding">
                 <textarea name="Comments" rows="6" cols="80" class="textareastyles" placeholder="Enter Comments"></textarea>
             </div>
-            <input type="hidden" name="PurchaseID" value="@ViewBag.PurchaseID"/>
+            <div class="col-md-12 col-lg-12 commonPadding">
+                <div class="col-md-3 col-lg-3">
+                    <input type="submit" class="formbutton float-right" name="Action" value="Reject" />
+                </div>
+                <div class="col-md-6 col-lg-5 ">
+                    <input type="submit" class="formbutton float-left" name="Action" value="Approve" />
+                </div>
+            </div>
+            <input type="hidden" name="PurchaseID" value="@ViewBag.PurchaseID" />
             <input type="hidden" name="ActiveStepID" value="@ViewBag.ActiveStepID" />
             <input type="hidden" name="ActiveWorkflowID" value="@ViewBag.ActiveWorkflowID" />
+            <input type="hidden" name="ItemTypeID" value="@ViewBag.ItemTypeID" />
+            <input type="hidden" name="ItemTypeName" value="@ViewBag.ItemTypeName" />
         </div>
-    </div>
+            </div>
 }
+

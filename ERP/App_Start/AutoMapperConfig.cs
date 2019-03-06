@@ -40,22 +40,33 @@ namespace ERP
                 cfg.CreateMap<BusinessModels.FloorMaster, ERP.Models.FloorMaster>().ReverseMap();
                 cfg.CreateMap<BusinessModels.Login, ERP.Models.Login>().ReverseMap();
                 cfg.CreateMap<BusinessModels.EnquiryLevel, ERP.Models.EnquiryLevel>().ReverseMap();
-                cfg.CreateMap<BusinessModels.ProductEnquiry, ERP.Models.ProductEnquiry>().ReverseMap();
+                
                 cfg.CreateMap<BusinessModels.SubModules, ERP.Models.SubModules>().ReverseMap();
                 cfg.CreateMap<BusinessModels.ReportMenu, ERP.Models.ReportMenu>().ReverseMap();
                 cfg.CreateMap<BusinessModels.Purpose, ERP.Models.Purpose>().ReverseMap();
                 cfg.CreateMap<BusinessModels.RoleAccess, ERP.Models.RoleAccess>().ReverseMap();
-                cfg.CreateMap<BusinessModels.PurchaseRequestDetails, ERP.Models.PurchaseRequestDetails>().ReverseMap();
+                
                 cfg.CreateMap<BusinessModels.Stocks, ERP.Models.Stocks>().ReverseMap();
                 cfg.CreateMap<BusinessModels.ExpenseType, ERP.Models.ExpenseType>().ReverseMap();
                 cfg.CreateMap<BusinessModels.OfficeExpense, ERP.Models.OfficeExpense>().ReverseMap();
 
+                cfg.CreateMap<BusinessModels.ProductEnquiry, ERP.Models.ProductEnquiry>().ForMember(d => d.ProductEnquiryDetails, o => o.Ignore());
+                cfg.CreateMap<BusinessModels.ProductEnquiryDetails, ERP.Models.ProductEnquiryDetails>().ReverseMap();
                 cfg.CreateMap<BusinessModels.PurchaseRequest, ERP.Models.PurchaseRequest>().ForMember(d => d.PurchaseRequestDetails, o => o.Ignore());
+                cfg.CreateMap<BusinessModels.PurchaseRequestDetails, ERP.Models.PurchaseRequestDetails>().ReverseMap();
+
                 cfg.CreateMap<BusinessModels.Workflow.Workflow, ERP.Models.Workflow.Workflow>().ReverseMap();
                 cfg.CreateMap<BusinessModels.Workflow.Step, ERP.Models.Workflow.Step>().ReverseMap();
                 cfg.CreateMap<BusinessModels.Workflow.WorkflowStepMapping, ERP.Models.Workflow.WorkflowStepMapping>().ReverseMap();
                 cfg.CreateMap<BusinessModels.Workflow.ActiveStep, ERP.Models.Workflow.ActiveStep>().ReverseMap();
                 cfg.CreateMap<BusinessModels.Workflow.ActiveWorkflow, ERP.Models.Workflow.ActiveWorkflow>().ReverseMap();
+
+
+                cfg.CreateMap<BusinessModels.SalesQuotation, ERP.Models.SalesQuotation>().ReverseMap();
+                cfg.CreateMap<BusinessModels.SalesQuotationDetails, ERP.Models.SalesQuotationDetails>().ReverseMap();
+
+
+
 
             });
         }

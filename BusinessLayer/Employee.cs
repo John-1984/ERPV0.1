@@ -146,6 +146,11 @@ namespace BusinessLayer
         {
             return _dataLayer.GetSupervisorOnWareHouseCompanyType(locidentity, companyID, companytype);
         }
+
+        public BusinessModels.Employee GetFinanceManagerOnCompanyType(Int32 locidentity, int companyID, int companytype)
+        {
+            return _dataLayer.GetFinanceManagerOnCompanyType(locidentity, companyID, companytype);
+        }
         public IEnumerable<BusinessModels.Region> GetAllRegions()
         {
             //TestRegionData();

@@ -44,7 +44,24 @@ namespace DataLayer
             return _SalesQuotation;
         }
 
-        
+        public BusinessModels.SalesQuotation GetSalesQuotationDetails(Int32 identity)
+        {
+            var _SalesQuotation = new BusinessModels.SalesQuotation();
+            using (var dbContext = new SalesQuotationDbContext())
+            {
+                _SalesQuotation = dbContext.SalesQuotation
+                             .Include(K => K.Location)
+                             .Include(d => d.Employee)
+                             .Include(f => f.Status)
+                             .Include(g => g.ProductEnquiry)
+                              .Include(w => w.EnquiryLevel)
+                              .Include(l => l.CompanyType)
+                              .Where(p => p.IsActive == true)
+                             .FirstOrDefault(p => p.Identity == identity);
+
+            }
+            return _SalesQuotation;
+        }
 
         public IEnumerable<BusinessModels.SalesQuotation> GetAll()
         {
@@ -215,11 +232,11 @@ namespace DataLayer
             return true;
         }
 
-        public bool UpdateSalesQuotationAssignedandStatus(int assignedid, int statusid, int identity)
+        public BusinessModels.SalesQuotation UpdateSalesQuotationAssignedandStatus(int assignedid, int statusid, int identity)
         {
-            var _user = false;
-            try             {                 using (var dbContext = new UserDbContext())                 {
-                    _user = dbContext.Database.SqlQuery<bool>("CALL UpdateSQAssignedandStatus(@_id, @_assignedid,@_statusid)", new MySqlParameter("@_id", identity), new MySqlParameter("@_assignedid", assignedid), new MySqlParameter("@_statusid", statusid)).FirstOrDefault();                 }             }             catch (Exception ex)             {                 var test = ex.Message;             }
+            var _user = new BusinessModels.SalesQuotation();
+            try             {                 using (var dbContext = new SalesQuotationDbContext())                 {
+                    _user = dbContext.Database.SqlQuery<BusinessModels.SalesQuotation>("CALL UpdateSQAssignedandStatus(@_id, @_assignedid,@_statusid)", new MySqlParameter("@_id", identity), new MySqlParameter("@_assignedid", assignedid), new MySqlParameter("@_statusid", statusid)).FirstOrDefault();                 }             }             catch (Exception ex)             {                 var test = ex.Message;             }
             return _user;
         }
 

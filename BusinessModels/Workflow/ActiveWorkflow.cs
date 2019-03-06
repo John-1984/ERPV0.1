@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -23,6 +23,7 @@ namespace BusinessModels.Workflow
         public string CompletedDate { get; set; }
 
         public virtual ICollection<ActiveStep> ActiveStep { get; set; }
+
         [ForeignKey("WorkflowID")]
         public virtual Workflow Workflow { get; set; }
     }

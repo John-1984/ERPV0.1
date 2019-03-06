@@ -54,5 +54,13 @@ namespace WorkflowManager
         {
             return _dataLayer.ActivateWorkflow(WorkflowID, userID, workItemID, workItemType);
         }
+
+        /// <summary>
+        /// This method gets workflow id for locaction and itemtype.
+        /// </summary>        
+        public BusinessModels.Workflow.Workflow GetWorkFLowIDForLocationAndItemType(int? locID, int typeID)
+        {
+            return _dataLayer.GetWorkFLowIDForLocationAndItemType(locID,typeID);
+        }
     }
 }

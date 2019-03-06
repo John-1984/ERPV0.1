@@ -18,7 +18,7 @@ namespace BusinessModels
             set;
         }
 
-        
+        [ForeignKey("ProductEnquiry")]
         public int ProductEnquiryID
         {
             get;
@@ -48,6 +48,10 @@ namespace BusinessModels
             get;
             set;
         }
+
+        public ProductEnquiry ProductEnquiry
+        { get; set; }
+
 
         public ItemMaster ItemMaster
         { get; set; }

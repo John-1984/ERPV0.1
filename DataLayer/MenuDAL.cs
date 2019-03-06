@@ -33,6 +33,17 @@ namespace DataLayer
             return _Menu;
         }
 
+        public BusinessModels.Menu GetMenuByName(String strName)
+        {
+            var _Menu = new BusinessModels.Menu();
+            using (var dbContext = new MenuDbContext())
+            {
+                _Menu = dbContext.Menu
+                            .FirstOrDefault(p => p.Name.Contains(strName));
+            }
+            return _Menu;
+        }
+
         public IEnumerable<BusinessModels.Menu> GetMenuForModules(Int32 identity)
         {
             var _Menus = new List<BusinessModels.Menu>();
@@ -56,7 +67,19 @@ namespace DataLayer
             return _Menus;
         }
 
-       
+        public IEnumerable<BusinessModels.Menu> GetAllApprovalNeededItems()
+        {
+            var _Menus = new List<BusinessModels.Menu>();
+            using (var dbContext = new MenuDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _Menus = dbContext.Menu.Where(p=>p.IsApprovalNeeded==true).ToList();
+            }
+
+            return _Menus;
+        }
+
+
         public Boolean Update(BusinessModels.Menu Menu)
         {
             using (var dbContext = new MenuDbContext())

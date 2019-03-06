@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Data.Entity;
 
 using System.ComponentModel.DataAnnotations;
+using MySql.Data.MySqlClient;
 //using System.Data.Entity.
 namespace DataLayer
 {
@@ -18,7 +19,7 @@ namespace DataLayer
         {
         }
 
-        public BusinessModels.ProductEnquiry GetProductEnquiry(Int32 identity)
+        public BusinessModels.ProductEnquiry GetProductEnquiry(Int32? identity)
         {
             var _ProductEnquiry = new BusinessModels.ProductEnquiry();
             using (var dbContext = new ProductEnquiryDbContext())
@@ -28,7 +29,7 @@ namespace DataLayer
                              .Include(l => l.Customer)
                              .Include(l => l.Status)
                              .Include(l => l.EnquiryLevel)                             
-                            .FirstOrDefault(p => p.Identity.Equals(identity));
+                            .FirstOrDefault(p => p.Identity==identity);
 
                 dbContext.Entry(_ProductEnquiry).Collection(p => p.ProductEnquiryDetails).Load();
             }
@@ -115,7 +116,21 @@ namespace DataLayer
             }
             return true;
         }
+        public bool UpdateProductEnquiryAssignedandStatus(int assignedid, int statusid, int identity)
+        {
+            var _user = false;
+            try             {                 using (var dbContext = new UserDbContext())                 {
+                    _user = dbContext.Database.SqlQuery<bool>("CALL UpdatePEAssignedandStatus(@_id, @_assignedid,@_statusid)", new MySqlParameter("@_id", identity), new MySqlParameter("@_assignedid", assignedid), new MySqlParameter("@_statusid", statusid)).FirstOrDefault();                 }             }             catch (Exception ex)             {                 var test = ex.Message;             }
+            return _user;
+        }
 
+        public bool UpdateProductEnquiryStatus( int statusid, int? identity)
+        {
+            var _user = false;
+            try             {                 using (var dbContext = new UserDbContext())                 {
+                    _user = dbContext.Database.SqlQuery<bool>("CALL UpdatePEStatus(@_id,@_statusid)", new MySqlParameter("@_id", identity), new MySqlParameter("@_statusid", statusid)).FirstOrDefault();                 }             }             catch (Exception ex)             {                 var test = ex.Message;             }
+            return _user;
+        }
         public BusinessModels.ProductEnquiry Insert(BusinessModels.ProductEnquiry ProductEnquiry)
         {
             using (var dbContext = new ProductEnquiryDbContext())

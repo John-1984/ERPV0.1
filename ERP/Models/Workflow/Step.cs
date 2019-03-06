@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Runtime;
+using System.Web.Mvc;
+
 namespace ERP.Models.Workflow
 {
     public class Step
@@ -24,5 +26,11 @@ namespace ERP.Models.Workflow
         public string StepOwner { get; set; }
         public string NotificationType { get; set; }
         public string AdditionalNotificationUser { get; set; }
+
+        public SelectList LocationList
+        { get; set; }
+
+        public SelectList EmployeeList
+        { get; set; }
     }
 }

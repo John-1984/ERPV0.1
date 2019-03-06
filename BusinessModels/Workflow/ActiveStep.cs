@@ -18,6 +18,7 @@ namespace BusinessModels.Workflow
         public string Status { get; set; }
         public int ActiveWorkflowID { get; set; }
         public string HasNotificationSend { get; set; }
+        public string Action { get; set; }
 
         [ForeignKey("ActiveWorkflowID")]
         public virtual ActiveWorkflow ActiveWorkflow { get; set; }

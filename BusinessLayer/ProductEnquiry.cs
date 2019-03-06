@@ -35,7 +35,7 @@ namespace BusinessLayer
 
         }
 
-        public BusinessModels.ProductEnquiry GetProductEnquiry(Int32 identity)
+        public BusinessModels.ProductEnquiry GetProductEnquiry(Int32? identity)
         {
             return _dataLayer.GetProductEnquiry(identity);
         }
@@ -127,6 +127,11 @@ namespace BusinessLayer
         {
             //TestRegionData();
             return _itemdataLayer.GetItemMaster(int.Parse(fldidentity));
+        }
+
+        public bool UpdateProductEnquiryAssignedandStatus(int assignedid, int statusid, int identity)
+        {
+            return _dataLayer.UpdateProductEnquiryAssignedandStatus(assignedid, statusid, identity);
         }
     }
 

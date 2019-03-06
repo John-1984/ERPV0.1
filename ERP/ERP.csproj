@@ -214,6 +214,8 @@
     <Compile Include="CustomeFilters\ExceptionFilter.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\WorkflowManagerController.cs" />
+    <Compile Include="Models\Workflow\ActiveStep.cs" />
+    <Compile Include="Models\Workflow\ActiveWorkFlow.cs" />
     <Compile Include="Models\Workflow\Workflow.cs" />
     <Compile Include="Models\Workflow\Step.cs" />
     <Compile Include="Controllers\WorkflowDashboardController.cs" />

@@ -16,7 +16,9 @@ namespace BusinessModels.Workflow
         public string Description { get; set; }
         public string Name { get; set; }
         public string CreatedDate { get; set; }
-        public string CreatedBy { get; set; }
+
+        [ForeignKey("Employee")]
+        public int CreatedBy { get; set; }
 
         [ForeignKey("Location")]
         public int LocationID { get; set; }
@@ -24,6 +26,7 @@ namespace BusinessModels.Workflow
         public int CompanyTypeID { get; set; }
         [ForeignKey("Company")]
         public int CompanyID { get; set; }
+
         [ForeignKey("Menu")]
         public int ItemType { get; set; }
 
@@ -37,6 +40,9 @@ namespace BusinessModels.Workflow
         { get; set; }
 
         public Menu Menu
+        { get; set; }
+
+        public Employee Employee
         { get; set; }
     }
 }

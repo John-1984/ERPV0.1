@@ -14,6 +14,7 @@ namespace ERP.Controllers
         private BusinessLayer.ProductEnquiry _ProductEnquiry = new BusinessLayer.ProductEnquiry();
         private BusinessLayer.ProductEnquiryDetails _ProductEnquiryDetails = new BusinessLayer.ProductEnquiryDetails();
         private BusinessLayer.Employee _Employeee = new BusinessLayer.Employee();
+        private BusinessLayer.SalesQuotation _salesQuotations = new BusinessLayer.SalesQuotation();
         public ActionResult Index()
         {
             return View();
@@ -150,16 +151,41 @@ namespace ERP.Controllers
         {
             return RedirectToAction("_ProductEnquiryAll");
         }
+
         [HttpGet]
         public PartialViewResult _ProductEnquiryView(int identity)
         {
-            return PartialView(AutoMapperConfig.Mapper().Map<Models.ProductEnquiry>(_ProductEnquiry.GetProductEnquiry(identity)));
+            BusinessModels.ProductEnquiry bsProductEnquiry = _ProductEnquiry.GetProductEnquiry(identity);
+            Models.ProductEnquiry mdProductEnquiry = AutoMapperConfig.Mapper().Map<Models.ProductEnquiry>(bsProductEnquiry);
+         
+            List<Models.ProductEnquiryDetails> lstProductEnquiryDetails = new List<Models.ProductEnquiryDetails>();
+            foreach (BusinessModels.ProductEnquiryDetails item in bsProductEnquiry.ProductEnquiryDetails)
+            {
+                Models.ProductEnquiryDetails mdProductEnquiry1 = AutoMapperConfig.Mapper().Map<Models.ProductEnquiryDetails>(item);
+                BusinessModels.ItemMaster bmItem = _ProductEnquiry.GetItemDetails(Convert.ToString(mdProductEnquiry1.ItemID));
+                Models.ItemMaster mdItem = AutoMapperConfig.Mapper().Map<Models.ItemMaster>(bmItem);
+                mdProductEnquiry1.ItemMaster = mdItem;
+                lstProductEnquiryDetails.Add(mdProductEnquiry1);
+            }
+
+            mdProductEnquiry.ProductEnquiryDetails = lstProductEnquiryDetails;
+
+            return PartialView(mdProductEnquiry);
         }
+       
 
         [HttpPost]
         public ActionResult Delete(int identity)
         {
             _ProductEnquiry.Delete(identity);
+            return RedirectToAction("_ProductEnquiryAll");
+        }
+
+        [HttpPost]
+        public ActionResult DeleteItem(int identity)
+        {
+
+            _ProductEnquiryDetails.Delete(identity);
             return RedirectToAction("_ProductEnquiryAll");
         }
 
@@ -175,6 +201,31 @@ namespace ERP.Controllers
                 //coded
                 mdProductenq.StatusID = 15;
             }
+            //_ProductEnquiry.Delete(identity);
+            return RedirectToAction("_ProductEnquiryAll");
+        }
+
+        [HttpPost]
+        public ActionResult _ProductEnquirySubmitQuotation(int identity)
+        {
+            BusinessModels.ProductEnquiry mdProductenq = _ProductEnquiry.GetProductEnquiry(identity);
+
+            //Get store manager on the companytype
+            BusinessModels.Employee mdemployee = _Employeee.GetFinanceManagerOnCompanyType(Convert.ToInt32(Convert.ToString(Session["LocationID"])), Convert.ToInt32(Convert.ToString(Session["CompanyID"])), Convert.ToInt32(Convert.ToString(Session["EmployeeCompanyTypeID"])));
+            if (mdemployee != null)
+            {
+                mdProductenq.AssignedTo = mdemployee.Identity;
+                //coded
+                mdProductenq.StatusID = 26;
+            }
+
+            
+            //Insert product enquiry data to sales quotation table
+            _salesQuotations.Insert(mdProductenq, Convert.ToInt32(Convert.ToString(Session["EmployeeCompanyTypeID"])), Session["EmployeeID"].ToString());
+
+            //Update Product enquiry status
+            _ProductEnquiry.UpdateProductEnquiryAssignedandStatus(mdemployee.Identity, 26, mdProductenq.Identity);
+
             //_ProductEnquiry.Delete(identity);
             return RedirectToAction("_ProductEnquiryAll");
         }

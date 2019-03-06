@@ -20,6 +20,7 @@ namespace DataLayer.Workflow
         public DbSet<BusinessModels.CompanyType> CompanyType { get; set; }
         public DbSet<BusinessModels.Company> Company { get; set; }
         public DbSet<BusinessModels.Menu> Menu { get; set; }
+        public DbSet<BusinessModels.Employee> Employee { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -34,6 +34,8 @@
   <ItemGroup>
     <Compile Include="OfficeExpense.cs" />
     <Compile Include="ExpenseType.cs" />
+    <Compile Include="Menu.cs" />
+    <Compile Include="SalesQuotationDetails.cs" />
     <Compile Include="Stocks.cs" />
     <Compile Include="ProductEnquiryComments.cs" />
     <Compile Include="Purpose.cs" />
@@ -93,8 +95,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Workflow\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

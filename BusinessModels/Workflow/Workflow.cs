@@ -17,5 +17,26 @@ namespace BusinessModels.Workflow
         public string Name { get; set; }
         public string CreatedDate { get; set; }
         public string CreatedBy { get; set; }
+
+        [ForeignKey("Location")]
+        public int LocationID { get; set; }
+        [ForeignKey("CompanyType")]
+        public int CompanyTypeID { get; set; }
+        [ForeignKey("Company")]
+        public int CompanyID { get; set; }
+        [ForeignKey("Menu")]
+        public int ItemType { get; set; }
+
+        public Location Location
+        { get; set; }
+
+        public CompanyType CompanyType
+        { get; set; }
+
+        public Company Company
+        { get; set; }
+
+        public Menu Menu
+        { get; set; }
     }
 }

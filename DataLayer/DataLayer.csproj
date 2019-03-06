@@ -53,6 +53,12 @@
     <Compile Include="PendingCustomerInfoDbContext.cs" />
     <Compile Include="ExpenseTypeDAL.cs" />
     <Compile Include="ExpenseTypeDbContext.cs" />
+    <Compile Include="MenuDAL.cs" />
+    <Compile Include="MenuDbContext.cs" />
+    <Compile Include="SalesQuotationDetailsDAL.cs" />
+    <Compile Include="SalesQuotationDetailsDbContext.cs" />
+    <Compile Include="SalesQuotationDAL.cs" />
+    <Compile Include="SalesQuotationDbContext.cs" />
     <Compile Include="StocksDAL.cs" />
     <Compile Include="StocksDbContext.cs" />
     <Compile Include="ProductEnquiryDetailsDAL.cs" />
@@ -150,8 +156,6 @@
       <Name>LoggingModule</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Workflow\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

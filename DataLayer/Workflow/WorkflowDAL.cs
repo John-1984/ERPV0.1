@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using MySql.Data.Entity;
@@ -80,6 +80,7 @@ namespace DataLayer.Workflow
 
                     var _activeWorkflow = dbContext.ActiveWorkflow
                         .Where(p => p.ActiveID.Equals(activeWorkflowID))
+
                         .Include(k => k.ActiveStep).FirstOrDefault();
 
                     _activeSteps = _activeWorkflow.ActiveStep.ToList();
@@ -326,11 +327,13 @@ namespace DataLayer.Workflow
                 {
                     _activeSteps = dbContext.ActiveStep
                                      .Where(p => p.Step.StepOwner.Equals(User) && p.Status.Equals("Active"))
+
                                      .Include(k => k.ActiveWorkflow)
                                      .Include(l => l.Step)
                                      .Include(s => s.ActiveWorkflow.Workflow)
                                      .Include(s => s.ActiveWorkflow.Workflow.Menu)
                                      .Include(s => s.ActiveWorkflow.Workflow.Employee)
+
                                      .ToList();
                 }
                 catch (Exception ex)
@@ -338,6 +341,7 @@ namespace DataLayer.Workflow
                     var message = "OnException:: ";
                     message = message + string.Format(messageFormatShort, "ActivateWorkflow", DateTime.Now.ToString(), ex.Message);
                 }
+
             }
             return _activeSteps;
         }
@@ -385,16 +389,19 @@ namespace DataLayer.Workflow
 
 
 
+
         public List<BusinessModels.Workflow.ActiveWorkflow> GetAllActiveWorkflows()
         {
             return new List<BusinessModels.Workflow.ActiveWorkflow>();
         }
+
 
         public Boolean WorkflowActionHandler(int activeStepID, string action, string comments, int activeWorkflowID, int purchaseID, int itemid, string itemname, int locid, int compType, int compid)
         {
             var _activeWorkflowSteps = GetActiveWorkflowSteps(activeWorkflowID);
             var _activeStepIndex = _activeWorkflowSteps.IndexOf(_activeWorkflowSteps.Find(p => p.ActiveStepID == activeStepID));
             var _isFinalStep = (_activeStepIndex == (_activeWorkflowSteps.Count() - 1)) ? true : false;
+
 
             if (!_isFinalStep)
             {
@@ -434,8 +441,9 @@ namespace DataLayer.Workflow
                     }
                 }
             }
-            else
-            {
+
+            else {
+
                 using (var dbContext = new WorkflowDbContext())
                 {
                     using (var dbContextTransaction = dbContext.Database.BeginTransaction())
@@ -460,6 +468,7 @@ namespace DataLayer.Workflow
                             _activeWorkflow.CompletedDate = DateTime.Now.ToString();
                             dbContext.Entry(_activeWorkflow).State = EntityState.Modified;
 
+
                             //coded 
                             //Update status of quotation and product enquiry if completed
                             if(itemname.Equals("Sales Quotation"))
@@ -472,6 +481,7 @@ namespace DataLayer.Workflow
 
                                 _prdEnq.UpdateProductEnquiryStatus(4, mdsales.ProductEnquiryID);
                             }
+
 
                             dbContext.SaveChanges();
                             #endregion

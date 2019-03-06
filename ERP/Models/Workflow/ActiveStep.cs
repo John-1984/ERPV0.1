@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 namespace ERP.Models.Workflow
 {
     public class ActiveStep
@@ -30,4 +30,6 @@ namespace ERP.Models.Workflow
 
         public Step Step { get; set; }
     }
+
 }
+

@@ -1,12 +1,15 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 @model ERP.Models.Workflow.Workflow
+
 
 @using (Html.BeginForm("WorkflowActionHandler", "WorkflowDashboard", FormMethod.Post))
 {
     <div class="container">
         <div class="col-md-12 col-lg-12 commonPadding">
+
             @if (Model.ItemTypeName.Contains("Sales Quotation"))
             {
                 <div class="col-md-12 col-lg-12 commonPadding" style="height:7px;">
@@ -88,3 +91,4 @@
         </div>
             </div>
 }
+

@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+
 using System.Globalization;
 using System.Linq;
 using System.Web;
@@ -8,11 +9,13 @@ using X.PagedList;
 
 namespace ERP.Controllers
 {
+
     [ERP.CustomeFilters.LoggingFilter]
     [ERP.CustomeFilters.ExceptionFilter]
     public class WorkflowDashboardController : Controller
     {
         private readonly WorkflowManager.WorkflowEngine _workflowEngine = new WorkflowManager.WorkflowEngine();
+
         private BusinessLayer.ProductEnquiry _ProductEnquiry = new BusinessLayer.ProductEnquiry();
         private BusinessLayer.SalesQuotation _salesQuotation = new BusinessLayer.SalesQuotation();
         public ActionResult Inbox()
@@ -60,6 +63,7 @@ namespace ERP.Controllers
         }
 
         [HttpPost]
+
         public ActionResult WorkflowActionHandler(FormCollection formCollection)
         {
             var action = formCollection["Action"];
@@ -67,6 +71,7 @@ namespace ERP.Controllers
             var purchaseID = formCollection["PurchaseID"];
             var activeStepID = formCollection["ActiveStepID"];
             var activeWorkflowID = formCollection["ActiveWorkflowID"];
+
 
             var itemtypeid= formCollection["ActiveWorkflowID"];
             var ItemTypeName = formCollection["ItemTypeName"];
@@ -81,10 +86,12 @@ namespace ERP.Controllers
         }
 
         private IPagedList<Models.Workflow.ActiveStep> GetActiveWorkflows(string sortOrder, int? page, string createdDate = "", string searchString = "")
+
         {
             ViewBag.CreatedDate = string.IsNullOrEmpty(createdDate) ? "" : createdDate;
             ViewBag.SearchString = string.IsNullOrEmpty(searchString) ? "" : searchString;
             ViewBag.CurrentSort = string.IsNullOrEmpty(sortOrder) ? "WorkflowName" : "";
+
 
             var _activeSteps = AutoMapperConfig.Mapper().Map<List<Models.Workflow.ActiveStep>>(_workflowEngine.GetActiveWorkflows(Session["EmployeeID"].ToString()));
             if (!string.IsNullOrEmpty(searchString) && !string.IsNullOrEmpty(createdDate))
@@ -108,6 +115,7 @@ namespace ERP.Controllers
                 default:
                     _activeSteps = _activeSteps.OrderBy(st => st.ActiveWorkflow.Workflow.Name).ToList();
                     break;
+
             }
 
             int Size_Of_Page = 8;  //Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["GridPageSize"].ToString());

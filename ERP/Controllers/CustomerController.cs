@@ -10,6 +10,7 @@ using System.Configuration;
 
 namespace ERP.Controllers
 {
+    [ERP.CustomeFilters.AjaxModelValidatorFilter]
     [ERP.CustomeFilters.LoggingFilter]
     [ERP.CustomeFilters.ExceptionFilter]
     public class CustomerController : Controller

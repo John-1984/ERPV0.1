@@ -220,6 +220,7 @@
     <Compile Include="Models\Workflow\WorkflowStepMapping.cs" />
     <Compile Include="Models\Workflow\ActiveWorkflow.cs" />
     <Compile Include="Models\Workflow\ActiveStep.cs" />
+    <Compile Include="CustomeFilters\AjaxModelValidatorFilter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\AddNew.png" />

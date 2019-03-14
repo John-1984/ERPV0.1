@@ -91,6 +91,7 @@
     <Compile Include="Workflow\WorkflowStepMapping.cs" />
     <Compile Include="Workflow\ActiveWorkflow.cs" />
     <Compile Include="Workflow\ActiveStep.cs" />
+    <Compile Include="Role_Menu.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

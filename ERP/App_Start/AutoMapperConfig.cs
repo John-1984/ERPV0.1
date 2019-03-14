@@ -65,7 +65,8 @@ namespace ERP
                 cfg.CreateMap<BusinessModels.SalesQuotation, ERP.Models.SalesQuotation>().ReverseMap();
                 cfg.CreateMap<BusinessModels.SalesQuotationDetails, ERP.Models.SalesQuotationDetails>().ReverseMap();
 
-
+                cfg.CreateMap<BusinessModels.Menu, ERP.Models.Menu>().ReverseMap();
+                cfg.CreateMap<BusinessModels.Modules, ERP.Models.Modules>().ReverseMap();
 
 
             });

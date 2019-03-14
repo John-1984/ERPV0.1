@@ -118,9 +118,9 @@ namespace BusinessLayer
             WorkflowManager.WorkflowInitializer _workflowInitializer = new WorkflowManager.WorkflowInitializer();
             //coded
             BusinessModels.Menu mnID = _menudataLayer.GetMenuByName("Sales Quotation");
-            BusinessModels.Workflow.Workflow wrkFlow = _workflowInitializer.GetWorkFLowIDForLocationAndItemType(prEnq.LocationId,mnID.Identity);
+            BusinessModels.Workflow.Workflow wrkFlow = _workflowInitializer.GetWorkFLowIDForLocationAndItemType(prEnq.LocationId,mnID.ID);
 
-            _workflowInitializer.InitializeWorkflow(wrkFlow.Identity, Convert.ToInt32(empID), mdSalesQuote.Identity, mnID.Identity.ToString());
+            _workflowInitializer.InitializeWorkflow(wrkFlow.Identity, Convert.ToInt32(empID), mdSalesQuote.Identity, mnID.ID.ToString());
 
             return mdSalesQuote;
         }

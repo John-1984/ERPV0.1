@@ -8,15 +8,15 @@ namespace DataLayer
     {
         public MenuDbContext() : base("LocalMySqlServer")
         {
-            var test = this.Database.Exists();
-            this.Database.Connection.Open();
-            this.Database.Connection.Close();
-            var test1 = this.Database.Connection.ConnectionString;
+            //var test = this.Database.Exists();
+            //this.Database.Connection.Open();
+            //this.Database.Connection.Close();
+            //var test1 = this.Database.Connection.ConnectionString;
         }
 
         public DbSet<BusinessModels.Menu> Menu { get; set; }
         public DbSet<BusinessModels.Modules> Modules { get; set; }
-
+        public DbSet<BusinessModels.Role_Menu> Role_Menu { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

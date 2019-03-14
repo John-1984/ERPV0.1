@@ -11,7 +11,7 @@ namespace BusinessModels
         }
         [System.ComponentModel.DataAnnotations.Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Int32 Identity
+        public Int32 ID
         {
             get;
             set;
@@ -50,14 +50,12 @@ namespace BusinessModels
             set;
         }
 
-        public Boolean IsApprovalNeeded
-        {
-            get;
-            set;
-        }
+        public string URL { get; set; }
 
         public Modules Modules
         { get; set; }
+
+        public Boolean? IsApprovalNeeded { get; set; }
 
     }
 }

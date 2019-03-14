@@ -34,5 +34,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IMenu.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessLayer\BusinessLayer.csproj">
+      <Project>{F28A8B70-EBD4-40DC-A47F-8CAC6C646AE6}</Project>
+      <Name>BusinessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessModels\BusinessModels.csproj">
+      <Project>{CAC5FD58-E0F1-423C-B1FF-F65E151CF844}</Project>
+      <Name>BusinessModels</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

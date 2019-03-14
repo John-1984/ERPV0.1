@@ -11,7 +11,13 @@ namespace ERP.Controllers
     {
         public PartialViewResult Index()
         {
-            return PartialView ();
+            MenuModule.Menu menu = new MenuModule.Menu();
+            var lstMenu = AutoMapperConfig.Mapper().Map<List<Models.Menu>>(menu.GetMenu());
+            var grouped = lstMenu.GroupBy(p => p.Modules.ModuleName).ToList();
+
+            //To get menu based on Role, use the below overloaded method with roleID as parameter
+            //var est = menu.GetMenu(1);
+            return PartialView (grouped);
         }
     }
 }

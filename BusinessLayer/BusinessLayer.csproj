@@ -58,6 +58,17 @@
     <Compile Include="ExpenseType.cs" />
     <Compile Include="DeadStock.cs" />
     <Compile Include="Menu.cs" />
+    <Compile Include="PaymentMode.cs" />
+    <Compile Include="PurchaseQuotation.cs" />
+    <Compile Include="PurchaseQuotationDetails.cs" />
+    <Compile Include="PQAdvanceDetails.cs" />
+    <Compile Include="StockInShortageDetails.cs" />
+    <Compile Include="StockInExcessDetails.cs" />
+    <Compile Include="StockInDamagedDetails.cs" />
+    <Compile Include="StockOutExpenseDetails.cs" />
+    <Compile Include="StockOutDetails.cs" />
+    <Compile Include="SQAdvanceDetails.cs" />
+    <Compile Include="PaymentType.cs" />
     <Compile Include="SalesQuotationDetails.cs" />
     <Compile Include="StocksShortage.cs" />
     <Compile Include="Stocks.cs" />

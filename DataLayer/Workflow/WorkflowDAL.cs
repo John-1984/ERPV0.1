@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MySql.Data.Entity;
 using System.Data.Entity;
+using System.Security.Cryptography;
 
 namespace DataLayer.Workflow
 {
@@ -137,6 +138,20 @@ namespace DataLayer.Workflow
                 dbContext.Configuration.LazyLoadingEnabled = false;
                 _workflow = dbContext.Workflow
                             .Where(p => p.LocationID==locid && p.ItemType==itemid)
+                            .FirstOrDefault();
+            }
+
+            return _workflow;
+        }
+
+        public BusinessModels.Workflow.Workflow GetWorkFLowIDForLocationAndItemTypeByName(int? locid, int itemid, string strName)
+        {
+            var _workflow = new BusinessModels.Workflow.Workflow();
+            using (var dbContext = new WorkflowDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _workflow = dbContext.Workflow
+                            .Where(p => p.LocationID == locid && p.ItemType == itemid && p.Name.Contains(strName))
                             .FirstOrDefault();
             }
 
@@ -419,16 +434,94 @@ namespace DataLayer.Workflow
                             _activeStep.Action = action;
                             _activeStep.UpdatedDate = DateTime.Now.ToString();
                             dbContext.Entry(_activeStep).State = EntityState.Modified;
-
                             dbContext.SaveChanges();
+
+                            //Assign the record to next level approver
+                             if (action == "Reject")
+                            {
+                                //If rejected in mid assign it back to original employee
+                                if (itemname.Equals("Sales Quotation"))
+                                {
+                                    DataLayer.EmployeeDAL _empLayer = new EmployeeDAL();
+                                    DataLayer.SalesQuotationDAL _sales = new SalesQuotationDAL();
+                                    BusinessModels.SalesQuotation mdsalesDet = _sales.GetSalesQuotationDetails(purchaseID);
+                                    DataLayer.ProductEnquiryDAL _prdEnq = new ProductEnquiryDAL();
+                                    BusinessModels.SalesQuotation mdsales = _sales.UpdateSalesQuotationAssignedandStatus(mdsalesDet.OriginatorID, 3, purchaseID);
+
+                                    BusinessModels.ProductEnquiry mdprdEnq = _prdEnq.GetProductEnquiry(mdsalesDet.ProductEnquiryID);
+                                    _prdEnq.UpdateProductEnquiryAssignedandStatus(mdprdEnq.OriginatorID, 3, mdsales.ProductEnquiryID);
+
+                                    //update purchase request table approved flag
+                                    _prdEnq.UpdatePEApprovedFlag(mdsalesDet.ProductEnquiryID, false);
+                                }
+                                else if (itemname.Equals("Sales Invoice Generated"))
+                                {
+                                    //If Finance head rejected the invoice assign it back to Finance Manager for review
+                                    DataLayer.EmployeeDAL _empLayer = new EmployeeDAL();
+                                    DataLayer.SalesQuotationDAL _sales = new SalesQuotationDAL();
+                                    BusinessModels.SalesQuotation mdsalesDet = _sales.GetSalesQuotationDetails(purchaseID);
+                                    DataLayer.ProductEnquiryDAL _prdEnq = new ProductEnquiryDAL();
+                                    BusinessModels.SalesQuotation mdsales = _sales.UpdateSalesQuotationAssignedandStatus(mdsalesDet.OriginatorID, 3, purchaseID);
+                                    _prdEnq.UpdateProductEnquiryAssignedandStatus(mdsalesDet.OriginatorID, 3, mdsales.ProductEnquiryID);
+
+                                    //update purchase request table approved flag
+                                    _sales.UpdateSalesQuotationApprovedFlag(purchaseID, false);
+                                }
+                                else if (itemname.Equals("Purchase Request"))
+                                {
+                                    DataLayer.PurchaseRequestDAL _purchaseRequest = new PurchaseRequestDAL();
+                                    //Create Purchase quotation and assign to FM
+                                    BusinessModels.PurchaseRequest prRequest = _purchaseRequest.GetPurchaseRequest(purchaseID);                                  
+
+                                    //update assigned to and status
+                                    BusinessModels.PurchaseRequest bmPurchaseRequest = _purchaseRequest.UpdatePurchaseRequestAssignedandStatus(prRequest.OriginatorID, 3, purchaseID);
+
+                                    //update purchase request table approved flag
+                                    _purchaseRequest.UpdatePurchaseRequestApprovedFlag(purchaseID, false);
+                                }
+                                else if (itemname.Equals("PR Invoice Generated"))
+                                {
+                                    DataLayer.PurchaseQuotationDAL  _purchaseQoute = new PurchaseQuotationDAL();
+                                    DataLayer.PurchaseRequestDAL _purchaseRequest = new PurchaseRequestDAL();
+                                    BusinessModels.PurchaseQuotation prQoute = _purchaseQoute.GetPurchaseQuotation(purchaseID);
+                                    //Set assigned and status of the purchase quotation
+                                    BusinessModels.PurchaseQuotation mdpurchase = _purchaseQoute.UpdatePurchaseQuotationAssignedandStatus(prQoute.OriginatorID, 3, purchaseID);
+
+                                    //update purchase request status
+                                    _purchaseRequest.UpdatePurchaseRequestStatus(3, prQoute.PurchaseRequestID);
+                                    //update purchase request table approved flag
+                                    _purchaseQoute.UpdatePurchaseQuotationApprovedFlag(purchaseID, false);
+                                }
+                                else if (itemname.Equals("Stock Out"))
+                                {
+                                    DataLayer.SalesQuotationDAL _sales = new SalesQuotationDAL();
+                                    BusinessModels.SalesQuotation mdsales = _sales.GetSalesQuotationDetails(purchaseID);
+
+                                    //Update the sales quotations status to dispatch approved and assign back to supervisor
+                                    _sales.UpdateSalesQuotationAssignedandStatus(mdsales.AssignedWHSupervisorID, 3, purchaseID);
+
+                                    //update the approved flag
+                                    _sales.UpdateSQDispatchFlag(false, mdsales.AssignedWHSupervisorID);
+
+                                }
+
+                                var _activeWorkflow = dbContext.ActiveWorkflow.Find(activeWorkflowID);
+                                _activeWorkflow.Status = "Completed";
+                                _activeWorkflow.CompletedDate = DateTime.Now.ToString();
+                                dbContext.Entry(_activeWorkflow).State = EntityState.Modified;
+                            }
+
                             #endregion
 
                             #region "Activate Next Step"
-                            var _nextActiveStep = _activeWorkflowSteps[_activeStepIndex + 1];
-                            _nextActiveStep.Status = "Active";
-                            dbContext.Entry(_nextActiveStep).State = EntityState.Modified;
+                            if (action != "Reject")
+                            {
+                                var _nextActiveStep = _activeWorkflowSteps[_activeStepIndex + 1];
+                                _nextActiveStep.Status = "Active";
+                                dbContext.Entry(_nextActiveStep).State = EntityState.Modified;
+                                dbContext.SaveChanges();
+                            }
 
-                            dbContext.SaveChanges();
                             #endregion
 
                             dbContextTransaction.Commit();
@@ -471,17 +564,187 @@ namespace DataLayer.Workflow
 
                             //coded 
                             //Update status of quotation and product enquiry if completed
-                            if(itemname.Equals("Sales Quotation"))
+                            DataLayer.EmployeeDAL _empLayer = new EmployeeDAL();
+                            DataLayer.SalesQuotationDAL _sales = new SalesQuotationDAL();
+                            DataLayer.ProductEnquiryDAL _prdEnq = new ProductEnquiryDAL();
+                            DataLayer.PurchaseRequestDAL _purchaseRequest = new PurchaseRequestDAL();
+                            DataLayer.PurchaseQuotationDAL _purchaseQoute = new PurchaseQuotationDAL();
+                            DataLayer.PurchaseOrderDAL _purchaseOrder = new PurchaseOrderDAL();
+                            DataLayer.StockOutDetailsDAL _StockOutDetails = new StockOutDetailsDAL();
+                            if (action == "Approve")
                             {
-                                DataLayer.EmployeeDAL _empLayer = new EmployeeDAL();
-                                DataLayer.SalesQuotationDAL _sales = new SalesQuotationDAL();
-                                DataLayer.ProductEnquiryDAL _prdEnq= new ProductEnquiryDAL();
-                                BusinessModels.Employee empDet = _empLayer.GetFinanceManagerOnCompanyType(locid, compid, compType);
-                                BusinessModels.SalesQuotation mdsales= _sales.UpdateSalesQuotationAssignedandStatus(empDet.Identity, 4, purchaseID);
 
-                                _prdEnq.UpdateProductEnquiryStatus(4, mdsales.ProductEnquiryID);
+
+                                if (itemname.Equals("Sales Quotation"))
+                                {
+
+                                    BusinessModels.Employee empDet = _empLayer.GetFinanceManagerOnCompanyType(locid, compid, compType);
+                                    //update assigned to and status
+                                    BusinessModels.SalesQuotation mdsales = _sales.UpdateSalesQuotationAssignedandStatus(empDet.Identity, 4, purchaseID);
+
+                                    //update sales quotation table approved flag
+                                    _sales.UpdateSalesQuotationApprovedFlag(purchaseID, true);
+
+                                    //update product enquiry status
+                                    _prdEnq.UpdateProductEnquiryStatus(4, mdsales.ProductEnquiryID);
+                                }
+                                else if (itemname.Equals("Sales Invoice Generated"))
+                                {
+                                    //Get Warehouse Manager for company 
+                                    BusinessModels.Employee empDet = _empLayer.GetWareHouseManagerOnLocation(locid, compid);
+
+                                    //Set assigned and status of the sales quotation
+                                    BusinessModels.SalesQuotation mdsales = _sales.UpdateSalesQuotationAssignedandStatus(empDet.Identity, 28, purchaseID);
+
+                                    //update product enquiry status
+                                    _prdEnq.UpdateProductEnquiryStatus(28, mdsales.ProductEnquiryID);
+
+                                    _sales.UpdateSalesQuotationAssignedFlag(purchaseID, false);
+                                }
+
+                                else if (itemname.Equals("Purchase Request"))
+                                {
+                                    //get Finance Manager
+                                    BusinessModels.Employee empDet = _empLayer.GetFinanceManagerOnCompany(locid, compid);
+
+                                    //Create Purchase quotation and assign to FM
+                                    BusinessModels.PurchaseRequest prRequest = _purchaseRequest.GetPurchaseRequest(purchaseID);
+                                    BusinessModels.PurchaseQuotation mdPurchaseQuote = new BusinessModels.PurchaseQuotation();
+                                    mdPurchaseQuote.LocationID = prRequest.LocationID;
+                                    mdPurchaseQuote.OriginatorID = prRequest.OriginatorID;
+                                    mdPurchaseQuote.EnquiryLevelID = prRequest.EnquiryLevelID;
+                                    mdPurchaseQuote.PurchaseRequestID = prRequest.Identity;
+                                    mdPurchaseQuote.IsActive = true;
+                                    mdPurchaseQuote.IsApproved = false;
+                                    mdPurchaseQuote.IsPOGenerated = false;
+                                    mdPurchaseQuote.CreatedBy = prRequest.OriginatorID;
+                                    mdPurchaseQuote.CreatedDate = DateTime.Now;
+                                    mdPurchaseQuote.CompanyTypeID = prRequest.CompanyTypeID;
+                                    mdPurchaseQuote.StatusID = 4;
+                                    mdPurchaseQuote.AssignedTo = empDet.Identity;
+                                    mdPurchaseQuote.PQCode = "PQ#" + GetRandomAlphanumericString();
+                                    _purchaseQoute.Insert(mdPurchaseQuote);
+
+
+                                    //update assigned to and status
+                                    BusinessModels.PurchaseRequest bmPurchaseRequest = _purchaseRequest.UpdatePurchaseRequestAssignedandStatus(empDet.Identity, 4, purchaseID);
+
+                                    //update purchase request table approved flag
+                                    _purchaseRequest.UpdatePurchaseRequestApprovedFlag(purchaseID, true);
+                                }
+                                else if (itemname.Equals("PR Invoice Generated"))
+                                {
+                                    BusinessModels.PurchaseQuotation prQoute = _purchaseQoute.GetPurchaseQuotationDetails(purchaseID);
+
+                                    //create purchase order
+                                    BusinessModels.PurchaseOrder prOrder = new BusinessModels.PurchaseOrder();
+                                    prOrder.LocationID = prQoute.LocationID;
+                                    prOrder.OriginatorID = prQoute.OriginatorID;
+                                    prOrder.EnquiryLevelID = prQoute.EnquiryLevelID;
+                                    prOrder.PurchaseQuotationID = prQoute.Identity;
+                                    prOrder.IsActive = true;
+                                    prOrder.IsApproved = true;
+                                    prOrder.IsAssigned = false;
+                                    prOrder.IsWarehouseAssigned = false;
+                                    //need to change
+                                    prOrder.CreatedBy = prQoute.OriginatorID;
+                                    prOrder.CreatedDate = DateTime.Now;
+                                    prOrder.CompanyTypeID = compType;
+                                    prOrder.StatusID = 1;
+                                    BusinessModels.Employee empDet =_empLayer.GetPurchaseManagersOnCompany(compid, locid);
+                                    prOrder.AssignedTo = empDet.Identity;
+                                    prOrder.POCode = "PO#" + GetRandomAlphanumericString();
+
+                                    _purchaseOrder.Insert(prOrder);
+
+                                    //  BusinessModels.Employee empDet = _empLayer.Getpu(locid, compid, compType);
+
+                                    //Need to do
+                                    //Assign the approved PO to purchase Manager
+
+                                    //Set assigned and status of the purchase quotation
+                                    BusinessModels.PurchaseQuotation mdpurchase = _purchaseQoute.UpdatePurchaseQuotationAssignedandStatus(prQoute.OriginatorID, 13, purchaseID);
+
+                                    //update purchase request status
+                                    _purchaseRequest.UpdatePurchaseRequestStatus(13, prQoute.PurchaseRequestID);
+                                }
+                                else if (itemname.Equals("Stock Out"))
+                                {
+                                    BusinessModels.SalesQuotation mdsales = _sales.GetSalesQuotationDetails(purchaseID);
+
+                                    //Update the sales quotations status to dispatch approved and assign back to supervisor
+                                    _sales.UpdateSalesQuotationAssignedandStatus(mdsales.AssignedWHSupervisorID, 35, purchaseID);
+
+                                    //update the approved flag
+                                    _sales.UpdateSQDispatchFlag(true, mdsales.AssignedWHSupervisorID);
+
+                                    //Update the completed workflow id to stock out details table
+                                    _StockOutDetails.UpdateStockOutWorkFlowID(_activeWorkflow.ActiveID, mdsales.Identity);
+
+                                }
+
+                                }
+                            else if (action == "Reject")
+                            {
+
+                                if (itemname.Equals("Sales Quotation"))
+                                {
+                                    //if SRM reject the quotation assign it back to origin employee who created the product enquiry
+                                    BusinessModels.SalesQuotation mdsalesDet = _sales.GetSalesQuotationDetails(purchaseID);
+                                    BusinessModels.SalesQuotation mdsales = _sales.UpdateSalesQuotationAssignedandStatus(mdsalesDet.OriginatorID, 3, purchaseID);
+
+                                    BusinessModels.ProductEnquiry mdprdEnq = _prdEnq.GetProductEnquiry(mdsalesDet.ProductEnquiryID);
+                                    _prdEnq.UpdateProductEnquiryAssignedandStatus(mdprdEnq.OriginatorID, 3, mdsales.ProductEnquiryID);
+
+                                    //update product enquiry approved flag
+                                    _prdEnq.UpdatePEApprovedFlag(mdsales.ProductEnquiryID, false);
+
+                                }
+                                else if (itemname.Equals("Sales Invoice Generated"))
+                                {
+                                    //If Finance head rejected the invoice assign it back to Finance Manager for review
+                                    BusinessModels.SalesQuotation mdsalesDet = _sales.GetSalesQuotationDetails(purchaseID);
+                                    BusinessModels.SalesQuotation mdsales = _sales.UpdateSalesQuotationAssignedandStatus(mdsalesDet.OriginatorID, 3, purchaseID);
+                                    _prdEnq.UpdateProductEnquiryAssignedandStatus(mdsalesDet.OriginatorID, 3, mdsales.ProductEnquiryID);
+
+                                    //update purchase request table approved flag
+                                    _sales.UpdateSalesQuotationApprovedFlag(purchaseID, false);
+
+                                }
+                                else if (itemname.Equals("Purchase Request"))
+                                {
+                                    //If Purchase Head rejected the request assign it back to originator employee                                    
+                                    BusinessModels.PurchaseRequest prRequest = _purchaseRequest.GetPurchaseRequest(purchaseID);
+                                    //update assigned to and status
+                                    BusinessModels.PurchaseRequest bmPurchaseRequest = _purchaseRequest.UpdatePurchaseRequestAssignedandStatus(prRequest.OriginatorID, 3, purchaseID);
+
+                                    //update purchase request table approved flag
+                                    _purchaseRequest.UpdatePurchaseRequestApprovedFlag(purchaseID, false);
+                                }
+                                else if (itemname.Equals("PR Invoice Generated"))
+                                {
+                                    BusinessModels.PurchaseQuotation prQoute = _purchaseQoute.GetPurchaseQuotation(purchaseID);
+                                    //Set assigned and status of the purchase quotation
+                                    BusinessModels.PurchaseQuotation mdpurchase = _purchaseQoute.UpdatePurchaseQuotationAssignedandStatus(prQoute.OriginatorID, 3, purchaseID);
+
+                                    //update purchase request status
+                                    _purchaseRequest.UpdatePurchaseRequestStatus(3, prQoute.PurchaseRequestID);
+                                }
+                                else if (itemname.Equals("Stock Out"))
+                                {
+                                    BusinessModels.SalesQuotation mdsales = _sales.GetSalesQuotationDetails(purchaseID);
+
+                                    //Update the sales quotations status to dispatch approved and assign back to supervisor
+                                    _sales.UpdateSalesQuotationAssignedandStatus(mdsales.AssignedWHSupervisorID, 3, purchaseID);
+
+                                    //update the approved flag
+                                    _sales.UpdateSQDispatchFlag(false, mdsales.AssignedWHSupervisorID);
+
+
+
+                                }
+
                             }
-
 
                             dbContext.SaveChanges();
                             #endregion
@@ -500,7 +763,34 @@ namespace DataLayer.Workflow
         }
 
         #endregion
+        private static string GetRandomAlphanumericString()
+        {
+            const string alphanumericCharacters =
+               "0123456789" + "0123456789";
+            return GetRandomString(3, alphanumericCharacters);
+        }
+        private static string GetRandomString(int length, IEnumerable<char> characterSet)
+        {
+            if (length < 0)
+                throw new ArgumentException("length must not be negative", "length");
+            if (length > int.MaxValue / 8) // 250 million chars ought to be enough for anybody
+                throw new ArgumentException("length is too big", "length");
+            if (characterSet == null)
+                throw new ArgumentNullException("characterSet");
+            var characterArray = characterSet.Distinct().ToArray();
+            if (characterArray.Length == 0)
+                throw new ArgumentException("characterSet must not be empty", "characterSet");
 
+            var bytes = new byte[length * 8];
+            new RNGCryptoServiceProvider().GetBytes(bytes);
+            var result = new char[length];
+            for (int i = 0; i < length; i++)
+            {
+                ulong value = BitConverter.ToUInt64(bytes, i * 8);
+                result[i] = characterArray[value % (uint)characterArray.Length];
+            }
+            return new string(result);
+        }
         private void RollBack(DbContext dbContext)
         {
             var changedEntries = dbContext.ChangeTracker.Entries()

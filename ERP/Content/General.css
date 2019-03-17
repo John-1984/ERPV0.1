@@ -113,7 +113,7 @@
 }
 .welcomestyle {
     font-family: 'Playball', Cursive;
-    color: #D59D63;
+    color: #565656;
     font-size: 17px;
 }
 .footerstyle {
@@ -270,7 +270,7 @@ a.ForgetPwd {
     padding-left: 2px; /*text-transform: uppercase;*/
     font-weight: bold;
     font-size: 14pt;
-    color: #D59D63; /* border-bottom: 1px solid #c0c0c0;*/
+    color: #565656; /* border-bottom: 1px solid #c0c0c0;*/
 }
 .BodyWelcomeText {
     /*background: #c2c2c2;
@@ -312,8 +312,11 @@ a.menulink {
     font-size: 13px;
     text-decoration: none;
     color: white;
-    background-color: #8A7B69;
-    border: 1px thick #8A7B69;
+    /*background-color: #8A7B69;
+    border: 1px thick #8A7B69;*/
+    background-color: #565656;
+    border: 1px thick #565656;
+    ;
     text-align: center;
     line-height: 10px;
 }
@@ -323,8 +326,8 @@ a.menulink {
     text-decoration: none;
     text-align: center;
     color: black;
-    border: 1px solid #D59D63;
-    border-bottom: 1px solid #8A7B69;
+    border: 1px solid #565656;
+    border-bottom: 1px solid #565656;
 }
 .gridedit {
    
@@ -360,8 +363,8 @@ a:hover, a:focus {
             padding: 8px 8px;
             background: #fff;
             font-size: 12px;
-            font-weight: 800;
-            color: #8A7B69;
+            font-weight: 400;
+            color: #2E001F;
             text-transform: uppercase;
             text-align: center;
             border-radius: 0;
@@ -398,7 +401,7 @@ a:hover, a:focus {
 
         .tab .nav-tabs li.active a,
         .tab .nav-tabs li a:hover {
-            color: #8A7B69;
+            color: #2E001F;
             border: none;
         }
 

@@ -24,7 +24,7 @@ namespace DataLayer
         {
         }
 
-        public BusinessModels.PurchaseRequest GetPurchaseRequest(Int32 identity)
+        public BusinessModels.PurchaseRequest GetPurchaseRequest(Int32? identity)
         {
             var _PurchaseRequest = new BusinessModels.PurchaseRequest();
             using (var dbContext = new PurchaseRequestDbContext())
@@ -214,14 +214,27 @@ namespace DataLayer
             return true;
         }
 
-        public bool UpdatePurchaseRequestAssignedandStatus(int assignedid, int statusid, int identity)
+        public BusinessModels.PurchaseRequest UpdatePurchaseRequestAssignedandStatus(int? assignedid, int statusid, int identity)
         {
-            var _user = false;
+            var _user = new BusinessModels.PurchaseRequest();
             try             {                 using (var dbContext = new UserDbContext())                 {
-                    _user = dbContext.Database.SqlQuery<bool>("CALL UpdatePRAssignedandStatus(@_id, @_assignedid,@_statusid)", new MySqlParameter("@_id", identity), new MySqlParameter("@_assignedid", assignedid), new MySqlParameter("@_statusid", statusid)).FirstOrDefault();                 }             }             catch (Exception ex)             {                 var test = ex.Message;             }
+                    _user = dbContext.Database.SqlQuery<BusinessModels.PurchaseRequest>("CALL UpdatePRAssignedandStatus(@_id, @_assignedid,@_statusid)", new MySqlParameter("@_id", identity), new MySqlParameter("@_assignedid", assignedid), new MySqlParameter("@_statusid", statusid)).FirstOrDefault();                 }             }             catch (Exception ex)             {                 var test = ex.Message;             }
             return _user;
         }
-
+        public BusinessModels.PurchaseRequest UpdatePurchaseRequestStatus(int statusid, int? identity)
+        {
+            var _user = new BusinessModels.PurchaseRequest();
+            try             {                 using (var dbContext = new UserDbContext())                 {
+                    _user = dbContext.Database.SqlQuery<BusinessModels.PurchaseRequest>("CALL UpdatePRStatus(@_id, @_statusid)", new MySqlParameter("@_id", identity),  new MySqlParameter("@_statusid", statusid)).FirstOrDefault();                 }             }             catch (Exception ex)             {                 var test = ex.Message;             }
+            return _user;
+        }
+        public BusinessModels.PurchaseRequest UpdatePurchaseRequestApprovedFlag(int identity, bool flag)
+        {
+            var _user = new BusinessModels.PurchaseRequest();
+            try             {                 using (var dbContext = new SalesQuotationDbContext())                 {
+                    _user = dbContext.Database.SqlQuery<BusinessModels.PurchaseRequest>("CALL UpdatePRApprovedFlag(@_flag,@_id)", new MySqlParameter("@_flag", flag), new MySqlParameter("@_id", identity)).FirstOrDefault();                 }             }             catch (Exception ex)             {                 var test = ex.Message;             }
+            return _user;
+        }
         public BusinessModels.PurchaseRequest Insert(BusinessModels.PurchaseRequest PurchaseRequest)
         {
             using (var dbContext = new PurchaseRequestDbContext())

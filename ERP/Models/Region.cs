@@ -24,6 +24,13 @@ namespace ERP.Models
             set;
         }
 
+        public bool IsActive
+        {
+            get;
+            set;
+        }
+
+
         [DefaultValue("")]
         [Required(ErrorMessage = "Region Name is required")]
         public string RegionName

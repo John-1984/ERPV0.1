@@ -19,6 +19,7 @@ namespace BusinessLayer
         private DataLayer.CompanyTypeDAL _comptypedataLayer = null;
         private DataLayer.PurchaseRequestTypeDAL _purtypedataLayer = null;
         private DataLayer.EnquiryLevelDAL _enqlvldataLayer = null;
+        private DataLayer.MenuDAL _menudataLayer =null;
 
         private DataLayer.PurchaseRequestDetailsDAL _enqDetailsdataLayer = null;
         public PurchaseRequest()
@@ -30,6 +31,7 @@ namespace BusinessLayer
             _enqDetailsdataLayer = new DataLayer.PurchaseRequestDetailsDAL();
             _venddataLayer = new DataLayer.VendorDAL();
             _branddataLayer = new DataLayer.BrandDAL();
+            _menudataLayer = new DataLayer.MenuDAL();
             _itemdataLayer = new DataLayer.ItemMasterDAL();
             _comptypedataLayer = new DataLayer.CompanyTypeDAL();
             _purtypedataLayer = new DataLayer.PurchaseRequestTypeDAL();
@@ -37,7 +39,7 @@ namespace BusinessLayer
 
         }
 
-        public BusinessModels.PurchaseRequest GetPurchaseRequest(Int32 identity)
+        public BusinessModels.PurchaseRequest GetPurchaseRequest(Int32? identity)
         {
             return _dataLayer.GetPurchaseRequest(identity);
         }
@@ -63,7 +65,7 @@ namespace BusinessLayer
             return _dataLayer.GetAll(locID, empID);
         }
 
-        public bool UpdatePurchaseRequestAssignedandStatus(int assignedid, int statusid, int identity)
+        public BusinessModels.PurchaseRequest UpdatePurchaseRequestAssignedandStatus(int assignedid, int statusid, int identity)
         {
             return _dataLayer.UpdatePurchaseRequestAssignedandStatus(assignedid,statusid,identity);
         }
@@ -82,7 +84,15 @@ namespace BusinessLayer
             return _enqlvldataLayer.GetAll();
         }
 
-
+        public bool InitiateinvoiceApprovalWorkFlow(int prId, int empID, int locID, string strName)
+        {
+            //Intitate work flow for invoice approval by FM and head. Initially we pass FM empid for first step
+            WorkflowManager.WorkflowInitializer _workflowInitializer = new WorkflowManager.WorkflowInitializer();
+            //coded
+            BusinessModels.Menu mnID = _menudataLayer.GetMenuByName("Purchase Request");
+            BusinessModels.Workflow.Workflow wrkFlow = _workflowInitializer.GetWorkFLowIDForLocationAndItemTypeByName(locID, mnID.Identity, strName);
+            return _workflowInitializer.InitializeWorkflow(wrkFlow.Identity, Convert.ToInt32(empID), prId, mnID.Identity.ToString());
+        }
         public Boolean Delete(Int32 identity)
         {
             return _dataLayer.Delete(identity);

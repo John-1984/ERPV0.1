@@ -38,6 +38,26 @@ namespace DataLayer
             return _Stocks;
         }
 
+        public BusinessModels.Stocks GetStocks(int itemid, string size)
+        {
+            var _Stocks = new BusinessModels.Stocks();
+            using (var dbContext = new StocksDbContext())
+            {
+                _Stocks = dbContext.Stocks
+                             .Include(K => K.Location)
+                             .Include(l => l.CompanyType)
+                             .Include(l => l.ItemMaster)
+                             .Include(e => e.ItemMaster.Brand)
+                             .Include(e => e.ItemMaster.Brand.Vendor)
+                            .Include(r => r.ItemMaster.Brand.Vendor.ProductMaster)
+                            .Where(o => o.IsActive == true && o.ItemID == itemid && o.Size == size)
+                            .FirstOrDefault();
+
+
+            }
+            return _Stocks;
+        }
+
         public BusinessModels.Stocks GetStocksWithItemIDAndSize(Int32 identity,string size)
         {
             var _Stocks = new BusinessModels.Stocks();

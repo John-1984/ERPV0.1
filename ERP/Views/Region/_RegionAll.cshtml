@@ -14,17 +14,26 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var region in Model)
+                @if (Model.Count() == 0)
                 {
-                    <tr class="gridrow">
-                        <td class="gridrow">@region.RegionName</td>
-                        @*<td class="gridrow "> <img src="~/Content/view.gif" alt="View" class="RegionView pointer" data-url="@Url.Action("_RegionView", "Region")" data-identity="@(region.Identity)" /> </td>*@
-                        <td class="gridrow "><img src="~/Content/edit.png" alt="Edit" class="RegionEdit pointer" data-url="@Url.Action("_RegionEdit", "Region")" data-identity="@(region.Identity)" /></td>
-                        <td class="gridrow "><img src="~/Content/delete.png" alt="Delete" class="RegionDelete pointer" data-url="@Url.Action("Delete", "Region")" data-identity="@(region.Identity)" /></td>
+                    <tr class="col-md-12 col-lg-12 gridrow">
+                        <td colspan="3">No Data Found</td>
                     </tr>
-
                 }
-            </tbody>
+                else
+                {
+                    foreach (var region in Model)
+                    {
+                        <tr class="gridrow">
+                            <td class="gridrow">@region.RegionName</td>
+                            @*<td class="gridrow "> <img src="~/Content/view.gif" alt="View" class="RegionView pointer" data-url="@Url.Action("_RegionView", "Region")" data-identity="@(region.Identity)" /> </td>*@
+                            <td class="gridrow "><img src="~/Content/edit.png" alt="Edit" class="RegionEdit pointer" data-url="@Url.Action("_RegionEdit", "Region")" data-identity="@(region.Identity)" /></td>
+                            <td class="gridrow "><img src="~/Content/delete.png" alt="Delete" class="RegionDelete pointer" data-url="@Url.Action("Delete", "Region")" data-identity="@(region.Identity)" /></td>
+                        </tr>
+
+                    }
+                }
+                </tbody>
         </table>
         </div>
         <div class="col-md-12 col-lg-12 nopadding textright">

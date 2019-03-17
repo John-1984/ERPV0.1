@@ -67,6 +67,8 @@ namespace DataLayer
             return _Companys;
         }
 
+
+
         public IEnumerable<BusinessModels.Location> GetLocations()
         {
             var _Locations = new List<BusinessModels.Location>();

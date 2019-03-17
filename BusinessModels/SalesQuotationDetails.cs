@@ -18,17 +18,15 @@ namespace BusinessModels
             set;
         }
 
-       
+        public string CheckNo
+        { get; set; }
+
         public string InvoiceNo
         {
             get;
             set;
         }       
-        public int WareHouseID
-        {
-            get;
-            set;
-        }
+       
 
         [ForeignKey("SalesQuotation")]
         public int SQID
@@ -40,22 +38,22 @@ namespace BusinessModels
 
 
 
-        public DateTime CreatedDate
+        public DateTime? CreatedDate
         {
             get;
             set;
         }
-        public DateTime ModifiedDate
+        public DateTime? ModifiedDate
         {
             get;
             set;
         }
-        public int ModifiedBy
+        public int? ModifiedBy
         {
             get;
             set;
         }
-        public int CreatedBy
+        public int? CreatedBy
         {
             get;
             set;
@@ -72,7 +70,24 @@ namespace BusinessModels
         public SalesQuotation SalesQuotation
         { get; set; }
 
-        
+        [ForeignKey("PaymentType")]
+        public Int32 PaymentTypeID
+        {
+            get;
+            set;
+        }
+        [ForeignKey("PaymentMode")]
+        public Int32 PaymentModeID
+        {
+            get;
+            set;
+        }
+
+        public PaymentMode PaymentMode
+        { get; set; }
+
+        public PaymentType PaymentType
+        { get; set; }
 
     }
 }

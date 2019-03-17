@@ -122,10 +122,15 @@
     <Compile Include="Controllers\OfficeExpenseController.cs" />
     <Compile Include="Controllers\PendingCustomerInfoController.cs" />
     <Compile Include="Controllers\PendingPRVerificationController.cs" />
+    <Compile Include="Controllers\PendingPurchaseQuotationController.cs" />
+    <Compile Include="Controllers\PendingSalesQuotationController.cs" />
+    <Compile Include="Controllers\PendingStockInController.cs" />
+    <Compile Include="Controllers\PendingStockOutController.cs" />
     <Compile Include="Controllers\ProductEnquiryController.cs" />
     <Compile Include="Controllers\ProductMasterController.cs" />
     <Compile Include="Controllers\PurchaseOrderController.cs" />
     <Compile Include="Controllers\PurchasePendingApprovalsController.cs" />
+    <Compile Include="Controllers\PurchaseQuotationController.cs" />
     <Compile Include="Controllers\PurchaseRequestController.cs" />
     <Compile Include="Controllers\PurchaseRequestTypeController.cs" />
     <Compile Include="Controllers\RegionController.cs" />
@@ -178,6 +183,8 @@
     <Compile Include="Models\Menu.cs" />
     <Compile Include="Models\Modules.cs" />
     <Compile Include="Models\OfficeExpense.cs" />
+    <Compile Include="Models\PaymentMode.cs" />
+    <Compile Include="Models\PaymentType.cs" />
     <Compile Include="Models\Priority.cs" />
     <Compile Include="Models\ProductEnquiry.cs" />
     <Compile Include="Models\ProductEnquiryComments.cs" />
@@ -195,9 +202,18 @@
     <Compile Include="Models\RoleEscalation.cs" />
     <Compile Include="Models\RoleMaster.cs" />
     <Compile Include="Models\RoleType.cs" />
+    <Compile Include="Models\PurchaseQuotation.cs" />
+    <Compile Include="Models\StockInDamagedDetails.cs" />
+    <Compile Include="Models\StockInExcessDetails.cs" />
+    <Compile Include="Models\StockInShortageDetails.cs" />
+    <Compile Include="Models\StockOutExpenseDetails.cs" />
+    <Compile Include="Models\StockOutDetails.cs" />
     <Compile Include="Models\SalesQuotation.cs" />
+    <Compile Include="Models\PurchaseQuotationDetails.cs" />
     <Compile Include="Models\SalesQuotationDetails.cs" />
     <Compile Include="Models\SalesRoleType.cs" />
+    <Compile Include="Models\PQAdvanceDetails.cs" />
+    <Compile Include="Models\SQAdvanceDetails.cs" />
     <Compile Include="Models\State.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\Company.cs" />
@@ -220,8 +236,6 @@
     <Compile Include="Models\Workflow\Step.cs" />
     <Compile Include="Controllers\WorkflowDashboardController.cs" />
     <Compile Include="Models\Workflow\WorkflowStepMapping.cs" />
-    <Compile Include="Models\Workflow\ActiveWorkflow.cs" />
-    <Compile Include="Models\Workflow\ActiveStep.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\AddNew.png" />
@@ -245,6 +259,15 @@
     <Content Include="Scripts\PendingPRVerification.js" />
     <Content Include="Scripts\ExpenseType.js" />
     <Content Include="Scripts\OfficeExpense.js" />
+    <Content Include="Scripts\PendingPurchaseQuotation.js" />
+    <Content Include="Scripts\PendingSalesQuotation.js" />
+    <Content Include="Scripts\StockIn.js" />
+    <Content Include="Scripts\PendingStockIn.js" />
+    <Content Include="Scripts\PurchaseOrder.js" />
+    <Content Include="Scripts\PurchaseQuotation.js" />
+    <Content Include="Scripts\PendingStockOut.js" />
+    <Content Include="Scripts\StockOut.js" />
+    <Content Include="Scripts\SalesQuotation.js" />
     <Content Include="Scripts\Stocks.js" />
     <Content Include="Scripts\ProductEnquiry.js" />
     <Content Include="Scripts\Brand.js" />
@@ -307,7 +330,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Views\Error\Index.cshtml" />
@@ -571,6 +593,30 @@
     <Content Include="Views\DeadStock\_DeadStockAll.cshtml" />
     <Content Include="Views\DeadStock\_DeadStockSearch.cshtml" />
     <Content Include="Views\DeadStock\Index.cshtml" />
+    <Content Include="Views\PendingSalesQuotation\_PendingSalesQuotationAll.cshtml" />
+    <Content Include="Views\PendingSalesQuotation\_PendingSalesQuotationView.cshtml" />
+    <Content Include="Views\PendingSalesQuotation\Index.cshtml" />
+    <Content Include="Views\PendingSalesQuotation\_PendingSalesQuotationSearch.cshtml" />
+    <Content Include="Views\PendingPurchaseQuotation\_PendingPurchaseQuotationAll.cshtml" />
+    <Content Include="Views\PendingPurchaseQuotation\_PendingPurchaseQuotationSearch.cshtml" />
+    <Content Include="Views\PendingPurchaseQuotation\_PendingPurchaseQuotationView.cshtml" />
+    <Content Include="Views\PendingPurchaseQuotation\Index.cshtml" />
+    <Content Include="Views\PurchaseQuotation\Index.cshtml" />
+    <Content Include="Views\PurchaseQuotation\_PurchaseQuotationAll.cshtml" />
+    <Content Include="Views\PurchaseQuotation\_PurchaseQuotationEdit.cshtml" />
+    <Content Include="Views\PurchaseQuotation\_PurchaseQuotationSearch.cshtml" />
+    <Content Include="Views\PurchaseQuotation\_PurchaseQuotationView.cshtml" />
+    <Content Include="Views\PendingStockOut\Index.cshtml" />
+    <Content Include="Views\PendingStockOut\_PendingStockOutView.cshtml" />
+    <Content Include="Views\PendingStockOut\_PendingStockOutAll.cshtml" />
+    <Content Include="Views\StockOut\_StockOutExpense.cshtml" />
+    <Content Include="Views\PendingStockIn\_PendingStockInAll.cshtml" />
+    <Content Include="Views\PendingStockIn\_PendingStockInView.cshtml" />
+    <Content Include="Views\PendingStockIn\Index.cshtml" />
+    <Content Include="Views\PendingStockIn\_PendingStockInSearch.cshtml" />
+    <Content Include="Views\StockIn\_StockInExcess.cshtml" />
+    <Content Include="Views\StockIn\_StockInShortage.cshtml" />
+    <Content Include="Views\StockIn\_StockInDamaged.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

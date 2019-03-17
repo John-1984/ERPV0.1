@@ -116,7 +116,14 @@ namespace DataLayer
             }
             return true;
         }
-        public bool UpdateProductEnquiryAssignedandStatus(int assignedid, int statusid, int identity)
+        public BusinessModels.ProductEnquiry UpdatePEApprovedFlag(int? identity, bool flag)
+        {
+            var _user = new BusinessModels.ProductEnquiry();
+            try             {                 using (var dbContext = new ProductEnquiryDbContext())                 {
+                    _user = dbContext.Database.SqlQuery<BusinessModels.ProductEnquiry>("CALL UpdatePEApprovedFlag(@_flag,@_id)", new MySqlParameter("@_flag", flag), new MySqlParameter("@_id", identity)).FirstOrDefault();                 }             }             catch (Exception ex)             {                 var test = ex.Message;             }
+            return _user;
+        }
+        public bool UpdateProductEnquiryAssignedandStatus(int? assignedid, int statusid, int? identity)
         {
             var _user = false;
             try             {                 using (var dbContext = new UserDbContext())                 {

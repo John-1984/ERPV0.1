@@ -35,6 +35,7 @@ namespace ERP.Controllers
                 Session["UserName"] = formCollection["UserName"];
                 Session["EmployeeCompanyTypeID"] = bsEmployee.CompanyTypeID;
                 Session["RoleType"] = bsEmployee.RoleMaster.RoleType;
+                Session["Role"] = bsEmployee.RoleMaster.RoleName;
                 Session["CompanyID"] = bsEmployee.CompanyID;
                 if (bsEmployee.FloorMaster != null)
                     Session["FloorID"] = bsEmployee.FloorMaster.Identity;

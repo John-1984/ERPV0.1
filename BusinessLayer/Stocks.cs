@@ -29,7 +29,11 @@ namespace BusinessLayer
         {
             return _dataLayer.GetStocks(identity);
         }
-        public IEnumerable<BusinessModels.Stocks> GetAll()
+        public BusinessModels.Stocks GetStocks(int itemid, string size)
+        {
+            return _dataLayer.GetStocks(itemid, size);
+        }
+            public IEnumerable<BusinessModels.Stocks> GetAll()
         {
             return _dataLayer.GetAll();
         }

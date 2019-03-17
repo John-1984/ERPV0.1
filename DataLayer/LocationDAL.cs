@@ -47,6 +47,8 @@ namespace DataLayer
             return _Locations;
         }
 
+        
+
         public IEnumerable<BusinessModels.Location> GetAll(int stidentity)
         {
             //Need to do

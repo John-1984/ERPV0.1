@@ -1,0 +1,90 @@
+﻿@model ERP.Models.SalesQuotation
+
+@using (Html.BeginForm("StockOutExpenseAdd", "StockOut", FormMethod.Post, new { @id = "registerFormId13" }))
+{
+    <div class="container col-md-12 col-lg-12 commonPadding StockOutExpenseDetails">
+       
+                     
+        <div class="row commonPadding col-md-12 col-lg-12" style="padding-bottom:13px;">
+            <div class="col-md-12 col-lg-12 commonPadding" style="height:7px;">
+
+            </div>
+            <div class="row col-md-12 col-lg-12 commonPadding">
+                <div class="col-md-6 col-lg-6">
+                    <div class="row col-md-12 col-lg-12">
+                        <div class="float-left col-md-7 col-lg-7 lablestyles textright">Expense Type:</div>
+                        <div class="float-right col-md-5 col-lg-5">
+                            @Html.DropDownList("drpstockoutexpensetype", (IEnumerable<SelectListItem>)Model.ExpenseTypeList, "Select Expense Type", new { @class = "dropdownstyles", name = "drpstockoutexpensetype" })
+                            @*<span class="input-validation-error" data-valmsg-for="ProductEnquiryDetName" data-valmsg-replace="true"></span>*@
+                            <input type="hidden" name="hdnstockoutexpensetype" id="hdnstockoutexpensetype" />
+                        </div>
+                    </div>
+                </div>
+                
+
+            </div>
+            <div class="row col-md-12 col-lg-12 commonPadding">
+
+                <div class="col-md-6 col-lg-6">
+                    <div class="row col-md-12 col-lg-12">
+                        <div class="float-left col-md-7 col-lg-7 lablestyles textright">Amount:</div>
+                        <div class="float-right col-md-5 col-lg-5">
+                            <input class="textareastyles" style="width:200px;height:35px;" type="text" name="ExpenseTypeAmount" value="@(Model.ExpenseTypeAmount)" placeholder="Enter Expense Amount" />
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6">
+                    <div class="row col-md-12 col-lg-12">
+                       
+                        <div class="col-md-12 col-lg-12">
+                            <input type="button" data-url="@Url.Action("StockOutExpenseAdd", "StockOut")" class="formbutton float-right StockOutExpenseAdd" data-identity="@(Model.Identity)" value="Expense Add" />
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+           
+            <div class="col-md-12 col-lg-12 commonPadding">
+                <table class="table customerAll">
+                    <thead>
+                        <tr class="gridheader">
+                            <th>Expense Type</th>
+                            <th>Amount</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.StockOutExpenseDetails.Count() == 0)
+                        {
+                            <tr class="col-md-12 col-lg-12 gridrow">
+                                <td>No Data Found</td>
+                            </tr>
+                        }
+                        else
+                        {
+                            foreach (var det in Model.StockOutExpenseDetails)
+                            {
+
+                                <tr class="gridrow">
+                                    <td class="gridrow">@det.ExpenseType.TypeName</td>
+                                    <td class="gridrow">@det.Amount</td>
+
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-12 col-lg-12 commonPadding textright" style="font-size:12px; color:black;font-weight:bold">
+                <div style="padding-right:15px">Total Expense Cost : @Model.TotalExpenseCost</div>
+            </div>
+        </div>
+
+                    <input type="hidden" name="Identity" value="@(Model.Identity)">
+</div>
+
+       
+   
+
+}

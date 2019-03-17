@@ -25,6 +25,7 @@ namespace BusinessModels
             set;
         }
 
+      
         [ForeignKey("Employee")]
         public int? AssignedTo
         {
@@ -107,6 +108,30 @@ namespace BusinessModels
         }
 
         public bool IsApproved
+        {
+            get;
+            set;
+        }
+
+        public bool IsSend
+        {
+            get;
+            set;
+        }
+
+        public bool IsAssigned
+        {
+            get;
+            set;
+        }
+
+        public bool IsDispatchApproved
+        {
+            get;
+            set;
+        }
+
+        public int? AssignedWHSupervisorID
         {
             get;
             set;

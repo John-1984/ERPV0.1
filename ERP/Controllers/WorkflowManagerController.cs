@@ -75,7 +75,7 @@ namespace ERP.Controllers
         public JsonResult Employee(string identity)
         {
 
-            return Json(new SelectList(_employee.GetAllCompaniesonLocation(identity), "Identity", "EmployeeName"));
+            return Json(new SelectList(_employee.GetAllEmployeesOnLocationByManager(int.Parse(identity)), "Identity", "EmployeeName"));
         }
         [HttpPost]
         public ActionResult AddWorkflow(Models.Workflow.Workflow workflow, FormCollection frmFields)

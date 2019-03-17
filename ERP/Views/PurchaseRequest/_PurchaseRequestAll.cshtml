@@ -15,7 +15,7 @@
                     <th>View</th>
                     <th>Edit</th>
                     <th>Add Item</th>
-                    <th>Verify</th>
+                    <th>Send For Approval</th>
                     <th>Delete</th>
                 </tr>
             </thead>
@@ -23,8 +23,7 @@
                 @foreach (var PurchaseRequest in Model)
                 {
                 <tr class="gridrow">
-                    <td class="gridrow "> @PurchaseRequest.CaseNo</td>
-                    
+                    <td class="gridrow "> @PurchaseRequest.CaseNo</td>                    
                     <td class="gridrow "> @PurchaseRequest.PurchaseRequestType.Name</td>
                     <td class="gridrow "> @PurchaseRequest.EnquiryLevel.EnquiryLevelName</td>
                     <td class="gridrow">@PurchaseRequest.Status.StatusName</td>

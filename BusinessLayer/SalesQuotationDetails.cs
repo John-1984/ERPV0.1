@@ -25,7 +25,10 @@ namespace BusinessLayer
             _itemdataLayer = new DataLayer.ItemMasterDAL();
 
         }
-
+        public BusinessModels.SalesQuotationDetails GetAllBySalesQuotation(int reqID)
+        {
+           return _dataLayer.GetAllBySalesQuotation(reqID);
+        }
         public BusinessModels.SalesQuotationDetails GetSalesQuotationDetails(Int32 identity)
         {
             return _dataLayer.GetSalesQuotationDetails(identity);

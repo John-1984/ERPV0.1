@@ -194,15 +194,17 @@ namespace ERP.Controllers
             // BusinessModels.PurchaseRequest.PurchaseRequestDetails mdDet = new BusinessModels.PurchaseRequest.PurchaseRequestDetails();
 
             List<Models.PurchaseRequestDetails> lstpurchaseRequestDetails = new List<Models.PurchaseRequestDetails>();
+            decimal dcAMt = 0;
             foreach (BusinessModels.PurchaseRequestDetails item in bsPurchaseRequest.PurchaseRequestDetails)
             {
                 Models.PurchaseRequestDetails mdPurchaseRequest1 = AutoMapperConfig.Mapper().Map<Models.PurchaseRequestDetails>(item);
                 BusinessModels.ItemMaster bmItem = _PurchaseRequest.GetItemDetails(Convert.ToString(mdPurchaseRequest1.ItemID));
                 Models.ItemMaster mdItem = AutoMapperConfig.Mapper().Map<Models.ItemMaster>(bmItem);
                 mdPurchaseRequest1.ItemMaster = mdItem;
+                dcAMt = dcAMt + (mdItem.RetailPrice * mdPurchaseRequest1.Quantity);
                 lstpurchaseRequestDetails.Add(mdPurchaseRequest1);
             }
-
+            mdPurchaseRequest.TotalPrice = dcAMt;
             mdPurchaseRequest.PurchaseRequestDetails = lstpurchaseRequestDetails;
 
             return PartialView(mdPurchaseRequest);
@@ -229,21 +231,46 @@ namespace ERP.Controllers
         [HttpPost]
         public ActionResult _PurchaseRequestProcessVerification(int identity)
         {
+            //Coded
             BusinessModels.PurchaseRequest mdProductenq = _PurchaseRequest.GetPurchaseRequest(identity);
+            //Purchase Request can be created by three types -  on by Purchase executives, warehouse supervisor, if local purchase request goes with different approval state
+            //PE->PM->PH->FM->FE->FM->FH->Originator WIth PO, 
 
-            BusinessModels.Employee mdemployee = _Employeee.GetSupervisorOnWareHouseCompanyType(Convert.ToInt32(Convert.ToString(Session["LocationID"])), Convert.ToInt32(Convert.ToString(Session["CompanyID"])), Convert.ToInt32(Convert.ToString(Session["EmployeeCompanyTypeID"])));
-            if (mdemployee != null)
+           string stsPurchaseReq= mdProductenq.PurchaseRequestType.Name;
+            #region Purchase  Executive Stage
+            if (Session["Role"].ToString().Contains("Purchase Executve") && !stsPurchaseReq.Contains("Local Purchase Request"))
             {
-                mdProductenq.AssignedTo = mdemployee.Identity;
-                mdProductenq.Employee = mdemployee;
-                //coded
-                mdProductenq.POStatus = 15;
-                BusinessModels.Status mdstatus = _status.GetStatus(15);
-                mdProductenq.Status = mdstatus;
-            }
+                //set workflow approvals for purchase executive
+                _PurchaseRequest.InitiateinvoiceApprovalWorkFlow(identity, Convert.ToInt32(Session["EmployeeID"].ToString()), Convert.ToInt32(Convert.ToString(Session["LocationID"])), "Purchase Request Approval(Purchase Executive)");
 
-            _PurchaseRequest.UpdatePurchaseRequestAssignedandStatus(mdemployee.Identity,15, identity);
-            //_PurchaseRequest.Delete(identity);
+            }
+            #endregion
+            //WS->WI->PH->FM-->FE->FM->FH->Originator WIth PO, 
+            #region Warehouse Supervisor Stage
+            if (Session["Role"].ToString().Contains("Warehouse Supervisor") && !stsPurchaseReq.Contains("Local Purchase Request"))
+            {
+                //set flow for Warehouse Supervisor
+                _PurchaseRequest.InitiateinvoiceApprovalWorkFlow(identity, Convert.ToInt32(Session["EmployeeID"].ToString()), Convert.ToInt32(Convert.ToString(Session["LocationID"])), "Purchase Request Approval(WareHouse Supervisor)");
+            }
+            #endregion
+            //LocalPurchaseRequest->SRM ->PH->PH->FM->FE->FM->FH->Originator WIth PO
+
+            #region Local Purchase Request
+            if (mdProductenq.PurchaseRequestType.Name.Contains("Local Purchase Request"))
+            {
+                //set flow for Local Purchase Request
+                _PurchaseRequest.InitiateinvoiceApprovalWorkFlow(identity, Convert.ToInt32(Session["EmployeeID"].ToString()), Convert.ToInt32(Convert.ToString(Session["LocationID"])), "Purchase Request Approval(Local Purchase Request)");
+            }
+            #endregion
+
+            #region Warehouse Incharge Purchase Request
+            if (Session["Role"].ToString().Contains("Warehouse Incharge") && !stsPurchaseReq.Contains("Local Purchase Request"))
+            {
+                //set flow for Warehouse Incharge
+                _PurchaseRequest.InitiateinvoiceApprovalWorkFlow(identity, Convert.ToInt32(Session["EmployeeID"].ToString()), Convert.ToInt32(Convert.ToString(Session["LocationID"])), "Purchase Request(Warehouse Incharge)");
+            }
+            #endregion
+           
             return RedirectToAction("_PurchaseRequestAll");
         }
 

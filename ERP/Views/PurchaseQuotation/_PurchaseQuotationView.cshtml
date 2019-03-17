@@ -1,0 +1,300 @@
+﻿@model ERP.Models.PurchaseQuotation
+
+@using (Html.BeginForm("Update", "PurchaseQuotation", FormMethod.Post, new { @id = "registerFormId1" }))
+{
+<div class="container col-md-12 col-lg-12 commonPadding PurchaseQuotationDetails">
+    <input type="hidden" value="@Model.Identity">
+    <div class="tab" role="tabpanel">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#Section1" aria-controls="home" role="tab" data-toggle="tab">Purchase Quotation Main Details</a></li>
+
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content tabs">
+            <div role="tabpanel" class="tab-pane active" id="Section1">
+
+                <div class="row commonPadding col-md-12 col-lg-12" style="padding-bottom:13px;">
+                    <div class="col-md-6 col-lg-6">
+                        <div class="row col-md-12 col-lg-12">
+                            <div class="float-left col-md-5 col-lg-5 textright lablestyles">
+                                Unique Code:
+                            </div>
+                            <div class="float-right col-md-7 col-lg-7 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                                @Model.PQCode
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-6 ">
+                        <div class="row col-md-12 col-lg-12">
+                            <div class="float-left col-md-4 col-lg-4 textright lablestyles">
+                                Status :
+                            </div>
+                            <div class="float-right col-md-8 col-lg-8 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                                @Model.Status.StatusName
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row commonPadding col-md-12 col-lg-12" style="padding-bottom:13px;">
+                    <div class="col-md-6 col-lg-6">
+                        <div class="row col-md-12 col-lg-12">
+                            <div class="float-left col-md-5 col-lg-5 textright lablestyles">
+                                Enquiry Level:
+                            </div>
+                            <div class="float-right col-md-7 col-lg-7 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                                @Model.EnquiryLevel.EnquiryLevelName
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-6 ">
+                        <div class="row col-md-12 col-lg-12">
+                            <div class="float-left col-md-4 col-lg-4 textright lablestyles">
+                                Created Date :
+                            </div>
+                            <div class="float-right col-md-8 col-lg-8 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                                @Model.CreatedDate
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="row col-md-12 col-lg-12 commonPadding"></div>
+    <div class="tab" role="tabpanel">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#Section2" aria-controls="home" role="tab" data-toggle="tab">Quotation Item Details</a></li>
+
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content tabs">
+            <div role="tabpanel" class="tab-pane active" id="Section2">
+
+                <div class="row commonPadding col-md-12 col-lg-12" style="padding-bottom:13px;">
+                    <div class="col-md-12 col-lg-12 commonPadding" style="height:7px;">
+
+                    </div>
+                    @*<div class="col-md-12 col-lg-12 BodyWelcomeText commonPadding" style="height:10px;">
+                            Quotation Details
+                        </div>
+                        <div class="col-md-12 col-lg-12 commonPadding" style="height:7px;border-bottom:1px dashed #8A7B69;">
+
+                        </div>*@
+                    <div class="col-md-12 col-lg-12 commonPadding">
+                        <table class="table customerAll">
+                            <thead>
+                                <tr class="gridheader">
+                                    <th>Product Master</th>
+                                    <th>Vendor</th>
+                                    <th>Brand</th>
+                                    <th>Item Name</th>
+                                    <th>Quantity</th>
+                                    <th>Size</th>
+                                    <th>Item Price</th>
+                                    @*<th>Delete</th>*@
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.PurchaseRequestDetails.Count() == 0)
+                                {
+                                    <tr class="col-md-12 col-lg-12 gridrow">
+                                        <td>No Data Found</td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    foreach (var det in Model.PurchaseRequestDetails)
+                                    {
+
+                                        <tr class="gridrow">
+                                            <td class="gridrow">@det.ItemMaster.Brand.Vendor.ProductMaster.ProductName</td>
+                                            <td class="gridrow">@det.ItemMaster.Brand.Vendor.VendorName</td>
+                                            <td class="gridrow">@det.ItemMaster.Brand.BrandName</td>
+                                            <td class="gridrow">@det.ItemMaster.ItemName</td>
+                                            <td class="gridrow">@det.Quantity</td>
+                                            <td class="gridrow">@det.Size</td>
+                                            <td class="gridrow">@det.ItemMaster.RetailPrice</td>
+                                            @*<td class="gridrow "><img src="~/Content/delete.png" alt="Delete" class="ProductEnquiryItemDelete pointer" data-url="@Url.Action("DeleteItem", "ProductEnquiry")" data-identity="@(det.Identity)" /></td>*@
+
+
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-12 col-lg-12 commonPadding textright" style="font-size:12px; color:black;font-weight:bold">
+                        <div style="padding-right:15px">Total Cost : @Model.TotalCost</div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row col-md-12 col-lg-12 commonPadding">
+        @*if (Model.SQAdvanceDetails != null)
+            {
+                if (Model.SQAdvanceDetails.Count() != 0)
+                {*@
+        <div class="tab" role="tabpanel">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#Section1" aria-controls="home" role="tab" data-toggle="tab">Advance Details</a></li>
+
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content tabs">
+                <div role="tabpanel" class="tab-pane active" id="Section1">
+
+                    <div class="col-md-12 col-lg-12 commonPadding">
+                        <table class="table customerAll">
+                            <thead>
+                                <tr class="gridheader">
+                                    <th>Advance Amount</th>
+                                    <th>Paid Date</th>
+                                    <th>Check Number</th>
+
+                                    @*<th>Delete</th>*@
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.PQAdvanceDetails.Count() == 0)
+                                {
+                                    <tr class="col-md-12 col-lg-12 gridrow">
+                                        <td>No Data Found</td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    foreach (var det in Model.PQAdvanceDetails)
+                                    {
+
+                                    <tr class="gridrow">
+                                        <td class="gridrow">@det.Amount</td>
+                                        <td class="gridrow">@det.CreatedDate</td>
+                                        <td class="gridrow">@det.CheckNo</td>
+                                    </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-12 col-lg-12 commonPadding textright" style="font-size:12px; color:black;font-weight:bold">
+                        <div style="padding-right:15px">Total Advance Amount Paid : @Model.TotalAdvanceAmount</div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        @*}
+            }*@
+    </div>
+    <div class="row col-md-12 col-lg-12 commonPadding">
+
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-5 col-lg-4 lablestyles textright">Payment  Type:</div>
+                <div class="float-right col-md-5 col-lg-5">
+                    @Html.DropDownList("drpPurchaseQuotationPaymentType", (IEnumerable<SelectListItem>)Model.PaymentTypeList, "Select Payment Type", new { @class = "dropdownstyles", name = "drpPurchaseQuotationPaymentType" })
+                    @*<span class="input-validation-error" data-valmsg-for="ProductEnquiryDetName" data-valmsg-replace="true"></span>*@
+                    <input type="hidden" name="hdnPurchaseQuotationPaymentType" id="hdnPurchaseQuotationPaymentType" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">Invoice No:</div>
+                <div class="float-right col-md-5 col-lg-5">
+                    <input class="textareastyles" style="width:300px;height:35px;" type="text" name="InvoiceNo" value="@(Model.InvoiceNo)" placeholder="Enter Invoice Number" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row col-md-12 col-lg-12 commonPadding">
+
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">Advance Amount</div>
+                <div class="float-right col-md-5 col-lg-5">
+                    <input class="textareastyles" style="width:300px;height:35px;" type="text" name="AdvanceAmount" value="@(Model.AdvanceAmount)" placeholder="Enter Advance Amount" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-5 col-lg-4 lablestyles textright">Payment  Mode:</div>
+                <div class="float-right col-md-5 col-lg-5">
+                    @Html.DropDownList("drpPurchaseQuotationPaymentMode", (IEnumerable<SelectListItem>)Model.PaymentModeList, "Select Payment Mode", new { @class = "dropdownstyles", name = "drpPurchaseQuotationPaymentMode" })
+                    @*<span class="input-validation-error" data-valmsg-for="ProductEnquiryDetName" data-valmsg-replace="true"></span>*@
+                    <input type="hidden" name="hdnPurchaseQuotationPaymentMode" id="hdnPurchaseQuotationPaymentMode" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row col-md-12 col-lg-12 commonPadding">
+
+        <div class="col-md-6 col-lg-6">
+            <div class="row col-md-12 col-lg-12">
+                <div class="float-left col-md-4 col-lg-4 lablestyles textright">Check Number:</div>
+                <div class="float-right col-md-5 col-lg-5">
+                    <input class="textareastyles" style="width:300px;height:35px;" type="text" name="CheckNo" value="@(Model.CheckNo)" placeholder="Enter Check Number" />
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    @*<div class="row col-md-12 col-lg-12 commonPadding PurchaseQuotationAdvanceAmount">
+            <div class="col-md-6 col-lg-6">
+                <div class="row col-md-12 col-lg-12">
+                    <div class="float-left col-md-5 col-lg-5 lablestyles textright">Assign To Warehouse Manager:</div>
+                    <div class="float-right col-md-5 col-lg-5">
+                        @Html.DropDownList("drpPurchaseQuotationEmployee", (IEnumerable<SelectListItem>)Model.EmployeeList, "Select Employee", new { @class = "dropdownstyles", name = "drpPurchaseQuotationEmployee" })
+                        <input type="hidden" name="hdnPurchaseQuotationEmployee" id="hdnPurchaseQuotationEmployee" />
+                    </div>
+                </div>
+            </div>
+        </div>*@
+    <div class="row col-md-12 col-lg-12 commonPadding">
+        <div class="col-md-3 col-lg-3 textright">
+            <input type="button" data-url="@Url.Action("Update", "PurchaseQuotation")" class="formbutton PurchaseQuotationAddEdit" data-identity="@(Model.Identity)" value="Update/Add" />
+        </div>
+
+        <div class="col-md-6 col-lg-6">
+            <input type="button" value="Cancel" data-url="@Url.Action("_PurchaseQuotationCancel", "PurchaseQuotation")" data-identity="-1" class="formbutton PurchaseQuotationCancel" />
+        </div>
+        <input type="hidden" name="Identity" id="Identity" value="@(Model.Identity)">
+        <input type="hidden" name="CreatedDate" value="@(Model.CreatedDate)">
+        <input type="hidden" name="CreatedBy" value="@(Model.CreatedBy)">
+        <input type="hidden" name="ModifiedBy" value="@(Model.ModifiedBy)">
+        <input type="hidden" name="ModifiedDate" value="@(Model.ModifiedDate)">
+        <input type="hidden" name="IsActive" value="@(Model.IsActive)">
+        <input type="hidden" name="AssignedTo" value="@(Model.AssignedTo)">
+        <input type="hidden" name="PQCode" value="@(Model.PQCode)">
+        <input type="hidden" name="EnquiryLevelID" value="@(Model.EnquiryLevelID)">
+        <input type="hidden" name="PurchaseRequestID" value="@(Model.PurchaseRequestID)">
+        <input type="hidden" name="LocationID" value="@(Model.LocationID)">
+        <input type="hidden" name="StatusID" value="@(Model.StatusID)">
+        <input type="hidden" name="VerifiedBy" value="@(Model.VerifiedBy)">
+        <input type="hidden" name="ApprovedBy" value="@(Model.ApprovedBy)">
+        <input type="hidden" name="OriginatorID" value="@(Model.OriginatorID)">
+        <input type="hidden" name="IsApproved" value="@(Model.IsApproved)">
+        <input type="hidden" name="IsAssigned" value="@(Model.IsAssigned)">
+        <input type="hidden" name="TotalCost" value="@(Model.TotalCost)">
+        <input type="hidden" name="TotalAdvanceAmount" value="@(Model.TotalAdvanceAmount)">
+    </div>
+
+</div>
+
+    }

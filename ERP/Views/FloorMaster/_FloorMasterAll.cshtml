@@ -20,24 +20,33 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var FloorMaster in Model)
+                @if (Model.Count() == 0)
                 {
-                <tr class="gridrow">
-                    <td class="gridrow">@FloorMaster.CompanyType.Company.Location.District.State.Country.Region.RegionName</td>
-                    <td class="gridrow "> @FloorMaster.CompanyType.Company.Location.District.State.Country.CountryName</td>
-                    <td class="gridrow">@FloorMaster.CompanyType.Company.Location.District.State.StateName</td>
-                    <td class="gridrow "> @FloorMaster.CompanyType.Company.Location.District.DistrictName</td>
-                    <td class="gridrow">@FloorMaster.CompanyType.Company.Location.LocationName</td>
-                    <td class="gridrow">@FloorMaster.CompanyType.Company.CompanyName</td>
-                    <td class="gridrow">@FloorMaster.CompanyType.TypeName</td>
-                    <td class="gridrow">@FloorMaster.FloorName</td>
-
-                    <td class="gridrow "><img src="~/Content/edit.png" alt="Edit" class="FloorMasterEdit pointer" data-url="@Url.Action("_FloorMasterEdit", "FloorMaster")" data-identity="@(FloorMaster.Identity)" /></td>
-                    <td class="gridrow "><img src="~/Content/delete.png" alt="Delete" class="FloorMasterDelete pointer" data-url="@Url.Action("Delete", "FloorMaster")" data-identity="@(FloorMaster.Identity)" /></td>
-                </tr>
-
+                    <tr class="col-md-12 col-lg-12 gridrow">
+                        <td colspan="10">No Data Found</td>
+                    </tr>
                 }
-            </tbody>
+                else
+                {
+                    foreach (var FloorMaster in Model)
+                    {
+                        <tr class="gridrow">
+                            <td class="gridrow">@FloorMaster.CompanyType.Company.Location.District.State.Country.Region.RegionName</td>
+                            <td class="gridrow "> @FloorMaster.CompanyType.Company.Location.District.State.Country.CountryName</td>
+                            <td class="gridrow">@FloorMaster.CompanyType.Company.Location.District.State.StateName</td>
+                            <td class="gridrow "> @FloorMaster.CompanyType.Company.Location.District.DistrictName</td>
+                            <td class="gridrow">@FloorMaster.CompanyType.Company.Location.LocationName</td>
+                            <td class="gridrow">@FloorMaster.CompanyType.Company.CompanyName</td>
+                            <td class="gridrow">@FloorMaster.CompanyType.TypeName</td>
+                            <td class="gridrow">@FloorMaster.FloorName</td>
+
+                            <td class="gridrow "><img src="~/Content/edit.png" alt="Edit" class="FloorMasterEdit pointer" data-url="@Url.Action("_FloorMasterEdit", "FloorMaster")" data-identity="@(FloorMaster.Identity)" /></td>
+                            <td class="gridrow "><img src="~/Content/delete.png" alt="Delete" class="FloorMasterDelete pointer" data-url="@Url.Action("Delete", "FloorMaster")" data-identity="@(FloorMaster.Identity)" /></td>
+                        </tr>
+
+                    }
+                }
+                </tbody>
         </table>
     </div>
     <div class="col-md-12 col-lg-12 nopadding textright">

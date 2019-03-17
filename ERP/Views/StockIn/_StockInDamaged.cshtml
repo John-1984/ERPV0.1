@@ -1,0 +1,13 @@
+﻿@model ERP.Models.PurchaseOrder
+
+@using (Html.BeginForm("StockInDamagedAdd", "StockIn", FormMethod.Post, new { @id = "registerFormId14" }))
+{
+    <div class="row col-md-12 col-lg-12 commonPadding">
+
+        <div class="float-left col-md-6 col-lg-6 lablestyles textright">Item:</div>
+        <div class="float-left col-md-5 col-lg-5">
+            @Html.DropDownList("drpStockInDamageditemid", (IEnumerable<SelectListItem>)Model.ItemList, "Select Item", new { @class = "dropdownstyles", name = "drpStockInDamageditemid" })
+            <input type="hidden" name="hdnStockInDamageditemid" id="hdnStockInDamageditemid" />
+        </div>
+    </div>
+}

@@ -97,14 +97,47 @@
         });
     });
 
+    $(document).find("#RegionName").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: '/Region/AutoComplete/',
+                data: "{ 'prefix': '" + request.term + "'}",
+                dataType: "json",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.RegionName,
+                            value: item.RegionName,
+                            identity: item.Identity
+                        };
+                    }))
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        },
+        select: function (e, i) {
+            $("#RegionID").val(i.item.identity);
+        },
+        minLength: 1,
+        cache: false
+    });
+
     $(document).off("click", ".RegionSearch");
     $(document).on("click", ".RegionSearch", function (event) {
-        var theUrl = $(this).attr("data-url");
+        event.stopImmediatePropagation();
         $('.headermode').html('View Region Info');
+        var theUrl = $(this).attr("data-url");
         $.ajax({
             url: theUrl,
             type: 'POST',  // http method
-            data: { "searchString": $(".searchText").val() },
+            data: { "searchString": $(".searchText").val(), "createdDate": $("#datepicker").val() },
             success: function (data, status, xhr) {
                 $('.resultView').html(data);
                 showMessage(status, "Success");

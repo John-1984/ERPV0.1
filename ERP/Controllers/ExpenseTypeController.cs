@@ -91,11 +91,11 @@ namespace ERP.Controllers
 
             var ExpenseTypes = AutoMapperConfig.Mapper().Map<List<Models.ExpenseType>>(_ExpenseType.GetAll());
             if (!string.IsNullOrEmpty(searchString) && !string.IsNullOrEmpty(createdDate))
-                ExpenseTypes = AutoMapperConfig.Mapper().Map<List<Models.ExpenseType>>(_ExpenseType.GetAll().ToList().FindAll(p => p.TypeName.ToLower().Contains(searchString.ToLower()) && p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+                ExpenseTypes = AutoMapperConfig.Mapper().Map<List<Models.ExpenseType>>(_ExpenseType.GetAll().ToList().FindAll(p => p.TypeName.ToLower().Contains(searchString.ToLower()) && Convert.ToDateTime(p.CreatedDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
             else if (!string.IsNullOrEmpty(searchString))
                 ExpenseTypes = AutoMapperConfig.Mapper().Map<List<Models.ExpenseType>>(_ExpenseType.GetAll().ToList().FindAll(p => p.TypeName.ToLower().Contains(searchString.ToLower())));
             else if (!string.IsNullOrEmpty(createdDate))
-                ExpenseTypes = AutoMapperConfig.Mapper().Map<List<Models.ExpenseType>>(_ExpenseType.GetAll().ToList().FindAll(p => p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+                ExpenseTypes = AutoMapperConfig.Mapper().Map<List<Models.ExpenseType>>(_ExpenseType.GetAll().ToList().FindAll(p => Convert.ToDateTime(p.CreatedDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
 
             switch (sortOrder)
             {

@@ -9,6 +9,8 @@ using System.Globalization;
 
 namespace ERP.Controllers
 {
+    [ERP.CustomeFilters.LoggingFilter]
+    [ERP.CustomeFilters.ExceptionFilter]
     public class RegionController : Controller
     {
         private BusinessLayer.Region _Region = new BusinessLayer.Region();
@@ -40,8 +42,10 @@ namespace ERP.Controllers
         [HttpPost]
         public ActionResult Delete(int identity)
         {
-            _Region.Delete(identity);
-            return RedirectToAction("_RegionAll");
+            BusinessModels.Region regDet=  _Region.GetRegion(identity);
+            regDet.IsActive = false;
+            _Region.Update(regDet);
+            return RedirectToAction("_RegionAll", regDet);
         }
 
         [HttpPost]
@@ -82,6 +86,14 @@ namespace ERP.Controllers
             return PartialView("_RegionAll", GetRegions(sortOrder, page, createdDate, searchString));
         }
 
+        [HttpPost]
+        public JsonResult AutoComplete(string prefix)
+        {
+            var regionss = _Region.GetMatchingRegions(prefix);
+
+            return Json(regionss);
+        }
+
         private IPagedList<Models.Region> GetRegions(string sortOrder, int? page, string createdDate = "", string searchString = "")
         {
 
@@ -91,11 +103,11 @@ namespace ERP.Controllers
 
             var Regions = AutoMapperConfig.Mapper().Map<List<Models.Region>>(_Region.GetAll());
             if (!string.IsNullOrEmpty(searchString) && !string.IsNullOrEmpty(createdDate))
-                Regions = AutoMapperConfig.Mapper().Map<List<Models.Region>>(_Region.GetAll().ToList().FindAll(p => p.RegionName.ToLower().Contains(searchString.ToLower()) && p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+                Regions = AutoMapperConfig.Mapper().Map<List<Models.Region>>(Regions.ToList().FindAll(p => p.RegionName.ToLower().Contains(searchString.ToLower()) && p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
             else if (!string.IsNullOrEmpty(searchString))
-                Regions = AutoMapperConfig.Mapper().Map<List<Models.Region>>(_Region.GetAll().ToList().FindAll(p => p.RegionName.ToLower().Contains(searchString.ToLower())));
+                Regions = AutoMapperConfig.Mapper().Map<List<Models.Region>>(Regions.ToList().FindAll(p => p.RegionName.ToLower().Contains(searchString.ToLower())));
             else if (!string.IsNullOrEmpty(createdDate))
-                Regions = AutoMapperConfig.Mapper().Map<List<Models.Region>>(_Region.GetAll().ToList().FindAll(p => p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+                Regions = AutoMapperConfig.Mapper().Map<List<Models.Region>>(Regions.ToList().FindAll(p => p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
 
             switch (sortOrder)
             {

@@ -47,16 +47,21 @@ namespace BusinessLayer
         {
             return _dataLayer.GetSalesQuotationDetails(identity);
         }
-            public IEnumerable<BusinessModels.SalesQuotation> GetAll()
-        {
-            return _dataLayer.GetAll();
-        }
-        
 
-        public IEnumerable<BusinessModels.SalesQuotationDetails> GetAllBySalesQuotation(int identity)
+        public BusinessModels.SalesQuotation UpdateSalesQuotationStatus(int? statusid, int identity)
+        {
+            return _dataLayer.UpdateSalesQuotationStatus(statusid,identity);
+        }
+            public BusinessModels.SalesQuotationDetails GetAllBySalesQuotation(int identity)
         {
             return _sqDetailsdataLayer.GetAllBySalesQuotation(identity);
         }
+
+        public IEnumerable<BusinessModels.SalesQuotation> GetAll()
+        {
+            return _dataLayer.GetAll();
+        }
+
         public IEnumerable<BusinessModels.SalesQuotation> GetAll(int locID)
         {
             return _dataLayer.GetAll(locID);
@@ -66,17 +71,58 @@ namespace BusinessLayer
             return _dataLayer.GetAll(locID, empID);
         }
 
+        public IEnumerable<BusinessModels.SalesQuotation> GetAllPendingSQForDispatch()
+        {
+            return _dataLayer.GetAllPendingSQForDispatch();
+        }
+
+        public IEnumerable<BusinessModels.SalesQuotation> GetAllPendingSQForDispatch(int locID)
+        {
+            return _dataLayer.GetAllPendingSQForDispatch(locID);
+        }
+        public IEnumerable<BusinessModels.SalesQuotation> GetAllPendingSQForDispatch(int locID, int empID)
+        {
+            return _dataLayer.GetAllPendingSQForDispatch(locID, empID);
+        }
+
+        public IEnumerable<BusinessModels.SalesQuotation> GetAllPendingApporvalSQ()
+        {
+            return _dataLayer.GetAllPendingApporvalSQ();
+        }
+
+        public IEnumerable<BusinessModels.SalesQuotation> GetAllPendingApporvalSQ(int locID)
+        {
+            return _dataLayer.GetAllPendingApporvalSQ(locID);
+        }
+        public IEnumerable<BusinessModels.SalesQuotation> GetAllPendingApporvalSQ(int locID, int empID)
+        {
+            return _dataLayer.GetAllPendingApporvalSQ(locID, empID);
+        }
+
         public BusinessModels.SalesQuotation UpdateSalesQuotationAssignedandStatus(int assignedid, int statusid, int identity)
         {
             return _dataLayer.UpdateSalesQuotationAssignedandStatus(assignedid, statusid, identity);
         }
 
-        //public IEnumerable<BusinessModels.ProductMaster> GetAllProductMasters()
-        //{
-        //    return _prodddataLayer.GetAll();
-        //}
+        public BusinessModels.SalesQuotation UpdateSQSupervisorID(int? assignedid, int identity)
+        {
+            return _dataLayer.UpdateSQSupervisorID(assignedid, identity);
+        }
+            public BusinessModels.SalesQuotation UpdateSalesQuotationAssigned(int assignedid,  int identity)
+        {
+            return _dataLayer.UpdateSalesQuotationAssigned(assignedid, identity);
+        }
 
-        public IEnumerable<BusinessModels.Status> GetAllStatus()
+        public BusinessModels.SalesQuotation UpdateSQDispatchFlag(bool flag, int identity)
+        {
+            return _dataLayer.UpdateSQDispatchFlag(flag, identity);
+        }
+            //public IEnumerable<BusinessModels.ProductMaster> GetAllProductMasters()
+            //{
+            //    return _prodddataLayer.GetAll();
+            //}
+
+            public IEnumerable<BusinessModels.Status> GetAllStatus()
         {
             return _statsddataLayer.GetAll();
         }
@@ -102,7 +148,7 @@ namespace BusinessLayer
         {
             BusinessModels.SalesQuotation mdSalesQuote = new BusinessModels.SalesQuotation();
             mdSalesQuote.LocationID = prEnq.LocationId;
-            mdSalesQuote.OriginatorID = prEnq.OriginatorID;
+            mdSalesQuote.OriginatorID = prEnq.AssignedTo;
             mdSalesQuote.EnquiryLevelID = prEnq.EnquiryLevelID;
             mdSalesQuote.ProductEnquiryID = prEnq.Identity;
             mdSalesQuote.IsActive = true;
@@ -125,7 +171,27 @@ namespace BusinessLayer
             return mdSalesQuote;
         }
 
-       
+        public bool InitiateinvoiceApprovalWOrkFlow(int sqId, int empID, int locID)
+        {
+            //Intitate work flow for invoice approval by FM and head. Initially we pass FM empid for first step
+            WorkflowManager.WorkflowInitializer _workflowInitializer = new WorkflowManager.WorkflowInitializer();
+            //coded
+            BusinessModels.Menu mnID = _menudataLayer.GetMenuByName("Sales Invoice Generated");
+            BusinessModels.Workflow.Workflow wrkFlow = _workflowInitializer.GetWorkFLowIDForLocationAndItemType(locID, mnID.Identity);
+
+           return  _workflowInitializer.InitializeWorkflow(wrkFlow.Identity, Convert.ToInt32(empID), sqId, mnID.Identity.ToString());
+        }
+
+        public bool InitiateStockOutApprovalWOrkFlow(int sqId, int empID, int locID)
+        {
+            //Intitate work flow for invoice approval by FM and head. Initially we pass FM empid for first step
+            WorkflowManager.WorkflowInitializer _workflowInitializer = new WorkflowManager.WorkflowInitializer();
+            //coded
+            BusinessModels.Menu mnID = _menudataLayer.GetMenuByName("Stock Out");
+            BusinessModels.Workflow.Workflow wrkFlow = _workflowInitializer.GetWorkFLowIDForLocationAndItemType(locID, mnID.Identity);
+
+            return _workflowInitializer.InitializeWorkflow(wrkFlow.Identity, Convert.ToInt32(empID), sqId, mnID.Identity.ToString());
+        }
 
         private static string GetRandomAlphanumericString()
         {
@@ -180,6 +246,10 @@ namespace BusinessLayer
         {
 
             return _itemdataLayer.GetAll(int.Parse(fldidentity));
+        }
+        public BusinessModels.SalesQuotation UpdateSalesQuotationAssignedFlag(int identity, bool flag)
+        {
+            return _dataLayer.UpdateSalesQuotationAssignedFlag(identity, flag);
         }
 
         public IEnumerable<BusinessModels.Vendor> GetAllVendors(string fldidentity)

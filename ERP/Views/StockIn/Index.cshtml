@@ -3,6 +3,23 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="container">
+    <div class="col-md-12 col-lg-12 width-100">
+        <div class="col-md-12 col-lg-12 BodyWelcomeText textleft headermode" style="border-bottom:1px dashed #8A7B69; padding-top:5px;">
+            View Stock In Info
+        </div>
 
-<h2>Index</h2>
+        <div class="col-md-12 col-lg-12 commonPadding StockInSearchDetials">
+            @{Html.RenderPartial("_StockInSearch");}
 
+        </div>
+        <div class="col-md-12 col-lg-12 height-10">
+            @ViewData["ActionUpdate"]
+        </div>
+        <div class="col-md-12 col-lg-12 resultView commonPadding">
+            @{Html.RenderAction("_StockInAll", "StockIn");}
+        </div>
+
+    </div>
+
+</div>

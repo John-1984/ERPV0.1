@@ -48,6 +48,18 @@ namespace BusinessLayer
         {
             return _dataLayer.GetEmployeeLogin(identity);
         }
+        public IEnumerable<BusinessModels.Employee> GetAllWareHouseManagerOnLocation(Int32 locidentity)
+        {
+            return _dataLayer.GetAllWareHouseManagerOnLocation(locidentity);
+        }
+            public IEnumerable<BusinessModels.Employee> GetAllFinanceExecutivesOnCompanyType(int? companytypeid, int fldidentity)
+        {
+            return _dataLayer.GetAllFinanceExecutivesOnCompanyType(companytypeid, fldidentity);
+        }
+        public IEnumerable<BusinessModels.Employee> GetWareHouseSupervisorsOnCompany(int? companyid, int fldidentity)
+        {
+            return _dataLayer.GetWareHouseSupervisorsOnCompany(companyid, fldidentity);
+        }
         public IEnumerable<BusinessModels.Employee> GetAllEmployeesOnRole(int fldidentity)
         {
             return _dataLayer.GetAllEmployeesOnRole(fldidentity);
@@ -56,6 +68,11 @@ namespace BusinessLayer
         public IEnumerable<BusinessModels.Employee> GetAllEmployeesOnLocation(int fldidentity)
         {
             return _dataLayer.GetAllEmployeesOnLocation(fldidentity);
+        }
+
+        public IEnumerable<BusinessModels.Employee> GetAllEmployeesOnLocationByManager(int fldidentity)
+        {
+            return _dataLayer.GetAllEmployeesOnLocationByManager(fldidentity);
         }
 
         public IEnumerable<BusinessModels.Employee> GetAllEmployeesOnCompanyType(int fldidentity)
@@ -146,12 +163,23 @@ namespace BusinessLayer
         {
             return _dataLayer.GetSupervisorOnWareHouseCompanyType(locidentity, companyID, companytype);
         }
-
         public BusinessModels.Employee GetFinanceManagerOnCompanyType(Int32 locidentity, int companyID, int companytype)
         {
             return _dataLayer.GetFinanceManagerOnCompanyType(locidentity, companyID, companytype);
         }
-        public IEnumerable<BusinessModels.Region> GetAllRegions()
+        public IEnumerable<BusinessModels.Employee> GetAllWareHouseManagers()
+        {
+            return _dataLayer.GetAllWareHouseManagers();
+        }
+        public IEnumerable<BusinessModels.Employee> GetAllWareHouseSupervisorsOnLocation(int locid)
+        {
+            return _dataLayer.GetAllWareHouseSupervisorsOnLocation(locid);
+        }
+            public IEnumerable<BusinessModels.Employee> GetAllWareHouseSupervisors()
+        {
+            return _dataLayer.GetAllWareHouseSupervisors();
+        }
+            public IEnumerable<BusinessModels.Region> GetAllRegions()
         {
             //TestRegionData();
             return _regdataLayer.GetAll();

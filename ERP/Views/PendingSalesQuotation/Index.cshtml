@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="col-md-12 col-lg-12 width-100">
+        <div class="col-md-12 col-lg-12 BodyWelcomeText textleft headermode" style="border-bottom:1px dashed #8A7B69; padding-top:5px;">
+            View Sales Quotation Info
+        </div>
+
+        <div class="col-md-12 col-lg-12 commonPadding PendingSalesQuotationSearchDetials">
+            @{Html.RenderPartial("_PendingSalesQuotationSearch");}
+
+        </div>
+        <div class="col-md-12 col-lg-12 height-10">
+            @ViewData["ActionUpdate"]
+        </div>
+        <div class="col-md-12 col-lg-12 resultView commonPadding">
+            @{Html.RenderAction("_PendingSalesQuotationAll", "PendingSalesQuotation");}
+        </div>
+
+    </div>
+
+</div>

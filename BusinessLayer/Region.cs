@@ -18,7 +18,10 @@ namespace BusinessLayer
         {
             return _dataLayer.GetRegion(identity);
         }
-
+        public IEnumerable<BusinessModels.Region> GetMatchingRegions(string prefix)
+        {
+            return _dataLayer.GetMatchingRegions(prefix);
+        }
         public IEnumerable<BusinessModels.Region> GetAll()
         {
             return _dataLayer.GetAll();

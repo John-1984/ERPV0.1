@@ -29,6 +29,8 @@ namespace DataLayer
             {
                 _SalesQuotationDetails = dbContext.SalesQuotationDetails
                              .Include(K => K.SalesQuotation)
+                             .Include(o => o.PaymentMode)
+                             .Include(y => y.PaymentType)
                              //.Include(d => d.ItemMaster)                            
                              .FirstOrDefault(p => p.Identity == identity);
             }
@@ -43,6 +45,8 @@ namespace DataLayer
                 dbContext.Configuration.LazyLoadingEnabled = false;
                 _SalesQuotationDetailss = dbContext.SalesQuotationDetails
                              .Include(K => K.SalesQuotation)
+                             .Include(o=>o.PaymentMode)
+                             .Include(y => y.PaymentType)
                             // .Include(d => d.ItemMaster)
                             .ToList();
             }
@@ -50,17 +54,19 @@ namespace DataLayer
             return _SalesQuotationDetailss;
         }
 
-        public IEnumerable<BusinessModels.SalesQuotationDetails> GetAllBySalesQuotation(int reqID)
+        public BusinessModels.SalesQuotationDetails GetAllBySalesQuotation(int reqID)
         {
-            var _SalesQuotationDetailss = new List<BusinessModels.SalesQuotationDetails>();
+            var _SalesQuotationDetailss = new BusinessModels.SalesQuotationDetails();
             using (var dbContext = new SalesQuotationDetailsDbContext())
             {
                 dbContext.Configuration.LazyLoadingEnabled = false;
                 _SalesQuotationDetailss = dbContext.SalesQuotationDetails
                             .Include(K => K.SalesQuotation)
-                            // .Include(d => d.ItemMaster)
+                            .Include(o => o.PaymentMode)
+                             .Include(y => y.PaymentType)
+                             // .Include(d => d.ItemMaster)
                              .Where(p => p.SQID == reqID)
-                            .ToList();
+                            .FirstOrDefault(); 
             }
 
             return _SalesQuotationDetailss;

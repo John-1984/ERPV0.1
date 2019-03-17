@@ -14,6 +14,14 @@ namespace ERP.Models.Workflow
             Name = string.Empty;
             CreatedDate = string.Empty;
            // CreatedBy = string.Empty;
+           SQCode = string.Empty;
+
+            StatusName = string.Empty;
+         EnquiryLevelName = string.Empty;
+        SQCreatedDate = string.Empty;
+        InvoiceNo = string.Empty;
+        PaymerMode = string.Empty;
+            CheckNo = string.Empty;
         }
 
         public int Identity { get; set; }
@@ -98,8 +106,90 @@ namespace ERP.Models.Workflow
 
         public ICollection<ProductEnquiryDetails> ProductEnquiryDetails { get; set; }
 
+        public ICollection<PurchaseRequestDetails> PurchaseRequestDetails { get; set; }
+
         public string ItemTypeName { get; set; }
         public Decimal TotalCost { get; set; }
+
+        public decimal TotalAdvanceAmount { get; set; }
+
+        public SalesQuotationDetails SQDetails { get; set; }
+
+        public PurchaseQuotationDetails PQDetails { get; set; }
+
+        public ICollection<SQAdvanceDetails> SQAdvanceDetails { get; set; }
+        public ICollection<PQAdvanceDetails> PQAdvanceDetails { get; set; }
+        public string SQCode { get; set; }
+        public string StatusName { get; set; }
+        public string EnquiryLevelName { get; set; }
+        public string SQCreatedDate { get; set; }
+        public string InvoiceNo { get; set; }
+        public string PaymerMode { get; set; }
+
+        public string CheckNo { get; set; }
+
+        public string PQCode { get; set; }
+        public string PQCreatedDate { get; set; }
+
+        public string CreatedDateString { get; set; }
+
+        public ICollection<StockOutExpenseDetails> StockOutExpenseDetails { get; set; }
+        public Decimal TotalExpenseCost { get; set; }
+
+
+        public string VehicleNo
+        {
+            get;
+            set;
+        }
+
+        public string DisapatchTime
+        {
+            get;
+            set;
+        }
+
+        public decimal ExpenseTypeAmount
+        {
+            get;
+            set;
+        }
+
+        public string DriverName
+        {
+            get;
+            set;
+        }
+
+        public string DriverLicenceNumber
+        {
+            get;
+            set;
+        }
+
+        public decimal AdditionalAmountPaid
+        {
+            get;
+            set;
+        }
+        public string ContainerNo
+        {
+            get;
+            set;
+        }
+
+        public bool IsDispatchApproved
+        {
+            get;
+            set;
+        }
+
+        public int? AssignedWHSupervisorID
+        {
+            get;
+            set;
+        }
+
 
     }
 }

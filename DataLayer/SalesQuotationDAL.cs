@@ -57,7 +57,7 @@ namespace DataLayer
                               .Include(w => w.EnquiryLevel)
                               .Include(l => l.CompanyType)
                               .Where(p => p.IsActive == true)
-                             .FirstOrDefault(p => p.Identity == identity);
+                             .FirstOrDefault(p => p.Identity == identity );
 
             }
             return _SalesQuotation;
@@ -76,67 +76,7 @@ namespace DataLayer
                              .Include(g => g.ProductEnquiry)
                               .Include(w => w.EnquiryLevel)
                                .Include(l => l.CompanyType)
-                              .Where(p => p.IsActive == true)
-                            .ToList();
-            }
-
-            return _SalesQuotations;
-        }
-
-        public IEnumerable<BusinessModels.SalesQuotation> GetAllPendingApporvalSQ()
-        {
-            var _SalesQuotations = new List<BusinessModels.SalesQuotation>();
-            using (var dbContext = new SalesQuotationDbContext())
-            {
-                dbContext.Configuration.LazyLoadingEnabled = false;
-                _SalesQuotations = dbContext.SalesQuotation
-                            .Include(K => K.Location)
-                             .Include(d => d.Employee)
-                             .Include(f => f.Status)
-                             .Include(g => g.ProductEnquiry)
-                              .Include(w => w.EnquiryLevel)
-                               .Include(l => l.CompanyType)
-                              .Where(p => p.IsActive == true && p.Status.Identity == 15 && p.IsApproved == false)
-                            .ToList();
-            }
-
-            return _SalesQuotations;
-        }
-
-        public IEnumerable<BusinessModels.SalesQuotation> GetAllPendingApporvalSQ(int locID)
-        {
-            var _SalesQuotations = new List<BusinessModels.SalesQuotation>();
-            using (var dbContext = new SalesQuotationDbContext())
-            {
-                dbContext.Configuration.LazyLoadingEnabled = false;
-                _SalesQuotations = dbContext.SalesQuotation
-                            .Include(K => K.Location)
-                             .Include(d => d.Employee)
-                             .Include(f => f.Status)
-                             .Include(g => g.ProductEnquiry)
-                              .Include(w => w.EnquiryLevel)
-                               .Include(l => l.CompanyType)
-                             .Where(p => p.LocationID == locID && p.IsActive == true && p.StatusID == 15 && p.IsApproved == false)
-                            .ToList();
-            }
-
-            return _SalesQuotations;
-        }
-
-        public IEnumerable<BusinessModels.SalesQuotation> GetAllPendingApporvalSQ(int locID, int empID)
-        {
-            var _SalesQuotations = new List<BusinessModels.SalesQuotation>();
-            using (var dbContext = new SalesQuotationDbContext())
-            {
-                dbContext.Configuration.LazyLoadingEnabled = false;
-                _SalesQuotations = dbContext.SalesQuotation
-                            .Include(K => K.Location)
-                             .Include(d => d.Employee)
-                             .Include(f => f.Status)
-                             .Include(g => g.ProductEnquiry)
-                              .Include(w => w.EnquiryLevel)
-                               .Include(l => l.CompanyType)
-                             .Where(p => p.LocationID == locID && p.CreatedBy == empID && p.IsActive == true && p.Status.Identity == 15 && p.IsApproved == false)
+                              .Where(p => p.IsActive == true && p.IsApproved == true && p.IsAssigned == true && p.StatusID != 6 && p.IsSend == false)
                             .ToList();
             }
 
@@ -156,7 +96,7 @@ namespace DataLayer
                              .Include(g => g.ProductEnquiry)
                               .Include(w => w.EnquiryLevel)
                                .Include(l => l.CompanyType)
-                             .Where(p => p.LocationID == locID && p.IsActive == true)
+                             .Where(p => p.LocationID == locID && p.IsActive == true && p.IsApproved == true && p.IsAssigned == true && p.StatusID != 6 && p.IsSend == false)
                             .ToList();
             }
 
@@ -176,13 +116,197 @@ namespace DataLayer
                              .Include(g => g.ProductEnquiry)
                               .Include(w => w.EnquiryLevel)
                                .Include(l => l.CompanyType)
-                             .Where(p => p.LocationID == locID && p.CreatedBy == empID && p.IsActive == true)
+                             .Where(p => p.LocationID == locID && p.AssignedTo == empID && p.IsActive == true && p.IsApproved == true && p.IsAssigned == true && p.StatusID != 6 && p.IsSend == false)
                             .ToList();
             }
 
             return _SalesQuotations;
         }
 
+        public IEnumerable<BusinessModels.SalesQuotation> GetAllPendingSQForDispatch()
+        {
+            var _SalesQuotations = new List<BusinessModels.SalesQuotation>();
+            using (var dbContext = new SalesQuotationDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _SalesQuotations = dbContext.SalesQuotation
+                            .Include(K => K.Location)
+                             .Include(d => d.Employee)
+                             .Include(f => f.Status)
+                             .Include(g => g.ProductEnquiry)
+                              .Include(w => w.EnquiryLevel)
+                               .Include(l => l.CompanyType)
+                              .Where(p => p.IsActive == true && p.IsApproved == true && p.IsAssigned == false && p.StatusID == 28 && p.IsSend == false)
+                            .ToList();
+            }
+
+            return _SalesQuotations;
+        }
+
+        public IEnumerable<BusinessModels.SalesQuotation> GetAllPendingSQForDispatch(int locID)
+        {
+            var _SalesQuotations = new List<BusinessModels.SalesQuotation>();
+            using (var dbContext = new SalesQuotationDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _SalesQuotations = dbContext.SalesQuotation
+                            .Include(K => K.Location)
+                             .Include(d => d.Employee)
+                             .Include(f => f.Status)
+                             .Include(g => g.ProductEnquiry)
+                              .Include(w => w.EnquiryLevel)
+                               .Include(l => l.CompanyType)
+                             .Where(p => p.LocationID == locID && p.IsActive == true && p.IsApproved == true && p.IsAssigned == false && p.StatusID == 28 && p.IsSend == false)
+                            .ToList();
+            }
+
+            return _SalesQuotations;
+        }
+
+        public IEnumerable<BusinessModels.SalesQuotation> GetAllPendingSQForDispatch(int locID, int empID)
+        {
+            var _SalesQuotations = new List<BusinessModels.SalesQuotation>();
+            using (var dbContext = new SalesQuotationDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _SalesQuotations = dbContext.SalesQuotation
+                            .Include(K => K.Location)
+                             .Include(d => d.Employee)
+                             .Include(f => f.Status)
+                             .Include(g => g.ProductEnquiry)
+                              .Include(w => w.EnquiryLevel)
+                               .Include(l => l.CompanyType)
+                             .Where(p => p.LocationID == locID && p.AssignedTo == empID && p.IsActive == true && p.IsApproved == true && p.IsAssigned == false && p.StatusID == 28 && p.IsSend == false)
+                            .ToList();
+            }
+
+            return _SalesQuotations;
+        }
+
+        public IEnumerable<BusinessModels.SalesQuotation> GetAllSQForDispatch()
+        {
+            //coded
+            var _SalesQuotations = new List<BusinessModels.SalesQuotation>();
+            using (var dbContext = new SalesQuotationDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _SalesQuotations = dbContext.SalesQuotation
+                            .Include(K => K.Location)
+                             .Include(d => d.Employee)
+                             .Include(f => f.Status)
+                             .Include(g => g.ProductEnquiry)
+                              .Include(w => w.EnquiryLevel)
+                               .Include(l => l.CompanyType)
+                              .Where(p => p.IsActive == true && p.IsApproved == true && p.IsAssigned == true && p.StatusID == 34 && p.IsSend == false)
+                            .ToList();
+            }
+
+            return _SalesQuotations;
+        }
+
+        public IEnumerable<BusinessModels.SalesQuotation> GetAllSQForDispatch(int locID)
+        {
+            var _SalesQuotations = new List<BusinessModels.SalesQuotation>();
+            using (var dbContext = new SalesQuotationDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _SalesQuotations = dbContext.SalesQuotation
+                            .Include(K => K.Location)
+                             .Include(d => d.Employee)
+                             .Include(f => f.Status)
+                             .Include(g => g.ProductEnquiry)
+                              .Include(w => w.EnquiryLevel)
+                               .Include(l => l.CompanyType)
+                             .Where(p => p.LocationID == locID && p.IsActive == true && p.IsApproved == true && p.IsAssigned == true && p.StatusID == 34 && p.IsSend == false)
+                            .ToList();
+            }
+
+            return _SalesQuotations;
+        }
+
+        public IEnumerable<BusinessModels.SalesQuotation> GetAllSQForDispatch(int locID, int empID)
+        {
+            var _SalesQuotations = new List<BusinessModels.SalesQuotation>();
+            using (var dbContext = new SalesQuotationDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _SalesQuotations = dbContext.SalesQuotation
+                            .Include(K => K.Location)
+                             .Include(d => d.Employee)
+                             .Include(f => f.Status)
+                             .Include(g => g.ProductEnquiry)
+                              .Include(w => w.EnquiryLevel)
+                               .Include(l => l.CompanyType)
+                             .Where(p => p.LocationID == locID && p.AssignedTo == empID && p.IsActive == true && p.IsApproved == true && p.IsAssigned == true && p.StatusID == 34 && p.IsSend == false)
+                            .ToList();
+            }
+
+            return _SalesQuotations;
+        }
+
+
+
+        public IEnumerable<BusinessModels.SalesQuotation> GetAllPendingApporvalSQ()
+        {
+            var _SalesQuotations = new List<BusinessModels.SalesQuotation>();
+            using (var dbContext = new SalesQuotationDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _SalesQuotations = dbContext.SalesQuotation
+                            .Include(K => K.Location)
+                             .Include(d => d.Employee)
+                             .Include(f => f.Status)
+                             .Include(g => g.ProductEnquiry)
+                              .Include(w => w.EnquiryLevel)
+                               .Include(l => l.CompanyType)
+                              .Where(p => p.IsActive == true && p.Status.Identity == 4 && p.IsApproved == true && p.IsAssigned==false)
+                            .ToList();
+            }
+
+            return _SalesQuotations;
+        }
+
+        public IEnumerable<BusinessModels.SalesQuotation> GetAllPendingApporvalSQ(int locID)
+        {
+            var _SalesQuotations = new List<BusinessModels.SalesQuotation>();
+            using (var dbContext = new SalesQuotationDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _SalesQuotations = dbContext.SalesQuotation
+                            .Include(K => K.Location)
+                             .Include(d => d.Employee)
+                             .Include(f => f.Status)
+                             .Include(g => g.ProductEnquiry)
+                              .Include(w => w.EnquiryLevel)
+                               .Include(l => l.CompanyType)
+                             .Where(p => p.LocationID == locID && p.IsActive == true && p.Status.Identity == 4 && p.IsApproved == true && p.IsAssigned == false)
+                            .ToList();
+            }
+
+            return _SalesQuotations;
+        }
+
+        public IEnumerable<BusinessModels.SalesQuotation> GetAllPendingApporvalSQ(int locID, int empID)
+        {
+            var _SalesQuotations = new List<BusinessModels.SalesQuotation>();
+            using (var dbContext = new SalesQuotationDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+                _SalesQuotations = dbContext.SalesQuotation
+                            .Include(K => K.Location)
+                             .Include(d => d.Employee)
+                             .Include(f => f.Status)
+                             .Include(g => g.ProductEnquiry)
+                              .Include(w => w.EnquiryLevel)
+                               .Include(l => l.CompanyType)
+                             .Where(p => p.LocationID == locID && p.CreatedBy == empID && p.IsActive == true && p.Status.Identity == 4 && p.IsApproved == true && p.IsAssigned == false)
+                            .ToList();
+            }
+
+            return _SalesQuotations;
+        }
+
+       
         public IEnumerable<BusinessModels.SalesQuotation> GetMatchingSalesQuotations(string prefix)
         {
             var _SalesQuotations = new List<BusinessModels.SalesQuotation>();
@@ -200,7 +324,7 @@ namespace DataLayer
                               .Include(w => w.EnquiryLevel)
                                .Include(l => l.CompanyType)
                                 .ToList()
-                                .Where(p => (p != null && !string.IsNullOrEmpty(p.SQCode) && p.SQCode.Contains(prefix) && p.IsActive == true))
+                                .Where(p => (p != null && !string.IsNullOrEmpty(p.SQCode) && p.SQCode.Contains(prefix) && p.IsActive == true && p.IsApproved == true))
                                 .ToList();
                 }
                 catch (Exception ex)
@@ -232,11 +356,65 @@ namespace DataLayer
             return true;
         }
 
-        public BusinessModels.SalesQuotation UpdateSalesQuotationAssignedandStatus(int assignedid, int statusid, int identity)
+        public BusinessModels.SalesQuotation UpdateSalesQuotationAssignedandStatus(int? assignedid, int statusid, int identity)
         {
             var _user = new BusinessModels.SalesQuotation();
             try             {                 using (var dbContext = new SalesQuotationDbContext())                 {
                     _user = dbContext.Database.SqlQuery<BusinessModels.SalesQuotation>("CALL UpdateSQAssignedandStatus(@_id, @_assignedid,@_statusid)", new MySqlParameter("@_id", identity), new MySqlParameter("@_assignedid", assignedid), new MySqlParameter("@_statusid", statusid)).FirstOrDefault();                 }             }             catch (Exception ex)             {                 var test = ex.Message;             }
+            return _user;
+        }
+
+        public BusinessModels.SalesQuotation UpdateSQSupervisorID(int? assignedid, int identity)
+        {
+            var _user = new BusinessModels.SalesQuotation();
+            try             {                 using (var dbContext = new SalesQuotationDbContext())                 {
+                    _user = dbContext.Database.SqlQuery<BusinessModels.SalesQuotation>("CALL UpdateSQSupervisorID(@_id, @_assignedid)", new MySqlParameter("@_id", identity), new MySqlParameter("@_assignedid", assignedid)).FirstOrDefault();                 }             }             catch (Exception ex)             {                 var test = ex.Message;             }
+            return _user;
+        }
+
+       
+
+        public BusinessModels.SalesQuotation UpdateSQDispatchFlag(bool flag, int? identity)
+        {
+            var _user = new BusinessModels.SalesQuotation();
+            try             {                 using (var dbContext = new SalesQuotationDbContext())                 {
+                    _user = dbContext.Database.SqlQuery<BusinessModels.SalesQuotation>("CALL UpdateSQDispatchFlag(@_id, @_flag)", new MySqlParameter("@_id", identity), new MySqlParameter("@_flag", flag)).FirstOrDefault();                 }             }             catch (Exception ex)             {                 var test = ex.Message;             }
+            return _user;
+        }
+
+        public BusinessModels.SalesQuotation UpdateSalesQuotationAssigned(int? assignedid, int identity)
+        {
+            var _user = new BusinessModels.SalesQuotation();
+            try             {                 using (var dbContext = new SalesQuotationDbContext())                 {
+                    _user = dbContext.Database.SqlQuery<BusinessModels.SalesQuotation>("CALL UpdateSQAssignedID(@_id, @_assignedid)", new MySqlParameter("@_id", identity), new MySqlParameter("@_assignedid", assignedid)).FirstOrDefault();                 }             }             catch (Exception ex)             {                 var test = ex.Message;             }
+            return _user;
+        }
+
+        public BusinessModels.SalesQuotation UpdateSalesQuotationStatus(int? statusid, int identity)
+        {
+            var _user = new BusinessModels.SalesQuotation();
+            try             {                 //coded -- if status is invoice generated intiate Finance Manager and Finance head approval                 if(statusid==5)
+                {
+
+
+                }                 using (var dbContext = new SalesQuotationDbContext())                 {
+                    _user = dbContext.Database.SqlQuery<BusinessModels.SalesQuotation>("CALL UpdateSQStatus(@_id, @_statusid)", new MySqlParameter("@_id", identity), new MySqlParameter("@_statusid", statusid)).FirstOrDefault();                 }             }             catch (Exception ex)             {                 var test = ex.Message;             }
+            return _user;
+        }
+
+        public BusinessModels.SalesQuotation UpdateSalesQuotationApprovedFlag( int? identity, bool flag)
+        {
+            var _user = new BusinessModels.SalesQuotation();
+            try             {                 using (var dbContext = new SalesQuotationDbContext())                 {
+                    _user = dbContext.Database.SqlQuery<BusinessModels.SalesQuotation>("CALL UpdateSQApprovedFlag(@_flag,@_id)", new MySqlParameter("@_flag", flag), new MySqlParameter("@_id", identity)).FirstOrDefault();                 }             }             catch (Exception ex)             {                 var test = ex.Message;             }
+            return _user;
+        }
+
+        public BusinessModels.SalesQuotation UpdateSalesQuotationAssignedFlag(int identity, bool flag)
+        {
+            var _user = new BusinessModels.SalesQuotation();
+            try             {                 using (var dbContext = new SalesQuotationDbContext())                 {
+                    _user = dbContext.Database.SqlQuery<BusinessModels.SalesQuotation>("CALL UpdateSQAssignedFlag(@_flag,@_id)", new MySqlParameter("@_flag", flag), new MySqlParameter("@_id", identity)).FirstOrDefault();                 }             }             catch (Exception ex)             {                 var test = ex.Message;             }
             return _user;
         }
 

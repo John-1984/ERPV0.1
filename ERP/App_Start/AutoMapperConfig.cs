@@ -64,6 +64,24 @@ namespace ERP
 
                 cfg.CreateMap<BusinessModels.SalesQuotation, ERP.Models.SalesQuotation>().ReverseMap();
                 cfg.CreateMap<BusinessModels.SalesQuotationDetails, ERP.Models.SalesQuotationDetails>().ReverseMap();
+                cfg.CreateMap<BusinessModels.PaymentMode, ERP.Models.PaymentMode>().ReverseMap();
+                cfg.CreateMap<BusinessModels.PaymentType, ERP.Models.PaymentType>().ReverseMap();
+                cfg.CreateMap<BusinessModels.SQAdvanceDetails, ERP.Models.SQAdvanceDetails>().ReverseMap();
+
+                cfg.CreateMap<BusinessModels.PurchaseQuotation, ERP.Models.PurchaseQuotation>().ReverseMap();
+                cfg.CreateMap<BusinessModels.PurchaseQuotationDetails, ERP.Models.PurchaseQuotationDetails>().ReverseMap();
+                cfg.CreateMap<BusinessModels.PQAdvanceDetails, ERP.Models.PQAdvanceDetails>().ReverseMap();
+
+                cfg.CreateMap<BusinessModels.PurchaseOrder, ERP.Models.PurchaseOrder>().ReverseMap();
+
+                cfg.CreateMap<BusinessModels.StockOutDetails, ERP.Models.StockOutDetails>().ReverseMap();
+
+
+                cfg.CreateMap<BusinessModels.StockOutExpenseDetails, ERP.Models.StockOutExpenseDetails>().ReverseMap();
+
+                cfg.CreateMap<BusinessModels.StockInShortageDetails, ERP.Models.StockInShortageDetails>().ReverseMap();
+                cfg.CreateMap<BusinessModels.StockInDamagedDetails, ERP.Models.StockInDamagedDetails>().ReverseMap();
+                cfg.CreateMap<BusinessModels.StockInExcessDetails, ERP.Models.StockInExcessDetails>().ReverseMap();
 
 
 

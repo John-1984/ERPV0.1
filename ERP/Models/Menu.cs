@@ -51,10 +51,17 @@ namespace ERP.Models
         {
             get;
             set;
-        }  
-        
+        }
+        public Boolean IsActive
+        {
+            get;
+            set;
+        }
+
         public Modules Modules
         { get; set; }
+
+       
 
     }
 }

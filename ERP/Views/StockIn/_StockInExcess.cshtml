@@ -1,0 +1,117 @@
+﻿@model ERP.Models.PurchaseOrder
+
+@using (Html.BeginForm("StockInExcessAdd", "StockIn", FormMethod.Post, new { @id = "registerFormId13" }))
+{
+    <div class="col-md-12 col-lg-12 commonPadding StockInExcessDetails width-100">
+
+
+        <div class="row commonPadding col-md-12 col-lg-12" style="padding-bottom:13px;">
+            <div class="col-md-12 col-lg-12 commonPadding" style="height:7px;">
+
+            </div>
+            <div class="row col-md-12 col-lg-12 commonPadding">
+                <div class="col-md-6 col-lg-6">
+                    <div class="row col-md-12 col-lg-12">
+                        <div class="float-left col-md-7 col-lg-7 lablestyles textright">Item:</div>
+                        <div class="float-right col-md-5 col-lg-5">
+                            @Html.DropDownList("drpstockinexcessitemid", (IEnumerable<SelectListItem>)Model.ItemList, "Select Item", new { @class = "dropdownstyles", name = "drpstockinexcessitemid" })
+                            @*<span class="input-validation-error" data-valmsg-for="ProductEnquiryDetName" data-valmsg-replace="true"></span>*@
+                            <input type="hidden" name="hdnstockinexcessitemid" id="hdnstockinexcessitemid" />
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="row col-md-12 col-lg-12 commonPadding">
+
+                <div class="col-md-6 col-lg-6">
+                    <div class="row col-md-12 col-lg-12">
+                        <div class="float-left col-md-7 col-lg-7 lablestyles textright">Quantity:</div>
+                        <div class="float-right col-md-5 col-lg-5">
+                            <input class="textareastyles" style="width:200px;height:35px;" type="text" name="Quantity" value="@(Model.Quantity)" placeholder="Enter Quantity" />
+                        </div>
+
+                    </div>
+                </div>
+                </div>
+
+                <div class="row col-md-12 col-lg-12 commonPadding">
+
+                    <div class="col-md-6 col-lg-6">
+                        <div class="row col-md-12 col-lg-12">
+                            <div class="float-left col-md-7 col-lg-7 lablestyles textright">Size:</div>
+                            <div class="float-right col-md-5 col-lg-5">
+                                <input class="textareastyles" style="width:200px;height:35px;" type="text" name="size" value="@(Model.size)" placeholder="Enter Size" />
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row col-md-12 col-lg-12 commonPadding">
+
+                    <div class="col-md-6 col-lg-6">
+                        <div class="row col-md-12 col-lg-12">
+                            <div class="float-left col-md-7 col-lg-7 lablestyles textright">Price:</div>
+                            <div class="float-right col-md-5 col-lg-5">
+                                <input class="textareastyles" style="width:200px;height:35px;" type="text" name="itemprice" value="@(Model.itemprice)"  readonly />
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6">
+                        <div class="row col-md-12 col-lg-12">
+
+                            <div class="col-md-12 col-lg-12">
+                                <input type="button" data-url="@Url.Action("StockInExcessAdd", "StockIn")" class="formbutton float-right StockInExcessAdd" data-identity="@(Model.Identity)" value="Add Item" />
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-lg-12 commonPadding">
+                    <table class="table customerAll">
+                        <thead>
+                            <tr class="gridheader">
+                                <th>Item Name</th>
+                                <th>Quantity</th>
+                                <th>Size</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.StockInExcessDetails.Count() == 0)
+                            {
+                                <tr class="col-md-12 col-lg-12 gridrow">
+                                    <td colspan="3">No Data Found</td>
+                                </tr>
+                            }
+                            else
+                            {
+                                foreach (var det in Model.StockInExcessDetails)
+                                {
+
+                                <tr class="gridrow">
+                                    <td class="gridrow">@det.ItemMaster.ItemName</td>
+                                    <td class="gridrow">@det.Quantity</td>
+                                    <td class="gridrow">@det.Size</td>
+
+                                </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12 col-lg-12 commonPadding textright" style="font-size:12px; color:black;font-weight:bold">
+                    <div style="padding-right:15px">Total Items : @Model.TotalExcessItems</div>
+                </div>
+            </div>
+
+        <input type="hidden" name="Identity" value="@(Model.Identity)">
+    </div>
+
+
+      
+
+}

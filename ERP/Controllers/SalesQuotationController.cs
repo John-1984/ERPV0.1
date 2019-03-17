@@ -12,8 +12,12 @@ namespace ERP.Controllers
     public class SalesQuotationController : Controller
     {
         private BusinessLayer.SalesQuotation _SalesQuotation = new BusinessLayer.SalesQuotation();
+        private BusinessLayer.ProductEnquiry _ProductEnquiry = new BusinessLayer.ProductEnquiry();
         private BusinessLayer.SalesQuotationDetails _SalesQuotationDetails = new BusinessLayer.SalesQuotationDetails();
+        private BusinessLayer.SQAdvanceDetails _SalesQAdvanceDetails = new BusinessLayer.SQAdvanceDetails();
         private BusinessLayer.Employee _Employeee = new BusinessLayer.Employee();
+        private BusinessLayer.PaymentMode _PaymentMode = new BusinessLayer.PaymentMode();
+        private BusinessLayer.PaymentType _PaymentType = new BusinessLayer.PaymentType();
         private BusinessLayer.Status _status = new BusinessLayer.Status();
         public ActionResult Index()
         {
@@ -30,19 +34,7 @@ namespace ERP.Controllers
         {
             if (identity.Equals(-1))
             {
-                Models.SalesQuotation mdSalesQuotation = new Models.SalesQuotation();
-
-                //mdSalesQuotation.ProductMasterList = null;
-                //mdSalesQuotation.ProductMasterList = new SelectList(_SalesQuotationDetails.GetAllProductMasters(), "Identity", "ProductName");
-
-                //mdSalesQuotation.VendorList = null;
-                //mdSalesQuotation.VendorList = new SelectList(_SalesQuotationDetails.GetAllVendors(), "Identity", "VendorName");
-
-                //mdSalesQuotation.BrandList = null;
-                //mdSalesQuotation.BrandList = new SelectList(_SalesQuotationDetails.GetAllBrands(), "Identity", "BrandName");
-
-                //mdSalesQuotation.ItemList = null;
-                //mdSalesQuotation.ItemList = new SelectList(_SalesQuotationDetails.GetAllItems(), "Identity", "ItemName");
+                Models.SalesQuotation mdSalesQuotation = new Models.SalesQuotation();               
 
                 TempData["PageInfo"] = "Add SalesQuotation Info";
                 return PartialView(mdSalesQuotation);
@@ -51,15 +43,7 @@ namespace ERP.Controllers
             {
                 // Models.SalesQuotation mdSalesQuotation = AutoMapperConfig.Mapper().Map<Models.SalesQuotation>(_SalesQuotation.GetSalesQuotation(identity));
                 Models.SalesQuotation mdSalesQuotation = new Models.SalesQuotation();
-                //mdSalesQuotation.ProductMasterList = null;
-                //mdSalesQuotation.ProductMasterList = new SelectList(_SalesQuotationDetails.GetAllProductMasters(), "Identity", "ProductName");
-
-                //mdSalesQuotation.VendorList = null;
-                //mdSalesQuotation.VendorList = new SelectList(_SalesQuotationDetails.GetAllVendors(), "Identity", "VendorName");
-
-                //mdSalesQuotation.BrandList = null;
-                //mdSalesQuotation.BrandList = new SelectList(_SalesQuotationDetails.GetAllBrands(), "Identity", "BrandName");
-
+                
                 //mdSalesQuotation.ItemList = null;
                 //mdSalesQuotation.ItemList = new SelectList(_SalesQuotationDetails.GetAllItems(), "Identity", "ItemName");
 
@@ -68,117 +52,8 @@ namespace ERP.Controllers
                 TempData.Keep();
                 return PartialView(mdSalesQuotation);
             }
-        }
-
-        [HttpGet]
-        public PartialViewResult _SalesQuotationAdd(int identity)
-        {
-
-
-            if (identity.Equals(-1))
-            {
-                Models.SalesQuotation mdSalesQuotation = new Models.SalesQuotation();
-                //mdSalesQuotation.SalesQuotationTypeList = null;
-                //mdSalesQuotation.SalesQuotationTypeList = new SelectList(_SalesQuotation.GetAllSalesQuotationType(), "Identity", "Name");
-
-                //mdSalesQuotation.EnquiryLevelList = null;
-                //mdSalesQuotation.EnquiryLevelList = new SelectList(_SalesQuotation.GetAllEnquiryLevels(), "Identity", "EnquiryLevelName");
-
-                return PartialView(mdSalesQuotation);
-            }
-            else
-            {
-                Models.SalesQuotation mdSalesQuotation = AutoMapperConfig.Mapper().Map<Models.SalesQuotation>(_SalesQuotation.GetSalesQuotation(identity));
-
-                //mdSalesQuotation.SalesQuotationTypeList = null;
-                //mdSalesQuotation.SalesQuotationTypeList = new SelectList(_SalesQuotation.GetAllSalesQuotationType(), "Identity", "Name", mdSalesQuotation.SalesQuotationTypeID);
-
-                //mdSalesQuotation.EnquiryLevelList = null;
-                //mdSalesQuotation.EnquiryLevelList = new SelectList(_SalesQuotation.GetAllEnquiryLevels(), "Identity", "EnquiryLevelName", mdSalesQuotation.EnquiryLevelID);
-
-                return PartialView(mdSalesQuotation);
-            }
-
-
-
-        }
-        [HttpPost]
-        public JsonResult Brand(string identity)
-        {
-            return Json(new SelectList(_SalesQuotation.GetAllBrands(identity), "Identity", "BrandName"));
-        }
-
-        [HttpPost]
-        public JsonResult Vendor(string identity)
-        {
-            return Json(new SelectList(_SalesQuotation.GetAllVendors(identity), "Identity", "VendorName"));
-        }
-
-        [HttpPost]
-        public JsonResult Item(string identity)
-        {
-            return Json(_SalesQuotation.GetItemDetails(identity));
-        }
-        [HttpGet]
-        public PartialViewResult _SalesQuotationDetailsAdd(int identity)
-        {
-            if (identity.Equals(-1))
-            {
-                Models.SalesQuotation mdSalesQuotationDetails = new Models.SalesQuotation();
-
-                //mdSalesQuotationDetails.ProductMasterList = null;
-                //mdSalesQuotationDetails.ProductMasterList = new SelectList(_SalesQuotation.GetAllProductMasters(), "Identity", "ProductName");
-
-                //mdSalesQuotationDetails.VendorList = null;
-                //mdSalesQuotationDetails.VendorList = new SelectList(_SalesQuotation.GetAllVendors(), "Identity", "VendorName");
-
-                //mdSalesQuotationDetails.BrandList = null;
-                //mdSalesQuotationDetails.BrandList = new SelectList(_SalesQuotation.GetAllBrands(), "Identity", "BrandName");
-
-                //mdSalesQuotationDetails.ItemList = null;
-                //mdSalesQuotationDetails.ItemList = new SelectList(_SalesQuotation.GetAllItems(), "Identity", "ItemName");
-
-
-                TempData["PageInfo"] = "Add SalesQuotation Info";
-                return PartialView(mdSalesQuotationDetails);
-            }
-            else
-            {
-                Models.SalesQuotation mdSalesQuotationDetails = new Models.SalesQuotation();
-
-                //Models.SalesQuotationDetails mdSalesQuotationDetails = AutoMapperConfig.Mapper().Map<Models.SalesQuotationDetails>(_SalesQuotation.GetSalesQuotationDetails(identity));
-
-                //mdSalesQuotationDetails.ProductMasterList = null;
-                //mdSalesQuotationDetails.ProductMasterList = new SelectList(_SalesQuotation.GetAllProductMasters(), "Identity", "ProductName", mdSalesQuotationDetails.ItemMaster.Brand.Vendor.ProductMasterID);
-
-                //mdSalesQuotationDetails.VendorList = null;
-                //mdSalesQuotationDetails.VendorList = new SelectList(_SalesQuotation.GetAllVendors(Convert.ToString(mdSalesQuotationDetails.ItemMaster.Brand.Vendor.ProductMasterID)), "Identity", "VendorName", mdSalesQuotationDetails.ItemMaster.Brand.VendorID) ;
-
-                //mdSalesQuotationDetails.BrandList = null;
-                //mdSalesQuotationDetails.BrandList = new SelectList(_SalesQuotation.GetAllBrands(Convert.ToString(mdSalesQuotationDetails.ItemMaster.Brand.VendorID)), "Identity", "BrandName", mdSalesQuotationDetails.ItemMaster.BrandID);
-
-                //mdSalesQuotationDetails.ItemList = null;
-                //mdSalesQuotationDetails.ItemList = new SelectList(_SalesQuotation.GetItemMasters(Convert.ToString(mdSalesQuotationDetails.ItemMaster.BrandID)), "Identity", "ItemName",mdSalesQuotationDetails.ItemID);
-
-                //mdSalesQuotationDetails.ProductMasterList = null;
-                //mdSalesQuotationDetails.ProductMasterList = new SelectList(_SalesQuotation.GetAllProductMasters(), "Identity", "ProductName");
-
-                //mdSalesQuotationDetails.VendorList = null;
-                //mdSalesQuotationDetails.VendorList = new SelectList(_SalesQuotation.GetAllVendors(), "Identity", "VendorName");
-
-                //mdSalesQuotationDetails.BrandList = null;
-                //mdSalesQuotationDetails.BrandList = new SelectList(_SalesQuotation.GetAllBrands(), "Identity", "BrandName");
-
-                //mdSalesQuotationDetails.ItemList = null;
-                //mdSalesQuotationDetails.ItemList = new SelectList(_SalesQuotation.GetAllItems(), "Identity", "ItemName");
-
-                // mdSalesQuotationDetails.SalesQuotationID = identity;
-
-                TempData["PageInfo"] = "Edit SalesQuotation Info";
-                TempData.Keep();
-                return PartialView(mdSalesQuotationDetails);
-            }
-        }
+        }      
+        
 
         [HttpGet]
         public ActionResult _SalesQuotationCancel(int identity)
@@ -188,24 +63,62 @@ namespace ERP.Controllers
         [HttpGet]
         public PartialViewResult _SalesQuotationView(int identity)
         {
-            BusinessModels.SalesQuotation bsSalesQuotation = _SalesQuotation.GetSalesQuotation(identity);
-            Models.SalesQuotation mdSalesQuotation = AutoMapperConfig.Mapper().Map<Models.SalesQuotation>(bsSalesQuotation);
-          //  // mdSalesQuotation.SalesQuotationDetails = bsSalesQuotation.SalesQuotationDetails;
-          //  // BusinessModels.SalesQuotation.SalesQuotationDetails mdDet = new BusinessModels.SalesQuotation.SalesQuotationDetails();
+            
+            BusinessModels.SalesQuotation mdsales = _SalesQuotation.GetSalesQuotationDetails(identity);
+            BusinessModels.ProductEnquiry bsProductEnquiry = _ProductEnquiry.GetProductEnquiry(mdsales.ProductEnquiryID);
+            Models.ProductEnquiry mdProductEnquiry = AutoMapperConfig.Mapper().Map<Models.ProductEnquiry>(bsProductEnquiry);
 
-          //  List<Models.SalesQuotationDetails> lstSalesQuotationDetails = new List<Models.SalesQuotationDetails>();
-          //  foreach (BusinessModels.SalesQuotationDetails item in bsSalesQuotation.SalesQuotationDetails)
-          //  {
-          //      Models.SalesQuotationDetails mdSalesQuotation1 = AutoMapperConfig.Mapper().Map<Models.SalesQuotationDetails>(item);
-          //      BusinessModels.ItemMaster bmItem = _SalesQuotation.GetItemDetails(Convert.ToString(mdSalesQuotation1.ItemID));
-          //      Models.ItemMaster mdItem = AutoMapperConfig.Mapper().Map<Models.ItemMaster>(bmItem);
-          //    //  mdSalesQuotation1.ItemMaster = mdItem;
-          //      lstSalesQuotationDetails.Add(mdSalesQuotation1);
-          //  }
+            Decimal totalPrice = 0;
+            List<Models.ProductEnquiryDetails> lstProductEnquiryDetails = new List<Models.ProductEnquiryDetails>();
+            foreach (BusinessModels.ProductEnquiryDetails item in bsProductEnquiry.ProductEnquiryDetails)
+            {
+                Models.ProductEnquiryDetails mdProductEnquiry1 = AutoMapperConfig.Mapper().Map<Models.ProductEnquiryDetails>(item);
+                BusinessModels.ItemMaster bmItem = _ProductEnquiry.GetItemDetails(Convert.ToString(mdProductEnquiry1.ItemID));
+                Models.ItemMaster mdItem = AutoMapperConfig.Mapper().Map<Models.ItemMaster>(bmItem);
+                mdProductEnquiry1.ItemMaster = mdItem;
+                totalPrice += mdItem.RetailPrice * mdProductEnquiry1.Quantity;
+                lstProductEnquiryDetails.Add(mdProductEnquiry1);
+            }
+            Models.SalesQuotation mdsalesMode = AutoMapperConfig.Mapper().Map<Models.SalesQuotation>(mdsales);
+            mdsalesMode.ProductEnquiryDetails = lstProductEnquiryDetails;
+            mdsalesMode.TotalCost = totalPrice;
 
-          ////  mdSalesQuotation.SalesQuotationDetails = lstSalesQuotationDetails;
+            //Get all finance executives on the location and companytype
+            //mdsalesMode.EmployeeList = null;
+            //mdsalesMode.EmployeeList = new SelectList(_Employeee.GetAllFinanceExecutivesOnCompanyType(Convert.ToInt32(Session["CompanyID"].ToString()), Convert.ToInt32(Session["LocationID"].ToString())), "Identity", "EmployeeName");
 
-           return PartialView(mdSalesQuotation);
+            mdsalesMode.PaymentTypeList = null;
+            mdsalesMode.PaymentTypeList = new SelectList(_PaymentType.GetAll(), "Identity", "Name");
+
+            mdsalesMode.PaymentModeList = null;
+            mdsalesMode.PaymentModeList = new SelectList(_PaymentMode.GetAll(), "Identity", "Name");
+
+            //Invoice and other details
+            BusinessModels.SalesQuotationDetails bssalesQuoteationdet = _SalesQuotationDetails.GetAllBySalesQuotation(identity);
+            Models.SalesQuotationDetails mdsalesquotedet = AutoMapperConfig.Mapper().Map<Models.SalesQuotationDetails>(bssalesQuoteationdet);
+
+            if (mdsalesquotedet != null)
+            {
+                mdsalesMode.SalesQuotationDetails = mdsalesquotedet;
+                mdsalesMode.InvoiceNo = mdsalesquotedet.InvoiceNo;
+                mdsalesMode.PaymentType = mdsalesquotedet.PaymentTypeID;
+                mdsalesMode.PaymentMode = mdsalesquotedet.PaymentModeID;
+                mdsalesMode.CheckNo = mdsalesquotedet.CheckNo;
+                //Advanjce Details
+                List<Models.SQAdvanceDetails> lstAdvanceDet = new List<Models.SQAdvanceDetails>();
+                decimal dAmt = 0;
+                foreach (BusinessModels.SQAdvanceDetails item in _SalesQAdvanceDetails.GetAllAdvanceBySQ(identity))
+                {
+                    Models.SQAdvanceDetails mdadvance = AutoMapperConfig.Mapper().Map<Models.SQAdvanceDetails>(item);
+                    lstAdvanceDet.Add(mdadvance);
+                    dAmt = dAmt + mdadvance.Amount;
+                }
+                mdsalesMode.TotalAdvanceAmount = dAmt;
+                mdsalesMode.SQAdvanceDetails = lstAdvanceDet;
+            }
+            else { List<Models.SQAdvanceDetails> lstAdvanceDet = new List<Models.SQAdvanceDetails>(); mdsalesMode.SQAdvanceDetails = lstAdvanceDet; }
+
+            return PartialView(mdsalesMode);
         }
 
         [HttpPost]
@@ -224,59 +137,117 @@ namespace ERP.Controllers
             _SalesQuotationDetails.Delete(identity);
             return RedirectToAction("_SalesQuotationAll");
         }
-
-
-        [HttpPost]
-        public ActionResult _SalesQuotationProcessVerification(int identity)
-        {
-            BusinessModels.SalesQuotation mdProductenq = _SalesQuotation.GetSalesQuotation(identity);
-
-            BusinessModels.Employee mdemployee = _Employeee.GetSupervisorOnWareHouseCompanyType(Convert.ToInt32(Convert.ToString(Session["LocationID"])), Convert.ToInt32(Convert.ToString(Session["CompanyID"])), Convert.ToInt32(Convert.ToString(Session["EmployeeCompanyTypeID"])));
-            if (mdemployee != null)
-            {
-                mdProductenq.AssignedTo = mdemployee.Identity;
-                mdProductenq.Employee = mdemployee;
-                //coded
-                mdProductenq.StatusID = 15;
-                BusinessModels.Status mdstatus = _status.GetStatus(15);
-                mdProductenq.Status = mdstatus;
-            }
-
-            _SalesQuotation.UpdateSalesQuotationAssignedandStatus(mdemployee.Identity, 15, identity);
-            //_SalesQuotation.Delete(identity);
-            return RedirectToAction("_SalesQuotationAll");
-        }
-
+       
         [HttpPost]
         public ActionResult Update(Models.SalesQuotation SalesQuotation, FormCollection frmFields)
         {
             //IF success resturn grid view
             //IF Failure return json value
 
-            BusinessModels.SalesQuotationDetails mdSalesQuotationdetails = new BusinessModels.SalesQuotationDetails();
-            var itemvalue = frmFields["hdnItem"];
-            var itemQty = frmFields["Quantity"];
-            var purpose = frmFields["Purpose"];
+            var empid = frmFields["hdnSalesQuotationEmployee"];
+            if (!String.IsNullOrEmpty(empid))
+                SalesQuotation.AssignedTo = int.Parse(empid);
 
-            //if (!String.IsNullOrEmpty(itemvalue))
-            //    mdSalesQuotationdetails.ItemID = int.Parse(itemvalue);
+            var mode = frmFields["hdnSalesQuotationPaymentMode"];
+            if (!String.IsNullOrEmpty(mode))
+                SalesQuotation.PaymentMode = int.Parse(mode);
 
-            //mdSalesQuotationdetails.SalesQuotationID = Convert.ToInt32(frmFields["Identity"]);
-            //mdSalesQuotationdetails.Quantity = Convert.ToInt32(itemQty);
-            //mdSalesQuotationdetails.Purpose = Convert.ToString(purpose);
+            var type = frmFields["hdnSalesQuotationPaymentType"];
+            if (!String.IsNullOrEmpty(type))
+                SalesQuotation.PaymentType = int.Parse(type);
 
-            _SalesQuotationDetails.Insert(mdSalesQuotationdetails);
-            //if (mdSalesQuotationdetails.Identity.Equals(-1))
+            var identity = frmFields["Identity"];
+            if (!String.IsNullOrEmpty(identity))
+                SalesQuotation.Identity = int.Parse(identity);
+
+            //if (!String.IsNullOrEmpty(SalesQuotation.InvoiceNo))
             //{
+                //coded
+                BusinessModels.SalesQuotationDetails salesdet = new BusinessModels.SalesQuotationDetails();
+                salesdet.SQID = int.Parse(identity);
+                
+                BusinessModels.SalesQuotationDetails bssalesQuoteationdet = _SalesQuotationDetails.GetAllBySalesQuotation(int.Parse(identity));
+                if (bssalesQuoteationdet != null)
+                {
+                //salesdet.Identity = bssalesQuoteationdet.Identity;
+                if (SalesQuotation.PaymentType == 7)
+                {
+                    bssalesQuoteationdet.InvoiceNo = SalesQuotation.InvoiceNo;
 
-            //   // mdSalesQuotationdetails.ItemID = Convert.ToInt32(itemvalue);
+                    bssalesQuoteationdet.PaymentTypeID = SalesQuotation.PaymentType;
+                    bssalesQuoteationdet.PaymentModeID = SalesQuotation.PaymentMode;
+                    bssalesQuoteationdet.CheckNo = SalesQuotation.CheckNo;
+                }
+                    bssalesQuoteationdet.IsActive = true;
+                    bssalesQuoteationdet.ModifiedDate = DateTime.Now;
+                    bssalesQuoteationdet.ModifiedBy = Convert.ToInt32(Session["EmployeeID"].ToString());
+                    _SalesQuotationDetails.Update(bssalesQuoteationdet);
+                }
+                else
+                {
+                if (SalesQuotation.PaymentType == 7)
+                {
+                    salesdet.InvoiceNo = SalesQuotation.InvoiceNo;
+                    salesdet.PaymentTypeID = SalesQuotation.PaymentType;
+                    salesdet.PaymentModeID = SalesQuotation.PaymentMode;
+                    salesdet.CheckNo = SalesQuotation.CheckNo;
+                }
+                salesdet.IsActive = true;
+                    salesdet.CreatedDate = DateTime.Now;
+                    salesdet.CreatedBy  = Convert.ToInt32(Session["EmployeeID"].ToString());
+                    _SalesQuotationDetails.Insert(salesdet);
+                }
+                
+           // }
 
-            //}
-            //else
-            //{
+            //coded add advance details else if paid change status to invoice generated and assign for approval
+            if (SalesQuotation.PaymentType == 8)
+            {
+                //Need to do = Add payment mode to advance
+                BusinessModels.SQAdvanceDetails salesadvancedet = new BusinessModels.SQAdvanceDetails();
+                salesadvancedet.SQID = int.Parse(identity);
+                salesadvancedet.Amount = SalesQuotation.AdvanceAmount;
+                salesadvancedet.CreatedDate = DateTime.Now;
+                salesadvancedet.CreatedBy = Convert.ToInt32(Session["EmployeeID"].ToString());
+                salesadvancedet.CheckNo = SalesQuotation.CheckNo;
+                _SalesQAdvanceDetails.Insert(salesadvancedet);
+                if (((SalesQuotation.AdvanceAmount + SalesQuotation.TotalAdvanceAmount) == SalesQuotation.TotalCost) && !String.IsNullOrEmpty(SalesQuotation.InvoiceNo))
+                {
+                    // Get Finance Manager on the location and company
+                    BusinessModels.Employee mdemployee = _Employeee.GetFinanceManagerOnCompanyType(Convert.ToInt32(Convert.ToString(Session["LocationID"])), Convert.ToInt32(Convert.ToString(Session["CompanyID"])), Convert.ToInt32(Convert.ToString(Session["EmployeeCompanyTypeID"])));
 
-            //  //  _SalesQuotationDetails.Update(mdSalesQuotationdetails);
-            //}
+                    //Set the workflow
+                    _SalesQuotation.InitiateinvoiceApprovalWOrkFlow(int.Parse(identity), mdemployee.Identity, Convert.ToInt32(Convert.ToString(Session["LocationID"])));
+
+                    //update status to invoice generated if all payment done
+                    _SalesQuotation.UpdateSalesQuotationStatus(5, int.Parse(identity));
+
+                }
+                else
+                {
+                    //update status to payment pending
+                    _SalesQuotation.UpdateSalesQuotationStatus(9, int.Parse(identity));
+                }
+
+            }
+            else if (SalesQuotation.PaymentType == 7 && !String.IsNullOrEmpty(SalesQuotation.InvoiceNo))
+            {
+                //update status to invoice generated and if full payment
+                _SalesQuotation.UpdateSalesQuotationStatus(5, int.Parse(identity));
+
+                //Initiate Invoice APproval work flow
+
+                // Get Finance Manager on the location and company
+                BusinessModels.Employee mdemployee = _Employeee.GetFinanceManagerOnCompanyType(Convert.ToInt32(Convert.ToString(Session["LocationID"])), Convert.ToInt32(Convert.ToString(Session["CompanyID"])), Convert.ToInt32(Convert.ToString(Session["EmployeeCompanyTypeID"])));
+
+                //Set the workflow
+                _SalesQuotation.InitiateinvoiceApprovalWOrkFlow(int.Parse(identity), mdemployee.Identity, Convert.ToInt32(Convert.ToString(Session["LocationID"])));
+            }
+
+           
+            // _SalesQuotation.UpdateSalesQuotationAssigned(int.Parse(empid), PendingSalesQuotation.Identity);
+
+           
             return RedirectToAction("_SalesQuotationAll");
         }
 
@@ -356,7 +327,7 @@ namespace ERP.Controllers
 
             switch (sortOrder)
             {
-                case "POCode":
+                case "SQCode":
                     SalesQuotations = SalesQuotations.OrderByDescending(stu => stu.SQCode).ToList();
                     break;
                 case "DateAsc":

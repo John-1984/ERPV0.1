@@ -180,5 +180,8 @@ namespace ERP.Models
         public bool IsApproved
         { get; set; }
         public virtual ICollection<PurchaseRequestDetails> PurchaseRequestDetails { get; set; }
+
+        public decimal TotalPrice
+        { get; set; }
     }
 }

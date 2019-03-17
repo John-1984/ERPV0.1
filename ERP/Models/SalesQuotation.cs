@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using System.Web.Mvc;
 
 namespace ERP.Models
 {
@@ -22,6 +23,9 @@ namespace ERP.Models
             get;
             set;
         }
+        public string CheckNo
+        { get; set; }
+
 
         public int? CompanyTypeID
         { get; set; }
@@ -30,6 +34,8 @@ namespace ERP.Models
             get;
             set;
         }
+
+        
 
         public int? AssignedTo
         {
@@ -61,6 +67,11 @@ namespace ERP.Models
             set;
         }
 
+        public int? ExpenseTypeID
+        {
+            get;
+            set;
+        }
 
 
 
@@ -75,6 +86,12 @@ namespace ERP.Models
             set;
         }
         public DateTime? CreatedDate
+        {
+            get;
+            set;
+        }
+
+        public string CreatedDateString
         {
             get;
             set;
@@ -113,6 +130,18 @@ namespace ERP.Models
             set;
         }
 
+        public bool IsAssigned
+        {
+            get;
+            set;
+        }
+
+        public Decimal AdvanceAmount
+        {
+            get;
+            set;
+        }
+
         public Employee Employee
         { get; set; }
 
@@ -129,6 +158,115 @@ namespace ERP.Models
         { get; set; }
         public CompanyType CompanyType
         { get; set; }
+
+        public ICollection<ProductEnquiryDetails> ProductEnquiryDetails { get; set; }
+
+        public ICollection<StockOutExpenseDetails> StockOutExpenseDetails { get; set; }
+
+        public Decimal TotalCost { get; set; }
+
+        public Decimal TotalExpenseCost { get; set; }
+
+        public SelectList EmployeeList
+        { get; set; }
+
+        public SelectList ExpenseTypeList
+        { get; set; }
+
+        public string InvoiceNo
+        {
+            get;
+            set;
+        }
+
+        public int PaymentType
+        {
+            get;
+            set;
+        }
+
+        public int PaymentMode
+        {
+            get;
+            set;
+        }
+        public Decimal TotalAdvanceAmount
+        {
+            get;
+            set;
+        }
+
+        public bool IsSend
+        {
+            get;
+            set;
+        }
+
+        public string ContainerNo
+        {
+            get;
+            set;
+        }
+
+        public string VehicleNo
+        {
+            get;
+            set;
+        }
+
+        public string DisapatchTime
+        {
+            get;
+            set;
+        }
+
+        public decimal ExpenseTypeAmount
+        {
+            get;
+            set;
+        }
+
+        public string DriverName
+        {
+            get;
+            set;
+        }
+
+        public string DriverLicenceNumber
+        {
+            get;
+            set;
+        }
+
+        public decimal AdditionalAmountPaid
+        {
+            get;
+            set;
+        }
+
+        public bool IsDispatchApproved
+        {
+            get;
+            set;
+        }
+
+        public int? AssignedWHSupervisorID
+        {
+            get;
+            set;
+        }
+
+        public SelectList PaymentTypeList
+        { get; set; }
+
+        public SelectList PaymentModeList
+        { get; set; }
+
+        public SelectList StatusList
+        { get; set; }
+
+        public SalesQuotationDetails SalesQuotationDetails { get; set; }
+        public ICollection<SQAdvanceDetails> SQAdvanceDetails { get; set; }
 
     }
 }

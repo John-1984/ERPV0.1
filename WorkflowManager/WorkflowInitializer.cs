@@ -21,9 +21,10 @@ namespace WorkflowManager
         /// <param name="InitiatorRole">Initiator role.</param>
         /// <param name="InitiatorBranch">Initiator branch.</param>
         /// <param name="InitiatorID">Initiator identifier.</param>
-        public int WorkflowSelector(string InitiatorRole, string InitiatorBranch , string InitiatorID) {
+        public int WorkflowSelector(string InitiatorRole, string InitiatorBranch, string InitiatorID)
+        {
             var _workflowID = -1;
-            if(InitiatorRole.Equals("Agent") && InitiatorBranch.Equals("Mumbai - Targeo"))
+            if (InitiatorRole.Equals("Agent") && InitiatorBranch.Equals("Mumbai - Targeo"))
             {
                 _workflowID = 1;
             }
@@ -60,7 +61,12 @@ namespace WorkflowManager
         /// </summary>        
         public BusinessModels.Workflow.Workflow GetWorkFLowIDForLocationAndItemType(int? locID, int typeID)
         {
-            return _dataLayer.GetWorkFLowIDForLocationAndItemType(locID,typeID);
+            return _dataLayer.GetWorkFLowIDForLocationAndItemType(locID, typeID);
+        }
+
+        public BusinessModels.Workflow.Workflow GetWorkFLowIDForLocationAndItemTypeByName(int? locid, int itemid, string strName)
+        {
+            return _dataLayer.GetWorkFLowIDForLocationAndItemTypeByName(locid, itemid, strName);
         }
     }
 }

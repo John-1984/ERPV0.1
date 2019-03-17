@@ -67,9 +67,773 @@
                 <div class="col-md-12 col-lg-12 commonPadding textright" style="font-size:12px; color:black;font-weight:bold">
                     <div style="padding-right:15px">Total Cost : @Model.TotalCost</div>
                 </div>
-                    }
+            }
+
+            @if (Model.ItemTypeName.Contains("Sales Invoice Generated"))
+            {
+                <div class="tab" role="tabpanel">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#Section1" aria-controls="home" role="tab" data-toggle="tab">Sales Quotation Main Details</a></li>
+
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content tabs">
+                        <div role="tabpanel" class="tab-pane active" id="Section1">
+
+                            <div class="row commonPadding col-md-12 col-lg-12" style="padding-bottom:13px;">
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="row col-md-12 col-lg-12">
+                                        <div class="float-left col-md-5 col-lg-5 textright lablestyles">
+                                            Unique Code:
+                                        </div>
+                                        <div class="float-right col-md-7 col-lg-7 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                                            @Model.SQCode
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-lg-6 ">
+                                    <div class="row col-md-12 col-lg-12">
+                                        <div class="float-left col-md-4 col-lg-4 textright lablestyles">
+                                            Status :
+                                        </div>
+                                        <div class="float-right col-md-8 col-lg-8 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                                            @Model.StatusName
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row commonPadding col-md-12 col-lg-12" style="padding-bottom:13px;">
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="row col-md-12 col-lg-12">
+                                        <div class="float-left col-md-5 col-lg-5 textright lablestyles">
+                                            Enquiry Level:
+                                        </div>
+                                        <div class="float-right col-md-7 col-lg-7 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                                            @Model.EnquiryLevelName
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-lg-6 ">
+                                    <div class="row col-md-12 col-lg-12">
+                                        <div class="float-left col-md-4 col-lg-4 textright lablestyles">
+                                            Created Date :
+                                        </div>
+                                        <div class="float-right col-md-8 col-lg-8 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                                            @Model.SQCreatedDate
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row commonPadding col-md-12 col-lg-12" style="padding-bottom:13px;">
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="row col-md-12 col-lg-12">
+                                        <div class="float-left col-md-5 col-lg-5 textright lablestyles">
+                                            Invoice No:
+                                        </div>
+                                        <div class="float-right col-md-7 col-lg-7 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                                            @Model.InvoiceNo
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-lg-6 ">
+                                    <div class="row col-md-12 col-lg-12">
+                                        <div class="float-left col-md-4 col-lg-4 textright lablestyles">
+
+                                        </div>
+                                        <div class="float-right col-md-8 col-lg-8 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row col-md-12 col-lg-12 commonPadding"></div>
+                <div class="tab" role="tabpanel">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#Section2" aria-controls="home" role="tab" data-toggle="tab">Quotation Item Details</a></li>
+
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content tabs">
+                        <div role="tabpanel" class="tab-pane active" id="Section2">
+
+                            <div class="row commonPadding col-md-12 col-lg-12" style="padding-bottom:13px;">
+                                <div class="col-md-12 col-lg-12 commonPadding" style="height:7px;">
+
+                                </div>
+                                @*<div class="col-md-12 col-lg-12 BodyWelcomeText commonPadding" style="height:10px;">
+                                Quotation Details
+                            </div>
+                            <div class="col-md-12 col-lg-12 commonPadding" style="height:7px;border-bottom:1px dashed #8A7B69;">
+
+                            </div>*@
+                                <div class="col-md-12 col-lg-12 commonPadding">
+                                    <table class="table customerAll">
+                                        <thead>
+                                            <tr class="gridheader">
+                                                <th>Product Master</th>
+                                                <th>Vendor</th>
+                                                <th>Brand</th>
+                                                <th>Item Name</th>
+                                                <th>Quantity</th>
+                                                <th>Size</th>
+                                                <th>Item Price</th>
+                                                @*<th>Delete</th>*@
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model.ProductEnquiryDetails.Count() == 0)
+                                            {
+                                                <tr class="col-md-12 col-lg-12 gridrow">
+                                                    <td>No Data Found</td>
+                                                </tr>
+                                            }
+                                            else
+                                            {
+                                                foreach (var det in Model.ProductEnquiryDetails)
+                                                {
+
+                                                    <tr class="gridrow">
+                                                        <td class="gridrow">@det.ItemMaster.Brand.Vendor.ProductMaster.ProductName</td>
+                                                        <td class="gridrow">@det.ItemMaster.Brand.Vendor.VendorName</td>
+                                                        <td class="gridrow">@det.ItemMaster.Brand.BrandName</td>
+                                                        <td class="gridrow">@det.ItemMaster.ItemName</td>
+                                                        <td class="gridrow">@det.Quantity</td>
+                                                        <td class="gridrow">@det.Size</td>
+                                                        <td class="gridrow">@det.ItemMaster.RetailPrice</td>
+                                                        @*<td class="gridrow "><img src="~/Content/delete.png" alt="Delete" class="ProductEnquiryItemDelete pointer" data-url="@Url.Action("DeleteItem", "ProductEnquiry")" data-identity="@(det.Identity)" /></td>*@
+
+
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-md-12 col-lg-12 commonPadding textright" style="font-size:12px; color:black;font-weight:bold">
+                                    <div style="padding-right:15px">Total Cost : @Model.TotalCost</div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row col-md-12 col-lg-12 commonPadding">
+                    @*if (Model.SQAdvanceDetails != null)
+                {
+                    if (Model.SQAdvanceDetails.Count() != 0)
+                    {*@
+                    <div class="tab" role="tabpanel">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#Section1" aria-controls="home" role="tab" data-toggle="tab">Advance Details</a></li>
+
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content tabs">
+                            <div role="tabpanel" class="tab-pane active" id="Section1">
+
+                                <div class="col-md-12 col-lg-12 commonPadding">
+                                    <table class="table customerAll">
+                                        <thead>
+                                            <tr class="gridheader">
+                                                <th>Advance Amount</th>
+                                                <th>Paid Date</th>
+                                                <th>Check Number</th>
+
+                                                @*<th>Delete</th>*@
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model.SQAdvanceDetails.Count() == 0)
+                                            {
+                                                <tr class="col-md-12 col-lg-12 gridrow">
+                                                    <td>No Data Found</td>
+                                                </tr>
+                                            }
+                                            else
+                                            {
+                                                foreach (var det in Model.SQAdvanceDetails)
+                                                {
+
+                                                    <tr class="gridrow">
+                                                        <td class="gridrow">@det.Amount</td>
+                                                        <td class="gridrow">@det.CreatedDate</td>
+                                                        <td class="gridrow">@det.CheckNo</td>
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-md-12 col-lg-12 commonPadding textright" style="font-size:12px; color:black;font-weight:bold">
+                                    <div style="padding-right:15px">Total Advance Amount Paid : @Model.TotalAdvanceAmount</div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    @*}
+                }*@
+                </div>
+            }
+
+            @if (Model.ItemTypeName.Contains("Purchase Request"))
+            {
+                <div class="col-md-12 col-lg-12 commonPadding" style="height:7px;">
 
                 </div>
+                <div class="col-md-12 col-lg-12 BodyWelcomeText commonPadding" style="height:10px;">
+                    Purchase Request Details
+                </div>
+                <div class="col-md-12 col-lg-12 commonPadding" style="height:7px;border-bottom:1px dashed #8A7B69;">
+
+                </div>
+                <div class="col-md-12 col-lg-12 commonPadding">
+                    <table class="table customerAll">
+                        <thead>
+                            <tr class="gridheader">
+                                <th>Product Master</th>
+                                <th>Vendor</th>
+                                <th>Brand</th>
+                                <th>Item Name</th>
+                                <th>Quantity</th>
+                                <th>Size</th>
+                                <th>Item Price</th>
+                                @*<th>Delete</th>*@
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.PurchaseRequestDetails.Count() == 0)
+                            {
+                                <tr class="col-md-12 col-lg-12 gridrow">
+                                    <td>No Data Found</td>
+                                </tr>
+                            }
+                            else
+                            {
+                                foreach (var det in Model.PurchaseRequestDetails)
+                                {
+
+                                    <tr class="gridrow">
+                                        <td class="gridrow">@det.ItemMaster.Brand.Vendor.ProductMaster.ProductName</td>
+                                        <td class="gridrow">@det.ItemMaster.Brand.Vendor.VendorName</td>
+                                        <td class="gridrow">@det.ItemMaster.Brand.BrandName</td>
+                                        <td class="gridrow">@det.ItemMaster.ItemName</td>
+                                        <td class="gridrow">@det.Quantity</td>
+                                        <td class="gridrow">@det.Size</td>
+                                        <td class="gridrow">@det.ItemMaster.RetailPrice</td>
+                                        @*<td class="gridrow "><img src="~/Content/delete.png" alt="Delete" class="ProductEnquiryItemDelete pointer" data-url="@Url.Action("DeleteItem", "ProductEnquiry")" data-identity="@(det.Identity)" /></td>*@
+
+
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12 col-lg-12 commonPadding textright" style="font-size:12px; color:black;font-weight:bold">
+                    <div style="padding-right:15px">Total Cost : @Model.TotalCost</div>
+                </div>
+            }
+
+            @if (Model.ItemTypeName.Contains("PR Invoice Generated"))
+            {
+                <div class="tab" role="tabpanel">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#Section1" aria-controls="home" role="tab" data-toggle="tab">Purchase Quotation Main Details</a></li>
+
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content tabs">
+                        <div role="tabpanel" class="tab-pane active" id="Section1">
+
+                            <div class="row commonPadding col-md-12 col-lg-12" style="padding-bottom:13px;">
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="row col-md-12 col-lg-12">
+                                        <div class="float-left col-md-5 col-lg-5 textright lablestyles">
+                                            Unique Code:
+                                        </div>
+                                        <div class="float-right col-md-7 col-lg-7 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                                            @Model.PQCode
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-lg-6 ">
+                                    <div class="row col-md-12 col-lg-12">
+                                        <div class="float-left col-md-4 col-lg-4 textright lablestyles">
+                                            Status :
+                                        </div>
+                                        <div class="float-right col-md-8 col-lg-8 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                                            @Model.StatusName
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row commonPadding col-md-12 col-lg-12" style="padding-bottom:13px;">
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="row col-md-12 col-lg-12">
+                                        <div class="float-left col-md-5 col-lg-5 textright lablestyles">
+                                            Enquiry Level:
+                                        </div>
+                                        <div class="float-right col-md-7 col-lg-7 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                                            @Model.EnquiryLevelName
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-lg-6 ">
+                                    <div class="row col-md-12 col-lg-12">
+                                        <div class="float-left col-md-4 col-lg-4 textright lablestyles">
+                                            Created Date :
+                                        </div>
+                                        <div class="float-right col-md-8 col-lg-8 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                                            @Model.PQCreatedDate
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row commonPadding col-md-12 col-lg-12" style="padding-bottom:13px;">
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="row col-md-12 col-lg-12">
+                                        <div class="float-left col-md-5 col-lg-5 textright lablestyles">
+                                            Invoice No:
+                                        </div>
+                                        <div class="float-right col-md-7 col-lg-7 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                                            @Model.InvoiceNo
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-lg-6 ">
+                                    <div class="row col-md-12 col-lg-12">
+                                        <div class="float-left col-md-4 col-lg-4 textright lablestyles">
+
+                                        </div>
+                                        <div class="float-right col-md-8 col-lg-8 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row col-md-12 col-lg-12 commonPadding"></div>
+                <div class="tab" role="tabpanel">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#Section2" aria-controls="home" role="tab" data-toggle="tab">Quotation Item Details</a></li>
+
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content tabs">
+                        <div role="tabpanel" class="tab-pane active" id="Section2">
+
+                            <div class="row commonPadding col-md-12 col-lg-12" style="padding-bottom:13px;">
+                                <div class="col-md-12 col-lg-12 commonPadding" style="height:7px;">
+
+                                </div>
+                                @*<div class="col-md-12 col-lg-12 BodyWelcomeText commonPadding" style="height:10px;">
+                                Quotation Details
+                            </div>
+                            <div class="col-md-12 col-lg-12 commonPadding" style="height:7px;border-bottom:1px dashed #8A7B69;">
+
+                            </div>*@
+                                <div class="col-md-12 col-lg-12 commonPadding">
+                                    <table class="table customerAll">
+                                        <thead>
+                                            <tr class="gridheader">
+                                                <th>Product Master</th>
+                                                <th>Vendor</th>
+                                                <th>Brand</th>
+                                                <th>Item Name</th>
+                                                <th>Quantity</th>
+                                                <th>Size</th>
+                                                <th>Item Price</th>
+                                                @*<th>Delete</th>*@
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model.PurchaseRequestDetails.Count() == 0)
+                                            {
+                                                <tr class="col-md-12 col-lg-12 gridrow">
+                                                    <td>No Data Found</td>
+                                                </tr>
+                                            }
+                                            else
+                                            {
+                                                foreach (var det in Model.PurchaseRequestDetails)
+                                                {
+
+                                                    <tr class="gridrow">
+                                                        <td class="gridrow">@det.ItemMaster.Brand.Vendor.ProductMaster.ProductName</td>
+                                                        <td class="gridrow">@det.ItemMaster.Brand.Vendor.VendorName</td>
+                                                        <td class="gridrow">@det.ItemMaster.Brand.BrandName</td>
+                                                        <td class="gridrow">@det.ItemMaster.ItemName</td>
+                                                        <td class="gridrow">@det.Quantity</td>
+                                                        <td class="gridrow">@det.Size</td>
+                                                        <td class="gridrow">@det.ItemMaster.RetailPrice</td>
+                                                        @*<td class="gridrow "><img src="~/Content/delete.png" alt="Delete" class="ProductEnquiryItemDelete pointer" data-url="@Url.Action("DeleteItem", "ProductEnquiry")" data-identity="@(det.Identity)" /></td>*@
+
+
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-md-12 col-lg-12 commonPadding textright" style="font-size:12px; color:black;font-weight:bold">
+                                    <div style="padding-right:15px">Total Cost : @Model.TotalCost</div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row col-md-12 col-lg-12 commonPadding">
+                    @*if (Model.SQAdvanceDetails != null)
+                {
+                    if (Model.SQAdvanceDetails.Count() != 0)
+                    {*@
+                    <div class="tab" role="tabpanel">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#Section1" aria-controls="home" role="tab" data-toggle="tab">Advance Details</a></li>
+
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content tabs">
+                            <div role="tabpanel" class="tab-pane active" id="Section1">
+
+                                <div class="col-md-12 col-lg-12 commonPadding">
+                                    <table class="table customerAll">
+                                        <thead>
+                                            <tr class="gridheader">
+                                                <th>Advance Amount</th>
+                                                <th>Paid Date</th>
+                                                <th>Check Number</th>
+
+                                                @*<th>Delete</th>*@
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model.PQAdvanceDetails.Count() == 0)
+                                            {
+                                                <tr class="col-md-12 col-lg-12 gridrow">
+                                                    <td>No Data Found</td>
+                                                </tr>
+                                            }
+                                            else
+                                            {
+                                                foreach (var det in Model.PQAdvanceDetails)
+                                                {
+
+                                                    <tr class="gridrow">
+                                                        <td class="gridrow">@det.Amount</td>
+                                                        <td class="gridrow">@det.CreatedDate</td>
+                                                        <td class="gridrow">@det.CheckNo</td>
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-md-12 col-lg-12 commonPadding textright" style="font-size:12px; color:black;font-weight:bold">
+                                    <div style="padding-right:15px">Total Advance Amount Paid : @Model.TotalAdvanceAmount</div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    @*}
+                }*@
+                </div>
+            }
+            @if (Model.ItemTypeName.Contains("Stock Out"))
+            {
+
+
+                <div class="tab" role="tabpanel">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#Section1" aria-controls="home" role="tab" data-toggle="tab">Sales Quotation Main Details</a></li>
+
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content tabs">
+                        <div role="tabpanel" class="tab-pane active" id="Section1">
+
+                            <div class="row commonPadding col-md-12 col-lg-12" style="padding-bottom:13px;">
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="row col-md-12 col-lg-12">
+                                        <div class="float-left col-md-5 col-lg-5 textright lablestyles">
+                                            Unique Code:
+                                        </div>
+                                        <div class="float-right col-md-5 col-lg-5 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                                            @Model.SQCode
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-lg-6 ">
+                                    <div class="row col-md-12 col-lg-12">
+                                        <div class="float-left col-md-5 col-lg-5 textright lablestyles">
+                                            Status :
+                                        </div>
+                                        <div class="float-right col-md-6 col-lg-6 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                                            @Model.StatusName
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row commonPadding col-md-12 col-lg-12" style="padding-bottom:13px;">
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="row col-md-12 col-lg-12">
+                                        <div class="float-left col-md-5 col-lg-5 textright lablestyles">
+                                            Enquiry Level:
+                                        </div>
+                                        <div class="float-right col-md-5 col-lg-5 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                                            @Model.EnquiryLevelName
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-lg-6 ">
+                                    <div class="row col-md-12 col-lg-12">
+                                        <div class="float-left col-md-5 col-lg-5 textright lablestyles">
+                                            Created Date :
+                                        </div>
+                                        <div class="float-right col-md-6 col-lg-6 textleft" style="font-size:13px; font-family:sans-serif; font-weight:normal;">
+                                            @Model.CreatedDate
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row col-md-12 col-lg-12 commonPadding"></div>
+                <div class="tab" role="tabpanel">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#Section2" aria-controls="home" role="tab" data-toggle="tab">Item Details</a></li>
+
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content tabs">
+                        <div role="tabpanel" class="tab-pane active" id="Section2">
+
+                            <div class="row commonPadding col-md-12 col-lg-12" style="padding-bottom:13px;">
+                                <div class="col-md-12 col-lg-12 commonPadding" style="height:7px;">
+
+                                </div>
+                                @*<div class="col-md-12 col-lg-12 BodyWelcomeText commonPadding" style="height:10px;">
+                                Quotation Details
+                            </div>
+                            <div class="col-md-12 col-lg-12 commonPadding" style="height:7px;border-bottom:1px dashed #8A7B69;">
+
+                            </div>*@
+                                <div class="col-md-12 col-lg-12 commonPadding">
+                                    <table class="table customerAll">
+                                        <thead>
+                                            <tr class="gridheader">
+                                                <th>Product Master</th>
+                                                <th>Vendor</th>
+                                                <th>Brand</th>
+                                                <th>Item Name</th>
+                                                <th>Quantity</th>
+                                                <th>Size</th>
+                                                @*<th>Item Price</th>*@
+                                                @*<th>Delete</th>*@
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model.ProductEnquiryDetails.Count() == 0)
+                                            {
+                                                <tr class="col-md-12 col-lg-12 gridrow">
+                                                    <td>No Data Found</td>
+                                                </tr>
+                                            }
+                                            else
+                                            {
+                                                foreach (var det in Model.ProductEnquiryDetails)
+                                                {
+
+                                                    <tr class="gridrow">
+                                                        <td class="gridrow">@det.ItemMaster.Brand.Vendor.ProductMaster.ProductName</td>
+                                                        <td class="gridrow">@det.ItemMaster.Brand.Vendor.VendorName</td>
+                                                        <td class="gridrow">@det.ItemMaster.Brand.BrandName</td>
+                                                        <td class="gridrow">@det.ItemMaster.ItemName</td>
+                                                        <td class="gridrow">@det.Quantity</td>
+                                                        <td class="gridrow">@det.Size</td>
+                                                        @*<td class="gridrow">@det.ItemMaster.RetailPrice</td>*@
+                                                        @*<td class="gridrow "><img src="~/Content/delete.png" alt="Delete" class="ProductEnquiryItemDelete pointer" data-url="@Url.Action("DeleteItem", "ProductEnquiry")" data-identity="@(det.Identity)" /></td>*@
+
+
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-md-12 col-lg-12 commonPadding textright" style="font-size:12px; color:black;font-weight:bold">
+                                    <div style="padding-right:15px">Total Cost : @Model.TotalCost</div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <div class="row col-md-12 col-lg-12 commonPadding"></div>
+                <div class="tab" role="tabpanel">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#Section3" aria-controls="home" role="tab" data-toggle="tab">Expense Details</a></li>
+
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content tabs">
+                        <div role="tabpanel" class="tab-pane active" id="Section3">
+                            <div class="row commonPadding col-md-12 col-lg-12" style="padding-bottom:13px;">
+                                <div class="row commonPadding col-md-12 col-lg-12" style="padding-bottom:13px;">
+                                    <div class="col-md-12 col-lg-12 commonPadding" style="height:7px;">
+
+                                    </div>
+                                 
+
+                                    <div class="col-md-12 col-lg-12 commonPadding">
+                                        <table class="table customerAll">
+                                            <thead>
+                                                <tr class="gridheader">
+                                                    <th>Expense Type</th>
+                                                    <th>Amount</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Model.StockOutExpenseDetails.Count() == 0)
+                                                {
+                                                    <tr class="col-md-12 col-lg-12 gridrow">
+                                                        <td>No Data Found</td>
+                                                    </tr>
+                                                }
+                                                else
+                                                {
+                                                    foreach (var det in Model.StockOutExpenseDetails)
+                                                    {
+
+                                                        <tr class="gridrow">
+                                                            <td class="gridrow">@det.ExpenseType.TypeName</td>
+                                                            <td class="gridrow">@det.Amount</td>
+
+                                                        </tr>
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col-md-12 col-lg-12 commonPadding textright" style="font-size:12px; color:black;font-weight:bold">
+                                        <div style="padding-right:15px">Total Expense Cost : @Model.TotalExpenseCost</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <div class="row col-md-12 col-lg-12 commonPadding"></div>
+
+                <div class="row col-md-12 col-lg-12 ">
+                    <div class="float-left col-md-6 col-lg-6 commonPadding">
+                        <div class="row col-md-12 col-lg-12 commonPadding">
+                            <div class="float-left col-lg-4 lablestyles textright">Vehicle No:</div>
+                            <div class="float-left col-lg-4">
+                                @(Model.VehicleNo)
+                            </div>
+                        </div>
+                        <div class="row col-md-12 col-lg-12 commonPadding">
+                            <div class="float-left col-lg-4 lablestyles textright">Container No:</div>
+                            <div class="float-left col-lg-4">
+                                @(Model.ContainerNo)
+                            </div>
+                        </div>
+                        <div class="row col-md-12 col-lg-12 commonPadding">
+                            <div class="float-left col-lg-4 lablestyles textright">Status:</div>
+                            <div class="float-left col-lg-4">
+                                @(Model.StatusName)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="float-left col-md-6 col-lg-6">
+                        <div class="row col-md-12 col-lg-12 commonPadding">
+                            <div class="float-left col-md-5 col-lg-5 lablestyles textright">Driver Name:</div>
+                            <div class="float-left col-md-5 col-lg-5">
+                                @(Model.DriverName)
+                            </div>
+                        </div>
+                        <div class="row col-md-12 col-lg-12 commonPadding">
+                            <div class="float-left col-md-5 col-lg-5 lablestyles textright">Driver Licence Number:</div>
+                            <div class="float-left col-md-5 col-lg-5">
+                                @(Model.DriverLicenceNumber)
+                            </div>
+                        </div>
+                        <div class="row col-md-12 col-lg-12 commonPadding">
+                            <div class="float-left col-md-5 col-lg-5 lablestyles textright">Dispatch Time:</div>
+                            <div class="float-left col-md-5 col-lg-5">
+                                @(Model.DisapatchTime)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            }
+            }
+        </div>
         <div class="row col-md-12 col-lg-12 commonPadding">
 
             <div class="col-md-12 col-lg-12 commonPadding">

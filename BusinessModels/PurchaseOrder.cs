@@ -7,7 +7,7 @@ namespace BusinessModels
     {
         public PurchaseOrder()
         {
-         
+
         }
 
         [System.ComponentModel.DataAnnotations.Key]
@@ -18,73 +18,132 @@ namespace BusinessModels
             set;
         }
 
-        
-        public string Comments
-        {
-            get;
-            set;
-        }
-        
+
         public string POCode
         {
             get;
             set;
         }
-        public int SupplierQuotationID
+
+        public string SQCode
         {
             get;
             set;
         }
-        public int LocationID
+
+
+        [ForeignKey("Employee")]
+        public int? AssignedTo
         {
             get;
             set;
         }
-        public int WarehouseID
+
+        [ForeignKey("EnquiryLevel")]
+        public int? EnquiryLevelID
         {
             get;
             set;
         }
-        public int Status
+
+        [ForeignKey("PurchaseQuotation")]
+        public int? PurchaseQuotationID
         {
             get;
             set;
         }
-        public int AssignedTo
+
+        [ForeignKey("Location")]
+        public int? LocationID
         {
             get;
             set;
         }
-        public int VerifiedBy
+
+        [ForeignKey("Status")]
+        public int? StatusID
         {
             get;
             set;
         }
-        public int ApprovedBy
+
+
+
+
+        public int? VerifiedBy
         {
             get;
             set;
         }
-        public DateTime CreatedDate
+        public int? ApprovedBy
         {
             get;
             set;
         }
-        public DateTime ModifiedDate
+        public DateTime? CreatedDate
         {
             get;
             set;
         }
-        public int ModifiedBy
+        public DateTime? ModifiedDate
         {
             get;
             set;
         }
-        public int CreatedBy
+        public int? ModifiedBy
         {
             get;
             set;
         }
+        public int? CreatedBy
+        {
+            get;
+            set;
+        }
+
+        public int? OriginatorID
+        {
+            get;
+            set;
+        }
+
+        public bool IsActive
+        {
+            get;
+            set;
+        }
+        public bool IsAssigned
+        {
+            get;
+            set;
+        }
+        public bool IsWarehouseAssigned
+        { get; set; }
+        public bool IsApproved
+        {
+            get;
+            set;
+        }       
+
+        [ForeignKey("CompanyType")]
+        public int? CompanyTypeID
+        { get; set; }
+        public Employee Employee
+        { get; set; }
+
+        public EnquiryLevel EnquiryLevel
+        { get; set; }
+
+        public PurchaseQuotation PurchaseQuotation
+        { get; set; }
+
+        public Location Location
+        { get; set; }
+
+        public Status Status
+        { get; set; }
+        public CompanyType CompanyType
+        { get; set; }
 
 
     }

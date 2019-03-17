@@ -12,7 +12,11 @@ namespace ERP.Models
         public SalesQuotationDetails()
         {
             Identity = -1;
+            InvoiceNo = string.Empty;
+            PaymentTypeID = 0;
+            PaymentModeID = 0;
         }
+        
 
         [Key]
         [DefaultValue(-1)]
@@ -22,17 +26,30 @@ namespace ERP.Models
             set;
         }
 
+        public string CheckNo
+        { get; set; }
 
         public string InvoiceNo
         {
             get;
             set;
         }
-        public int WareHouseID
+        public Int32 PaymentTypeID
         {
             get;
             set;
         }
+        public Int32 PaymentModeID
+        {
+            get;
+            set;
+        }
+
+        public PaymentMode PaymentMode
+        { get; set; }
+
+        public PaymentType PaymentType
+        { get; set; }
 
         public int SQID
         {

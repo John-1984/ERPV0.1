@@ -39,7 +39,7 @@ namespace DataLayer
             using (var dbContext = new RegionDbContext())
             {
                 dbContext.Configuration.LazyLoadingEnabled = false;
-                _Regions = dbContext.Region.Where(p=>p.RegionName!="All").ToList();
+                _Regions = dbContext.Region.Where(p=>p.RegionName!="All" && p.IsActive==true).ToList();
             }
 
             return _Regions;
@@ -51,12 +51,32 @@ namespace DataLayer
             using (var dbContext = new RegionDbContext())
             {
                 dbContext.Configuration.LazyLoadingEnabled = false;
-                _Regions = dbContext.Region.Where(p => p.RegionName == "Abroad").ToList();
+                _Regions = dbContext.Region.Where(p => p.RegionName == "Abroad" && p.IsActive == true).ToList();
             }
 
             return _Regions;
         }
+        public IEnumerable<BusinessModels.Region> GetMatchingRegions(string prefix)
+        {
+            var _regiosns = new List<BusinessModels.Region>();
+            using (var dbContext = new RegionDbContext())
+            {
+                try
+                {
+                    dbContext.Configuration.LazyLoadingEnabled = false;
+                    _regiosns = dbContext.Region                        
+                                .ToList()
+                                .Where(p => (p != null && !string.IsNullOrEmpty(p.RegionName) && p.RegionName.Contains(prefix) && p.IsActive == true))
+                                .ToList();
+                }
+                catch (Exception ex)
+                {
+                    var et = ex.Message;
+                }
+            }
 
+            return _regiosns;
+        }
         public Boolean Update(BusinessModels.Region Region)
         {
             using (var dbContext = new RegionDbContext())

@@ -55,6 +55,12 @@ namespace BusinessModels
             get;
             set;
         }
+        public Boolean IsActive
+        {
+            get;
+            set;
+        }
+
 
         public Modules Modules
         { get; set; }

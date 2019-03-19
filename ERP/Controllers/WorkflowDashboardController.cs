@@ -216,7 +216,7 @@ namespace ERP.Controllers
             TempData["PurchaseID"] = ViewBag.PurchaseID = purchaseID;
             TempData["ActiveStepID"] = ViewBag.ActiveStepID = activeStepID;
             TempData["ActiveWorkflowID"] = ViewBag.ActiveWorkflowID = activeWorkflowID;
-            TempData["ItemTypeID"] = ViewBag.ItemTypeID = mdwrkflow.Menu.Identity;
+            TempData["ItemTypeID"] = ViewBag.ItemTypeID = mdwrkflow.Menu.ID;
             TempData["ItemTypeName"] = ViewBag.ItemTypeName = mdwrkflow.Menu.Name;
 
             return View(mdwrkflow);

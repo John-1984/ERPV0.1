@@ -7,6 +7,7 @@ namespace ERP.Controllers
     [AllowAnonymous]
     [HandleError]
     [ERP.CustomeFilters.LoggingFilter]
+    [ERP.CustomeFilters.AjaxModelValidatorFilter]
     public class LoginController : Controller
     {
         private BusinessLayer.Employee _Employee = new BusinessLayer.Employee();
@@ -36,6 +37,7 @@ namespace ERP.Controllers
                 Session["EmployeeCompanyTypeID"] = bsEmployee.CompanyTypeID;
                 Session["RoleType"] = bsEmployee.RoleMaster.RoleType;
                 Session["Role"] = bsEmployee.RoleMaster.RoleName;
+                Session["RoleID"] = bsEmployee.RoleMaster.Identity;
                 Session["CompanyID"] = bsEmployee.CompanyID;
                 if (bsEmployee.FloorMaster != null)
                     Session["FloorID"] = bsEmployee.FloorMaster.Identity;

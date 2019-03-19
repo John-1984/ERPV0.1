@@ -83,7 +83,7 @@ namespace ERP
                 cfg.CreateMap<BusinessModels.StockInDamagedDetails, ERP.Models.StockInDamagedDetails>().ReverseMap();
                 cfg.CreateMap<BusinessModels.StockInExcessDetails, ERP.Models.StockInExcessDetails>().ReverseMap();
 
-
+                cfg.CreateMap<BusinessModels.Menu, ERP.Models.Menu>().ReverseMap();
 
 
             });

@@ -9,6 +9,7 @@ using System.Globalization;
 
 namespace ERP.Controllers
 {
+    [ERP.CustomeFilters.AjaxModelValidatorFilter]
     [ERP.CustomeFilters.LoggingFilter]
     [ERP.CustomeFilters.ExceptionFilter]
     public class RegionController : Controller
@@ -54,10 +55,11 @@ namespace ERP.Controllers
             //IF success resturn grid view
             //IF Failure return json value
             BusinessModels.Region mdRegion = AutoMapperConfig.Mapper().Map<BusinessModels.Region>(Region);
-
+            mdRegion.IsActive = true;
             if (Region.Identity.Equals(-1))
             {
                 mdRegion.CreatedDate = DateTime.Now;
+                
                 _Region.Insert(mdRegion);
             }
             else
@@ -65,14 +67,14 @@ namespace ERP.Controllers
                 mdRegion.ModifiedDate = DateTime.Now;
                 _Region.Update(mdRegion);
             } 
-            return RedirectToAction("_RegionAll");
+            return RedirectToAction("_RegionAll", GetRegions("", 1, "", ""));
         }
 
 
         [HttpGet]
         public ActionResult _RegionCancel(int identity)
         {
-            return RedirectToAction("_RegionAll");
+            return RedirectToAction("_RegionAll", GetRegions("", 1, "", ""));
         }
 
         [HttpPost]
@@ -103,11 +105,11 @@ namespace ERP.Controllers
 
             var Regions = AutoMapperConfig.Mapper().Map<List<Models.Region>>(_Region.GetAll());
             if (!string.IsNullOrEmpty(searchString) && !string.IsNullOrEmpty(createdDate))
-                Regions = AutoMapperConfig.Mapper().Map<List<Models.Region>>(Regions.ToList().FindAll(p => p.RegionName.ToLower().Contains(searchString.ToLower()) && p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+                Regions = AutoMapperConfig.Mapper().Map<List<Models.Region>>(Regions.ToList().FindAll(p => p.RegionName.ToLower().Contains(searchString.ToLower()) && Convert.ToDateTime(p.CreatedDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
             else if (!string.IsNullOrEmpty(searchString))
                 Regions = AutoMapperConfig.Mapper().Map<List<Models.Region>>(Regions.ToList().FindAll(p => p.RegionName.ToLower().Contains(searchString.ToLower())));
             else if (!string.IsNullOrEmpty(createdDate))
-                Regions = AutoMapperConfig.Mapper().Map<List<Models.Region>>(Regions.ToList().FindAll(p => p.CreatedDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
+                Regions = AutoMapperConfig.Mapper().Map<List<Models.Region>>(Regions.ToList().FindAll(p => Convert.ToDateTime(p.CreatedDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(createdDate)));
 
             switch (sortOrder)
             {
@@ -125,7 +127,7 @@ namespace ERP.Controllers
                     break;
             }
 
-            int Size_Of_Page = 8;  //Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["GridPageSize"].ToString());
+            int Size_Of_Page = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["GridPageSize"].ToString());
             int No_Of_Page = (page ?? 1);
             return Regions.ToPagedList(No_Of_Page, Size_Of_Page);
         }

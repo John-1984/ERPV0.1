@@ -90,8 +90,8 @@ namespace BusinessLayer
             WorkflowManager.WorkflowInitializer _workflowInitializer = new WorkflowManager.WorkflowInitializer();
             //coded
             BusinessModels.Menu mnID = _menudataLayer.GetMenuByName("Purchase Request");
-            BusinessModels.Workflow.Workflow wrkFlow = _workflowInitializer.GetWorkFLowIDForLocationAndItemTypeByName(locID, mnID.Identity, strName);
-            return _workflowInitializer.InitializeWorkflow(wrkFlow.Identity, Convert.ToInt32(empID), prId, mnID.Identity.ToString());
+            BusinessModels.Workflow.Workflow wrkFlow = _workflowInitializer.GetWorkFLowIDForLocationAndItemTypeByName(locID, mnID.ID, strName);
+            return _workflowInitializer.InitializeWorkflow(wrkFlow.Identity, Convert.ToInt32(empID), prId, mnID.ID.ToString());
         }
         public Boolean Delete(Int32 identity)
         {

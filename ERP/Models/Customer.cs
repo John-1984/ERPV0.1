@@ -17,6 +17,7 @@ namespace ERP.Models
             EmailID = string.Empty;
             Quantity = string.Empty;
             CreatedDate = DateTime.Now;
+            IsActive = false;
         }
 
         [Key]
@@ -58,18 +59,21 @@ namespace ERP.Models
             set;
         }
 
+        [Required(ErrorMessage = "Please select status")]
         public int? StatusID
         {
             get;
             set;
         }
 
+        [Required(ErrorMessage = "Please select Assigned To")]
         public int? AssignedTo
         {
             get;
             set;
         }
 
+        [Required(ErrorMessage = "Please enter address")]
         public string Address
         {
             get;
@@ -83,12 +87,14 @@ namespace ERP.Models
             set;
         }
 
+        [Required(ErrorMessage = "Please select purpose")]
         public int? PurposeID
         {
             get;
             set;
         }
 
+        [Required(ErrorMessage = "Please enter quantity required")]
         public string Quantity
         {
             get;
@@ -118,6 +124,7 @@ namespace ERP.Models
             set;
         }
 
+        [Required(ErrorMessage = "Please select enquiry level")]
         public int? EnquiryLevelID
         { get; set; }
 
@@ -171,7 +178,8 @@ namespace ERP.Models
             set;
         }
 
-        public Boolean IsActive
+       
+        public bool? IsActive
         { get; set; }
     }
 }

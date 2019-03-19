@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 
 namespace DataLayer
 {
@@ -27,8 +28,8 @@ namespace DataLayer
             var _Menu = new BusinessModels.Menu();
             using (var dbContext = new MenuDbContext())
             {
-                _Menu = dbContext.Menu                            
-                            .FirstOrDefault(p => p.Identity.Equals(identity));
+                _Menu = dbContext.Menu
+                            .FirstOrDefault(p => p.ID.Equals(identity));
             }
             return _Menu;
         }
@@ -50,7 +51,7 @@ namespace DataLayer
             using (var dbContext = new MenuDbContext())
             {
                 dbContext.Configuration.LazyLoadingEnabled = false;
-                _Menus = dbContext.Menu.Where(p=>p.ModuleID==identity).ToList();
+                _Menus = dbContext.Menu.Where(p => p.ModuleID == identity).ToList();
             }
             return _Menus;
         }
@@ -61,7 +62,32 @@ namespace DataLayer
             using (var dbContext = new MenuDbContext())
             {
                 dbContext.Configuration.LazyLoadingEnabled = false;
-                _Menus = dbContext.Menu.ToList();
+                _Menus = dbContext.Menu
+                            .Include(p => p.Modules)
+                            .Where(p=>p.IsActive==true)
+                            .ToList();
+            }
+
+            return _Menus;
+        }
+
+        public IEnumerable<BusinessModels.Menu> GetAll(int roleID)
+        {
+            var _Menus = new List<BusinessModels.Menu>();
+            using (var dbContext = new MenuDbContext())
+            {
+                dbContext.Configuration.LazyLoadingEnabled = false;
+
+                var _menuIDs = dbContext.Role_Menu.
+                                Where(p => p.RoleID.Equals(roleID))
+                                .Select(p => p.MenuID).Distinct().ToArray();
+
+                _Menus = (from menu in dbContext.Menu
+                          where _menuIDs.Contains(menu.ID)
+                          select menu)
+                          .Include(p => p.Modules)
+                          .Where(p => p.IsActive == true)
+                          .ToList();
             }
 
             return _Menus;
@@ -73,12 +99,11 @@ namespace DataLayer
             using (var dbContext = new MenuDbContext())
             {
                 dbContext.Configuration.LazyLoadingEnabled = false;
-                _Menus = dbContext.Menu.Where(p=>p.IsApprovalNeeded==true).ToList();
+                _Menus = dbContext.Menu.Where(p => p.IsApprovalNeeded == true).ToList();
             }
 
             return _Menus;
         }
-
 
         public Boolean Update(BusinessModels.Menu Menu)
         {
@@ -94,7 +119,7 @@ namespace DataLayer
         {
             using (var dbContext = new MenuDbContext())
             {
-                dbContext.Entry(new BusinessModels.Menu() { Identity = identity }).State = System.Data.Entity.EntityState.Deleted;
+                dbContext.Entry(new BusinessModels.Menu() { ID = identity }).State = System.Data.Entity.EntityState.Deleted;
                 dbContext.SaveChanges();
             }
             return true;

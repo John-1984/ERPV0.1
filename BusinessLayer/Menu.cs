@@ -27,6 +27,11 @@ namespace BusinessLayer
             return _dataLayer.GetAll();
         }
 
+        public IEnumerable<BusinessModels.Menu> GetAll(int roleID)
+        {
+            return _dataLayer.GetAll(roleID);
+        }
+
         public IEnumerable<BusinessModels.Menu> GetAllApprovalNeededItems()
         {
             return _dataLayer.GetAllApprovalNeededItems();
@@ -47,7 +52,7 @@ namespace BusinessLayer
             return _dataLayer.Insert(Menu);
         }
 
-      
+
 
     }
 

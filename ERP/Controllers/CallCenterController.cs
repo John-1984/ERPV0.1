@@ -6,6 +6,9 @@ using System.Web.Mvc;
 
 namespace ERP.Controllers
 {
+    [ERP.CustomeFilters.AjaxModelValidatorFilter]
+    [ERP.CustomeFilters.LoggingFilter]
+    [ERP.CustomeFilters.ExceptionFilter]
     public class CallCenterController : Controller
     {
         private BusinessLayer.CallCenter _CallCenter = new BusinessLayer.CallCenter();

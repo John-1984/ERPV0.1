@@ -9,6 +9,9 @@ using System.Globalization;
 
 namespace ERP.Controllers
 {
+    [ERP.CustomeFilters.AjaxModelValidatorFilter]
+    [ERP.CustomeFilters.LoggingFilter]
+    [ERP.CustomeFilters.ExceptionFilter]
     public class BrandController : Controller
     {
         private BusinessLayer.Brand _Brand = new BusinessLayer.Brand();

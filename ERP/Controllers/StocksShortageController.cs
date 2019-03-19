@@ -9,6 +9,9 @@ using System.Globalization;
 
 namespace ERP.Controllers
 {
+    [ERP.CustomeFilters.AjaxModelValidatorFilter]
+    [ERP.CustomeFilters.LoggingFilter]
+    [ERP.CustomeFilters.ExceptionFilter]
     public class StocksShortageController : Controller
     {
         private BusinessLayer.StocksShortage _Stocks = new BusinessLayer.StocksShortage();

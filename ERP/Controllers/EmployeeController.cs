@@ -9,6 +9,9 @@ using System.Globalization;
 
 namespace ERP.Controllers
 {
+    [ERP.CustomeFilters.AjaxModelValidatorFilter]
+    [ERP.CustomeFilters.LoggingFilter]
+    [ERP.CustomeFilters.ExceptionFilter]
     public class EmployeeController : Controller
     {
         private BusinessLayer.Employee _Employee = new BusinessLayer.Employee();

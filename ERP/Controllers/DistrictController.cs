@@ -9,6 +9,9 @@ using System.Globalization;
 
 namespace ERP.Controllers
 {
+    [ERP.CustomeFilters.AjaxModelValidatorFilter]
+    [ERP.CustomeFilters.LoggingFilter]
+    [ERP.CustomeFilters.ExceptionFilter]
     public class DistrictController : Controller
     {
         private BusinessLayer.District _District = new BusinessLayer.District();

@@ -6,6 +6,9 @@ using System.Web.Mvc;
 
 namespace ERP.Controllers
 {
+    [ERP.CustomeFilters.AjaxModelValidatorFilter]
+    [ERP.CustomeFilters.LoggingFilter]
+    [ERP.CustomeFilters.ExceptionFilter]
     public class WarehouseMasterController : Controller
     {
         private BusinessLayer.WarehouseMaster _WarehouseMaster = new BusinessLayer.WarehouseMaster();

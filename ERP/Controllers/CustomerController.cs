@@ -10,6 +10,7 @@ using System.Configuration;
 
 namespace ERP.Controllers
 {
+    [ERP.CustomeFilters.AjaxModelValidatorFilter]
     [ERP.CustomeFilters.LoggingFilter]
     [ERP.CustomeFilters.ExceptionFilter]
     public class CustomerController : Controller
@@ -18,6 +19,7 @@ namespace ERP.Controllers
         private BusinessLayer.CommonFunctions _commonfunc = new BusinessLayer.CommonFunctions();
         public ActionResult Index()
         {
+           // ERP.Models.Customer mdcus = new Models.Customer();
             return View();
         }
         [HttpGet]

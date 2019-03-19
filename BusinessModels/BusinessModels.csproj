@@ -39,6 +39,7 @@
     <Compile Include="PurchaseQuotation.cs" />
     <Compile Include="PurchaseQuotationDetails.cs" />
     <Compile Include="PQAdvanceDetails.cs" />
+    <Compile Include="Role_Menu.cs" />
     <Compile Include="StockInShortageDetails.cs" />
     <Compile Include="StockInExcessDetails.cs" />
     <Compile Include="StockInDamagedDetails.cs" />

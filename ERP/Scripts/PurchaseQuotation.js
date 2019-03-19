@@ -13,6 +13,9 @@ $(document).ready(function () {
         } else if (status == "notice") {
             $.growl({ title: "Notice", message: message });
         }
+        else if (status == "ModelError") {
+            $.growl.error({ message: message });
+        }
     };
 
     $(document).off("click", ".PurchaseQuotationCancel");
@@ -97,7 +100,15 @@ $(document).ready(function () {
                 showMessage(status, "Success");
             },
             error: function (jqXhr, textStatus, errorMessage) {
-                showMessage(textStatus, errorMessage);
+                if (errorMessage == "Model Validation Failed") {
+                    var errorString = "";
+                    $.each(jqXhr.responseJSON.Error, function (index, value) {
+                        errorString = errorString + value + '</br>';
+                    });
+                    showMessage("ModelError", errorString);
+                } else {
+                    showMessage(textStatus, errorMessage);
+                }
             }
         });
     });
@@ -120,7 +131,15 @@ $(document).ready(function () {
                 showMessage(status, "Success");
             },
             error: function (jqXhr, textStatus, errorMessage) {
-                showMessage(textStatus, errorMessage);
+                if (errorMessage == "Model Validation Failed") {
+                    var errorString = "";
+                    $.each(jqXhr.responseJSON.Error, function (index, value) {
+                        errorString = errorString + value + '</br>';
+                    });
+                    showMessage("ModelError", errorString);
+                } else {
+                    showMessage(textStatus, errorMessage);
+                }
             }
         });
     });
@@ -208,7 +227,15 @@ $(document).ready(function () {
                 showMessage(status, "Success");
             },
             error: function (jqXhr, textStatus, errorMessage) {
-                showMessage(textStatus, errorMessage);
+                if (errorMessage == "Model Validation Failed") {
+                    var errorString = "";
+                    $.each(jqXhr.responseJSON.Error, function (index, value) {
+                        errorString = errorString + value + '</br>';
+                    });
+                    showMessage("ModelError", errorString);
+                } else {
+                    showMessage(textStatus, errorMessage);
+                }
             }
         });
     });

@@ -1,20 +1,25 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
 namespace MenuModule
 {
-    public class Menu: IMenu
+    public class Menu
     {
+        private BusinessLayer.Menu _menuBL = null;
         public Menu()
         {
+            _menuBL = new BusinessLayer.Menu();
         }
 
-        public Tuple<string, string> GetMenu()
+        public List<BusinessModels.Menu> GetMenu()
         {
-            throw new NotImplementedException();
+            return _menuBL.GetAll().ToList();
         }
 
-        public Tuple<string, string> GetMenu(string role)
+        public List<BusinessModels.Menu> GetMenu(int roleID)
         {
-            throw new NotImplementedException();
+            return _menuBL.GetAll(roleID).ToList();
         }
     }
 }

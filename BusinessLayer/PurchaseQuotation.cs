@@ -157,9 +157,9 @@ namespace BusinessLayer
             WorkflowManager.WorkflowInitializer _workflowInitializer = new WorkflowManager.WorkflowInitializer();
             //coded
             BusinessModels.Menu mnID = _menudataLayer.GetMenuByName("PR Invoice Generated");
-            BusinessModels.Workflow.Workflow wrkFlow = _workflowInitializer.GetWorkFLowIDForLocationAndItemType(locID, mnID.Identity);
+            BusinessModels.Workflow.Workflow wrkFlow = _workflowInitializer.GetWorkFLowIDForLocationAndItemType(locID, mnID.ID);
 
-            return _workflowInitializer.InitializeWorkflow(wrkFlow.Identity, Convert.ToInt32(empID), sqId, mnID.Identity.ToString());
+            return _workflowInitializer.InitializeWorkflow(wrkFlow.Identity, Convert.ToInt32(empID), sqId, mnID.ID.ToString());
         }
 
         private static string GetRandomAlphanumericString()

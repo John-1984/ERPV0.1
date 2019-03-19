@@ -153,6 +153,7 @@
     <Compile Include="Controllers\VendorController.cs" />
     <Compile Include="Controllers\WarehouseMasterController.cs" />
     <Compile Include="Controllers\WarrantyController.cs" />
+    <Compile Include="CustomeFilters\AjaxModelValidatorFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

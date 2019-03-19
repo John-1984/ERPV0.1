@@ -9,6 +9,9 @@ using System.Globalization;
 
 namespace ERP.Controllers
 {
+    [ERP.CustomeFilters.AjaxModelValidatorFilter]
+    [ERP.CustomeFilters.LoggingFilter]
+    [ERP.CustomeFilters.ExceptionFilter]
     public class OfficeExpenseController : Controller
     {
         private BusinessLayer.OfficeExpense _OfficeExpense = new BusinessLayer.OfficeExpense();

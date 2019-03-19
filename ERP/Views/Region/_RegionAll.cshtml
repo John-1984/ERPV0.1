@@ -43,7 +43,7 @@
 
             </div>
             <div class="col-md-6 col-lg-6">
-                @Html.PagedListPager(Model, page => Url.Action("Sorting", new { page, sortOrder = ViewBag.CurrentSort, createdDate = ViewBag.CreatedDate, searchString = ViewBag.SearchString }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { InsertionMode = InsertionMode.Replace, HttpMethod = "GET", UpdateTargetId = "resultView" }))
+                @Html.PagedListPager(Model, page => Url.Action("Sorting", new { page, sortOrder = ViewBag.CurrentSort, createdDate = ViewBag.CreatedDate, searchString = ViewBag.SearchString }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { InsertionMode = InsertionMode.Replace, HttpMethod = "GET", UpdateTargetId = "resultRegion" }))
 
             </div>
         </div>

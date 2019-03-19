@@ -11,6 +11,9 @@
         } else if (status == "notice") {
             $.growl({ title: "Notice", message: message });
         }
+        else if (status == "ModelError") {
+            $.growl.error({ message: message });
+        }
     };
 
     $(document).off("click", ".BrandCancel");
@@ -122,7 +125,15 @@
                 showMessage(status, "Success");
             },
             error: function (jqXhr, textStatus, errorMessage) {
-                showMessage(textStatus, errorMessage);
+                if (errorMessage == "Model Validation Failed") {
+                    var errorString = "";
+                    $.each(jqXhr.responseJSON.Error, function (index, value) {
+                        errorString = errorString + value + '</br>';
+                    });
+                    showMessage("ModelError", errorString);
+                } else {
+                    showMessage(textStatus, errorMessage);
+                }
             }
         });
     });
@@ -131,6 +142,7 @@
     $(document).on("click", ".BrandSearch", function (event) {
         var theUrl = $(this).attr("data-url");
         $('.headermode').html('View Brand Info');
+        if ($(".searchText").val() != "") {
         $.ajax({
             url: theUrl,
             type: 'POST',  // http method
@@ -142,7 +154,11 @@
             error: function (jqXhr, textStatus, errorMessage) {
                 showMessage(textStatus, errorMessage);
             }
-        });
+            });
+        }
+        else {
+            showMessage("ModelError", "Please enter brand name");
+        }
     });
 
 });

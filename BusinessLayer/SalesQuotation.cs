@@ -164,9 +164,9 @@ namespace BusinessLayer
             WorkflowManager.WorkflowInitializer _workflowInitializer = new WorkflowManager.WorkflowInitializer();
             //coded
             BusinessModels.Menu mnID = _menudataLayer.GetMenuByName("Sales Quotation");
-            BusinessModels.Workflow.Workflow wrkFlow = _workflowInitializer.GetWorkFLowIDForLocationAndItemType(prEnq.LocationId,mnID.Identity);
+            BusinessModels.Workflow.Workflow wrkFlow = _workflowInitializer.GetWorkFLowIDForLocationAndItemType(prEnq.LocationId,mnID.ID);
 
-            _workflowInitializer.InitializeWorkflow(wrkFlow.Identity, Convert.ToInt32(empID), mdSalesQuote.Identity, mnID.Identity.ToString());
+            _workflowInitializer.InitializeWorkflow(wrkFlow.Identity, Convert.ToInt32(empID), mdSalesQuote.Identity, mnID.ID.ToString());
 
             return mdSalesQuote;
         }
@@ -177,9 +177,9 @@ namespace BusinessLayer
             WorkflowManager.WorkflowInitializer _workflowInitializer = new WorkflowManager.WorkflowInitializer();
             //coded
             BusinessModels.Menu mnID = _menudataLayer.GetMenuByName("Sales Invoice Generated");
-            BusinessModels.Workflow.Workflow wrkFlow = _workflowInitializer.GetWorkFLowIDForLocationAndItemType(locID, mnID.Identity);
+            BusinessModels.Workflow.Workflow wrkFlow = _workflowInitializer.GetWorkFLowIDForLocationAndItemType(locID, mnID.ID);
 
-           return  _workflowInitializer.InitializeWorkflow(wrkFlow.Identity, Convert.ToInt32(empID), sqId, mnID.Identity.ToString());
+           return  _workflowInitializer.InitializeWorkflow(wrkFlow.Identity, Convert.ToInt32(empID), sqId, mnID.ID.ToString());
         }
 
         public bool InitiateStockOutApprovalWOrkFlow(int sqId, int empID, int locID)
@@ -188,9 +188,9 @@ namespace BusinessLayer
             WorkflowManager.WorkflowInitializer _workflowInitializer = new WorkflowManager.WorkflowInitializer();
             //coded
             BusinessModels.Menu mnID = _menudataLayer.GetMenuByName("Stock Out");
-            BusinessModels.Workflow.Workflow wrkFlow = _workflowInitializer.GetWorkFLowIDForLocationAndItemType(locID, mnID.Identity);
+            BusinessModels.Workflow.Workflow wrkFlow = _workflowInitializer.GetWorkFLowIDForLocationAndItemType(locID, mnID.ID);
 
-            return _workflowInitializer.InitializeWorkflow(wrkFlow.Identity, Convert.ToInt32(empID), sqId, mnID.Identity.ToString());
+            return _workflowInitializer.InitializeWorkflow(wrkFlow.Identity, Convert.ToInt32(empID), sqId, mnID.ID.ToString());
         }
 
         private static string GetRandomAlphanumericString()
